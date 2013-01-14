@@ -1,0 +1,151 @@
+\ProvidesPackage{lecturetex}
+%%%%
+% Lecture Latex File for Mathematics Lectures
+% By Eeshan Wagh
+% Provides page geometry and headings, typographic style,
+% and theorem environments.
+%%%%
+
+%%%%
+% Package dependencies
+% 
+% * mathtools, amssymb, amsthm --- Standard math packages, we are setting math.
+
+
+
+\usepackage[left=1in,top=1in,right=1in,bottom=1in]{geometry}
+\usepackage{amssymb, amsmath, amsthm, amstext, bbm}
+\usepackage{enumitem}
+\usepackage{mathdots}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\usepackage{lastpage}
+%\usepackage[usenames,dvipsnames]{color}
+\allowdisplaybreaks[1]
+
+%______________________________________________________________
+\newcommand{\halmos}{\rule{1.75mm}{2.25mm}}
+\renewcommand{\qedsymbol}{\halmos}
+
+%_________________________________________________________________
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\st}{\; : \; }
+\newcommand{\fin}{\qquad \quad \hfill \framebox[1.75mm][l]{\,}}
+\newcommand{\cU}{\mathcal{U}}
+
+\newcommand{\cA}{\mathcal{E}}
+\newcommand{\cB}{\mathcal{E}}
+\newcommand{\cC}{\mathcal{E}}
+\newcommand{\cD}{\mathcal{E}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{E}}
+\newcommand{\cG}{\mathcal{E}}
+\newcommand{\cH}{\mathcal{E}}
+\newcommand{\cI}{\mathcal{E}}
+\newcommand{\cJ}{\mathcal{E}}
+\newcommand{\cK}{\mathcal{E}}
+\newcommand{\cL}{\mathcal{E}}
+\newcommand{\cM}{\mathcal{E}}
+\newcommand{\cN}{\mathcal{E}}
+\newcommand{\cO}{\mathcal{E}}
+\newcommand{\cP}{\mathcal{E}}
+\newcommand{\cQ}{\mathcal{E}}
+\newcommand{\cR}{\mathcal{E}}
+\newcommand{\cS}{\mathcal{E}}
+\newcommand{\cT}{\mathcal{E}}
+\newcommand{\cU}{\mathcal{E}}
+\newcommand{\cV}{\mathcal{E}}
+\newcommand{\cW}{\mathcal{E}}
+\newcommand{\cX}{\mathcal{E}}
+\newcommand{\cY}{\mathcal{E}}
+\newcommand{\cZ}{\mathcal{E}}
+
+
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bZ}{\mathbb{Z}}
+\newcommand{\bC}{\mathbb{C}}
+
+
+% Topology
+\newcommand{\interior}{\mbox{int}}
+\newcommand{\ext}{\mbox{ext}}
+
+
+%Algebra
+\newcommand{\tensor}{\otimes}
+\newcommand{\dsum}{\otimes}
+
+
+
+
+\newcommand{\CITE}{}
+
+
+
+%______________________________________________________________________________________
+
+\renewenvironment{thebibliography}[1]
+	{\section*{#1}
+	   \begin{list}{}{\setlength{\leftmargin}{\bibindent}
+	                  \setlength{\itemindent}{-\leftmargin}
+	                  \setlength{\itemsep}{0pt}
+	                  \setlength{\parsep}{\smallskipamount}
+	                  \usecounter{enumiv}\renewcommand{\theenumiv}{}}
+                    \sloppy\clubpenalty=4000\widowpenalty=4000\frenchspacing}
+	{\end{list}}
+
+\newtheoremstyle{stdthm}{7mm}{}{\it}
+{}{}{\bf}{ }{\thmname{\sc #1}\thmnumber{ \bf #2.}\thmnote{ \sc[#3]}}
+
+\newtheoremstyle{stddef}{7mm}{}{\rm}
+{}{}{\bf}{ }{\thmname{\sc #1}\thmnumber{ \bf #2.}\thmnote{ \sc[#3]}}
+
+\newtheoremstyle{stdnonum}{7mm}{}{\rm}
+{}{}{\bf.}{ }{\thmname{\sc #1}\thmnote{ \sc(#3)}}
+
+\newtheoremstyle{stdqands}{7mm}{}{\rm}
+{}{}{\bf}{ }{\thmname{\bf #1}\thmnumber{ \bf #2.}\thmnote{\sc#3}}
+
+\newtheoremstyle{stdbold}{}{}{\rm}
+{}{}{\bf:}{ }{\thmname{\bf #1}\thmnote{ \bf(#3)}}
+
+% Important results that usually require proof
+\theoremstyle{stdthm}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{obsv}[thm]{Observation}
+
+% Definitions and rems that merely state facts
+\theoremstyle{stddef}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{rem}[thm]{remark} %\fin if without proof
+\newtheorem{eg}[thm]{example} %\fin
+
+% No numbering on these containers
+\theoremstyle{stdnonum}
+\newtheorem{diver}{Diversion} %\fin if without proof
+\newtheorem{prob}{Problem}
+\newtheorem{claim}{Claim}
+\newtheorem{sol}{Solution}
+\newtheorem{ob}{Observation} %\fin if without proof
+\newtheorem{note}{Note} %\fin
+
+% Sample questions and solutions
+\theoremstyle{stdqands}
+\newtheorem{sampleq}{Sample Question}
+\newtheorem{samples}{Sample Solution} %\fin
+
+% Misc. useful containers
+\theoremstyle{stdbold}
+\newtheorem{quest}{Question}
+\newtheorem{conc}{Conclusion}
+\newtheorem{strat}{Strategy}
+\newtheorem{astrat}{Alternate Strategy}
+\newtheorem{as}{Alternate Solution} %\fin
+
