@@ -1,0 +1,2106 @@
+\documentclass[letterpaper, leqno, 12pt]{article}
+\pagestyle{plain}
+\usepackage[left=1in,top=1in,right=1in,bottom=1in]{geometry}
+\usepackage{amssymb, amsmath, amsthm, amstext}
+\usepackage{enumitem}
+\usepackage{mathdots}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\usepackage{lastpage}
+%\usepackage[usenames,dvipsnames]{color}
+\allowdisplaybreaks[1]
+
+%______________________________________________________________
+\newcommand{\halmos}{\rule{1.75mm}{2.25mm}}
+\renewcommand{\qedsymbol}{\halmos}
+
+%_________________________________________________________________
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\st}{\;:\;}
+\newcommand{\fin}{\qquad \quad \hfill \framebox[1.75mm][l]{\,}}
+\newcommand{\sH}{\mathcal{H}}
+\newcommand{\sQ}{\mathcal{Q}}
+
+
+\newcommand{\Ind}{\mbox{Ind}}
+\newcommand{\Res}{\mbox{Res}}
+\newcommand{\sR}{\mathcal{R}}
+\newcommand{\sC}{\mathcal{C}}
+\newcommand{\sO}{\mathcal{O}}
+\newcommand{\sL}{\mathcal{L}}
+
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bZ}{\mathbb{Z}}
+
+\newcommand{\bK}{\mathbb{K}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\Ann}{\mbox{Ann}}
+\newcommand{\End}{\mbox{End}}
+%Groups Related Commands 
+
+\newcommand{\Scross} {S_{3}\times S_{3}} %S3 cross S3
+\newcommand{\SNormgp} { \{1, b, b^{2}\}}
+
+%Analysis Commands
+\newcommand{\intpi}{\int_{-\pi}^\pi}
+\newcommand{\overtpi}{\frac{1}{2\pi}}
+\newcommand{\Trig}{\text{Trig}}
+\newcommand{\ospan} {\text{span}}
+\newcommand{\otrig} {\text{Trig}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\cB}{\mathcal{C}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\qtwo}{\mathbb{Q}_{2}}
+\newcommand{\Pow}{\mathrm{P}}
+\newcommand{\osc}{\ensuremath{\mathrm{osc}}}
+\newcommand{\dotcup}{\ensuremath{\,\mathaccent\cdot\cup}}
+\newcommand{\multi}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+\newcommand{\PosSLP}{\mathsf{PosSLP}}
+\newcommand{\PERM}{\mathsf{PERM}}
+\newcommand{\BitSLP}{\mathsf{BitSLP}}
+\newcommand{\ACIT}{\mathsf{ACIT}}
+\newcommand{\EquSLP}{\mathsf{EquSLP}}
+\newcommand{\DegSLP}{\mathsf{DegSLP}}
+\newcommand{\sSAT}{\mathsf{\#SAT}}
+\newcommand{\poly}{\mathrm{poly}}
+\newcommand{\Po}{\mathrm{P}}
+\newcommand{\NP}{\mathrm{NP}}
+\newcommand{\FP}{\mathrm{FP}}
+\newcommand{\sP}{\mathrm{\#P}}
+\newcommand{\PP}{\mathrm{PP}}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\TCz}{\mathrm{TC}^0}
+\newcommand{\CITE}{}
+
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\mbrac}[1] {\left( #1 \right)}
+\providecommand{\mcbrac}[1] { \{ #1 \}}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\ip}[1]{\left\langle #1 \right\rangle}
+\newcommand{\bC} {\mathbb{C}}
+\newcommand{\mdist} {\text{dist}}
+\newcommand {\flln} {\lfloor \lambda n\rfloor}
+%Rep Theory______________________________
+\newcommand {\repV} {(\rho,V)}
+\newcommand {\repW} {(\tau,W)}
+\newcommand{\tmatrix}[4]{\left(  \begin{array}{cc}
+#1 & #2 \\ 
+#3 & #4
+\end{array} \right) }
+
+%______________________________________________________________________________________
+
+\renewenvironment{thebibliography}[1]
+	{\section*{#1}
+	   \begin{list}{}{\setlength{\leftmargin}{\bibindent}
+	                  \setlength{\itemindent}{-\leftmargin}
+	                  \setlength{\itemsep}{0pt}
+	                  \setlength{\parsep}{\smallskipamount}
+	                  \usecounter{enumiv}\renewcommand{\theenumiv}{}}
+                    \sloppy\clubpenalty=4000\widowpenalty=4000\frenchspacing}
+	{\end{list}}
+
+\newtheoremstyle{stdthm}{7mm}{}{\it}
+{}{}{\bf}{ }{\thmname{\sc #1}\thmnumber{ \bf #2.}\thmnote{ \sc[#3]}}
+
+\newtheoremstyle{stddef}{7mm}{}{\rm}
+{}{}{\bf}{ }{\thmname{\sc #1}\thmnumber{ \bf #2.}\thmnote{ \sc[#3]}}
+
+\newtheoremstyle{stdnonum}{7mm}{}{\rm}
+{}{}{\bf.}{ }{\thmname{\sc #1}\thmnote{ \sc(#3)}}
+
+\newtheoremstyle{stdqands}{7mm}{}{\rm}
+{}{}{\bf}{ }{\thmname{\bf #1}\thmnumber{ \bf #2.}\thmnote{\sc#3}}
+
+\newtheoremstyle{stdbold}{}{}{\rm}
+{}{}{\bf:}{ }{\thmname{\bf #1}\thmnote{ \bf(#3)}}
+
+% Important results that usually require proof
+\theoremstyle{stdthm}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{obsv}[thm]{Observation}
+
+% Definitions and rems that merely state facts
+\theoremstyle{stddef}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{rem}[thm]{Remark} %\fin if without proof
+\newtheorem{eg}[thm]{Example} %\fin
+
+% No numbering on these containers
+\theoremstyle{stdnonum}
+\newtheorem{diver}{Diversion} %\fin if without proof
+\newtheorem{prob}{Problem}
+\newtheorem{sol}{Solution}
+\newtheorem{ob}{Observation} %\fin if without proof
+\newtheorem{note}{Note} %\fin
+
+% Sample questions and solutions
+\theoremstyle{stdqands}
+\newtheorem{sampleq}{Sample Question}
+\newtheorem{samples}{Sample Solution} %\fin
+
+% Misc. useful containers
+\theoremstyle{stdbold}
+\newtheorem{quest}{Question}
+\newtheorem{conc}{Conclusion}
+\newtheorem{strat}{Strategy}
+\newtheorem{astrat}{Alternate Strategy}
+\newtheorem{as}{Alternate Solution} %\fin
+%_________________________________________________________________
+
+
+
+%_____________________________________________________________________________________
+
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+\textsc{\LARGE University of Waterloo}\\[1cm]
+\textsc{\Large Fall 2012}\\[0.5cm]
+\rule{\linewidth}{0.5mm} \\[0.4cm]
+{\Large \bf PMATH 733 - Linear Representations of Finite Groups}\\[0.2cm]
+\rule{\linewidth}{0.5mm} \\[1cm]
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Eeshan \textsc{Wagh}
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Instructor:} \\
+Wentang Kuo
+\end{flushright}
+\end{minipage}
+\\[1cm]
+%\emph{These notes are presented without any guaranty of any kind. They might contain material not seen in the course and/or omit material seen in the course. These notes might also contain typos and errors.}\\[0.5cm]
+Last updated: \today \\
+\end{center}
+
+\tableofcontents
+
+\end{titlepage}
+
+\newpage
+
+
+
+
+\section{Introduction to Representation Theory}
+\begin{center}
+\emph{Monday, September 9}
+\end{center}
+\subsection{Introduction}
+\begin{defn} {Finite Group.} Let $G$ be a set with a binary operation $(\cdot)$ satisfying the following properties
+\begin{itemize}
+\item $\forall f,g,h\in G, (f \cdot g)\cdot h = f\cdot (g \cdot h)$
+\item There exists an element $e_l$, called the left identity, such that for all $g\in G$. $e_l \cdot g = g$ and there exists $g_l^{-1} \in G$ such that $g_l^{-1} \cdot g = e_l$
+\end{itemize}
+Then $(G,\cdot)$ is called a group. If the cardinality of $G$ is finite, we say $G$ is a finite group. Otherwise, $G$ is infinite. 
+\end{defn}
+
+\begin{rem}
+You can prove that $e_l$ and $e_l \cdot g = g \cdot e_l = g$ and $g_l^{-1} \cdot = g \cdot g_l^{-1} = e_l$. 
+\end{rem}
+
+\begin{defn}
+We say a group $G$ is Abelian if for all $g,h\in G$, $gh = hg$. 
+\end{defn}
+
+\begin{defn}
+Let $G$ be a group and $H\subset G$. $H$ is a subgroup of $G$ if $h_1 h_2^{-1} \in H$ for all $h_1,h_2 \in H$. If the only normal subgroup of $G$ are $\{e\},G$, we say $G$ is a simple group. A subgroup $H$ is called "normal" if forall $g\in G, h\in H, ghg^{-1} \in H$.   
+\end{defn}
+
+\begin{eg} Examples of Finite Groups
+\begin{itemize}
+\item Let $n$ be a positive integer. The cyclic group $(\bZ/n\bZ, +)$  is a finite abelian group. $|C_n| = n$. The size of a group $G$ is called the order of the group. 
+\item Let $n$ be a positive integer. The dihedral group $D_n$ is the group of rotations and reflections in the plane which preserve a regular polygon with $n$ vertices. 
+\begin{align*}
+D_n &= \{1,r,\dots,r^{n-1}, s,sr,sr^2,\dots,sr^{n-1}\}\\
+\end{align*}
+Or we could write the group using generator relations
+\begin{align*}
+D_n &= \ip{r,s}/(r^n=1,s^2 =1, srs = r^{-1})
+\end{align*}
+
+\item $S_n$ is the set of permutations of $n$ elements, with $\abs{S_n} = n!$. 
+
+\item The quaternion group $\mathbb{H}$ is the group generated by $i,j$ such that if $k:= ij, m:= i^2$. Then
+\begin{enumerate}
+\item $i^4 = j^4 = k^4 = e$
+\item $i^2 = j^2 = k^2 = m$
+\item $ij = mji$ 
+\item $\mathbb{H} = 8 $
+
+\end{enumerate}
+\end{itemize}
+\end{eg}
+
+\begin{eg} {Infinite Groups}
+\begin{enumerate}
+\item $(\bZ,+)$ is an infintie group
+\item The group of rotations of the plane, preserving the origin, denoted by $C_\infty$. We have $C_\infty$ is isomorphic to $\bR/2\pi \bZ:= S^1:=$ the unit circle.
+\item $D_\infty = C_\infty \cup \{ sr_\alpha | r_\alpha \in C_\infty \}$ with $s^2 = 1$ and $sr_\alpha s = r_\alpha^{-1}$
+\item Let $F$ be a field. The set of all invertible $n\times n$ matrices of coefficients in $F$ denoted by $GL_n(F)$ is a group. If $F$ is a finite field, then $GL_n(F)$ is finite. Otherwise, $GL_n(F)$ is infinite.  
+\end{enumerate}
+\end{eg}
+\newpage
+\begin{center}
+\emph{Wednesday, September 11}
+\end{center}
+
+
+\begin{defn}
+Let $G$ be a Hausdorff topological space with a group law. We say $G$ is a topological group if the mapping $G\times G \rightarrow G$ with $(g,h) \rightarrow gh$ is continuous.   
+\end{defn}
+
+\begin{rem}
+If $G$ is finite, we take the discrete topology on $G$, then $G$ is a topological group. 
+\end{rem}
+
+\begin{eg}
+Since $GL(n,F) \subseteq F^{n^2}$, if $F$ is a topological space, then $F^{n^2}$ has a topology. Therefore, we have a subspace topology on $GL(n,F)$ and with this topology, $GL(n,F)$ is a topological group. 
+\end{eg}
+
+\begin{defn} 
+Let $V$ be a complex Hilbert space. We use $GL(V)$ to denote the group of bounded operators on $V$ with bounded inverse. 
+\end{defn}
+
+\begin{defn}
+Let $G$ be a topological group and $V$ be a non-trivial complex Hilbert space. A {\bf (linear) representation } of $G$ on $V$ is a group of homomorphisms $\rho$, called the Group Action, from $G \rightarrow GL(V)$ such that the map 
+\begin{align*}
+G\times V &\rightarrow V\\
+(g,v) &\rightarrow \rho(g) v
+\end{align*} 
+is continuous. 
+\end{defn}
+
+\begin{rem}
+The representation $(\rho, v)$ map may not be a continuous mapping from $\rho: G \rightarrow GL(V)$ (For example, maybe if $V$ is an infinite dimensional space, though this won't come up in our class). However, if $G$ is finite and $dim(V)<\infty$, then $\rho$ will be continuous. 
+\end{rem}
+
+\begin{rem} Concepts
+
+\begin{enumerate}
+\item if $V$ is a finite dimensional vector space over $\bC$, we can choose a basis $\{e_i\}_{i=1}^{n=dim(V)}$. If $(\rho, V)= \rho(V)$ is a representation of $G$ on $V$
+\begin{align*}
+\rho(g)e_j &= \sum_{i=1}^n a_{ij}(g)e_i
+\end{align*}
+Therefore, it induces a mapping (homomorphism) from $G\rightarrow GL(n,\bC)$ with $g \rightarrow (a_{ij}(g))$. This is called the {\bf Matrix Form} of $(\rho, V)$.   
+
+\item If $(\rho,V)$ is a representation of $G$ and $dim(V)<\infty$, we say that $(\rho,V)$ is a finite dimensional representation with degree $dim(V)$.
+
+\item Let $G$ be a group, we define the {\bf Group Algebra} 
+\begin{align*}
+\bC\left[G\right] &:= \{ \sum_{g\in G} c_g g | c_g \in \bC, \text{ almost all } c_g = 0\}
+\end{align*} 
+We can define the product on $\bC[G]$ in the obvious way. If $G$ is not abelian, $\bC[G]$ is non-commutative.  If $(\rho, V)$ is a representation of $G$ on $V$, then $V$ can be viewed as a $\bC[G] - \text{ Module}$ with $(\sum c_g \cdot g)\cdot v := \sum c_g \rho(g) v$. If $|G|<\infty$ and $dim V < \infty$, we do not need to worry about the topologies. Therefore, $(\rho,V)$ is a representation of $G$ on $V$ if and only if $V$ is a $\bC[G] - \text{ Module}$. 
+\end{enumerate}
+\end{rem}
+
+\begin{eg} Examples of Representations
+
+\begin{enumerate}
+\item Let $V$ be a one dimensional vector space over $\bC$. $1_v$ is the identity linear transformation from $V$ to $V$. The {\bf trivial representation} of $G$ is the homomorphism from $G\rightarrow GL(V)\cong \bC^*$ defined by $\rho(g) := 1_v, \forall g \in G$. 
+
+\item Let $G$ be a finite group of order $n$ and $V:= \bC[G]$ ($dim (V) = n$). We know that $V$ has a basis $\{e_g\}_{g\in G}$. The {\bf Regular Representation} $(r,V)$ of $G$ defined by 
+\begin{align*}
+r: G & \rightarrow V\\
+r(s) e_t &:= e_{st}, \forall s,t\in G
+\end{align*}
+\end{enumerate}
+\end{eg}
+
+\begin{defn}
+Let $(\rho,V)$ and $(\tau,W)$ be two representations of a finite group $G$. A linear map $f:V \rightarrow W$ is called a homomorphism or {\bf intertwining operator} between $(\rho,V)$ and $(\tau,W)$ if $\forall g\in G, v\in V, f(\rho(g)v) = \tau(g)f(V)$.
+% The diagram V ->(f)-> W ->tau(g) ->W <-f<- V <-rho(g)<- V
+The homormorphism conditions is nothing but the diagram above commutes. If we view $V$ and $W$ as $\bC[G] - \text{Modules}$ (G- Modules via $\rho,\tau$ respectively. $f$ is a hom. if and only if $f$ is a G-Module homormophism from $V$ to $W$. If $f$ is an isomorphism we say that $(\rho,V)$ and $(\tau,W)$ are isomorphic.
+\end{defn}
+
+\newpage
+\begin{center}
+\emph{Friday, September 13}
+\end{center}
+
+
+\begin{defn}
+Let $(\rho,V)$ and $(\tau,W)$ be representations of $G$. We define  $(\rho \oplus \tau, V \oplus W)$ a representation of $G$ defined by 
+\begin{align*}
+(\rho \oplus \tau)(g) ((v,w)) &= (\rho(g)v,\tau(g)w) 
+\end{align*}
+\end{defn}
+
+\begin{defn}
+Let $\rho, W)$ be a representation of $G$ on $V$ and $W$ be non-zero subspace of $V$. We say that $W$ is a {\bf subrepresentation} of $(\rho, V)$ if $W$ is "stable" under $\rho$-action, that is $\forall g\in G, w\in W, \rho(g)w \in W \Rightarrow (\rho|_W,W)$ is a representation of $G$. 
+\end{defn}
+
+\begin{defn}
+We say $(\rho, V)$ is irreducible if $(\rho,V)$ have only two different $G$-stable subspaces, namely, $\{0\},V$. This is equivalent to saying the only subrepresentation of $(\rho,V)$ is $(\rho,V)$ itself. 
+\end{defn}
+
+\begin{eg}
+All representations of degree 1 is irreducible. 
+\end{eg}
+
+\begin{strat}
+Find all the irreducible representations
+\end{strat}
+
+\begin{thm}
+If $G$ is finite, then all irreducible representations of $G$ are finite dimensional. 
+\end{thm}
+
+\begin{proof}
+Let $\repV$ be irreducible representation of $G$ and let $e\in V$ be a non-zero vector. Let $W := \ip{\rho(g)e}_{g\in G}$. Then $dim(W) \leq \abs{G} <\infty$. It is enough to show that $W$ is G-Stable (G-Invariant). $w\in W$, $\exists C_g \in \bC$ such that 
+\begin{align*}
+w &= \sum_{g\in G} C_g \rho(g) e
+\end{align*}
+Then for all $h\in G$
+\begin{align*}
+\rho(h)w &= \rho(h) \left( \sum_{g\in G} C_g \rho(g) e \right)\\
+&= \sum_{g\in G} C_g \rho(hg)e \in W
+\end{align*}
+Therefore, $W$ is a finite dimensional subrepresentation of $V$ and $W=V$. 
+\end{proof}
+
+\begin{rem}
+If $(\rho,V)$ is irreducible, $\forall v \neq 0 \in V$, $W = \ip{\rho(g)v}_{g\in G} = V$. 
+\end{rem}
+
+\begin{eg}{Find all irreducible representations of $C_n$}
+\\
+We have $C_n \cong \bZ/n\bZ = \{ \bar{0},\bar{1},\dots, \bar{n-1}\}$. $\forall 0\leq k \leq n-1$, we define a one -dimensional represnetation $(X_k, V_k)$ as follows, $\forall k$, $V_k$ is just a one dimensional vector spaces. So $\forall 0\leq j\leq n-1, \forall v \in V_k$
+\[X_k (\bar{j}) v  = e^{2\pi k \frac{j}{n}}v \]
+Or we can $X_k$ as a homomorphism
+\begin{align*}
+C_n & \rightarrow \bC^*\\
+\bar{j}& \rightarrow e^{2\pi \frac{kji}{n}} = \left(e^{\frac{2\pi j i}{n}} \right)^k
+\end{align*}
+$\{(X_k,V_k)\}_{k=0}^{n-1}$ is a set of irreducible representations of $C_n$. \\
+
+Let $(\chi,V)$ be an irreducible representation of $C_n$, the set $\{ \chi(g)\}_{g\in C_n} \subset GL(V)$ is a commutative subset. That is, for all $g_1,g_2 \in C_n$
+\begin{align*}
+\chi(g_1)\chi(g_2) &= \chi(g_2) \chi(g_1)\\
+\chi(g_1g_2)&= \chi(g_2g_1)\\
+(\chi(g_1))^n &= \chi(g_1^n) =\chi(1) = 1_V
+\end{align*}
+The minimal polynomial of $\chi(g_1)$ is a divisor of $x^n = 1$. Since  $x^n - 1$ has no repeated roots, $\chi(g_1)$ is diagnalizable. By a theorem of linear algebra, $\{\chi(g)\}_ {g\in G}$ has a common eigenvector $v$. That is,  $\forall g\in G, \chi(g) v = \lambda_g v$ for some $\lambda_g \in \bC$. Therefore, $W = \ip{v}$ is G-Invariant and $W = V$ and $dim(W) = dim(V) = 1$.\\
+
+So $(\chi(\bar{1}))^n = 1_V$ implies that $\chi(\bar{1})$ is a root of unity of order n, thus 
+\[\chi(\bar{1}) = e^{(2\pi i) \frac{k}{n}} \]
+for some $k\in \bZ (0 \leq k \leq n-1)$. thus $\chi = \chi_k$. 
+\end{eg}
+
+\begin{eg} Representations of {$D_n$ ($n\geq 2$ even)}\\
+$D_n = \ip{r,s}/\ip{r^n=1,s^2 = 1, srs = r^{-1}}$. There are 4 1-dimensional representations \\
+
+\begin{tabular}{|c|c|c|}
+\hline 
+• & $r^k$ & $sr^k$ \\ 
+\hline 
+$\psi_1$ & 1 & 1 \\ 
+\hline 
+$\psi_2$  & 1 & -1 \\ 
+\hline 
+$\psi_3$ & $(-1)^k$ & $(-1)^k$ \\ 
+\hline 
+$\psi_4$ & •$(-1)^k$ & $(-1)^{k+1}$ \\ 
+\hline 
+\end{tabular} 
+
+\newpage
+% Monday, Sept 17
+\begin{center}
+\emph{Monday, September 16}
+\end{center}
+
+We know $C_n \rhd D_n$ and $D_n/C_n \cong C_2$. Any representation of $C_2$ gives a representation of $D_n$ by 
+\[D_n \rightarrow D_n/C_n \cong C_2 \rightarrow GL(V) \]
+$C_2$ has 2 irredcible representations: namely the trivial one and the non-trivial one. However, a representation of $C_n$ might not be extended to a representation of $D_n$.\\
+
+ For degree 2 representations, let $\xi = e^{\frac{2\pi i}{n}}$ and $h \in \bZ$. We define a representation  $(\rho_n,V_n)$ of $D_n$ on a two- dimensonal space $V_n$. 
+ \begin{align*}
+\rho_n (r^h) &= \left( \begin{array}{cc}
+\xi^{hk} & 0 \\ 
+0 & \xi^{-hk}
+\end{array} \right)\\
+\rho_n (sr^k) &= \left( \begin{array}{cc}
+0 & \xi^{-hk} \\ 
+\xi^{hk} & 0
+\end{array} \right)
+ \end{align*}
+ We can check that $(\rho_n,V_n)$ is a indeed a representation of $D_n$. Notice that $\rho_n$ and $\rho_{n-h}$ are isomorphic (Exercise: find an intertwining operator from $\rho_n$ to $\rho_{n-h}$)\\
+ 
+ The extreme cases $h=0$ or $h = \frac{n}{2}$ are isomorphic to $\psi_1 \oplus \psi_2$ and $\psi_3 \oplus \psi_4$ respectively. To summarize, we get 
+ \[\psi,\psi_2,\psi_3,\psi_4,\rho_1,\dots,\rho_{\frac{n}{2} -1}\]
+ a set of irreducible representations of $D_n$. \\
+ 
+ To show that $1 \leq h \frac{n}{2} -1$, $\rho_n$ is irreducible, we assume that there is a 1-dimensional $G$-invariant space $W = \ip{V}$. Thus, $\rho_n(r^k)v  \in \ip{v} \Rightarrow  v = [0,1]$ or $ = [1,0]$. $\rho_h(s)v \in \ip{v} \Rightarrow v$  is an eigenvector $\rho_s(s)v = \lambda v$ of the matrix of 
+ \[ \left( \begin{array}{cc}
+0 & 1 \\ 
+1 & 0
+\end{array} \right)\]
+However, $[1,0]$ and $[0,1]$ are not eigenvectors of the above matrix. Thus, we have a contradiction and so $\rho_n$ is irreducible. 
+\end{eg}
+
+\begin{eg} $D_n$ when $n$ is odd
+\begin{tabular}{|c|c|c|}
+\hline 
+• & $r^k$ & $sr^k$ \\ 
+\hline 
+$\psi_1$ & 1 & 1 \\ 
+\hline 
+$\psi_2$ & 1 & -1 \\ 
+\hline 
+\end{tabular} 
+The same linear transformations from the above example will work
+%incomplete
+\end{eg}
+
+\begin{eg}
+$\{\psi_1,\psi_2, \rho_1\}$ is the full set of irreducible representations of$D_3$.\\
+
+Let $\repV$ be an irreducible representations of $D_3$, we can consider $\repV$ is a representation of $C_3 = \ip{r}/\ip{r^3 = 1}$. Since $r^3 = 1$, $V$ can be decomposed into the direct sum of eigenvectors of $]rho(r) $ 
+\[V = \bigoplus_{i=1}^m V_i, dim(V)=m \]
+Let $v_1 = \ip{v_1}$ with $\rho(r) v_1 = \xi^{\alpha_1}v_1$ where $\xi = e^{\frac{2\pi i}{3}}, \alpha_1 \in \bZ$. Then, we have
+\begin{align*}
+\rho(r)(\rho(s)v_1) &= \rho(rs) v_1 \\
+&= \rho(sr^{-1}) v_1\\
+&= \rho(s)(\rho(r^{-1}v_1)\\
+& = \rho(s(\rho(r^2)v_1\\
+&\rho(s) [ \xi^{2\alpha_i} v_1]\\
+&= \xi^{2\alpha_i}(\rho(s)v_1) 
+\end{align*}
+ Thus $\ip{v_1, \rho(S)v_1} = w$ is a Ds invariant subspace of $(\rho,V)$.\\
+ 
+ Since $\repV$ is irreduclbe, $V = W = \ip{v_1, \rho(s)v_1}, \dim V = \dim W \leq 2$. Note that $ip{\rho(s)v_1}$ is an $C_3$ invariant suspace with eigenvalues $\xi^{2\alpha_i}$ respectiely to $\rho (v)$. \\
+ 
+ If $dim(W) = 1$ then $\xi ^{2\alpha_1} = \xi^{\alpha_1} \Rightarrow \xi ^{\alpha_1} = 1\Rightarrow \alpha_1 = 0$ for a multiple of 3. That is, $\rho$ is trivial on $C_3$ and it gives us $\psi_1,\psi_2$.\\ 
+ 
+ If $dim(W)=2$, we have a basis of $W$, namely $\{v_1,\rho(s)v_1\}$. If we write down its matrix form, we will see that it is $\rho_s,V_n)$ for some $h = \alpha_1$. So we are done.
+
+ \begin{rem}
+ The Grand goal of representation theory is to find all the irreducible representations of any group
+ \begin{enumerate}
+ \item Given a group, how many irreducible representations of the given one? 
+ \item Is there any way to describe the set of irreducible representations?
+ \item How to find those representations 
+ \end{enumerate}
+ \end{rem} 
+\end{eg}
+
+
+
+\subsection{Direct Sum and Tensor Product}
+Let $\repV$ and $\repW$ be two finite dimensional represnetations of a finite group $G$. Let $\{v_i\}$ and $\{w_i\}$ be bases of $V$ and $W$ respectively. We can define $(\rho \oplus \tau, V\oplus W)$ a representation of $G$. Let $V = \ip{v_i}, E = \ip{w_j}$.We have the matrix form for $\rho$ and $\tau$ as follows 
+\begin{align*}
+\rho(g)(v_i) &= \sum_k a_{k_i}(g)v_k\\
+\tau(g)(w_j) &= \sum_l b_{lj}(g) w_l
+\end{align*}
+Then we define
+\begin{align*}
+p \otimes \tau (g)  (v_i \otimes w_j) &:= \sum_{k,l} a_{k_i}(g)b_{l_j}(g) v_k \otimes w_l \\
+p \oplus \tau(g) (v_i \oplus w_j) &:= \rho(g) v_i \oplus \tau(g) w_j
+\end{align*}
+Where $v_i \otimes w_j$ is a basis of $V \otimes W$. 
+
+
+\begin{center}
+\emph{Wednesday, September 19}
+\end{center}
+
+\subsection{Decomposition of Representations}
+
+\begin{defn}
+Let $\repV$ be a representation of $G$. We say $\repV$ is {\bf unitary} if there exists a ($G$-) invariant inner product $\ip{,}$ on $V$ such that $\ip{,}$ is positive and Hermitian and for all $g\in G$ and $w,v \in V, \ip{\rho(g)v, \rho(g)w} = \ip{v,w}$
+\end{defn}
+
+\begin{rem}
+A matrix is unitary if $A\cdot \bar{A^t} = I$.  If $\repV$ is a unitary representation with $\ip{,}$ a G-invariant inner product, then given an orthonormal basis, the matrix form $(a_i, (g))$ are all unitary.  
+\end{rem}
+
+\begin{lem}
+Let $\repV$ be a unitary representatio with an invariant inner product $\ip{,}$. $W$ a subrepresentation, then, the orthogonal complement $W^{\perp}$ with respect to $\ip{,}$ is a subrepresentation of $V$ and $V = W \oplus W^{\perp}$.  
+\end{lem}
+
+\begin{proof}
+We only need to show that $W^{\perp}$ is G-invariant. This happens if and only if $\forall g\in G, \tilde{w} \in W^{\perp} \Rightarrow \rho(\tilde{w}) \subseteq W^{\perp} \Leftrightarrow \forall g \in G, \tilde{w} \in W^\perp,\forall w \in W, \ip{w,\rho(g)(\tilde{w})} = 0$. 
+
+\begin{align*}
+\ip{w,\rho(g)(\tilde{w})} &= \ip{\rho(g^{-1}w, \rho(g^{-1}\rho(g)\tilde{w}}\\
+&= \ip{\rho(g^{-1}w, \tilde{w}}\\
+&= 0
+\end{align*}
+Note:  $\rho(g^{-1})w \in W, \tilde{w} \in W^{\perp}$ so the inner product is 0. Thus, $\ip{w, \rho(g)\tilde{w}} = 0$ if $w \in W, \tilde{w} \in W^\perp$ and we finish the proof. 
+\end{proof}
+
+\begin{cor}
+If $\repV$ is a unitary representation. $\repV$ is a direct sum of irreducible representations of $G$. 
+\end{cor}
+
+\begin{lem}
+All representations of a finite group $G$ is unitary. 
+\end{lem}
+
+\begin{proof}
+Let $\repV$ be a representation of $G$ and $\ip{,}$ an inner product on $V$. We define a new inner product $\ip{,}_G$ by $\forall v,w\in V$
+\[ \ip{v,w}_G := \frac{1}{\abs{G}} \sum_{g\in G} \ip{\rho(g)v, \rho(g)w}\]
+We need to check whether our new inner product is G-invariant. $\forall h \in G. v,w \in V$
+\begin{align*}
+\ip{\rho(h)v,\rho(h)w}_G &= \frac{1}{\abs{G}} \sum_{g\in G} \ip{\rho(g)\rho(h)v, \rho(g)\rho(h)w}\\
+&= \frac{1}{\abs{G}} \sum_{t \in G} \ip{\rho(t)v, \rho(t)w} = \ip{v,w}\\
+t&:= gh
+\end{align*}
+We used a change of variable above. Therefore, $\ip{,}_G$ is G-invariant. 
+\end{proof}
+
+\newpage
+\section{Character Theory}
+
+\begin{defn}
+Let $V$ be a vector space with a basis $\{e_i\}$ and $A$ is a linear transformation from $V \rightarrow V$ with matrix form $\{a_{ij}\}$. Define the {\bf Trace} of $A$ denoted by $Tr(A)$ to be $Tr(A):= \sum a_ii$. We can consider $Tr$ as a function from the set of linear transformations from $V$ to $V$ to the complex numbers.  $Tr(A)$ is independent of the choice of basis. 
+\end{defn}
+
+\begin{defn}
+Let $\repV$ be a representation of $G$ for $g\in G$. The {\bf Character} $\chi_\rho(g)$ of $\repV$ by 
+\[\chi_\rho(g):= Tr(\rho(g)) \]
+This gives us a function on $G$. 
+\end{defn}
+
+\begin{prop}
+If $\chi$ is a character of the representation of $\repV$ of $V$, then 
+\begin{enumerate}
+\item $\chi(e) = \text{dim}(V)$\\
+\item $\chi(g^{-1}) = \bar{\chi(g)}$\\
+\item $\chi(st) = \chi(ts), \forall s,t\in G$
+\end{enumerate}
+\end{prop}
+
+\begin{rem}
+Let $G$ be a group and $f$ a function on $G$, we say $f$ is a {\bf class function} if $\forall s,t\in G, f(st) = f(ts) $ i.e. $f(sts^{-1}) = f(t)$. 
+\end{rem}
+
+\begin{proof}
+\begin{enumerate}
+\item We know $\rho(e) = I_v$. Thus, $\chi(e) = Tr(I_v) = \sum 1 = dim(V)$. 
+\item Since $G$ is finite, $\rho(g)$ has a finite order and it is diagonalizable. We can choose a basis such that the matrix form of $\rho(g)$ is diagonal with entries $\lambda_1,\dots,\lambda_n$, where $n = dim V$ and $\abs{\lambda_i} = 1$, that is, $\lambda_i$ are roots of unity and so $\lambda_i^{-1} = \bar{\lambda}_i$. Then $\rho^{-1}(g)$ has the matrix form of a diagonal matrix with $\lambda_i^{-1}$ on diagonal. Then
+\[ \chi(g^{-1}) = \sum \lambda_{i}^{-1} = \sum \bar{\lambda_i} = \bar{\chi(g)} \]
+\end{enumerate}
+\end{proof}
+
+% Friday - Sept 21
+\begin{center}
+\emph{Friday, September 21}
+\end{center}
+\begin{prop}
+Let $\repV$ and $\repW$ be two representations of $G$ and $\chi_\rho$ and $\chi_\tau$ be characters of $\repV$ and $\repW$ respectively. Then, 
+\begin{align*}
+\chi_{\rho \oplus \tau} &= \chi_\rho + \chi_\tau\\
+\chi_{\rho \otimes \tau} &= \chi \cdot \chi_\tau
+\end{align*}
+\end{prop}
+
+\begin{proof}
+Let $\{v_i\}$ and $\{w_j\}$ be bases of $V$ and $W$ respectively. Then,
+\begin{align*}
+\rho(g) v_i &= \sum{a_{ki} v_k}\\
+\tau(g) w_j &= \sum {b_{lj}} w_l
+\end{align*}
+Given $g \in G$,  $\rho \oplus \tau (v_i) = \sum {a_{ki} v_k}$, the coefficient of $v_i$ is $a_{ii}$ and $\rho \oplus \tau (w_j) = \sum{b_{lj}w_l}$, the coefficient of $w_j$ is $b_{jj}$.  Then,
+\begin{align*}
+\chi_{\rho \oplus \tau} (g) &= Tr(\rho \oplus \tau(g)) = \sum a_{ii} + \sum b_{jj} \\
+&= \chi_\rho(g) + \chi_\tau(g)\\
+\rho \oplus \tau(g) &= \tmatrix{\rho(g)}{0}{0}{\tau(g)}
+\end{align*}
+Now for the tensor product, $\rho \otimes \tau(g) (v_i \otimes w_j) = \sum a_{k_i}(g) b_{l+j} v_k \otimes w_l$, the coefficent of $v_i \otimes w_j$ is $a_{ii}b_{jj}$. Thus, 
+\begin{align*}
+\chi_{\rho \otimes \tau} (g) &:= Tr (\rho \otimes \tau(g))\\
+&= \sum_{i} \sum_{j} a_{ii}b_{jj}\\
+&= \left( \sum_{i} a_{ii} \right) \left(\sum_j b_{jj} \right)\\
+&= \chi_\rho(g) \cdot \chi_\tau(g)
+\end{align*}
+\end{proof}
+
+\begin{lem} [Schur's Lemma]
+Let $\repV$ and $\repW$ be two irreducible representations of $G$ and $f$ be an intertwining operator from $V$ to $W$. 
+\begin{enumerate}
+\item If $\repV$ and $\repW$ are not isomorphic, then $f = 0$
+\item If $\repV = \repW$, then $f$ is a scalar multiple of the identity (called homothety) and the scalar is called the ratio.  
+\end{enumerate}
+\end{lem}
+
+
+\begin{proof}
+If $f=0$, then (i) and (ii) are true. Suppose, $f \neq 0$, let $ker(f) := V' \subsetneq V$. Then, $\forall v' \in V'$ 
+\begin{align*}
+f(\rho(g)(v')) &= \tau(g) (f(v')) = \tau(g)(0_w)= 0_w
+\end{align*} 
+Thus, $V'$ is G-invariant. Since $V$ is irreducible, it must be the case that $V' = \{0_v\}$. \\
+
+\noindent Let $Im(f) = W' \subseteq W$. $\forall w' \in W', \exists v \in V$ such that $f(v) = w'$.  $\forall g\in G $
+\[\tau(g)(w') = \tau(g)(f(v)) = f(\rho(g)(v)) \in W' \]
+Thus, $W'$ is G-invariant. Since $W$ is irreducible, $W' = \{0_w\}$ or $W' = W$. Since $f\neq 0$, $W'=W$ and $f$ is bijective, i.e. an isomorphism. If $\repV$ and $\repW$ are not isomorphic, $f \equiv 0$. This finishes the first case. \\
+
+\noindent Let $\lambda$ be an eigenvalue of $f$. Thus, $f-\lambda\cdot I_v$ hss a non-trivial kernel. Moreover, $f- \lambda \cdot I_v$ is an intertwining operator since 
+\begin{align*}
+\rho(g)(f - \lambda I_v) &= \rho(g)\circ f - \lambda \rho(g) \circ I_v\\
+&= f \circ \rho(g) - \lambda I_v \circ \rho(g)\\
+&= (f - \lambda I_v) \circ \rho(g) 
+\end{align*}
+As before, $f - \lambda I_v \equiv 0$, i.e. $f = \lambda I_v$. 
+\end{proof}
+
+\begin{cor}
+Keep the notations as above. Let $h$ be a linear mapping from $V$ to $W$, not necessarily an intertwining operator. Put
+\[h_G := \frac{1}{\abs{G}} \sum_{t\in G} \tau(t)^{-1} \circ h \circ \rho(t) \]
+
+\begin{enumerate}
+\item If $\repV$ and $\repW$ are not isomorphic, then $h_G \equiv 0$\\
+\item If $\repV = \repW$, the $h_G$ is a homothety of ratio $\frac{1}{n} Tr(h), n = dim(V)$.  
+\end{enumerate}
+\end{cor}
+
+\begin{proof}
+We claim that $h_G$ is an intertwining operator. 
+% Rectangle diag: V - > h_G -> W -> tau(g)->W <- V <-h_G <- rho(g) <- V
+$\forall g \in G, \tau(g) \circ h_G = h_G \circ \rho(g) \Rightarrow h_G =  \tau^{-1}(g)\circ h_G \circ \rho(g)$ Thus, 
+\begin{align*}
+\tau)g)^{-1} \circ h_G \circ \rho(g) &= \frac{1}{\abs{G}} \sum_{t\in G} \tau(g)^{-1} \circ \tau(t)^{-1} \circ h \circ \rho(t) \circ \rho(g)\\
+&= \frac{1}{\abs{G}}\sum_{t\in G} \tau(tg)^{-1} \circ h \circ f(tg)\\
+&= \frac{1}{\abs{G}} \sum_{s \in G} \tau(S)^{-1} \circ h \circ \rho(s)\\
+&= h_G
+\end{align*}
+Thus, $h_G$ is an intertwining operator. By Schur's Lemma, (i) is done. Next,
+\begin{align*}
+Tr(h_G) &= \frac{1}{\abs{G}} \sum_{t\in G} Tr(\rho(t)^{-1} \circ h \circ \rho(t))\\
+&= \frac{1}{\abs{G}} \sum_{t\in G} Tr(h) = Tr(h)
+\end{align*}
+If $h_g = \lambda I_v$, $Tr(h_g) = \lambda dim(V) = \lambda n$. Thus the ratio $\lambda$ is equal to $\frac{1}{n}Tr(h)$
+\end{proof}
+
+\begin{center}
+\emph{Monday, September 24}
+\end{center}
+
+\begin{eg}
+Let $G = C_{10} \cong \bZ/10\bZ$ and $h=5 \cdot I_{\bC}$. Suppose that $\chi_1$ and $\chi_2$ are two 1-dimensional representations of $G$ on $\bC$. 
+\begin{align*}
+\chi_2(\bar{j}) &:= e^{\frac{2\pi i j}{10}}\\
+\chi_i(\bar{j}) &:= e^{\frac{4\pi i }{10}}
+\end{align*}
+$j = \{0,1,\dots,0\}$. Then,
+\begin{align*}
+h_G &= \frac{1}{10} \sum_{j=0}^9 e^{\frac{-14\pi i j}{10}} 5e^{\frac{4\pi i j}{10}}\\
+&= \frac{1}{2} \sum_{j=0}^9 e^{\frac{-10\pi i j}{10}} = \frac{1}{2}\sum_{j=0}^9 \left( e^{-\pi i j} \right)\\
+&= \frac{1}{2}\sum_{j=0}^9 (-1)^i = 0
+\end{align*} 
+\end{eg}
+
+\begin{thm}
+Let $\repV$ and $\repW$ be 2 irreducible representations of $G$ with matrix forms $(a_{ij})$ and $(b_{kl})$ respectively. Then, 
+\begin{enumerate}
+\item For the case that $\rho$ and $\tau$ are not isomorphic, we have  $\frac{1}{\abs{G}} \sum_{t \in G} a_{ij}(t^{-1})b_{kl}(t) = 0$
+\item For the case $\rho = \tau$, we have 
+\[\frac{1}{\abs{G}} \sum_{t\in G} a_{ij}(t^{-1}) b_{kl}(t) = \frac{1}{h} \delta_{il}\delta_{jk}
+= \begin{cases}
+\frac{1}{n} & i=l,j-k\\
+0 &\text {otherwise}
+\end{cases}
+\]
+$n = \dim(V)$
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+Let $h$ be a linear mapping from $V$ to $W$ with a matrix representation $(\chi_{rs})$ and $h_G$ with a matrix representation $(y_{rs})$. 
+\begin{align*}
+y_{il} &= \frac{1}{\abs{G}} \sum_{t\in G} a_{ij}(t^{-1}) \chi_{jk} b_{kl}(t)\\
+&= \left( \frac{1}{\abs{G}} \sum_{t\in G} a_{ij}(t^{-1}) b_{kl}(t) \right) \chi_{jk}
+\end{align*}
+In case (i)$ y_{il} \equiv 0$, $\frac{1}{\abs{G}} \sum_{t \in G} a_{ij}(t^{-1})b_{kl}(t) =0$. \\
+
+\noindent In case (ii), we have $h_G = \lambda I_v$, i.e.
+\begin{align*}
+ y_{il} = \lambda, \delta_{il}& = \frac{1}{h} Tr(h) \cdot \delta_{il}\\
+ &= \delta_{il} \left( \frac{1}{n} \sum \delta_{jk} \chi_{jk} \right)\\
+ &= \left( \frac{1}{n} \sum \delta_{jk}\delta_{il} \right) \chi_{jk}
+\end{align*}
+Thus, 
+\[\frac{1}{\abs{G}} \sum_{t \in G} a_{ij}(t^{-1})b_{kl}(t) = \frac{1}{n} \sum \delta_{jk} \delta_{il} = 
+\begin{cases}
+\frac{1}{n} & j=k,i=l\\
+0 &\text{otherwise}
+\end{cases}
+\]
+\end{proof}
+
+\begin{rem}
+\begin{enumerate}
+\item Suppose that the matrices $(a_{ij}(t)$ are unitary. It can be realized by a suitable choice of basis. We have $a_{ij}(t^{-1}) = \bar{a_{ji}(t)}, (A^{-1} = \bar{A^t})$
+\item If $\phi$ and $\psi$ are two functions on $G$, put 
+\[(\phi|\psi) = \frac{1}{\abs{G}} \sum_{t\in G} \phi(t) \bar{\psi(t)} \]
+It is an inner product.\\
+
+\noindent Let $\repV$ and $\repW$ be two irreducible representations of $G$ with matrix forms $(a_{ij})$ and $b_{kl}$ with respectively orthonormal bases on $V$ and $W$ respectively.  Then,  $(a_{ij}|b_{kl}) = 0$ if $(\repV \ncong \repW$ and $(a_{ik}|b_{kl}) = \frac{1}{n} \delta_{ik}\delta{jl}$ 
+\end{enumerate}
+In conclusion, the functions coming from matrix forms are orthogonal (and therefore linearly independent). 
+\end{rem}
+
+\begin{thm} Orthogonality of irreducible characters
+
+\noindent (1) If $\chi$ is a character of an irreducible representation, we have $(\chi|\chi) = 1$.\\
+
+\noindent (2) If $\chi,\psi$ are characters of two non-isomorphic irreducible representations, we have $(\chi|\psi) = 0$.  
+\end{thm}
+\begin{proof}
+Let $\repV$ and $\repW$ be two irreducible representations of $G$ with matrix form $(a_{ij})$ and $(b_{kl})$ with respect to orthonormal basis of $V$ and $W$ respectively. Let $\chi$ and $\psi$ be characters of $\rho$ and $\tau$ respectively.  
+\begin{align*}
+\chi(g) &:= \sum a_{ii}(g)\\
+\psi(g) &:= \sum b_{kk}(g)\\
+(\chi|\chi) &= \sum_{i,j} (a_{ii}|a_{jj}) = \sum_{i,j} \frac{1}{n}\delta_{ij} =1 \\
+(\chi|\psi) &= \sum(a_{ii}|b_{kk}) = 0
+\end{align*}
+by the orthogonal relations. 
+\end{proof}
+
+%Sept 26, 2012
+\begin{center}
+\emph{Monday, September 26}
+\end{center}
+\begin{thm}
+$\chi,\psi$ are characters of an irreducible representation. Then,
+\begin{enumerate}
+\item $(\chi|\chi) = 1$
+\item $(\chi|\psi) = 0$ if the representations are not isomorphic and $(\chi|\psi)=1$ is they are isomorphic. 
+\end{enumerate}
+\end{thm}
+
+\begin{rem}
+Let $(\rho,v)$ be a representation of $G$ with a matrix form $(a_{ij}(g))$.
+
+\begin{enumerate}
+\item If we change the basis, then we get a new matrix form 
+\[\left( \sum_{k,l} T_{ik}^{-1}a_{kl}(g)T_{lj} \right) \]
+when $T$ is the matrix of change of basis and $T^{-1}$ is its inverse. Note that $\sum_{kl}T_{ik}^{-1}a_{kl}(g)T_{lj}$ is a linear combination of functions $a_{kl}(g)$. Let $F_\rho := \ip{a_{kl}(g)} \subseteq C(G)$, the set of "continuous" functions on $G$ (For finite groups, all functions are continuous, so not really relevant, but matters for Lie Groups,etc ). By observation, we have that $F_\rho$ is independent of choices of $V$.
+
+\item If $(\rho,V)$ is irreducible, then $dim(F_\rho) = (\dim (V))^2$ because we can represent $C(G)$ as $(\chi|\psi)$, and so the elements are linearly independent because they are orthogonal.  
+
+\item If $\repV \cong \repW$m the characters of $\rho$ and $\tau$ are the same. 
+\end{enumerate}
+
+Recall that every representation of $G$ can be decomposed into a direct sum of irreducible representations (not necessarily unique). Fix a representation of $G$ and $\{\chi_1,\dots, \chi_n\}$ the set of all characters of irreducible representations of $G$ ( it might be infinite. Then $\chi_i(e_i) = n_i=$ dimension of the new representation.
+
+\end{rem}
+
+\begin{thm}
+(**)Let $V$ be a representaion of $G$ with character $\phi$. If $V = \bigoplus W_i$ where  $W_i$ irreducible with character of $\chi_{W_i}$. Then if $W$ is an irreducible representation of $G$ with character $\chi$, then the number of $W_i$ that are isomorphic to $W$ is equal to $(\phi|\chi)$. In particular, the number is independent of the decomposition and the decomposition is unique. 
+\end{thm}
+
+\begin{proof}
+We know that $\phi = \sum \chi_{w_i}$. Thus,
+\begin{align*}
+(\phi|\chi) &= (\sum \chi_{w_i}|\chi)\\
+&- \sum(\chi_{W_i}|\chi)\\
+&= \text{ number of } W_i \text{ isomorphic to } W
+\end{align*}
+Because by the previous theorem, the above inner product is 0 or 1 depending whether the representations are isomorphic. 
+\end{proof}
+\newpage
+\begin{center}
+\emph{Friday, September 2012}
+\end{center}
+
+\begin{cor}
+(**)Two representations are isomorphic if and only if their characters are the same. 
+\end{cor}
+
+\begin{eg}
+In class, we claim $\rho_{n-h}$ and $\rho_h$ are isomorphic ($\rho_n$ is an irreducible representation of $D_n$). Where we had
+\begin{align*}
+\rho_h (r^k) &= \tmatrix{\xi^{hk}}{0}{0}{\xi^{-hk}}
+\end{align*}
+Where $\chi_{\rho_h}(r^) = \xi^{hk} + \xi^{hk}, \xi_{\rho_h}(sr^k) = 0, \xi_{\rho_h} = \chi _{\rho_{n-h}}$, 
+\end{eg}
+
+\begin{cor}
+Let $\chi_1,\dots,\chi_n$ are distinct irreducible characters of $G$ and $W_1,\dots, W_k$ denote its corresponding representation space, where an {\bf irreducible character} means a function coming from character of irreducible representation. Each representation is isomorphic to 
+\[ V = m_1 W_1 \oplus \dots \oplus m_k W_k\]
+where $m_i$ are integers (non-negative). Then $m_i := (\chi_v|\chi_i)$ where $\chi_v$ is the character of $V$ and $\chi_v = \sum m_i \chi_i$. As a consequence, 
+\begin{align*}
+(\chi_v|\chi_v) &= \left(\sum m_i \chi_i| \sum m_j \chi_j\right)\\
+&= \sum_{i,j} m_i m_j (\chi_i|\chi_j)\\
+&= \sum_{i,j} m_i m_j \delta_{ij} \sum_i m_i^2
+\end{align*}
+In particular, $(\chi_v|\chi_v)$ is a sum of squares. 
+\end{cor}
+
+\begin{thm}
+Let $\phi$ be a character of a representation $V$. Then, $(\phi|\phi) = 1$ if and only if $V$ is irreducible. 
+\end{thm}
+\begin{proof}
+Let $V = \bigoplus m_ iW_i$ ,$W_i$  are distinct irreducible.  $(\phi|\phi) = \sum_r m_i^2 = 1 \Leftrightarrow$ there is only one component and $m_1 = 1 \Leftrightarrow$ $V$ is irreducible.   
+\end{proof}
+
+\begin{cor}
+All one dimensional representations are irreducible
+\end{cor}
+
+\begin{proof}
+Let $(\chi,V)$ be a one-dimensional irreducible representation of $G$ and $\chi$ a character of $(\chi,V)$. 
+\begin{align*}
+(\chi|\chi) &= \frac{1}{\abs{G}} \sum_{g \in G} \chi(g) \bar{\chi}(g)\\
+&=\frac{1}{\abs{G}} \sum_{g\in G} 1 = 1
+\end{align*}
+
+\end{proof}
+\begin{defn}
+Let $G$ be a finite group of order $n$ and $V = \bC[G]$ (Note that $\bC[G] \cong \ip{g}_{g\in G}$).  Let $(r,V)$ be the "regular" representation $r(h) g:= hg$. Then,,
+\[
+\begin{cases}
+\abs{G} &\text{ If } g=e\\
+0 & \text{ If } g \neq e
+\end{cases}
+\]
+Let $\chi$ be an irreducible character and $\chi_r$ be a character of regular representation. Then consider
+\begin{align*}
+(\chi_r| \chi) &= \frac{1}{\abs{G}} \sum_{t\in G} \chi_r(t) \bar{\chi}(t)\\
+&= \frac{1}{\abs{G}} \chi_r(e) \bar{\chi}(e)  = dim_\chi
+\end{align*}
+\end{defn}
+
+\begin{thm}
+(**) Let $\chi_1,\dots ,\chi_h$ be the set of full irreducible characters (it might be infinite). Then,
+\begin{align*}
+\chi_r &= \sum_{i=1}^h \left(dim_\chi\right) \chi_i
+\end{align*}
+In particular, $h$ is finite. 
+\end{thm}
+
+\begin{cor}
+$\abs{G} = \sum_{i=1}^h \left( dim_{\chi_i}^2 \right)$. 
+\end{cor}
+
+\begin{proof}
+\begin{align*}
+(\chi_r|\chi_r) &= \frac{1}{\abs{G}} \sum_{t\in G} \chi_r(t)\bar{\chi}(t)\\
+&= \frac{1}{\abs{G}} \abs{G}\abs{G} = \abs{G}
+\end{align*}
+On the other hand, $(\chi_r|\chi_r) = \sum_{i=1}^h (dim_{\chi_i})^2$.  Therefore $\abs{G} = \sum_{i=1}^h (dim \chi_i)^2$
+\end{proof}
+
+\begin{eg}
+Consider $D_3$ which has 2 one dimensional representations $\psi_1,\psi_2$ and 1 2 dimensional $\rho_1$. 
+\[ |D_3| = 6 = 1^2 + 1^2 + 2^2 = 6 \]
+\end{eg}
+
+\begin{center}
+\emph{Monday,  October 1}
+\end{center}
+
+
+\begin{rem}
+Note that the set of all irreducible characters form an orthogonal system in the space of class functions on $G$. 
+\end{rem}
+
+\begin{defn}
+Let $C^n(G) = \{f: F\rightarrow \bC| f(sts^{-1}) = f(t), s,t\in G \}$ denote the space of class functions on $G$ and $\text{dim} (C^n(G))$ is the number of conjugacy classes. 
+\end{defn}
+
+\begin{prop}
+Let $f$ be a class function on $G$ and $\repV$ a representation of $G$. Let $\rho_f: V\rightarrow V$ defined as $\rho_f := \sum_{t\in G} f(t)\rho(t)$. If $\repV$ is an irreducible representation of degree $n$ with character $\chi$, then $\rho_f$ is a homothety of the ratio $\lambda_i$, 
+\[ \lambda = \frac{\abs{G}}{n} (f|\bar{\chi}) \]
+\end{prop}
+
+
+\begin{proof}
+We would like to show that $\rho_f$ is an intertwining operator. $\forall s \in G$
+
+\begin{align*}
+\rho(s)^{-1}\circ \rho_f \circ \rho(s) &= \rho(s)^{-1} \left( \sum_{t\in G} f(t)\rho(t) \right) \circ \rho(s)\\
+&= \sum_{t\in G} (f(t) \rho(s)^{-1} \circ \rho(t) \circ \rho(s))\\
+&= \sum_{t\in G} f(t) \rho(s^{-1}ts)\\
+&= \sum_{u= s^{-1}ts} f(sus^{-1})\rho(t)\\
+&= \sum_{u\in G} f(u) \rho(u) = \rho_f 
+\end{align*}
+Thus, $\rho_f$ is a homothety.  
+\begin{align*}
+\lambda &= \frac{1}{n} Tr(\rho_f)\\
+&= \frac{1}{n} \sum_{t\in G} f(t) Tr(\rho(t))\\
+&= \frac{1}{n} \sum_{t\in G} f(t)\chi(t)\\
+&= \frac{\abs{G}}{n} (f|\bar{\chi})
+\end{align*}
+\end{proof}
+
+\begin{thm}
+Let $C^h(G)$ be the space of class functions on $G$. Then, the full set $\{\chi_1,\dots, \chi_k\}$ of irreducible characters is an orthonormal basis of $C^h(G)$. In particular, the number of irreducible representations of $G$ is the same as the number of conjugacy classes. 
+\end{thm}
+
+\begin{proof}
+Let $f \in C^h(G)$ and $(f|\chi_i) = 0$ for all $1\leq i \leq k$. It is enough to show that $f \equiv 0$. Note that there is no harm in assuming that $(f|\bar{\chi}_i) \equiv 0$ for all $1\leq i\leq k$.  For each representation $\rho$ of $G$, put $\rho_f:= \sum_{t\in G} f(t)\rho(t)$. The previous proposition shows that $\rho_f$ is 0 if $\rho$ is irreducible. From the direct sum of decomposition, we conclude that $\rho_f$ is 0 for all representations. In particular, let $\rho = r$, where $r$ is the regular representation, i.e. $r_f \equiv 0$.  
+\begin{align*}
+0 = r_f(e_l) &= \sum_{t\in G} f(t)r(t)(e_l)\\
+&= \sum_{t\in G} f(t)e_{tl}\\
+&= \sum_{t \in G} f(t)e_t\Rightarrow \\
+f(t) &= 0
+\end{align*}
+For all $t \in G$. It finishes the proof. 
+\end{proof}
+
+\begin{cor}
+A group is abelian if and only if all irreducible representations are 1-dimensional. 
+\end{cor}
+
+\begin{proof}
+$G$ is abelian $\Leftrightarrow$ the number of conjugacy classes is equal to $\abs{G}$. By the previous theorem, the number of irreducible representation is $\abs{G}$. We want to show this is equivalent to all the irreducible representations being 1-dimensional. Recall that $\abs{G} = \sum_{i=1}^k m_i^2$ where $m_i$ is the dimension of the irreducible representation, so $m_i = 1$ and this concludes the proof. 
+\end{proof}
+
+\begin{cor}
+Let $A$ be an abelian subgroup of $G$, then each irreducible representation of $G$ has degree less than or equal $\frac{|G|}{|A|}$, i.e. the index of $A$ in $G$. 
+\end{cor}
+
+\begin{proof}
+Let $\repV$ be an irreducible representation of $G$. We can restrict the $G$-action to $A$-action and make $\repV$ a representation of $A$. Since $A$ is abelian, all the irreducible representations are 1-dimensional. Let $V = \bigoplus_{i=1}^l V_i$ where $V_i$ are irreducible representations of $A$ and $\text{Dim}(V) = 1$. Let $\{[s]\}$ be a collection of the representatives of the coset $G/A$.  Define $W = \ip{\rho(s)V_i}_{s \in G/A}$. More precisely if $V_1 = \ip{v}$, then $W = \ip{\rho(s)v}$. It is enough to show that $W$ is $G$-invariant. Let $t \in G$, $\forall w \in W, w = \sum C_s \rho(s)v$,
+\begin{align*}
+\rho(t) w &= \sum_{s \in G/A} C_s \rho(t) \rho(s) v\\
+&= \sum_{s \in G/A} C_s \rho(s_t) \rho(g_{st}) v\\
+&= \sum_{s_t \in G/A} C_s \rho(s_t) C_{st}v\\
+&= \sum_{s_t \in G/A} C_s C_{st} \rho(s_t)v \in W
+\end{align*}
+where $\{s_k\}$ is a permutation of $\{[s]\}$ and $a_{st} \in A$ ($ts = s_t a_{st}$). We have showed that $W$ is $G$-invariant and therefore $V = W$ and $\text{Dim } V = \text{Dim W} \leq \frac{\abs{G}}{n}$ 
+\end{proof}
+\newpage
+\begin{center}
+\emph{Wednesday, October 3}
+\end{center}
+
+\begin{eg}
+Suppose $G = S_3 \cong D_3$. $G = \{(1), (12),(23),(13),(123),(213)\}$. There are 3 conjugacy classes. Recall, that if $H \lhd G$ can be lifted to an irreducible representation of $G$ by 
+\[ \tilde{\rho}: G \rightarrow G/H \rightarrow GL(V) \]
+$A_3 = \{(1), (123), (132)\} \lhd S_3 \wedge [S_3: A_3] = 2$ thus $S_3/A_3 \cong C_2$. Let 
+\begin{align*}
+\psi_0: C_2 &\rightarrow \bC^*\\
+[i]&\rightarrow 1\\
+\psi_0: C_2 &\rightarrow \bC^*\\
+[i] &\rightarrow [1]^i\\
+\theta_0: S_2 &\rightarrow \bC^*\\
+\sigma &\rightarrow 1\\
+\theta_1: S_3&\rightarrow \bC^*\\
+\sigma&\rightarrow sgn(\sigma)
+\end{align*}
+are induced by $\psi_0$ and $\psi_1$. By the theorem we proved we know that there exists at least one irreducible representation of degree greater than 1, say $k$. $\abs{G} = 6 \geq 1^2 + 1^2 + k^2 \Rightarrow k =2$ and there exists exactly one representation of degree 2. Let $\theta$ be the character of this representation. In fact, we can find its character
+\[ \chi_r = \chi_{\theta_0} + \chi_{\theta_1} + 2\theta \]
+We can determine the value now by  looking at the value of the characters on each of the elements.  
+\begin{table}[htdp]
+\caption{Value of the Characters}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+& (1) & (12) &(123)\\
+\hline
+$\chi_{\theta_0}$ & 1& 1& 1\\
+\hline
+$\chi_{\theta_1}$ & 1&-1&1\\
+\hline
+$\theta$ & 2&0&-1\\
+\hline
+$\chi_r$ & 6&0&0\\
+\hline
+\end{tabular}
+\end{center}
+
+\label{Value of the Characters }
+\end{table}
+A natural question how can we construct this n-dimensional irreducible representation? $S_3$ can act of $\bC^3$ by permuting the basis vectors $\{1,1,1\}$. By observation, $e_1 + e_2 + e_3$ is a $G$-invariant vector with eigenvalue $1$. $v^\perp = \{w \in \bC^3| \ip{v,w} = 0\}$ is a $G$-invariant subspace. In fact, $v^\perp = \{(x,y,z) \in \bC^3| x+y+z = 0\}$. This is the 3-dimensional irreducible representation of $S_3$. 
+\end{eg}
+
+\subsection*{Product Groups}
+\begin{defn}
+Let $G_1, G_2$ be two groups. We define $G_1 \times G_2$, the product of $G_1$ and $G_2$ by  $(s_1,t_1)\cdot (s_2,t_2) = (s_1s_2, t_1t_2)$ for all $s_1,s_2 \in G$ and  $ t_1,t_2 \in G_2$
+\end{defn}
+
+\begin{rem} Notes about product groups\\
+\begin{enumerate}
+\item $G_1$ and $G_2$ are finite groups, then $\abs{G_1 \times G_2} = \abs{G_1}\abs{G_2}$.
+\item If $H_1, H_2 \lhd G$ with $H_1H_2 = G$ and $H_1 \cap H_2 = \{ e\}$ and for all $h_1,h_2$ we have $h_1h_2 = h_2h_1$ then $G \cong H_1 \times H_2$. 
+\end{enumerate} 
+\end{rem}
+
+\begin{defn}
+Let $(\rho_1,V)$ and $(\rho_2,V)$ be representations of $G_1$ and $G_2$, respectively. Define a representation $\rho_1 \otimes \rho_2$ of $G_1 \times G_2$ on $V_1 \otimes V_2$ by setting $\rho_1 \otimes \rho_2 (s_1,s_2)(v_1\otimes v_2) := \rho_1(s_1) v_1 \otimes \rho_2 (s_2)v_2$ where $s_1 \in G_1, s_2 \in G_2, v_1\in V_1, v_2 \in V_2$, we can check that it is a representation of $G_1 \times G_2$. 
+\end{defn}
+
+\begin{rem} Notes on product \\
+\begin{enumerate}
+\item If $G_1= G_2$ then $\rho_1 \otimes \rho_2$ has two different meanings. It can be viewed as a representation of $G$ by  $\rho_1 \otimes \rho_2 (s)(v_1 \otimes v_2) := \rho_1(s)v_1 \otimes \rho_2(s)v_2 , \forall s\in G, v_1 \in V, v_2 \in V_2$. On the other hand it can be viewed as a representation of $G \times G$ as we just defined. 
+\item In general, if we have a  group homomorphism $f: H\rightarrow K$ and $(tau,W)$ be a representation of $K$. Then, we can define a representation on $H$ by $H\rightarrow K \rightarrow GL(W)$ by $\tau \circ f$. If we set $H = G, K = G\times G$ and $f: G \rightarrow G \times G$ with a diagonal mapping $G \rightarrow (g,g)$. Then, the first meaning is induced from the second one by $f$. 
+\end{enumerate}
+\end{rem}
+
+\begin{center}
+\emph{Friday, October 5}
+\end{center}
+
+\begin{rem}
+If $\chi_i$ is a the character of $\rho_i$ respectively, the character of $\rho_1 \otimes \rho_2$ is given $\chi(s_1,s_2) = \chi_1(s_1)\chi_2(s_2)$. 
+\end{rem}
+
+\begin{thm} Keeping our notations. We have
+\begin{enumerate}
+\item If $\rho_1$ and $\rho_2$ are irreducible, $\rho_1 \otimes \rho_2$ is irreducible
+\item Each irreducible representation of $G_1 \times G_2$ is isomorphic to a representation $\rho_1 \otimes \rho_2$ when $\rho_1$ and $\rho_2$ are irreducible for $G_1$ and $G_2$ respectively. 
+\end{enumerate}
+
+\end{thm}
+
+\begin{proof}
+If $\rho_1$ and $\rho_2$ are irreducible, we have 
+\begin{align*}
+\frac{1}{\abs{G_1}} \sum_{s_1 \in G_1} \abs{\chi_1(s_1)^2} &= 1\\
+\frac{1}{\abs{G_2}} \sum_{s_1 \in G_2} \abs{\chi_2(s_2)^2} &= 1\\
+\frac{1}{\abs{G_1 \times G_2}} \sum_{s\in G_1, s_2 \in G_2} \abs{\chi(s_1,s_2)}^2 &= \frac{1}{|G_1||G_2|} \sum_{s_1\in G_1,s_2 \in G_2} |\chi_1(s_1)|^2 |\chi_2(s_2)|^2\\
+&= \mbrac{\frac{1}{|G|} \sum_{s_1 \in G_1} |\chi_1(s_1)^2} \mbrac{\frac{1}{|G^2|} \sum_{s\in G_2} \abs{\chi_2(s_2)}^2} = 1
+\end{align*}
+
+\noindent Let $V_1,...,V_l$ (reap. $W_1,...,W_k)$ be all irreducible representations of $G_1$ (reap. $G_2$) with degree $n_1,...,n_l$ (reap. $m_1,...,m_k$). Then $\sum_i n_i^2 = |G_1|, \sum_j m_j^2 = |G_2|$
+
+\begin{align*}
+\sum_{i,j}(dim V_i \otimes W_j)^2 &= \sum_{i,j} (n_i,m_j)^2 \\
+&= \sum_{i,j} n_i^2 m_j^2\\
+&= (\sum_i n_i^2)(\sum_j m_j^2)\\
+&= |G_1||G_2| = |G_1 \times G_2| 
+\end{align*}
+Thus, $\{V_i \otimes W_j\}$ is the full set of irreducible representations of $G_1 \times G_2$. 
+
+\end{proof}
+\newpage
+\section{Induced Representations}
+
+Let $G$ be a finite group, $H$ a subgroup of $G$. We have a system of representatives $\{r_\sigma\}_{\sigma \in G/H} \subset G$ such that the disjoint union of $r_\sigma H = G$. $\forall t \in G$, we can write uniquely $t=rh$ where $r \in \{r_\sigma\}, h \in H$. 
+
+\begin{defn}
+Let $\repV$ be a representation of $G$ and $H$ a subgroup of $G$ and $W$ be an invariant subspace of $V$. i.e. $\forall h \in H, w \in W, hw \in W$ ($\rho(H)W \subseteq W)$. Let $s\in G,\rho(S)W$ depends only on the left coset of $H$ since $s =rh$.  $r \in \{r_\sigma\}, h \in H, \rho(s)W = \rho(r)\rho(h)W = \rho(r)W$. \\
+
+Let $W_\sigma = \rho(r_\sigma)W \subseteq V$. We say $\repV$ is {\bf induced} by $(\theta,W)$ where $\theta$ is the restriction of $\rho|_H$ on $W$, i.e. $\theta(h)W = \rho(h)W, h \in H, w \in W'$ if $V = \bigoplus_{\sigma \in G/H} W_\gamma$. We also say that $(\rho,V)$ is the induced representation of $(\theta,W)$. 
+\end{defn}
+
+\begin{thm}
+Given a representation $(\theta,W)$ of a subgroup $H$ of $G$ there exists a unique representation $(\rho,V)$ of $G$ denoted by $Ind_H^G\theta$ or $Ind_H^G W$ induced by $(\theta, W)$ (up to isomorphism). 
+\end{thm}
+\newpage
+\begin{center}
+\emph{Wednesday, October 10}
+\end{center}
+
+\begin{proof}
+We first prove uniqueness. Let $R = \{r_\sigma\}_{\sigma \in \sigma/H}$ be a set of representatives. By definition, $V = \bigoplus_{\sigma \in G/H} W_\sigma, W_\sigma := \rho(r_\sigma)W$. Thus, each element $v$ of $V$ has a unique expression
+ \[ v = \sum_{\sigma \in G/H} \rho(r_\sigma) w_\sigma \]
+Given $g \in G$, $g\cdot r_\sigma = r_{g\cdot \sigma} \cdot h_{g \cdot \sigma}$ where $r_{g\cdot \sigma} \in R, h_{g\cdot \sigma} \in A$.  
+\begin{align*}
+\rho(g)(\rho(r_\sigma)w_\sigma)  &= \rho(g\cdot r_\sigma) w_\sigma\\
+&= \rho(r_{g\cdot \sigma}) \rho(h_{g\cdot \sigma}) w_\sigma\\
+&= \rho(r_\sigma\cdot \sigma) (\theta (h_{g \cdot \sigma}) w_\sigma)
+\end{align*}
+This expression is only dependent on $\theta$ and $H$. Therefore, $\repV$ is unique. \\
+
+\noindent Next, we show existence, Define a representation $\repV$ by $V = \bigoplus_{\sigma \in G/H}W_\sigma$ where $W_\sigma \cong W$.  $\rho: G \rightarrow GL(V)$, for all $g\in G, v = \sum_{\sigma \in G/H} w_\sigma$ with $w_\sigma \in W_\sigma$, for all $\sigma \in G/H$. 
+\[ \rho(g) v := \sum_{\sigma \in G/H} \theta (h_{g\cdot \sigma}) w_{g \cdot \sigma}\]
+To show that $\rho$ is well defined, we must verify that it is a homomorphism. That is, $\rho(g)'\rho(g)w_\sigma = \rho(gg')w_\sigma$, for $g,g' \in G, \sigma \in G/H$. We have 
+\begin{align*}
+g\cdot r_\sigma &= r_{g\sigma} h_{g\sigma}\\
+g' r_{g\sigma} &= r_{g'(g\sigma)} h_{g'(g\sigma)}\\
+(g'g) r_\sigma &= g'(g r_\sigma)\\
+&= g'(r_{g\sigma} h_{g\sigma})\\
+&= r_{g'(g\sigma)} (h_{g'(g\sigma)}h_{g\sigma})\\
+\rho(g')(\rho(g)w_\sigma) &= \rho(g') (\theta (h_{g\sigma)}w_{g\sigma})\\
+&= \theta(h_{g'(g\sigma)} \theta(h_{g\sigma}) w_{g'(g\sigma)}\\
+\rho(g;g) w_\sigma&= \theta(h_{g'(g\sigma)} h_{g\sigma}) w_{g'(g\sigma)}\\
+&= \theta(h_{g'(g\sigma)})\theta(h_{g\sigma}) w_{g'(g\sigma)}
+\end{align*}
+
+\end{proof}
+
+\begin{rem}
+A few remarks on induced representations
+\begin{enumerate}
+\item If $\rho_1 = Ind_r^G \theta_1, \rho_2 = Ind_H^G\theta_2$, then $\rho_1 \oplus \rho_2 = Ind_H^G (\theta_1 \oplus \theta_2) = Ind_H^G \theta_1 \oplus Ind_\theta^G \theta_2$.\\
+
+\noindent Proof. If $V_i,W_i$ are representation spaces of $\rho_i, \theta_i$ respectively, then $W_1 \oplus W_2 \subseteq V_1 \oplus V_2$ and $\rho_i(r_\sigma)W_i$ are distinct sums. By our theorem, $V_1 \oplus V_2 = Ind_H^G W_1 \oplus W_2$.
+
+\item If $\rho_1 = Ind_H^G$ and $\rho_2$ a representation of $G$, then $(Ind_H^G \theta) \otimes \rho_2 = Ind_H^G (\theta \otimes Res_H^G \rho_2)$ where $Res_H^G \rho_2$ is the representation of $H$ by forgetting the other part of the $G$-action.  
+
+\item Let $H$ be a subgroup of $G$ and $K$ be a subgroup of $H$. Given a representation $(\theta,W)$ of $K$, $Ind_H^G(Ind_K^H \theta) = Ind_K^G \theta$.
+
+\item $Ind_H^G W \cong \bC[G] \otimes_{\bC[H]} W$.  
+\end{enumerate}
+\end{rem}
+
+\begin{thm}
+Let $H$ be a subgroup of $G$ and $|H|$ is the order of $H$, $R = \{r_\sigma\}_{\sigma \in G/H}$ a system of representatives. Suppose that $\repV$ is induced by a representation $(\theta,W)$ of $H$ and let $\chi_\rho$ and $\chi_\theta$ be the corresponding characters of $G$ and $H$. For all $g\in G$, 
+\[ \chi_\rho(g) = \sum_{r\in R, r^{-1}gr \in H} \chi_\theta (r^{-1} g r) = \frac{1}{|H|} \sum_{s \in G, s^{-1}gs \in H} \chi_\theta (s^{-1} gs) \]
+\end{thm} 
+
+\begin{proof}
+$V = \oplus_{\sigma \in G/H} W_\sigma, W_\sigma = \rho(r_\sigma) W$. We know that $\rho(g)$ permutes $W_\sigma$. $\chi_(g)|_{W\sigma}$ is not 0, if and only if $g\sigma = \sigma \Leftrightarrow gr_\sigma = r_\sigma h_{g\sigma} \Leftrightarrow r_{\sigma}^{-1} gr_{\sigma} = h_{g\sigma} \in H$.  So we get 
+\[ Tr_{W_\sigma} (\rho(g)|_{W_\sigma}) = Tr_W \theta(r^{-1}_\sigma gr_\sigma) = X_\theta (r_\theta^{-1} gr_\sigma) \]
+\end{proof}
+
+\begin{center}
+\emph{Friday, October 12}
+\end{center}
+This finishes the first equality. For the second one, $\forall s \in r_\sigma H$, i.e. $s = r_\sigma h$ $X_\theta(s^{-1}gs) = X_\theta(h^{-1} r_\sigma^{-1}g r_\sigma h) = Tr_W [ \theta(h^{-1}) \theta(r^{-1}\sigma g r_\sigma) \theta(h)] = Tr_W(\theta(r_\sigma^{-1} g r_\sigma )) = X_\theta(r_\sigma^{-1} gr_\sigma)$.  Thus, $g\sigma = \sigma \Leftrightarrow g r_\sigma = r_\sigma h_{g\sigma} \Leftrightarrow r^{-1}_\sigma gr_\sigma = h_{g\sigma} \in H$. 
+
+\begin{prop}
+Let $H$ be a subgroup of $G$, $(\theta, W)$ a representation of $H$, $(\tau, V)$ a representation of $G$. Then, any $H$-module homomorphism $\varphi: W\rightarrow V$ extends uniquely to a $G$-module homomorphism. $\tilde{\varphi}: Ind_H^G W \rightarrow V$. 
+\[ Hom_H(W, Res_H^F V) \cong Hom_G(Ind_H^G W, V) \] 
+In particular, this universal property uniquely determines $Ind_H^G W$ up to isomorphism. 
+\end{prop}
+
+\begin{proof}
+Let $\repV = Ind_H^G \theta$ and $R = \{r_\sigma\}_{\sigma \in G/H}$ a system of representatives of $G/H$.  $V = \bigoplus_{\sigma \in G/H} W_\sigma, W_\sigma = \rho(r_\sigma) W$. We define $\tilde{\varphi}$ on $W_\sigma$ as follows: $\forall \sigma \in G/H$ 
+\[ W_{\sigma} (\rho(r_\sigma)^{-1} \rightarrow W (\varphi) \rightarrow V (\tau(r_\sigma)) \rightarrow V \]
+Which is independent of the representative of $r_\sigma$ for $r$, since $\gamma$ is $H$-invariant, 
+\end{proof}
+
+\begin{thm}[Frobenius Reciprocity]
+Let $H$ be a subgroup of $G$, $(\theta, W)$ a representation of $H$, $(\tau,V)$ a representation of $G$. For a representation $(\epsilon, M)$, we use $\chi_\epsilon$ or $\chi_M$ to denote the character of $(\epsilon, M)$.
+\[ (\chi_{Ind_H^G W}| \chi_V)_G =  (\chi_W | \chi_{Res_H^G V})_H\] 
+
+\end{thm}
+
+\begin{proof}
+Since the inner product is linear w.r.t direct sum. it is enough to show that $\theta$ and $\tau$ are irreducible. The left hand side is the number of times $U$ appears in $Ind_H^G W$ which is equal to $dim_\bC (Hom_G(Ind_H^G W,U))$. Similarly, the right hand side is the number of times $W$ appearing in $Res_H^G V$ which is equal to $dim_{\bC} (Hom_H(W, Res_H^G V))$ . Since $Hom_G(Ind_H^G W,V) = Hom_G(W, Res_H^G, V)$, we have that they have the same dimension over $\bC$. 
+\end{proof} 
+
+\begin{eg}
+Suppose we have $G = D_n$ where $n$ is even and $n\geq 2$. Recall that $D_n = \ip{r,s}/\ip{r^n = 1, s^2 = 1, srs = r^{-1}}$. 
+
+\begin{table}[htdp]
+\caption{1 - Dimensional representations}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+ & $r^k$ & $sr^k$ \\ 
+ \hline
+ $\psi_1$ & 1 & 1 \\
+ $\psi_2$ & 1 & (-1) \\
+ $\psi_3$ & $(-1)^k$ & $(-1)^k$\\
+ $ \psi_4 $ & $(-1)^k$ & $(-1)^{k+1}$ 
+\end{tabular}
+\end{center}
+\label{1 Dimensional representations}
+\end{table}
+We have $\zeta, \rho_h$ as defined earlier. We have
+\begin{align*}
+1^2 + 1^2 + 1^2 + 1^2 +(\frac{n}{2} - 1) 2^2 &= 4 + (\frac{n}{2} - 1) \cdot 4\\
+&= 2n = |D_n|
+\end{align*}
+Thus, $\{\psi_1, \psi_2,\psi_3,\psi_4, \rho_h\}_{1\leq h \leq \frac{n}{2} - 1}$ is the full set of irreducible representations of $D_n$.  $C_n \lhd D_n$  so any representation of $C_n$ can produce a representation of $D_n$  with twice dimensions. All irreducible representations of $C_n$ are $\{\chi_h\}$, $\chi_h(r^k) = \zeta^{hk}$. $Ind_{C_n}^{D_n}$ is a two-dimensional representation. In fact, $Ind_{C_n}^{D_n} \cong \rho_h$. \\
+
+\noindent $(\chi_h,V)$ is a 1-dimensional representation of $C_n$. $Ind_{C_n}^{D_n} \chi_h = V \bigoplus \rho(s) V = \ip{v, \rho(s) v}$  where $v$ is a basis of $V$.
+\begin{align*}
+\rho_h(r^k) v &= \chi_h (r^k v) = \zeta^{hk} v\\
+\rho_h(r^k) (\rho_h(s) v) &= \rho_h(sr^{-k}) v = \rho_h(s) \zeta^{-hk}v = \zeta^{-hk} \rho_h(s) v)\\
+r^k s &= sr^k
+\end{align*} 
+The matrix form of $\rho_h(r^k)$ is $\tmatrix{\zeta^{hk}} {0} {0}{\zeta^{-hk}}$. 
+\end{eg}
+
+\begin{center}
+\emph{Monday, October 15}
+\end{center}
+
+\begin{eg}
+Let $G \cong S_4$. We have $\abs{S_4} = 4! =24$. $H = \{(1),(12)(34),(13)(24),(14)(23)\}$. Then, $H \lhd S_4$, $S_3 \subseteq S_4$ and $H \rtimes S_3 \cong S_4$ (semi-direct), $S_4/H \cong S_3 \cong D_3 $. We have 2 1-dimensional representations of $S_4$ and one 2-dimensional representation of $S_4$. $S_4$ acts on $\bC^4$ by permuting the basis elements $\{e_1,e_2,e_3,e_4\}$, then $e_1 + e_2 + e_3 + e_4$ is an $S_4$- invariant subspace
+\[ \{ x+y+z+w = 0 | x,y,z,w \in \bC^4\}\]
+is a $S_4$-invariant subspace of $\bC4$. This gives us a 3-dimensional irreducible representation of $S_4$. \\
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline 
+• & (1) & (12) & (12)(34) & (123) & (1234) \\ 
+\hline 
+$x_0$ & 1 & 1 & 1 & 1 & 1 \\ 
+\hline 
+$\epsilon$ & 1 & -1 & 1 & 1 & -1 \\ 
+\hline 
+$\theta$& 2 & 0 & 2 & -1 & 0 \\ 
+\hline 
+$\psi$ & 3 & 1 & -1 & 0 & -1 \\ 
+\hline 
+$\epsilon \otimes \psi$ & 3 & -1 & -1 & 0 & 1 \\ 
+\hline 
+$r_G$ & 24 & 0 & 0 & 0 & 0\\
+\hline
+\end{tabular}
+
+\end{center} 
+\end{eg}
+\begin{rem}
+Let $H,K$ be two subgroups of $G$ and $\rho: H \rightarrow GL(W)$ be a representation of $H$. $V = Ind_H^G W$. We would like to know $Res_K^G V$. First of all, we choose a set of representatives $S$ for $K \backslash G / H$, that is, $G = \bigcup_{s\in S} KsH$ (disjoint union), so $s \sim s' \Leftrightarrow \exists k \in K, h \in H $ such that $ksh = s'$. $\forall s\in S$ define $H_s := sHs^{-1} \cap K \subseteq K$. We set $\rho^s(x) := \rho(s^{-1} xs), x \in H_s$ and obtain a representation $\rho_s: H_s \rightarrow GL(W)$, we denote this representation by $W_s$. 
+\end{rem}
+
+\begin{prop}
+The representation $Res_K^G(Ind_H^G W)$ is isomorphic to the direct sum of the representation $Ind_{H_s}^K W_s$ for $s \in S \cong K \backslash G / H$. 
+\end{prop}
+
+\begin{proof}
+We know that $V$ is a direct sum of the image $\rho(x)W$ for $x \in G/H$. Let $s \in S$ and $V(s)$ be the space of $V$ generated by the image of $\rho(x)W$, where $x \in KsH$. By definition, $V(s)$ is $K$-invariant. We just need to show that $V(s) \cong Ind_{H_s}^K W_s$. We only need to check that $W_s \subseteq V(s)$. In fact, $\rho(s)W$ is $H_s$ isomorphic to $W_s$ given by $s: W_s \rightarrow \rho(s)W$. 
+\end{proof}
+
+\begin{rem}
+ In particular, if $H = K$, we still use $H_s = sHs^{-1} \cap H$. The representation of $\rho$ of $H$, define a $Res_s(\rho)$ by restriction to $H_s$. This might be different than $W_s$. 
+\end{rem}
+
+\begin{prop} [Mackey's Irreducibility Criterion]
+In order to make $V = Ind_H^G W$ irreducible, it is necessary and sufficient that the following two conditions be satisfied. 
+\begin{enumerate}
+\item $W$ is irreducible
+\item $\forall s \in H\backslash G /H$, two representations $(\rho^s, W_s)$ and $Res_s(\rho)$ are disjoint, i.e. $\rho^s$ and $Res_s(\rho)$ have no common irreducible components. $H$ is the same as $(\chi_{Res_s(\rho)}| \chi_{\rho(s)})_{H_s} = 0$ for all $s \in H\backslash G/H$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+$V$ is irreducible if and only if
+\begin{align*}
+(\chi_v|\chi_v)_G &= 1 \Leftrightarrow\\
+(\chi_{Ind_H^G W}| \chi_{Ind_H^G W})_G &=1 \Leftrightarrow\\
+(\chi_w| \chi_{Res_H^G(Ind_H^G W)})_H &= 1\\
+Res_H^G(Ind_H^G w) &= \bigoplus_{s \in H \backslash G / H} Ind_{H^s}^H \rho^s \\
+1&= (\chi_v|\chi_v) = \sum_{s \in H\backslash G / H} d_s\\
+d_s &=  (\chi_w| \chi_{Ind_{H^s}^H} \rho^s)_H = (\chi_{Res_s(\rho)}|\chi_{\rho^s})_{H_s}
+\end{align*}
+If $s = e$ then $d_s = d_e = 1$. Thus, the sum is equal to 1 if and only if $d_s \equiv 0$ for $s \neq e$. This is exactly the second condition. 
+\end{proof}
+
+\begin{cor}
+Suppose that $H \lhd G$, $Ind_H^G W$ is irreducible if and only if $W$ is irreducible and $\rho$ is not isomorphic to and of $\rho^s$ for all $s \notin H$. 
+\end{cor}
+
+\newpage
+
+\section{Module Theory}
+
+\begin{center}
+\emph{Wednesday, October 17}
+\end{center}
+\begin{defn}
+Let $R$ be a ring with identity 1 (not necessarily commutative). A (left) $R$-Module is an abelian group $(M,+,0)$ together with a left action of $R$  on $M$ by $R\times M \rightarrow M$ with $(r,m) \rightarrow r \cdot m$ such that for all $r,s \in R$ and $m,n \in M$
+\begin{enumerate}
+\item $r(m+n) = rm + rn$
+\item $r(sm) = (rs)m$
+\item $(r+s)m = rm + sm$
+\item $1m = m$
+\end{enumerate}
+We sometimes write $_RM$ to specify that $M$ is a left module. We can define the right module in a similar fashion. 
+\end{defn}
+
+\begin{eg}
+ $_RR$ for any ring with identity. 
+\end{eg}
+
+\begin{defn}
+Recall that a (left) {\bf Ideal} of a ring $R$ is a subset if $R$ such that $\forall r \in R, i \in I \Rightarrow r\cdot i \in I$ and also closed under addition. Similarly, we can define right ideals. If a subset $I$ is both left and right ideals, we say $I$ is an ideal of $R$. Any left ideal $I$ of $R$ gives an $R$-module. 
+\end{defn}
+
+\begin{defn}
+If $M,N$ are $R$-modules (always means left) then $\phi: M \rightarrow N$ is said to be a (module) homomorphism if 
+\begin{enumerate}
+\item $\varphi$ is a group homomorphism
+\item $\forall r\in R$ and $m\in M$, we have $\phi(r \cdot m) = r \cdot \varphi(m)$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+Let $N$ be a subset of an $R$-Module $M$. We say that $N$ is a submodule of $M$ if $N$ is a subgroup and $R \cdot N = \{r \cdot n| r \in R, n \in N\} \subseteq N$. 
+\end{defn}
+
+\begin{defn}
+A quotient module $M/N$, where $N$ is a submodule, of $M$ is a quotient group $M/N$ with the R-action $r(m+ N) = r\cdot m + N$. It is well defined. 
+\end{defn}
+
+\begin{thm} [ First Isomorphism Theorem]
+Let $R$ be a ring and $\varphi: M \rightarrow N$ is a module homomorphism. Then, 
+\begin{enumerate}
+\item $\varphi(M)$ is a submodule, $\text{ker}(\varphi)$ is a submodule of $M$
+\item $\varphi(M) \cong M/\text{ker}(\varphi)$
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+Obvious.
+\end{proof}
+
+\begin{thm} [Second Isomorphism Theorem]
+Let $R$ be a ring and $B,C \subseteq A$ be $R$-Modules. Then 
+\[ (B+C)/B \cong C/(B\cap C) \]
+where $B + C := \{ b+c| b \in B, c \in C\} \subseteq A$.
+\end{thm}
+
+\begin{proof}
+Obvious. 
+\end{proof}
+
+\begin{thm}
+Let $R$ be a ring and $C \subseteq A$ be $R$-Modules. The sub-modules of $A/C$ corresponds to submodules $C \subseteq B \subseteq A$ via $B \Leftrightarrow B/C$. Furthermore, 
+\[ \frac{A/C}{B/C} \cong A/B \]
+\end{thm}
+
+\begin{thm}
+Let $R$ a ring and suppose that $0 \leq A_0 \leq A_1 \leq \dots \leq A_n = M$ and $0 = B_0 \leq \dots \leq B_m = M$ are two chains of $R$-Modules. Then, both chains can be refined so that they have the same length and the same factors )possibly in different order). 
+\end{thm}
+
+\begin{proof}
+Let $A_{i,j} := A_i + (A_{i+1} \cap B_j)$ where $0 \leq i \leq n$ and $0 \leq j \leq n$. Let $B_{i,j} := B_j + (A_i \cap B_{j+1})$. Then, by the previous theorem, $A_{i,j+1}/A_{i,j} \cong B_{i+j}/B_{i,j}$. $A_i = A_{0,i}$ and $B_j = B_{0,j}$. Thus, $\{A_{i,j}\}, \{B_{i,j}\}$ are the refinements which we are looking for. 
+\end{proof}
+
+\begin{defn}
+A module $M$ is called irreducible (simple) if $M$ has exactly two different submodules $0$ and $M$. A {\bf Composition Series} for a module $M$ is a chain of submodules $0 \subsetneq A_1 \subsetneq A_2 \dots \subsetneq A_n = M$ and $A_i / A_{i-1}$ is irreducible.  $A_i/A_{i-1}$ are called the factors of $M$. 
+\end{defn}
+
+\begin{thm} [Jordan - Holder]
+If $M$ has a composition series, then any two composition series have the same length and the same factors (up to isomorphism). 
+\end{thm}
+
+\begin{proof}
+By the previous theorem, two composition series share refinements with the same factors. 
+\end{proof}
+
+\begin{rem}
+The length of $M$ and factors do not uniquely determine $M$. 
+\end{rem}
+
+\begin{eg}
+Consider $S_4 \cong H \rtimes S_3$ has the same factor as $H \times S_3$. 
+
+\noindent $H = \{ (1),(12)(34), (13)(24), (14)(23)\}$ 
+\end{eg}
+
+\begin{center}
+\emph{Friday, October 19}
+\end{center}
+
+\begin{prop}
+An $R$-Module $M$ is irreducible if and only if $M$ is isomorphic to $R/A$, when $A$ is a maximal left ideal. 
+\end{prop}
+
+\begin{proof}
+$\Leftarrow$ $M\cong R/A$, then the submodule of $M$ corresponding to the left ideals containing $A$. Since $A$ is maximal, $M$ is irreducible. \\
+
+$\Rightarrow$ $\varphi: _RR\rightarrow M$ by $r \rightarrow r\cdot a$ when we fix a non-zero element $a \in M$, $\varphi \neq 0$. $\varphi(M)$ is a submodule of $M$, thus, $\varphi(R) = M$. $\ker \varphi$ is a left ideal of $R$ and $R \cong R/ker \varphi$ and by the converse, $\ker \varphi$ must be maximal. 
+\end{proof}
+
+\begin{defn}
+A module $M$ is Noetherian (Artinian) if every non-empty set of submodules has a maximal element. 
+\end{defn}
+
+\begin{defn}
+The {\bf ascending chain condition} abbreviated as ACC, says that if $\{A_n\}_{n=1}^\infty$ is a sequence of submodules with $A_n \subseteq A_{n+1}$ for all $n\geq 1$, then there is an $N$ such that $A_n = A_{n+1}$ for all $n \geq N$ (similarly can define descending chain). 
+\end{defn}
+
+\begin{prop}
+A module is Noetherian (Artinian) if an donly if it satisfies ACC. 
+\end{prop}
+
+\begin{defn}
+A module $M$ is called finitely generated if $M = \ip{b_1,\dots, b_n} = \sum_{i=1}^n Rb_i$.  
+\end{defn}
+
+\begin{prop}
+A module is Noetherian if and only if every submodule is finitely generated. 
+\end{prop}
+
+\begin{prop}
+Let $A$ be a module and $B \subseteq A$ be a submodule. $A$ is Artinian (Noetherian) if and only if $B,A/B$ are Artinian (Noetherian). 
+\end{prop}
+
+\begin{cor}
+A finite product of modules $M_1 \times M_2 \times \dots \times M_k$ of modules is Artinian (Noetherian) if and only if each $M_i$ is Artinian (Noetherian).  
+\end{cor}
+
+\begin{proof}
+By induction on $k$ and $(A\times B)/B \cong A$. 
+\end{proof}
+
+\begin{cor}
+A module $M$ has a composition series if and only if $M$ is Artinian and Noetherian.
+\end{cor}
+
+\begin{proof}
+Suppose that $M$ has a composition series $0 \leq M_0 \subsetneq \dots \subsetneq M_r = M$, we know $M_{i+1}/M_i$ is simple (irreducible) and therefore, it is both Artinian and Noetherian. By the previous proposition, $M=M_k$ is both Artinian and Noetherian.  \\
+
+Conversely, let $C$ be a maximal chain of submodules. Since $M$ is artinian and $C$ is bounded below 0. Similarly, since $M$ is Noetherian, $C$ is bounded above by $M$. Therefore, $C$ has a finite length. 
+\end{proof}
+
+\subsection*{Radicals}
+
+\begin{defn}
+Let $R$ be a ring. For an $R$-module $M$, define $\Ann(M) := \{ r \in R| r \cdot m = 0, \forall m \in M\}$. The Jacobson radicals (radical) of $R$ is 
+\[ J(R) := \bigcap_{M \text{ irreducible R-Module}} \Ann(M) \]
+\end{defn}
+
+
+\begin{prop}
+Let $R$ be a ring and $M$ an $R$-Module. Then $\Ann(M)$ is an ideal of $R$. As a consequence, $J(R)$ is an ideal of $R$. 
+\end{prop}
+
+\begin{thm}[Homework]
+The following are equivalent for $J(R)$. 
+\begin{enumerate}
+\item $\bigcap_{M \text{ irreducible}} \Ann(M)$
+\item $\bigcap_{A \text{ maximal left ideals}} A$
+\item $\{a \in R| \forall r \in R, \exists u \in R, a(1-ra) = 1\}$
+\item The largest proper ideal $J$ of $R$ such that $1-a \in R^* = \{r \in R| \exists r', r'' \in R \text{ such that } r'r = r''r =1\}$ 
+\end{enumerate}
+Furthermore, the right analogues of 1,2,3 are also equivalent to $J(R)$. 
+\end{thm}
+
+
+\begin{defn}
+A ring $R$ is a {\bf semiprimitive} if $J(R) = 0$. Note that some books use "semisimple" to denote this property.  
+\end{defn}
+
+
+\begin{thm}
+$R/J(R)$ is semiprimitive
+\end{thm}
+
+\begin{proof}
+By corresponding theorem (third isomorphism theorem), 
+\begin{align*}
+J(R/J(R)) &= \bigcap_{M \text{ Maximal}} M\\
+&= \bigcap_{N \text{ maximal in R}} N/J(R)\\
+&= \left(\bigcap_{N \text{ maximal}}\right)/J(R)\\
+&= J(R)/J(R)\\
+&= 0
+\end{align*}
+\end{proof}
+
+
+\begin{center}
+\emph{Monday, October 22}
+\end{center}
+
+\begin{defn}
+A left ideal $I$ is {\bf nil} if for all $a \in I$ if $a$ is nilpotent. That is, there exists $k \in \bZ$ with $a^k = 0$. A left ideal is {\bf nilpotent} if there exists $b \in \bZ$ such that $I^k =0$, where $I^k$ is the ideal generated by $\{a_1,\dots,a_k|a_i \in I\}$. 
+\end{defn}
+
+\begin{prop}
+If $I$ is left ideal then $I \subseteq J(R)$
+\end{prop}
+
+\begin{proof}
+Let $a \in I, \forall r \in R$, we would like to show $1 - ra$ has a left inverse. Since $ra \in I$, there exists $k \in \bN$ such that $(ra)^k =0$. Hence, 
+\begin{align*}
+(1-ra)(1+ ra + \dots + (ra)^{k-1}) &= 0 \Rightarrow\\
+1 - ra &\in R^*
+\end{align*}
+Note the right hand of the product is $(1-(ra)^k)$ and we are done. 
+\end{proof}
+
+\begin{thm}
+Let $A$ be $\bK$-algebra such that $\dim_{\bK}(A) < |\bK|$, when $\bK$ is a field. Then, $J(A)$ is nil.
+\end{thm}
+
+\begin{proof}
+Let $a \in J(A)$ so that for all $\lambda \in \bK, 1-\lambda a$ is invertible in $A$. Then the set $\{(1-\lambda a)^{-1}|\lambda \in \bK \}$ must be linearly dependent since $\dim_\bK(A) < |\bK|$. Thus, there exists $\lambda_0 = 0, \lambda_1, \dots, \lambda_n \in \bK$ and $c_0,\dots, c_n \in \bK$ not all zero, such that 
+\begin{align*}
+0 = \sum_{i=0}^n c_i (1 - \lambda_i)^{-1} &= \left[ \prod_{i=0}^n (1-\lambda_i a)^{-1} \right]\sum_{i=0}^n c_i \prod_{j\neq i} (1-\lambda_j a)
+\end{align*}
+Let $p(x) = \sum_{i=0}^n c_i \prod_{i\neq j} (1 - \lambda_j x)$ and $p(a) = 0$.  Since $\prod_{i=0}^n (1-\lambda_i a)^{-1}$ is invertible.  We would show that $p(x) \neq 0$. 
+\begin{enumerate}
+\item $c_0 \neq 0$. Then, the coefficeint of $x^n$ is $c_0 \prod_{i=1}^n (-\lambda_j) \neq 0$
+\item If $c_0 = 0$, suppose that $c_i \neq 0, i>0$, then  $p(\lambda_i^{-1}) = c_i \prod_{i\neq j} (1-\lambda_j\lambda_i^{-1}) \neq 0$.  
+\end{enumerate}
+Hence, $p(x) \neq 0$.  
+\[0 = p(a) = a^k (b_k + b_{k+1}a + \dots + b_na^{n-k} \]
+for some $0 \leq k \leq m$ and $b_k \neq 0$. However, the right hand of the product is invertible which implies that $a^k =0$ which means that $J(A)$ is nil.
+\end{proof}
+
+\begin{thm}
+If $G$ is any group, then $\bC[G]$ is semiprimitive, i.e. $J(\bC[G]) = 0$. 
+\end{thm}
+
+\begin{proof}
+Define an involution on $\bC[G]$ by 
+\[ x^* = \left( \sum_{g \in G} x_g g \right)^* := \sum_{g \in G} \bar{x}_g g^{-1} \]
+Clearly $(x^*)^* = x, (\alpha x)^* = \bar{\alpha} x^*, (x+g)^* = x^* + y^*, (xy)^* = y^*x^*$. Suppose that $G$ is countable then $\bC[G]$ is a $\bC$-algebra of dimension $|G|<|\bC|$. Thus, $J(\bC[G])$ is nil. 
+
+Let $x \in J(\bC[G])$ and suppose $x \neq 0$. 
+\[ y:= x^*x = \sum_{h \in G} \left( \sum {g \in G} (\bar{x}_g x_{gh})h \right) \]
+In particular, $y_e = \sum_{y \in G} |x_g|^2 > 0$, so $y \neq 0$. 
+\[ y^* = (x^* x)^* = x^*(x^*)^* = x^* x = y \]
+Thus, $y^2 = y^*y \neq 0$. Repeat this construction we get $y^{2^k} \neq 0$ for all $k\geq 1, k \in \bZ$. Also, $y^{2^k} \in J(\bC[G])$. $H$ is a contraction since $J(\bC[G])$ is nil. So the countable case is done.\\
+
+\noindent Next suppose that $G$ is any group and $x \in J(\bC[G])$.  $H:= \ip{\{g \in G| x_g \neq 0\}}$ is countable. We have $x \in \bC[H]$. Our goal is to show that $x \in J(\bC[G])$ for all $r \in \bC[H]$, $(1- rx)^{-1} \in \bC[G]$. Let $1- rx = \sum_{h \in H} a_{h}h$.
+\begin{align*}
+(1-rx)^{-1} &= \sum_{g \in G} b_g g\\
+b &= \sum_{g \in H} b_g g \in \bC[H]
+\end{align*}
+Since $(1-rx)(1-rx)^{-1} = 1$. 
+\begin{align*}
+1 = \sum_{g \in G} a_g b_{g^{-1}} = \sum_{h \in H} a_h b_{h-1}
+\end{align*}
+For any non-identity element $k \in H$ 
+\[ 0 = \sum_{g \in G} a_g b_{g^{-1} k} = \sum_{h \in G} a_h b_{h^{-1}k}\]
+Thus, $(1-rx)b' = 1$. Since the inverse is unique, $b' = (1-rx)^{-1} \in \bC[H]$ and we are done. 
+\end{proof}
+\begin{center}
+\emph{Wednesday, October 24}
+\end{center}
+
+\begin{defn}
+ A ring $R$ is called Artinian if $_RR$ is a left Artinian $R$-moudle. In other words, $R$ is Artinian if and only any collection of left ideals has a minimal element. 
+\end{defn}
+
+\begin{eg}
+ If $R$ is a finite dimensional $\bK$ - algebra for a field $\bK$. Then, $R$ is artinian. The length of $R$ is less or equal to $\dim_\bK(R)$. 
+\end{eg}
+
+\begin{thm}
+If $A$ is artinian, then $J(A)$ is nilpotent. 
+\end{thm}
+
+\begin{proof}
+Let $J = J(A)$, $J \supset J^2 \supset J^3 \dots$, then there exists $N \in \bN$ such that $J^n = J^{n+1}$ for all $ n\geq N$. Let $B = J^N$, So 
+\[ BJ = J^N J = J^{N+1} = J^N = B = B^2 \]
+If $B = 0$, we are done. If not, let $S$ be the set of left ideals $I$ such that $BI \neq 0$. $S$ is non-empty since $J,B \in S$. Since $A$ is artinian, $S$ has a minimal element $I_0$. There exits $x \in I_0$ such that $Bx \neq 0$. $B(Bx) = B^2x = Bx \neq 0$. Thus, $Bx \in S$. By minimality, $Bx = I_0$, i.e. there exists $b \in B$ such that $bx = x$. This implies $(1-b)x = 0 \Rightarrow x = 0$ Since $1-b \in J$ is invertible. 
+\end{proof}
+
+
+\begin{cor}
+If $A$ is artinian then $J(A)$ is the unique largest nilpotent ideal and every nilpotent ideal is contained in $J(A)$. 
+\end{cor}
+
+\begin{lem}[Schur's Lemma]
+If $M$ is an irreducible left $R$-module, then $End_R(M)$ is a division ring. 
+\end{lem}  
+
+\begin{proof}
+Let $\rho \in End_R(M)$, $\varphi \neq 0$, then $\varphi(M)$ is a a submodule of $M$ and $\varphi(M) \neq 0$. Thus, $M = \varphi(M)$ since $M$ is irreducible. Similarly, $\ker \varphi$ is a submodule of $M$. Since $\ker \varphi$ is a proper submodule of $M$, $\ker \varphi = 0$. Thus, $\varphi$ is an isomorphism and it is invertible. 
+\end{proof}
+
+\begin{thm}
+Let $M$ be a left ideal of a ring $R$. Then,
+\begin{enumerate}
+\item If $M^2 \neq 0$, $End_R(M)$ is a division ring, then $M = Re$ for some $e = e^2 \in R$ and $End_R(M) \cong eR^{op}e$ where $R^{op}$ is the opposite ring of $R$, i.e. $r_1,r_2 \in R. r_1*r_2 := r_2r_1$. 
+\item If $M$ is a minimal left ideal and $M^2 \neq 0$ then $M = Re$ for some $e = e^2 \in R$.
+\item If $R$ has no non-zero nilpotent ideal and $M = Re$ for some $e = e^2 \in R$, then $M$ is minimal if and only if $eRe$ is a division ring.  
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+Since $M^2 \neq 0$ there exists $a \in M$ such that $Ma \neq 0$. Define $\rho_a: M \rightarrow M$ by $\rho_a(x) := xa$. Let $e:= \rho_a^{-1}(a)$ (If $M = Re, e^2 e$, then $ m \in M, me=- m$). 
+\begin{align*}
+ea = \rho_a(e) = a\\
+ea = e(ea) = e^2a \Rightarrow\\
+(e-e^2)a = 0\Rightarrow\\
+\rho(a)(e-e^2) = 0\\
+e - e^2 = 0 \Rightarrow\\
+e = e^2
+\end{align*}
+$M = \rho_a(M) = M_a \supseteq R_a \supseteq M_a$. This(? $M=r$ nd we get that $re = M$?erased). $\forall c \in M, c = re = re^2 = ce$ for some $ r \in R$. Suppose that $\rho \in End_R(M)$. Let $b = \rho(e)$
+\[ v = \rho(e^2) =e \rho(3) = eb = ebe \]
+Thus, $b \in eMe \leq eRe$. 
+\[ \rho(x) = \rho(xe) = x \rho(e) = xh \] 
+Then $\rho = \rho_b$. Conversel, for all $b \in eRe$, $\rho_b \in End_S(M)$. 
+\[ \rho_b \circ \rho_c = \rho_{cb} = \rho_{b*c} \] in $R^{op}$. Thus, $End_R(M) \cong eR^{op}e$. 
+
+(ii) Suppose that $M$ is minimal and therefore $M$ is irreducible by (i) we are done. \\
+
+(iii) If $M$ is minimal, by (ii) we are done. Assume $eRE$ is a division rng and $0 \neq N \leq M$. If $eN = 0$, then $N^2 \leq MN = ReN = 0$. It contradicts our assumption. Thus, $eN \neq 0$. Take $n \in N, en\neq 0m ene = en \neq 0$. Thus, there exsits $r \in R$ such that $eren = (ere)(ene) = e$. Since $eren \in N$, this implies $e \in N \Rightarrow M \subseteq N \Rightarrow M = N$. Thus, $M$ is minimal. 
+\end{proof}
+
+\begin{center}
+\emph{Monday, October 29}
+\end{center}
+
+\begin{thm}
+If $R$ is artinian and semiprimitive then $R = \bigoplus A_i$, $A_i$ is simple and artinian. 
+\end{thm}
+
+\begin{thm} [Artin - Wedderburn]
+If $R$ is Artinian and simple, then there exists a division ring $F$ such that $R \cong M_n(D)$ for some $n \in \bN$. Moreover, $n$ and $D$ are unique. 
+\end{thm}
+
+\begin{cor} [Generalization of Artin-Wedderburn]
+If $R$ is Artinian and semi-primitive (semi-simple) then $R \cong \bigoplus M_{n,i}(D_i)$ for some division rings $D_i$ and $n_i \in \bN$. Moreover, $n_i, D_i$ are unique. 
+\end{cor}
+
+\begin{defn}
+A ring $R$ is called primitive if there exists a faithful irreducible $R$-module $M$, i.e. $\Ann(M) = 0$. An ideal $A$ of $R$ is called primitive if $A = \Ann(R)$ for some irreducible $R$-module $M$. 
+\end{defn}
+
+\begin{rem}
+\begin{itemize}
+\item $R/A$ is primitive since $M$ is a faithful irreducible $R/A$-Module. 
+\item If $R$ is primitive, then $R$ is semi-primitive. Since $J(R) = \bigcap \Ann(N) = 0 \subseteq \Ann(M)$
+\end{itemize}
+\end{rem}
+
+\begin{prop}
+If $R$ is Artinian and simple, then $R$ is primitive. 
+\end{prop}
+
+\begin{proof}
+Since $R$ is Artinian, there exists a minimal left ideal. $A$ is irreducible by minimality.  $\Ann(A)$ is an ideal of $R$. Since $R$ is simple, $\Ann(A) = 0$ and $A$ is faithful. 
+\end{proof}
+
+\begin{rem}
+Let $R$ be primitive and $M$ a faithful irreducible $R$-module. $D = \mbox{End}_R(M)$ is a division algebra. $M$ is also a $D$-module by $\varphi \in D$. $\varphi x = \varphi(x)$. Moreover, $\forall r \in R$, $\varphi(rm( = r \varphi(m)$. Thus, we get $R \rightarrow \mbox{End}_R(M)$ by $r \rightarrow \varphi_r: M \rightarrow M$ by $r\cdot m \rightarrow 1m$. Since $M$ is faithful, $R \rightarrow \mbox{End}_D(M)$ is injective. What we need now is to show that this map is surjective.   
+\end{rem}
+
+\begin{defn}
+An $R$-module is called {\bf semisimple} if every submodule $N\subseteq M$ is a direct summand, i.e., there exists $N' \subseteq M$ such that $M = N \oplus N'$. 
+\end{defn}
+
+\begin{prop}
+If $M$ is semi-simple, then every submodule and every quotient module is semisimple. 
+\end{prop}
+
+\begin{lem}
+If $M$ is a non-zero semi-simple $R$ module, then $M$ has an irreducible submodule. 
+\end{lem}
+
+\begin{proof}
+Take $0 \neq m \in M$. Let $S$ be the set of all submodules that are contained in $M$ but do not contain $m$. $S$ is non-empty since $0 \in S$. By Zorn's Lemma, $S$ has a maximal element, $N_0$. $R_m = N_0 \oplus N'$ for some $N'$. Then, $N'$ is irreducible. If not, there exists $N''$, $0 \neq N''\subsetneq N'$ and $N_0 \oplus N'' \supsetneq N_0$. By maximality, $R_m \subseteq N_0 \oplus N''$   (one line missing here, a contradiction is thrown)
+\end{proof}
+
+\begin{thm}
+Let $M$ be an $R$-module. The following are equivalent
+\begin{enumerate}
+\item $M$ is semisimple
+\item $M$ is a direct sum of irreducible modules
+\item $M$ is equal to the sum of all irreducible modules. 
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+$(i) \rightarrow (ii)$. Let $M_1$ be the maximal submodule of $M$ such that $M_1$ is a direct sum of irreducible modules. Since $M$ is semisimple, there exists $M_1'$ such that $M= M_1 \oplus M_1'$. IF $M_1'$ is not zero, by lemma, there exists an irreducible submodule $N \subseteq M_i$.  $M_1 \oplus N \supseteq $. It contradicts the maximality of $M$. \\
+\noindent $(ii) \rightarrow (iii)$ Trivial. \\
+
+$(iii) \rightarrow (i)$. Let $N$ be a submodule of $M$. $S':=$ the collections of irreducible submodules such that $\sum_{L \in S} L$ is a direct sum and $L \cap N = 0$.  If $N \neq M$, $S'$ is non-empty by our condition. $S'$ has a maximal element, say $S_0$ and $N' = \oplus_{L \in S_0} L$. If $N \oplus N' \subseteq M$ there exist $N \oplus N'$  and $L' \cap N \oplus N' = 0$, since $L'$ is irreducible. Take $N'' - N' \oplus  L'$ and $N'' \cap N = -$ and $n''$ is a direct sum of irreducible modules $N'' \supsetneq N'$. It contradicts the maximality of $N$. 
+\end{proof}
+
+\begin{defn}
+A ring $R$ is semi-simple if $_RR$ is semi-simple, i.e. $\forall I$ left ideal of $R$ there exists $J$ (left ideal of $R$ suchthat $R = I \oplus J$. 
+\end{defn}
+
+\begin{cor}
+If $R$ is semi-simple, then every $R$-module is semi-simple.
+\end{cor}
+
+\begin{proof}
+$M  = \sum_{m \in M} R_m$, thus, it is sufficient to show that $R_m$ is semi-simple. $R_m \cong R/N, N = \{r \in R, rm = d\}$, $R$ is semi-simple and therefore $R/N \cong R_m$ is semi-simple. Thus, $R_m$ is the direct sum of irreducible modules and we are done. 
+\end{proof}
+
+\begin{center}
+\emph{Wednesday, October 31}
+\end{center}
+
+\begin{rem} [Correction]
+In A3Q7, the division algebra must be finite dimensional over $F$. 
+\end{rem}
+
+
+\begin{lem}
+Let $M$ be semi-simple over $R$, $D = \End_R(M)$ and $f \in \End_D(M)$. Let $m \in M$, there exists an element $r \in R$ such that $r\cdot m= f(m)$
+\end{lem}
+
+\begin{proof}
+Since $M$ is semi-simple, there exists an $R$-submodule $N$ such that $M = R_m \oplus N$. Let $\pi: M\rightarrow R_m$ be the projection. This is an $R$-homomorphism and $\pi \in \End_E(M) = D, f(m) = f(\pi(m)) = \pi(f(m)) \in R_m$ (since $\pi$ is identity on $R_m$ since its a projection) 
+\end{proof}
+
+\begin{thm} [Density Theorem]
+Let $M$ be semi-simple over $R$ and $D = \End_R(M)$. Let $f \in \End_D(M)$, for any $m_1,\dots, m_k$ there exists $r \in R$ such that $rm = f(m_i)$. 
+\end{thm}
+
+\begin{cor}
+If $M$ is finitely generated, then the image is onto. Moreover, if $M$ is faithful irreducible and finitely generated, then $R \cong \End_D(M) \cong M_n(D)$ where $n = \dim_D(M)$. 
+\end{cor}
+
+\begin{proof} [Proof of Density Theorem]
+We may assume that $M$ is irreducible. Define
+\begin{align*}
+ f^(k): M^k &\rightarrow M^k \\
+  f^{(k)} (x_1,\dots, x_k) &\rightarrow (f(x_1),\dots f(x_k))
+ \end{align*}
+ $D = \End_R(M^k)$, ten $D'$ is none other than the ring of matrices with coefficients in $D = \End_R(M)$. Thus, $f^{(k)}$ commutes with $D'$ since $f$ commutes with $D$ and therefore $f^{(k)} \in \End_{D'}(M^k)$. 
+ 
+ 
+Since $M$ is simple, $M^k$ is semi-simple and we apply lemma to $f^{(k)}$ on $M^k$. It finishes the proof, there exists $r \in R$ such that $rm = f(m_i)$ for $1\leq i \leq k$. 
+\end{proof}
+
+\begin{thm} [Artin -Wedderburn]
+If $R$ is simple and Artinian, then there exists a division ring $D$ such that $R \cong M_n(D)$. 
+\end{thm}
+
+\begin{proof}
+There exists a faithful irreducible $R$-module $M$ and $D = \End_R(M)$. Assume that we have an infinite linearly independent sets $\{v_1,\dots, v_k, \dots\}$ in $M$ over $D$. 
+\[ L_k = \{r \in R| rv_i = 0, 1\leq i \leq k\} \]
+We have $L_{k+1} \supsetneq L_k$ by the density theorem. Since $R$ is Artinian, it is impossible. 
+\end{proof}
+
+\begin{lem}
+Let $D$ be a division ring and $R = M_n(D)$, then  every irreducible $R$-module is isomorphic to $_RD^n$. Therefore, $M_n(D)$ has a unique class of irreducible modules.   
+\end{lem}
+
+\begin{proof}
+Let $M$ be an irreducible $R$-module. If $0 \neq m \in M, M = R_m \neq R/N$ where $N = \{r \in R| rm = 0\}$. Since $R$ is Artinian and semi-primitive, there exists $e = e^2 \in R$ such that $N = Re$. 
+\[ M \cong R/N = R/Re \cong R(1-e) \]
+(Recall $R = Re \oplus R(1-e)$).  Since $M$ is irreducible, $R(1-e)$ is irreducible and therefore it is a minimal left ideal. $R$ acts transitively on $RE_{1\cdot 1} \cong _RD^n$. Since $R E_{1\cdot 1}$ is an irreducible $R$-module. $\Ann(RE_{1\cdot 1} = 0$ since $R$ is simple.  In particular, $(1\cdot e) E_{1\cdot 1} \neq 0$. Pick $r \in R$ such that $f_r E_{1\cdot 1} \neq 0$. Define $\varphi: R(1-e)$ by $x(1-e) \rightarrow x(1-e)r E_{1\cdot 1}$. $\varphi$ is a homomorphism and $\ker \varphi \supsetneq Rf$ and therefore $\ker \varphi = 0$. Similarly, $\varphi $ is onto and thus $\varphi$ is an isomorphism.  
+\end{proof}
+
+\begin{rem}
+Let $G$ be a finite group. $\bC[G]$ is Artinian and semi-primitive. Therefore, we have
+\end{rem}
+
+\begin{thm}
+Let $G$ be a finite group. Then $\bC[G] \cong \bigoplus_{n_i} M_{n_i} (\bC)$. (proof by Artin Wedderburn). 
+\end{thm}
+
+\begin{rem}
+$A_n, SN, GL_2$ state the irreducible representation. Study assignment questions which we got wrong. Finally, a question from class. 
+\end{rem}
+
+\begin{center}
+\emph{November 2}
+\end{center}
+\begin{proof}
+Let $\{(\rho_i,V_i)\}$ be the set of all irreducible representations of $G$ (i.e. $V_i$ are irreducible $\bC[G]$-Module via $\rho_i$, $\dim V_i = n$. Each $\rho_i$ gives a homomorphism from $G \rightarrow GL(V_i)$ and extended to 
+\[ \bC[G] \rightarrow \End_\bC(V_i) \cong M_{n_\bC} \bC \]
+We can combine them together and get 
+\[ \bC[G] \rightarrow \bigoplus_{i=1}^l M_{n_i}(\bC)\]
+where $l = $ \# of irreducible representations of $G$, since $|G| = \sum n_i^2$. If $\rho$ is surjective and then it is injective and therefore it is an isomorphism. The surjective comes from the orthogonal relations. This finishes the proof. 
+\end{proof}
+
+\begin{prop} [Fourier Inversion]
+Let $\{u_i\}_{i \in Irr(G)}$ be an element of $\prod_{ i \in Irr(G)} M_{n_i}(e)$ and $u = \sum_{g \in G} u_s s$ such that $\hat{\rho}_i(u) = u_i$. Then, 
+\[ u_s = \frac{1}{|G|} \sum_{i \in Irr(G)} n_i Tr(\rho_i(s^{-1}) u_i0 \]
+\end{prop}
+
+\begin{prop}
+Let $u = \sum u_s s, v = \sum v_s s$, $u,v \in \bC[G]$
+\begin{align*}
+\ip{u,v} &= \sum_{s\in G} u_{s^{-1}} v_s \\
+\ip{u,v} &= \frac{1}{|G|} \sum_{i \in Ind(G)} n_i Tr(\hat{\rho} (uv))
+\end{align*}
+\end{prop}
+
+\begin{thm}
+Let $\repV$ be an irreducible representation of $G$, then $\dim V||G|$.
+\end{thm}
+
+\begin{prop}
+For any irreducible representation $(\rho_i, V_i)$ , the set of all irreducible representations of $G$, the homomorphism $\hat{\rho}_i$ maps the center of $\bC[G]$, denoted $Z(\bC[G])$ into the set of homotheties of $V_i$ and defines an algebra homomorphism. 
+\[ w_i: Z(\bC[G]) \rightarrow \bC \]
+If $u = \sum_{s \in G} u_s s \in Z(\bC[G])$ 
+\begin{align*}
+w_i(u) &= \frac{1}{n_i} Tr_{V_i} (\hat{\rho}(u)) \\
+&= \frac{1}{n_i} \sum_{s\in G} u_i \chi_i(s) 
+\end{align*}
+\end{prop}
+
+\begin{rem}
+$Z(\bC[G])  = \ip{u_c:=\sum_{s \in G} s_c}$ (conjugacy classes). 
+\begin{align*}
+\dim Z(\bC[G]) &= \# \mbox{ of irreducible representations}
+\end{align*}
+$\{u_c\}$ generates a subalgebra of $\bC([G])$. Moreover, $u_{c_1}, u_{c_2}$ is an integral linear combination of $\{u_c\}$. Thus, $\bZ \ip{u_c}$ is a finite generated $\bZ$-algebra inside $\bC[G]$. 
+\end{rem}
+
+\begin{defn}
+Let $R$ be a commutative ring of characteristic 0 (i.e $\bZ$ is a subring). For $x \in R$, we say $X$ is integral over $\bZ$, if there exists $a_1,\dots, a_n \in \bZ$ such that 
+\[ x^n + a_1 x^{n-1} + \dots + a_n = 0\] 
+\end{defn}
+
+
+\begin{rem}
+\begin{enumerate}
+\item Let $R = \bC$, the set of all elements which are integral over $\bZ$ is called the set of algebraic integers. 
+\item The roots of unity are algebraic integers since $x^n = 1$. 
+\item Any algebraic integer in $\bQ$ is in $\bZ$ (By Gauss's Lemma, let $x \in \bQ$ be an algebraic integer, there exists $a,b \in \bZ$ such that $ax + b = 0$. Since $x$ is integral over $\bZ$. $a = 1$ and $x = -b \in \bZ$. 
+\item $\forall g \in G$ and any $(\rho,V)$ a representation of $V$, then $\chi_\rho(g)$ is an algebraic integer. 
+\item Algebraic integers form a ring in $\bC$. 
+\end{enumerate}
+\end{rem}
+
+\begin{prop}
+Let $x \in R$ a commutative ring of characteristic 0. The following are equivalent
+\begin{enumerate}
+\item $x$ is integral over $\bZ$
+\item $\bZ[X]$ is finitely generated as a $\bZ$-module. 
+\item There exists finitely generated sub $\bZ$-Module of $R$ which contains $\bZ[X]$. 
+\end{enumerate}
+\end{prop}
+
+\begin{cor}
+If $R$ is finitely generated $\bZ$ module, each element of $R$ is integral over $\bZ$. In particular, all $\bZ(\ip{u_I}_c)$ are integral over $\bZ$. 
+\end{cor}
+
+\begin{cor}
+Let $\rho$ be an irreducible representation of $G$ of degree $n$ with character $\chi$. IF $u$ is an element in $Z(\bC[G])$ such that $ u = \sum_{c , conj} a_c u_c$ and $a_i$ are algebraic integers. Then, the number 
+\[ \frac{1}{n} \sum_c \sum_{s\in G, s \in c} a_c \chi(s) \]
+is integral over $\bZ$
+\end{cor}
+
+\begin{proof}
+Indeed, this number is just the image of $\omega: \bZ[\bC[G]) \rightarrow \bC$. 
+\end{proof}
+
+\begin{thm}
+$\dim V ||G|$
+\end{thm}
+
+\begin{proof}
+$ u = \sum_{s\in G} \chi(s^{-1}) s \in Z(\bC[G])$. Then, by the corollary,
+\begin{align*}
+\frac{1}{n}\sum_{s\in G} \chi(s^{-1}) \chi(s)\\
+&= \frac{|G|}{n} \ip{\chi|\chi}\\
+&= \frac{|G|}{n} \in \bQ
+\end{align*}
+Hence $\frac{|G|}{n} \in \bZ$ and so $n||G|$. 
+\end{proof}
+
+
+\begin{center}
+\emph{Wednesday - November 7, Burnside Thm}
+\end{center}
+
+\begin{thm} [Thm]
+Let $G$ be a group such that $|G|=p^a q^b$ where $p,q$ are distinct primes, $a,b \geq 0$. Then $G$ is solvable. s
+\end{thm}
+
+\begin{lem}
+If $N \rhd G$ and $N$ is solvable, as well as $G/N$, then $G$ is solvable. 
+\end{lem}
+
+\begin{prop}
+$p$ is prime then $\frac{1}{p}$ is not an algebraic integer. (proof on last friday)
+\end{prop}
+
+\begin{prop}
+Let $\lambda_1,\dots, \lambda_n$ be the nth roots of unity. Let $a = \frac{1}{n} \sum \lambda_i$. If $a$ is integral over $\bZ$m then either $a = 0$ or $\lambda_1 = \dots = \lambda_n = a$. 
+\end{prop}
+
+\begin{proof}
+$F$ is the splitting field of $a$ over $\bQ$, $f(x)$ is the minimal polynomial. $\sigma \in Gal(F/\bQ)$, $\sigma(\lambda_i)$ is a root of unity. 
+\begin{align*}
+|\sigma(a)| &\leq \frac{1}{n} \sum |\sigma\lambda_i)| = 1\\
+N(a) &= \prod_{\sigma \in Gal(F/Q)} \sigma(a) \leq 1
+\end{align*}
+Hence, the constant term of $f \in \{-1,0,1\}$. $|\sigma(a)|= 1 \Rightarrow \lambda_1 = \dots = \lambda_n = a$. 
+
+\end{proof}
+
+\begin{prop}
+$G$ a finite group. $S \in G$, $C(S) = p^r, r>0$. Then, there exists an irreducible character $\chi$ such that $\chi(s) \neq 0, \chi(1) \ncong 0(\mod p)$. Further, $\rho(s)$ is a homothety.
+\end{prop}
+
+\begin{proof}
+\begin{align*}
+\sum_\chi \chi(1) \chi(s) &= 0 \\
+1 + \sum_{\chi n.t.} \chi(1) \chi(s) &= 0\\
+1+ \sum_{\chi,n.t} p^{u(\chi)}q_\chi \chi(s) &=0 \\
+u = \sum_{g \in C(S)} g u(g)\\
+\frac{1}{n} \sum_{g \in G} u(g) \chi(G) &= \frac{c(s)}{n}\chi(s)\\
+n &= \chi(1) \ncong 0 (\mod p)
+\end{align*}
+So there exists $k,l \in \bZ$ such that $c(s)k + ln = 1$. Then,
+\[ \frac{kc(s)}{n} \chi(s) + l\chi(s) = \frac{1}{n} \chi(s) \]
+Hence, $\chi(s)= \lambda$ and $\lambda^n = 1$. Thus, $\rho(s)$ is a homothety and $\ker(\rho)$ is not trivial. 
+\end{proof}
+
+\begin{prop}
+Let $G$ be as in the theorem. Then, there exists $s \in G$ such that $c(S) \ncong 0 (\mod q)$ $s \neq 1$, $|G| = p^a q^b=1 + \sum c(g)$
+\end{prop}
+
+\begin{prop}
+$G$ as in the theorem, then $G$ contains a non-trivial normal subgroup. 
+\end{prop}
+
+\begin{proof}[of Theorem]
+By prop 5, $G$ contains a normal subgroup $N$. Then, use induction, $N$, $G/N$ is solvable. Lemma implies that $G$ is Solvable. 
+\end{proof}
+
+Let $G$ be such that $|G| = pq$, $n_q \cong 1 (\mod q)$, then $n_q|p$, $nq = 1$ so $p <q$. 
+
+\begin{eg}
+
+\end{eg}
+
+\begin{center}
+\emph{Monday, November 11}
+\end{center}
+
+\section*{Representations of $A_n$ - Frank Ban}
+\begin{defn}
+\[ A_n = \{ \pi \in S_n: sgn \pi \cong 0 \mod 2\}\]
+This yields that $[S_n : A_n] = 2$. 
+\end{defn}
+
+\begin{defn}
+Let $V$ be a representation of $G$. Define $V' = V \otimes U'$ where $U'$ maps $H$ to 1 and $\bar{H}$ to 1. 
+\end{defn}
+
+\begin{defn}
+$W$ a representation of $H$, then $\bar{W}$ by $\rho_{\bar{W}}(h) = \rho_w(tht^{-1})$ where $t \notin H$. 
+\end{defn}
+
+\begin{prop}
+$V$ an irreducible representation of $G$, $W = Res_H^G V$, one of the following holds
+\begin{enumerate}
+\item $V \cong V'$, $W = W'\oplus W''$ such that $W',W''$ irreducible conjugate and not isomorphic. 
+\[ \Ind_H^G W' = \Ind_H^G W'' = V \]
+\item $V$ not isomorphic to $V'$, $W$ is irreducible and self conjugate $\Ind_H^G W = V \oplus V'$, each irreducible representation of $H$ arises in one of these ways. 
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+\begin{align*}
+|G| &= \sum_{g \in G} |\chi(g)|^2\\
+2|H| &= \sum_{h \in H} | \chi(h)|^2 + \sum_{t \in H} |\chi(t)|^2 \\
+&= |H| \ip{\chi|_H, \chi|_H} + \sum_{t \notin H} |\chi(t)|^2
+\end{align*}
+If $\ip{\chi|_H, \chi|_H} = 2$ then $\chi(t) = 0$ for all $t \notin H$ then $\chi_{v'} = \chi_v$, then $V \cong V'$ which implies $W = W' \oplus W''$. \\
+
+\noindent If $\ip{\chi_H, \chi_H} = 1$ then $W$ is irreducible and so $\sum_{t\notin H} |\chi(t)|^2 = |H|$ which implies $V' \cong V$.
+\begin{align*}
+\Res_H^G(\Ind_H^G W) &= W \oplus \bar{W}\\
+\Ind_H^G(\Res_H^G V) &= V \otimes (U \oplus U')
+\end{align*} 
+\end{proof}
+
+%\begin{defn}
+%$\lambda \rightarrow n$, the conjugate partition $\lambda'$ comes form reflecting the $\lambda$ along the diagonal. $S^\lambda$ an irreducible representation of $S_n$, $\lambda \rightarrow n$.  $(S^\lambda) = S^\lambda \otimes U$.Fact: $(S^\lambda)^' = S^\lambda'$.  $S^{\lambda'} \cong S\lambda$ if and only if $\lambda' = \lambda$. 
+%\end{defn}
+%Let $W^\lambda := \Res_{A_n}^{S'} S^\lambda$. If $\lambda' = \lambda, W^\lambda = (W^\lambda)'\oplus (W^\lambda)''$. If $\lambda' \neq \lambda, \Ind_{A_n}^{S_n} W^\lambda = S^\lambda \oplus S^{\lambda'}$. If $C$ is a conjugacy class of $A_n$, then either $C$ is a conjugacy class of $S_n$ or $C\cup C'$ is a conjugacy class of $S_n$. 
+
+%\[ \mbox{ cycle type} = (\dots \alpha_1 \dots) (\dots \alpha_2 \dots) \dots (\dots \alpha_n \dots)$, so the split pair $C\cup C'$ is in $A_n$. cycle type is $q_1 > q_2 > \dots > q_n$. 
+
+%\begin{prop}
+%$\lambda = \lambda'$, $W^\lambda = (W^\lambda)' \oplus (W^\lambda)''$
+%\end{prop}
+%\begin{proof}
+%If $C \cup C'$ does not correspond to $\lambda$, then 
+%\begin{align*}
+%\chi'_\lambda(c) &= \chi'_\lambda (c') \\
+%&=  \chi''_\lambda (c) = \chi''(c')\\
+%&= \frac{1}{2} \chi_\lambda(C \cup C')
+%\end{align*}
+
+%(2) If $C \cup C'$ is decomposed into $\lambda_1$ 
+%\end{proof}
+
+%If $\lambda$ is not self conjugate, then $\Res_{A_n}^{S_n} S^\lambda$ for $\lambda = \lambda'$.  Otherwise $\Res_{A_n}^{S_n} S^\lambda = W^\lambda \oplus \bar{W^\lambda}$ for $\lambda = \lambda'$. 
+%\subsection*{Representation of $GL_2(\bF)$ and $SL_2(\bF)$ - Wendesday, November 14}
+
+
+%\begin{defn}
+%The projective line $\bP^1(\bF_q)$ is the set 
+%\[ \{[a:b]|(a,b) \neq (0,0)\}\]
+%Where $[a_1: b_2] = [a_2: b_2]$ if anf only if $a_1 = \lambda a_2, b_1 = \lambda b_2$. Let $G = GL_2(\bF_q), \bF = \bF_q$. Some subgroups of $G$ are  the diagonal matrices , diagonal not 0, or upper triangular matrices, diagonal not 
+%\end{defn}
+
+%\begin{lem}
+%$|G| = q(q-1)^2 (q+1)$
+%\end{lem}
+%\begin{proof}
+%$G$ acts transitively on $\bP^1(\bF)$. Look for elements in $G$ that fix $[1:0]$. 
+%\end{proof}
+
+%\begin{lem}
+%$G$ contains a cyclic subgroup $K$ of order $q^2 - 1$. 
+%\end{lem}
+%\begin{tabular}{|c|c|c|}
+%\hline 
+%Representative & \# of Elements &  \# of classes \\ 
+%\hline 
+%$a_x = \tmatrix{x}{0}{0}{x}$ & 1 & q-1 \\ 
+%\hline 
+%$b_x = \tmatrix{x}{1}{0}{x}$ & $q^2 - 1$ & $q-1$ \\ 
+%\hline 
+%$c_{xy} &= \tmatrix{x}{0}{0}{y}$ & $q^2 + q$ & $\frac{(q-1)(q-2)}{2}$ \\ 
+%\hline 
+%$d_{xy} = \matrix{x}{-y}{y}{x}$ & $q^2 - q$ & $\frac{q(q-1)}{2}$
+%\end{tabular} 
+%$c_{xy}$ and $c_{yx}$ are conjugate, and the $d_{xy}$ are conjugate.
+
+\begin{rem}
+Consider the permutation representation of $G$ on $\mathbb{P}^1(\mathbb{F})$. This has $\dim$ q+1. This contains the trivial representation, so remove it, and let this complementary representation be $V$. 
+\end{rem}
+\end{document}\begin{tabular}{|c|c|c|c|c|}
+\hline 
+• & $a_x$ & $b_x$ & $C_{x,y}$ & $d_{x,y}$ \\ 
+\hline 
+V & q & 0 & 1 & 1	 \\ 
+\hline 
+$U_\alpha$ & $\alpha(x)^2$ & $\alpha(x)^2$ &$\alpha(x)\alpha(y)$  & $\alpha(x^2 - y^2)$ \\ 
+\hline 
+\end{tabular} 
+
+Let $\alpha, \beta$ be a 1-dimensional representations of $\bF_q^*$ Define $w_{\alpha,\beta} \tmatrix{a}{b}{0}{d} = \alpha(a) \beta(d)$. Let $W_{\alpha,\beta} = \Ind_B^G w_{\alpha,\beta}$
+
+\begin{prop}
+If $W_{\alpha,\beta$ is irreducible if and only if $\alpha \neq \beta$. $W_{\alpha, \beta} \cong W_{\alpha',\beta'\}$ if and only if $\{\alpha,\beta\} = \{ \alpha', \beta\}$. 
+\end{prop}
+
+
+\begin{defn}
+A virtual character is an integer linear combination of irreducible characters. 
+\end{defn}
+
+\begin{lem}
+$\chi$ a virtual character and $\ip{\chi|\chi} - 1$ and $\chi(1) > 0$. Then, $\chi$ is the character if an irreducible representation. 
+\end{lem}
+
+\section*{Weyl's Construction - Abel and Eric}
+\begin{defn}The 
+\begin{align*}V^{\otimes 3} &= Sym^3 \oplus Alt^3 + Mystery
+\end{align*}
+Weyl's consturction can help us figure out what mystery is. 
+\end{defn}
+
+\begin{thm}[Double Commutatant]
+Let $E$ be a finite dimensional vector space, $A \subseteq \End(E)$ a semisimple subalgebra. 
+\end{thm}
+
+\subsection*{Artin's Theorem}
+
+\begin{defn}
+We have 
+\[ R^+(G) = \bZ^+ X_i \oplus \dots \oplus \bZ^_ X_n \]
+and 
+\[ R(G) = \bZ X_i \oplus \dots \oplus \bZ X_n \]
+We have 
+\begin{align*}
+\Ind_H^G: R(H) \to R(G)
+\end{align*}
+Defines a ring homomorphism. If $G$ is a finite group, $Y$ a set of subgroups of $G$, then 
+\begin{align*}
+\Ind: \bigoplus_{H \in Y} R(H) &\to R(G)\\
+\Ind(\bigoplus_{H \in Y} \chi_H) &\rightarrow \sum_{H \in Y} \Ind_H^G \chi_H 
+\end{align*}
+\end{defn}
+
+\begin{thm} Artin
+If $G$ is a finite group, $Y$ is a set of its subgroups then the following are equivalent
+\begin{enumerate}
+\item The union of all conjugates of $H \in Y$ is $G$, $g \in G, g = x^{-1}gx$.
+\item For a character $\chi$ of $G$,
+\[ \chi = \sum_{H \in Y} q_H \Ind_H^G(\chi_H) \]
+where $q_h \in \bQ$.
+\item 
+\[ X = \sum_{H \in Y} C_H \Ind_H^G(\chi_H) \]
+for $c_H \in \bC$. Let $\chi_1, \dots, \chi_n$ be the set of irreducible characters. 
+\[ \chi_i = \sum c_{H_n} \Ind_{H_n}^G (\chi_{H_k}) \]
+\end{enumerate}
+\end{thm}

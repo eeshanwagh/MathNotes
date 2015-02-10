@@ -1,0 +1,2465 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage[left=1in,top=1in,right=1in,bottom=1in]{geometry}
+\usepackage{amssymb, amsmath, amsthm, amstext, bbm}
+\usepackage{enumitem}
+\usepackage{mathdots}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+
+\usepackage{lastpage}
+%\usepackage[usenames,dvipsnames]{color}
+\allowdisplaybreaks[1]
+
+%______________________________________________________________
+\newcommand{\halmos}{\rule{1.75mm}{2.25mm}}
+\renewcommand{\qedsymbol}{\halmos}
+
+%_________________________________________________________________
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\st}{\; : \; }
+\newcommand{\fin}{\qquad \quad \hfill \framebox[1.75mm][l]{\,}}
+\newcommand{\cU}{\mathcal{U}}
+
+\newcommand{\cE}{\mathcal{E}}
+
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cJ} {\mathcal{J}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bZ}{\mathbb{Z}}
+
+\newcommand{\bQ}{\mathbb{Q}}
+
+\newcommand{\bA}{\mathbb{A}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bP}{\mathbb{P}}
+\newcommand{\bq}{\mathbb{q}}
+\newcommand{\Meas}{\mathrm{Meas}}
+\newcommand{\Th}{\mbox{Th}}
+\newcommand{\Aut}{\mbox{Aut}}
+\newcommand{\tp}{\mbox{tp}}
+\newcommand{\Stab}{\mbox{Stab}}
+
+\newcommand{\RM}{\mbox{RM}}
+\newcommand{\dM}{\mbox{dM}}
+%Groups Related Commands 
+%\newcommand{\iff}{\Leftrightarrow}
+\newcommand{\Scross} {S_{3}\times S_{3}} %S3 cross S3
+\newcommand{\SNormgp} { \{1, b, b^{2}\}}
+
+%Analysis Commands
+\newcommand{\intpi}{\int_{-\pi}^\pi}
+\newcommand{\overtpi}{\frac{1}{2\pi}}
+\newcommand{\Trig}{\text{Trig}}
+\newcommand{\ospan} {\text{span}}
+\newcommand{\otrig} {\text{Trig}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\cP}{\mathcal{P}}
+
+\newcommand{\Bor}{\mathrm{Bor}}
+\newcommand{\sA}{\mathcal{A}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\qtwo}{\mathbb{Q}_{2}}
+\newcommand{\Pow}{\mathrm{P}}
+\newcommand{\osc}{\ensuremath{\mathrm{osc}}}
+\newcommand{\dotcup}{\ensuremath{\,\mathaccent\cdot\cup}}
+\newcommand{\multi}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+\newcommand{\PosSLP}{\mathsf{PosSLP}}
+\newcommand{\PERM}{\mathsf{PERM}}
+\newcommand{\BitSLP}{\mathsf{BitSLP}}
+\newcommand{\ACIT}{\mathsf{ACIT}}
+\newcommand{\EquSLP}{\mathsf{EquSLP}}
+\newcommand{\DegSLP}{\mathsf{DegSLP}}
+\newcommand{\sSAT}{\mathsf{\#SAT}}
+\newcommand{\poly}{\mathrm{poly}}
+\newcommand{\Po}{\mathrm{P}}
+\newcommand{\NP}{\mathrm{NP}}
+\newcommand{\FP}{\mathrm{FP}}
+\newcommand{\sP}{\mathrm{\#P}}
+\newcommand{\PP}{\mathrm{PP}}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\TCz}{\mathrm{TC}^0}
+\newcommand{\CITE}{}
+
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\mbrac}[1] {\left( #1 \right)}
+\providecommand{\mcbrac}[1] { \{ #1 \}}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\ip}[1]{\left\langle #1 \right\rangle}
+\newcommand{\bC} {\mathbb{C}}
+\newcommand{\mdist} {\text{dist}}
+\newcommand {\flln} {\lfloor \lambda n\rfloor}
+
+
+\newcommand{\acl}{\mbox{acl}}
+
+\newcommand{\dcl}{\mbox{dcl}}
+\newcommand{\cl}{\mbox{cl}}
+\newcommand{\acldim}{\mbox{acl-dim}}
+\newcommand{\da}{\downarrow}
+\newcommand{\uhl}{\upharpoonleft}
+\newcommand{\uhr}{\upharpoonright}
+\newcommand{\ord}{\mbox{ord}}
+%______________________________________________________________________________________
+
+\renewenvironment{thebibliography}[1]
+	{\section*{#1}
+	   \begin{list}{}{\setlength{\leftmargin}{\bibindent}
+	                  \setlength{\itemindent}{-\leftmargin}
+	                  \setlength{\itemsep}{0pt}
+	                  \setlength{\parsep}{\smallskipamount}
+	                  \usecounter{enumiv}\renewcommand{\theenumiv}{}}
+                    \sloppy\clubpenalty=4000\widowpenalty=4000\frenchspacing}
+	{\end{list}}
+
+\newtheoremstyle{stdthm}{7mm}{}{\it}
+{}{}{\bf}{ }{\thmname{\sc #1}\thmnumber{ \bf #2.}\thmnote{ \sc[#3]}}
+
+\newtheoremstyle{stddef}{7mm}{}{\rm}
+{}{}{\bf}{ }{\thmname{\sc #1}\thmnumber{ \bf #2.}\thmnote{ \sc[#3]}}
+
+\newtheoremstyle{stdnonum}{7mm}{}{\rm}
+{}{}{\bf.}{ }{\thmname{\sc #1}\thmnote{ \sc(#3)}}
+
+\newtheoremstyle{stdqands}{7mm}{}{\rm}
+{}{}{\bf}{ }{\thmname{\bf #1}\thmnumber{ \bf #2.}\thmnote{\sc#3}}
+
+\newtheoremstyle{stdbold}{}{}{\rm}
+{}{}{\bf:}{ }{\thmname{\bf #1}\thmnote{ \bf(#3)}}
+
+% Important results that usually require proof
+\theoremstyle{stdthm}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{obsv}[thm]{Observation}
+
+% Definitions and rems that merely state facts
+\theoremstyle{stddef}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{rem}[thm]{remark} %\fin if without proof
+\newtheorem{eg}[thm]{example} %\fin
+
+% No numbering on these containers
+\theoremstyle{stdnonum}
+\newtheorem{diver}{Diversion} %\fin if without proof
+\newtheorem{prob}{Problem}
+\newtheorem{claim}{Claim}
+\newtheorem{sol}{Solution}
+\newtheorem{ob}{Observation} %\fin if without proof
+\newtheorem{note}{Note} %\fin
+
+% Sample questions and solutions
+\theoremstyle{stdqands}
+\newtheorem{sampleq}{Sample Question}
+\newtheorem{samples}{Sample Solution} %\fin
+
+% Misc. useful containers
+\theoremstyle{stdbold}
+\newtheorem{quest}{Question}
+\newtheorem{exercise}{Exercise}
+\newtheorem{conc}{Conclusion}
+\newtheorem{strat}{Strategy}
+\newtheorem{astrat}{Alternate Strategy}
+\newtheorem{as}{Alternate Solution} %\fin
+%_________________________________________________________________
+
+
+
+
+
+
+
+%_____________________________________________________________________________________
+
+
+\begin{document}
+%\title{Pmath 450 Notes}
+%\author{Eeshan Wagh}
+%\maketitle
+%\newpage
+%{\noindent \textbf{\huge{PMATH 352 (1121 - Winter 2012)} \\ \Large{Complex %Analysis}} \\[0.25cm] Professor: L. Marcoux \\ University of Waterloo \\[0.25cm] Author: {\tt{mlbaker}} <\url{lambertw.com}> \\ Revised: \today} \\
+\begin{titlepage}
+\begin{center}
+\textsc{\LARGE University of Waterloo}\\[1cm]
+\textsc{\Large Fall 2012}\\[0.5cm]
+\rule{\linewidth}{0.5mm} \\[0.4cm]
+{\Large \bf PMATH 911 - Stability Theory}\\[0.2cm]
+\rule{\linewidth}{0.5mm} \\[1cm]
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Eeshan \textsc{Wagh}
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Instructor:} \\
+Rahim Moosa
+\end{flushright}
+\end{minipage}
+\\[1cm]
+%\emph{These notes are presented without any guaranty of any kind. They might contain material not seen in the course and/or omit material seen in the course. These notes might also contain typos and errors.}\\[0.5cm]
+Last updated: \today \\
+\end{center}
+
+\tableofcontents
+
+\end{titlepage}
+
+\section{Stability Theory}
+Stability Theory was originally developed by Shelah to deal with the Spectrum problem. Namely, fix a theory $T$, and consider the function $I_T: \text{Card } \to \text{Card}$ given by $\aleph_0 \leq \kappa \to $ \# of non-isomorphic models of $T$ of size $k$.
+
+\begin{eg}
+An example is Morely's Theorem: If $L$ is countable, and if $I_T(\kappa) = 1$ for some $\kappa > \aleph_0$ then $I_T(\kappa) = 1$ for all $\kappa > \aleph_0$. 
+\end{eg}
+
+Shelah's work on this lead to important properties of definable sets in models of $T$. Look at the structure or geometry of the definable sets. This gives rise to geometric stability theory. What these techniques end up giving you is a distinction between "tame" and "wild" theories. So let us look at some examples\\
+
+
+
+\begin{eg}
+Let $L$ be the empty language and $T$ be the theory of infinite sets. 
+\begin{enumerate}
+\item Properties of $T$
+\begin{itemize}
+\item Not finitely axiomatizable
+\item QE
+\item Complete: All models are elementarily equivalent
+\item Models of $T$ are precisely the existentially closed $L$-structures. $T$ is the model companion to the empty theory
+\end{itemize}
+\item Structure of definable sets
+\begin{itemize}
+\item Every definable set is a finite boolean combination of atomically definable sets
+\item atomically definable subsets of $M^n$ , $x=x, x_i = a, x_i = x_j$. 
+\item for $n = 1$, the definable sets are either finite or cofinite. 
+
+\end{itemize}
+
+\end{enumerate}
+
+
+\end{eg}
+
+
+%\begin{tabular}{ c l l}
+%  Language/Theory & Properties of $T$ & Structure of definable sets  \\
+%  $L = \emptyset$ &  - not finitely axiomatizable & - QE: Every definable set is a finite boolean combination of atomically definable sets \\
+%   $T = $ theory of infinite sets& - Complete: All models are elementarily equivalent & - atomically definable subsets of $M^n$ , $x=x, x_i = a, x_i = x_j$.  \\
+%   & - totally categorical: $I_T(\kappa)=1$ for all $\kappa \geq \aleph_0$&\\
+%   & - Models of $T$ are precisely the existentially closed $L$-structures. $T$ is the model companion to the empty theory &
+%\end{tabular}\\
+
+
+%So for $n = 1$, the definable sets are either finite or cofinite. 
+
+
+\begin{eg}
+$L = \{<\}$ and $T$ is the theory of dense linear ordering without endpoints. 
+\end{eg}
+\begin{itemize}
+\item Properties of $T$: 
+\begin{enumerate}
+\item finitely axiomatizable
+\item Complete, so we can say DLO $ = Th(\bQ,<)$
+\item $\aleph_0$ categorical, though not uncountably categorical.
+\item DLOs are the existentially closed linear orders 
+\end{enumerate}
+\item Structure of definable sets
+\begin{enumerate}
+\item Has quantifier elimination
+\item Atomic definable subsets of $M^n$:
+\begin{itemize}
+\item $M^n$
+\item $M^{i-1}\times \{a\} \times N^{n-i}, a \in M$ 
+\item $M^{i-1}\times (-\infty, a) \times M^{n-1}$ ($x_i < a)$ 
+\item $M^{i-1}\times (a, \infty) \times M^{n-1}$ ($a < x_i)$
+\item $<_{ij}:= \{(a_1,\dots a_n): a_i < a_j\}$
+\end{itemize}
+\item $n=1$: definable subsets of $M$ are finite unions of points and open intervals. 
+\end{enumerate}
+
+\end{itemize}
+
+
+\begin{eg}
+$L = \{0,+,-\}$, $T$ is theory of DAG, non-trivial, torsion free divisble abelian groups. 
+\begin{enumerate}
+\item Properties of $T$
+\begin{itemize}
+\item Not finitely axiomizable
+\item Complete : $Th(\bQ,0,1,+) = DAG$ 
+\item uncountable categorical 
+\item DAGs are existentially closed torsion free abelian groups. 
+\end{itemize}
+\item Structure of definable sets
+\begin{itemize}
+\item Quantifier Elimination
+\item Atomically definable sets in $M^n$ are those defined by linear equations with integer coefficients $m_1x_1 + \dots + m_nx_n = a$ where $a \in M, m_1, \dots, m_n \in \bZ$. 
+\item Consider $n=1$, then we have $mx=a$. If $m = 0$ then $a=0$ defines $M$. If $m\neq 0$ then $mx=a$ has a unique solution because of existence of divisibility and uniqueness by torsion free. Namely, $mx=a, mx' = a \Rightarrow m(x-x') 0 \Rightarrow x = x'$.  Hence, the definable subsets of $M$ are finite or cofinite. I.e. DAG is strongly minimal. 
+\end{itemize}
+
+\end{enumerate}
+
+\end{eg}
+
+\begin{eg}
+Fix a field $F$, let $L = \{0,+,-,(\lambda_i)_{i\in F}\}$ and $T$ is the theory of infinite $F$-vector spaces. 
+\begin{enumerate}
+\item Properties of $T$
+\begin{itemize}
+\item Not finitely axiomatizable
+\item Complete
+\item Has a prime model. If $F$ is infinite then $(F,0,+,-,(\lambda_r))$ but if $F$ is finite have $(\bigoplus_{i=0}^{\aleph_0} F, 0,1,+,-,(\lambda_r))$
+\item $\kappa$-categorical for all $\kappa > |F| + \aleph_0$
+\item existentially closed $F$-vector spaces
+\end{itemize}
+\item Structure of definable sets
+\begin{itemize}
+\item QE
+\item Atomic definable subset of $M^n$: $r_1x_1 + \dots + r_nx_n = a$ where $a \in M, r_1,\dots, r_n \in F$. 
+\item $VS_F$ is strongly minimal. 
+\end{itemize}
+
+\end{enumerate}
+
+\end{eg}
+
+\begin{eg}
+$L = \{0,1,+,-,\times\}$ and $T$ is the theory of ACF. 
+\begin{enumerate}
+\item Properties of $T$
+\begin{itemize}
+\item Not finitely axiomatizable
+\item Not complete
+\item Completions: For each prime $p$ or $p=0$
+\item Uncountably categogrical 
+\item ACFs are precisely the existentially closed fields (or even integral domains)
+\end{itemize}
+\item Structure of definable sets
+\begin{itemize}
+\item QE
+\item Atomic definable sets given by polynomial equations $P(x_1,\dots,x_n)=0$ where $P \in M[X_1,\dots, X_n]$. The definable sets are the Zariski Constructible sets.  
+\item Considering $n=1$ gives ACF is strongly minimal. 
+\end{itemize}
+\end{enumerate}
+
+\end{eg}
+
+\begin{eg}
+$L = \{0,1,+,\times,-\}$ and $T$ is RCF. Recall these are formally real fields (-1 not sum of squares), $\forall x(x \mbox{ or } -x \mbox{ is a square})$ and if $P \in M[x]$ has odd degree then there exists $x$ such that $P(x) = 0$. 
+\begin{enumerate}
+\item Properties of $T$
+\begin{itemize}
+\item Complete
+\item Not categorical in any cardinal
+\item prime model $(\bQ^{alg} \cap \bR, 0, 1, +, -, \times)$. 
+\item RCFs are the existentially closed formally real fields. 
+\end{itemize}
+\item Structure of Definable sets
+\begin{itemize}
+\item Does not admit QE. Consider $\exists y(x=y^2)$
+\item Model Complete. This means if we look at RCOF: $(M,0,1,+,-,\times, <)$  has QE. 
+\item The definable subsets are finite boolean combinations of sets defined by  polynomial inequations: $P(x_1,\dots, x_n) >0$ where $P \in M[X_1,\dots, X_n]$
+\end{itemize}
+\item Considering $n=1$, we see that definable subsets of $M$ are finite unions of points and open intervals where the ordering is the square ordering (the canonical ordering). RCF is o-minimal. 
+
+\end{enumerate}
+
+\end{eg}
+
+\begin{rem}
+Examples 2,6 are not "stable: but 1,3,4,5 are (in fact they are strongly minimal). 
+\end{rem}
+
+%Thursday, Jan 10
+\section{Types and Saturation}
+
+\subsection{Types}
+Fix a language $L$, $\Phi(x_1,\dots,x_n)$ a set of $L$-formulas whose free variables comes from $\{x_1,\dots, x_n\}$
+
+\begin{defn}
+Given an $L$-structure $\cM$, $a \in M^n$, we say that $a$ \emph{realizes} $\Phi$, denoted by $\cM \models \Phi(a)$, if $\cM \models \phi(a)$ for all $\phi \in \Phi$.  We say $\Phi(x_1,\dots, x_n)$ is \emph{realized} in $\cM$ if there exists $a \in M^n$ with $\cM \models \Phi(a)$. 
+\end{defn}
+
+\begin{prop} \label{prop1}
+$T$ an L-theory, a set of L-formulas $\phi(x_1,\dots, x_n)$, write $x = (x_1,\dots, x_n)$. Then, the following are equivalent
+\begin{enumerate}
+\item $\Phi(x)$ is realized in some model of $T$
+\item Every finite subset of $\Phi(x)$ is realized in a model of $T$
+\item There is a model of $T$ in which every finite subset of $\Phi$ is realized. 
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+$(i) \Rightarrow (ii)$ is clear. \\
+
+\noindent $(ii) \Rightarrow (iii)$ : Show $T \cup \{ \exists (\bigwedge \Sigma(x)): \Sigma \subseteq \Phi(x) \mbox{ finite} \}$ is consistent. This follows from (ii) by compactness. \\ 
+
+\noindent (iii) $\Rightarrow$ (ii) clear\\
+
+\noindent (ii) $\Rightarrow$ (i): Let $L' = L \cup \{c_1,\dots, c_n\}$ (new constant symbols). Let $c= (c_1,\dots, c_n)$ and $T' := T \cup \Phi(c)$ is an $L'$-theory. We claim that $\Phi(x)$ is realized in a model of $T$ if and only if $T'$ is consistent. If $\cM \models T, a \in M^n$ with $\cM \models \Phi(a)$, then let $\cM' = (\cM, c^{\cM'} = a) \models T'$. Conversely, if $\cM' \models T'$ then $\cM := \cM'|_L \models T$ and $a:= c^{\cM'} \in M^n$ is a realization of $\Phi$ in $\cM$. \\
+
+Now, that we have shown the claim, it suffices to show that $T'$ is consistent. By compactness, let $\Sigma \subseteq T'$ be finite. Show $\Sigma$ is consistent.  $\Sigma \subseteq T \cup \{\phi_1(c), \dots, \phi_n(c)\}$ where $\phi_i \in \Phi$. By (ii), there is a model $\cM \models T$ and $A \in M^n$ such that $\cM \models \bigwedge_{i=1}^n \phi_i(a)$. So $\cM' = (\cM, c^{\cM'} = a)$ is a model of $\Sigma$. 
+\end{proof}
+
+\begin{rem}
+Prop \ref{prop1} (i) $\Leftrightarrow $ (ii) is just the compactness theorem for sets of formulas.
+\end{rem}
+
+\begin{defn}
+$T$ an L-theory, $n < \omega$. An {\bf $n$-type} of $T$ is a set of L-formulas $\Phi(x_1,\dots, x_n)$ satisfying any of the equivalent statements in  Proposition \ref{prop1}. Note: This depends on the presentation of the free variable $(x_1,\dots, x_n)$. We should but we wont call them them $(x_1,\dots, x_n)$- type. 
+\end{defn}
+
+\begin{defn}
+An $n$-type is {\bf complete} if for every L-formula $\phi(x_1,\dots, x_n)$, either $\phi \in \Phi$ or $\neg \phi \in \Phi$. Denote the set of complete in $n$-types of $T$ by $S_n(T)$. 
+\end{defn}
+
+\begin{rem}
+\begin{enumerate}
+\item If $T$ is complete and $\Phi(x)$ is an $n$-type of $T$ then in \emph{every} model of $T$ every finite subset of $\Phi$ is realized. This is by \ref{prop1} part (iii) and by completeness of $T$. 
+\item On the other hand, it is not the case that even when $T$ is complete, that $\Phi$ is realized. 
+\end{enumerate}
+
+\end{rem}
+
+\begin{eg}
+To see an example of the above remark, consider $ACF_0$ and $(\bQ^{alg}, 0,1,+,-,\times) \preceq (\bC, 0,1,+,-,\times)$. Let $\Phi(x) := \{P(x) \neq 0: P \in \bZ[x], P \neq 0\}$. $\Phi(x)$ is a 1-type of ACF since it is realized by say $\pi$ in $(\bC, 0, 1, +,-,\times)$ but $\Phi(x)$ is not realized in $(\bQ^{alg}, 0, 1,+,-,\times)$. Types give us a way to find a difference between these two models, even though the theory is complete. 
+\end{eg}
+
+\begin{rem}
+We say that $\Phi(x)$ is {\bf finite realized} in $\cM$ if every finite subset is realized in $\cM$. 
+\end{rem}
+
+\begin{lem}
+$\Phi(x)$, an n-type of $T$ is complete if and only if it is maximal among the n-types of $T$. 
+\end{lem}
+
+\begin{proof}
+$\Rightarrow$ Suppose $\Phi(x)$ is complete and $\Phi(x) \subsetneq \Phi'(x)$ set of L-formulas. Let $\phi \in \Phi' \setminus \Phi$. $\Phi$ is complete and so $\neg \phi \in \Phi \Rightarrow \neg \phi \in \Phi'$ so $\Phi'$ is not realized in any L-structure. Thus, $\Phi'$ is not an n-type of $T$. \\
+
+\noindent $\Leftarrow$ Suppose $\Phi(x)$ is a maximal n-type of $T$. Suppose $\phi(x) \notin \Phi(x)$ and want to show that $\neg \phi \in \Phi$. Consider $\Phi(x) \cup \{ \neg \phi\}$. It suffices to show that this is an $n$-type of $T$. If not, then by Prop \ref{prop1}, there is  a finite subset $\Sigma \subseteq \Phi \cup \{\neg \phi \}$ that is not realized in \emph{any} model of $T$. $\Sigma \subseteq \{\phi_1, \dots, \phi_l, \neg \phi\}$ where $\phi_1, \dots, \phi_n \in \Phi$. So $T \models \forall x \neg(\phi_1(x) \wedge \dots \wedge \phi_l(x) \wedge \neg \phi(x))$.   This implies $T \models \forall x\left( \bigwedge_{i=1}^l \phi_i(x) \to \phi(x)\right)$. Since $\phi_1,\dots, \phi_l \in \Phi$ and $\Phi$ is realized in some model of $T$. Thus, $\Phi \cup \{\phi\}$ is realized in a model of $T$ which contradicts the maximality of $\Phi$. 
+\end{proof}
+
+\begin{cor}
+Every $n$-type of $T$ is contained in a complete $n$-type of $T$.
+\end{cor}
+
+\begin{proof}
+Use Zorn's Lemma and check that a union of chain of $n$-types is an $n$-type. 
+\end{proof}
+
+
+\begin{rem}
+We want to talk about types over parameters. In practice, types appear as follows: $\cM$ an L-structure, $A \subseteq \cM, b \in M^n$. 
+\[ t_{p_\cM}(b/A) := \{\phi(x_1,\dots, x_n) L_A - \mbox{ formulas such that } \cM \models \phi(b) \}\] 
+The type of $b$ over $A$ in $\cM$. This is an $n$-type of $Th(\cM_A)$ (in $L_a$) - $t_{p_\cM}(b/A)$ is realized by $b$ in $\cM_A$. 
+\end{rem}
+
+\begin{defn}
+More generally, $\cM$ an $L$-structure $A\subseteq M$. A (complete) {\bf $n$-type in $\cM$ over $A$} is a (complete) $n$-type of $Th(\cM_A)$. By an {\bf n-type in $\cM$} is an $n$-type in $\cM$ over the whole universe $M$. The set of complete $n$-types in $\cM$ over $A$ is denoted by $S_n^{\cM}(A)$. 
+\end{defn}
+
+\begin{rem}
+\begin{enumerate}
+\item A collection of $L_A$  formulas in $x = (x_1,\dots, x_n)$ is an $n$-type in $\cM$ over $A$ if and only if it is realized in \emph{some} model of $Th(\cM_A)$. This is equivalent to saying every finite subset if realized in $\cM_A$. 
+\item $A \subseteq M, \cM \preceq \cN$. The $n$-types in $\cM$ over $A$ is the same as the $n$-types in $\cN$ over $A$. Proof: $\cM \preceq \cN \Leftrightarrow \cM_M \equiv \cN_M \Rightarrow \cM_A \equiv \cN_A \Rightarrow Th(\cM_A) = Th(\cN_A)$. 
+\item $\cM \preceq \cN, A \subseteq M. S_n^\cM (A) = S_n^{\cN}(A)$ by (b) applied to complete types. 
+\end{enumerate}
+\end{rem}
+
+
+%Tuesday, January 15
+
+\begin{rem}
+The complete types in $\cM$ over $A$ that are realized in $\cM$ are precisely of the form $t_{p_{\cM}}(b/A)$. Proof: $\Phi(x)$ is realized by $b$ $\Rightarrow \Phi(x) \subseteq t_{p_\cM}(b/A)$ as $\cM \models \Phi(b)$ and this implies $\Phi(x) = t_{p_\cM}(b/A)$ by maximality.  
+\end{rem}
+
+\begin{prop}
+Every type in $\cM$ is realized in some elementary extension of $\cM$.
+\end{prop}
+\begin{proof}
+Let $\Phi(x)$ be a type in $\cM$ over $A$. By definition, $\Phi(x)$ is realized in a model of $\Th(\cM_A)$. To prove the proposition we just need to show that $\Phi(x)$ is realized in a model of $\Th(\cM_M)$ (See exercise 4.44). To show this we let $c$ be a new tuple of constant symbols, and it suffices to show:
+
+\begin{claim}
+$\Phi(c) \cup \Th(\cM_M)$ is consistent (as a $L_M \cup \{c\}$-theory)
+\end{claim}
+
+\begin{proof}[proof of claim]
+By compactness, we need to show that if $\phi(x), \dots, \phi_l(x) \in \Phi(x)$ and $\psi(\underline{b}) \in \Th(\cM_M)$ where $\phi_1, \dots, \phi_l,\psi$ are $L_A$ formulas and $b \in M \setminus A$ then $\{\phi_1(c), \dots, \phi_l(c), \psi(b)\}$ is consistent. But $\exists w \psi(w) \in \Th(\cM_A)$ and $\Phi(x)$ has a realization, say $d$ in a model $\cN \models \Th(\cM_A)$. Since $\cN \models \exists w \psi(w)$, there is $e$ from $N$ realizing $\psi(w)$. Then, 
+\[ \cN' := (\cN, c^{\cN'} = d, \underline{b}^{\cN'}= e) \models \{\phi_1(c),\dots, \phi_l(c), \psi(\underline{b}) \} \]
+\end{proof}
+This concludes the proof.
+\end{proof}
+
+\begin{cor}
+$S_n^{\cM} (A) = \{t_{p_\cN}(b/A): \cM \preceq \cN, b \mbox{ tuple from } \cN \}$ 
+\end{cor}
+
+\begin{lem} \label{propeg}
+Suppose $T$ admits quantifier elimination, $\cM \models T, A \subseteq M, b,b' \in M^n$. If $b$ and $b'$ realize the same atomic formulas  then $t_{p_\cM}(b /A) = t_{p_\cM}(b'/A)$. 
+\end{lem}
+
+\begin{proof}
+Induction on complexity of $L_A$-formulas. 
+\end{proof}
+
+\begin{eg} [DLO] The atomic L-formulas in a single variable are $x=x$ and $x<x$. The former is realized by everything while the latter is realized by nothing. By quantifier elimination and Lemma \ref{propeg}, any two elements in a model of $T$ have the same type over $\phi$. Therefore, $S_1(T)$ is a singleton. 
+
+\end{eg}
+
+\begin{rem}
+Suppose $p(x) \in S_1^\cM(A)$ is realized by $a \in A$. $M \models p(a)$, then $(x=a) \in p(x)$ and this formula isolates (completely determines) $p(x)$. These complete $1$-types are parametrized by $A$. 
+\end{rem}
+
+
+\begin{prop}
+$(M,<) \models DLO, A\subseteq M, A \neq \phi$. The complete types over $A$ not realized in $A$are in bijection with the set of \emph{cuts} in $A$ (where a \emph{cut} in $A$ is a decomposition $A = L \sqcup U$ where $x<y$ for all $x \in L, y \in U$)  
+\end{prop}
+
+\begin{proof}
+We can construct this bijection explicitly
+\begin{align*}
+S_1^\cM(A)  \to &\mbox{cuts in } A\\
+p(x)  \to &L_p = \{a \in A: (a<x) \in p(x) \}\\
+& U_p := \{a \in A: (x<a) \in p(x) \}
+\end{align*}
+By completeness of $p(x)$, $A = L_p \cup U_p$ and by finite realizability, this is accurate.  \\
+
+\noindent {\bf Injectivty:} Suppose we have $p,q \in S_1(A)$ (not realized) with $L_p = L_q$ and $U_p = U_q$. Choose $\cM \preceq \cN$ with $b,b' \in N$ such that $p = t_p(b/A)$ and $q = t_p(b'/A)$.  For any $a \in A$, we have $a<b \Leftrightarrow (a<x) \in p(x) \Leftrightarrow a \in L_p \Leftrightarrow a \in L_q \Leftrightarrow (a<x) \in q(x) \Leftrightarrow a<b'$. Having the same cut tells us that $b,b'$ satisfy the same atomic $L_A$-formulas $\Rightarrow p=q$. \\
+
+\noindent {\bf Surjectivty:} Suppose $A = L\cup U$ is a cut of $A$. Consider $\{a < x: a \in \} \cup \{x <a: a \in U\}$. By density this collection is finitely realizable in $(M,<)$. Let $p \in S_1^\cM(A)$ extend this type to a complete type. Note that $p(x)$ is not realized in $A$. Consider $A = L_p \cup U_p$, this yields that $L \subseteq L_p, U \subseteq U_p$ but since they are cuts, we get $L=L_p, U = U_p$ and so our map is surjective. 
+\end{proof}
+
+\begin{eg}
+In particular, in $(\bQ, <)$, we have that $S_1^\bQ (\bQ) "=" \bR$ and so $|S_1(\bQ)| = 2^{\aleph_0}$. Note that the size of the sets of $L_\bQ$ - formulas in $x$ is also $2^{\aleph_0}$, which is the maximal number of types. This is in some sense tells us the "wildness" of the theory. It is wild in the sense that insisting that out set of formulas are consistent, doesn't cut down the number of them. 
+\end{eg}
+
+\begin{prop}
+Let $K \models ACF$ and $k \subseteq K$ a subfield. Fix $n < \omega$.  There is a bijective correspondence between $S_n^K(k) \to \mbox{ prime ideals in } k[x_1,\dots, x_n]$, given by $p(x) \to I_p = \{ f \in k[x]: (f(x) = 0) \in p(x)\}$. 
+\end{prop}
+
+\begin{proof}
+To see that $I_p$ is a prime ideal, let $L$ be an elementary extension of $K$ such that $p(x) = t_{p_L}(b/K), b \in L^n$. Then, $I_p = \{f \in k[x]: f(b) = 0\}$. Check that $I_p$ is a prime ideal.\\
+
+\noindent {\bf Injective:} Suppose $p,q \in S_1^K(k), I_p = I_q$. Let $K \preceq L, b,b' \in L^n$ such that $p = t_p (b/K), q = t_{p'}(b'/K)$. Hence, $f(x) \in k[x], f(b) = 0 \Leftrightarrow f(b') = 0$.  The atomic $L_K$ formulas are of the form $f(x) = 0, f \in k[x]$ $\Rightarrow b,b'$ satisfy the same atomic formulas and by quantifier elimination $\Rightarrow$ $p=q$. \\
+
+\noindent {\bf Surjective:} Given $I \subseteq k[x]$ a prime ideal. Let $J \subseteq K[x]$ be a prime ideal. $\i.e. J\cap k[x] = I$.  Exists by commutative algebra. 
+\[ K \hookrightarrow K[X] /J \hookrightarrow F = \mbox{Fraction Field of } k[x]/J \hookrightarrow F^{alg} \]
+So this give us that $K \subseteq F^{alg}$ and so $K\preceq F^{alg}$ by model completeness of ACF. Let $b = x + J \in F^{alg}$ and let $ p = t_{p_L}(b/K)$. $f(x) \in I_p \Leftrightarrow f(b) = 0 \Leftrightarrow f(x) \in J \cap k[x] \Leftrightarrow f(x) \in I$. Therefore, $I = I_p$. 
+\end{proof}
+
+\begin{rem}
+So $S_n^K(k) "=" \mbox{Spec}(k[x]) = \bA^n_k$. The geometric interpretation, $S_n^K(k) \leftrightarrow \{ k - \mbox{Zariski Closed subsets of } k^n \}$ given by $p \to V_p := V(I_p) = \{a \in k^n: f(a) = 0, f \in I_p\}$. Going the other way, given a Zariski closed set, $V \to I_p = I(V)$ i.e. the set of polynomials in $k[x]$ such that $f(a) =0$ for all $a \in V$. We say that $p$ is the generic type of $V$. $p(x)$ says that $x \in V$ but $x \notin W$ for any $W \subsetneq V$, $W$ Zariski closed over $k$. 
+\end{rem}
+
+\begin{rem}
+We have  
+\[ |S_n^K(k)| = | \mbox{set of primes } k[x]| = | \mbox{finite subsets of } k[x] | = |k[x]| = \left| \bigcup_{n < \omega}k^n\right| = |k| + \aleph_0 \]
+In particular, if $k$ is countable, then the number of types is countable. So there are "few" types. 
+\end{rem}
+
+%Thursday, January 17
+
+\subsection{Saturation and Homogeneity}
+
+In no structure can all types by realized. 
+
+\begin{eg}
+$\cM$ infinite, consider the 1-type over $M$ 
+\[ \Phi(x) = \{x \neq a: a \in M \} \]
+It is a 1-type since it is finitely realized in $\cM$ but clearly not realized! 
+\end{eg}
+
+\begin{defn}
+Let $\kappa$ be an infinite cardinal, we say $\cM$ is $\kappa$-saturated if for all $A \subseteq M$, $|A| < \kappa$, every $n$-type in $\cM$ over $A$ is realized in $\cM$. 
+\end{defn}
+
+\begin{rem}
+If $\cM$ is $\kappa$-saturated, then $|M|\geq \kappa$. For $\kappa$-saturation, it suffices to show that if $p \in S_n^\cM(A)$ and $|A|<\kappa$, then $p$ is realized in $\cM$. 
+\end{rem}
+
+\begin{eg}
+$(\bQ^{alg},0,1,+,-,\times)$ is {\bf not} $\aleph_0$-saturated. For example, take, 
+\[ \Phi(x) := \{P(x) \neq 0: P \in \bZ[X]\setminus \{0\} \} \]
+this is a 1-type over $\bQ$. 
+\end{eg}
+
+\begin{prop} \label{2dot6}
+If all 1-types over sets of size less than $\kappa$ are realized then $\cM$ is $\kappa$-saturated. 
+\end{prop}
+
+\begin{proof}
+Fix $A \subseteq M$, $|A|< \kappa$, show every type in $S_n^\cM$ is realized in $\cM$. Induction on $n \geq 1$. 
+
+\noindent $n = 1$ case is clear. \\
+
+\noindent $n>1$. Let $p(x_1,\dots, x_n) \in S_n^\cM(A)$. 
+\[ q(x_1,\dots, x_{n-1}) := \{\phi(x_1,\dots, x_n) \in p: x_n \mbox{ does not appear freely in }\phi\} \subseteq p(x) \]
+Note: $q \in S_{n-1}^\cM (A) \Rightarrow $ by the inductive hypothesis, there is $b = (b_1,\dots, b_{n-1}) \in M^{n-1}$ realizing $q$. 
+\[ r(x_n) := \{ \phi(b_1,\dots, b_{n-1}, x_n): \phi \in p\} \]
+
+\begin{claim} $r(x)$ is a 1-type over $A \cup \{b_1,\dots, b_{n-1}\}$ 
+\end{claim}
+
+\begin{proof}
+Taking conjunctions, it suffices to show that each $\phi(b,x_n) \in r(x_n)$ is realized in $\cM$. We want $\cM \models \exists x_n \phi(b,x_n)$. Write 
+\[ p = t_{p_\cN}(c/A), c = (c_1,\dots, c_n) \in N^n, \cM \preceq \cN\]
+Thus, $\phi(x_1,\dots, x_n)\in p(x) \Rightarrow \cN \models \phi(c)  \Rightarrow \cN \models \exists x_n(c_1,\dots, c_{n-1}, x_n) \Rightarrow \exists x_n \phi(x_1,\dots, x_n) \in t_{p_\cN} (c_1,\dots, x_{n-1}/A) \subseteq t_p(c_1,\dots, c_n/A) = p \Rightarrow \exists x_n \phi(x_1,\dots, x_{n-1}, x_n ) \in q$    
+\end{proof}
+\end{proof}
+
+\begin{eg}
+Let $K \models ACF$, then $K$ is $\lambda$-saturated if and only if $\mbox{trdeg}(K) \geq \lambda$ (the size of a transcendence basis over $K$ where the underlying field is 
+\[ \bF = 
+\begin{cases}
+\bQ & char = 0\\
+\bZ_p & char = p 
+\end{cases}
+\]
+Proof. $\Rightarrow$ Let $trdeg(K) < \lambda$. Let $B \subseteq K$ be a transcendence basis for $K$. That is, $B$ is algebraically independent over $\bF$ and $(\bF(B)^{alg} = K$ and $|B| < \lambda$. 
+\[ \Phi(x) := \{ P(x) \neq 0 : P \in \bF (B)[x] \setminus \{0\} \} \]
+is a 1-type over $B$ but $\Phi(x)$ is not realized. Therefore, $K$ is not $\lambda$-saturated.   \\
+
+Conversely, suppose $trdeg(K) \geq \lambda, p \in S_1^K(A)$, where $A \subseteq K, |A| < \lambda$. Let $k = \bF(A) \supseteq A$. As an aside,  There exists a unique $q \in S_1^K(k)$ such that $q|_A = p$ (i.e. $q \to q|_A$ is a bijection as a map from $S_1^K(k) \to S_1^K(A)$), though, we don't need this. \\
+
+$p(x) \subseteq q(x) \in S_1^K(k)$. It suffices to realize $q$. \\
+
+{\bf case 1: $I_q \subseteq k[x]$ is a non-zero ideal} ($I_q = \{P(x) \in k[x] :  (P(x) = 0) \in q(x))$. This implies that for some $P \neq 0, (P(x) = 0) \in q(x)$ and so let $a \in L$ with $K \preceq L$ be a realization of $q$. Then, $P(a) = 0 \Rightarrow a \in k^{alg} \subseteq K$. \\
+
+{\bf Case 2: $I_q = (0)$. } Let $a \in K \setminus k^{alg}$ exists since $trdeg(k) \supseteq \lambda$ but $trdeg(k^{alg}) = trdeg(k) < \lambda$. Let $q' = t_{p_K)}(a/k)$ and $I_{q'} = (0) = I_q$. Thus, $q=q'$ and therefore $q$, and hence $p$ is realized (by $a$). 
+\end{eg}
+
+\begin{prop}
+Given an $L$-structure $\cM$ and $K \supseteq |M|$, there exists a $\kappa$-saturated elementary extension of $\cM$. 
+\end{prop}
+
+\begin{proof}
+In fact, we will find a $\kappa^+$-saturated elementary extension. 
+
+\begin{claim}
+For any $\cM$, there exists $\cM'$ with $\cM \preceq \cM'$ such that every type in $S_1^{\cM}$ is realized in $\cM'$ for all $A \subseteq M, |A| < \kappa$. 
+\end{claim}
+
+\begin{proof}[Proof of Claim.]
+Let $(p_\alpha : \alpha < \lambda)$ enumerate all types over less than $\kappa$ many parameters (note $\lambda = |M|^\kappa$). Define recursively, an elementary chain, $(\cM_\alpha: \alpha < \lambda)$ 
+\begin{align*}
+\cM_0 &= \cM\\
+\cM_{\alpha + 1} & \succeq M_\alpha \mbox{ realizes } p_\alpha \in S_1^\cM(A) - S_1^{\cM_\alpha}(A)
+\end{align*}
+If $\alpha$ is an ordinal, then 
+\[ \cM_\alpha := \bigcup_{\beta < \alpha} \cM_\beta \]
+If $(a_i: i \in I)$ is an elementary chain of $L$-structures, then $a_i \preceq \bigcup_{i \in I} a_i$. Let $\cM
+ = \bigcup_{\alpha < \lambda} \cM_{\alpha} \Rightarrow \cM \preceq \cM'$ and every $p_\alpha$ is realized in $\cM'$. This ends the claim. 
+\end{proof}
+Iterate the claim recursively. Let 
+\begin{align*}
+\cN_0 &:= \cM \\
+\cN_{\alpha + 1} &:= \mbox{ elementary extension of } \cN_\alpha \mbox{ realizing all types in } \cN_\alpha \mbox{ over  } \leq \kappa - \mbox{ many parameters (by the claim)}
+\end{align*}
+If $\alpha$ an ordinal then, 
+\[ \cN_\alpha = \bigcup_{\beta < \alpha} \cN_\beta \]
+and define $\cN = \bigcup_{\alpha < \kappa^+} \cN_\alpha \succeq \cM$. 
+
+\begin{claim}
+$\cN$ is $\kappa^+$-saturated. 
+\end{claim}
+
+\begin{proof}
+$A \subseteq N$, $|A| \preceq k$, $p \in S_1^{\cN}(A)$. As $\kappa^+$ is regular, $cof(\kappa^+) = \kappa^+$. So $A \subseteq \bigcup_{\alpha < \kappa^+} N_\alpha$, $|A| < \kappa^+$ and so $A \subseteq N_\alpha$ for some $\alpha < \kappa^+$. So $\cN_\alpha \preceq \cN$. Thus, 
+\[ S_1^\cN(A) = S_1^{\cN_\alpha}(A) \]
+all realized in $\cN_{\alpha+1} \preceq \cN$. So $p$ is realized in $\cN$. If one pays attention to the argument, it shows that $\cM$ has a $\kappa^+$-saturated elementary extension of size $|M|^\kappa = 2^\kappa$ (If you assume the GCH, then $\cM$ has a $\kappa^+$ - saturated elementary extension which is of size $\kappa^+$. 
+\end{proof}
+
+\end{proof}
+
+\begin{defn}
+We say that $\cM$ is {\bf saturated} to mean that it is $|M|$-saturated.
+\end{defn}
+
+\begin{cor}
+ If you assume GCH then every $L$-structure has arbitrary large saturated elementary extensions.  
+\end{cor}
+
+\begin{proof}
+Given $\cM$ and suppose $\kappa \geq |M|$. By the previous proposition, or rather, by the remark at the end of the proof of the proposition, there is $\cN \succeq \cM$, $\cN$ is $\kappa^+$ saturated and $|N| = 2^\kappa = \kappa^+$, hence $\cN$ is saturated. 
+\end{proof}
+
+\begin{defn}
+Let $\cM,\cN$ be 2 L-structures and $A \subseteq M$, and a map $f: A \to N$ is called a {\bf partial elementary map} (abreviated pem) if for any $L$-formula, $\phi(x_1,\dots, x_n)$, and any $a_1,\dots, a_n \in A$
+\[ \cM \models \phi(a_1,\dots, a_n) \Leftrightarrow \cN \models \phi(f(a),\dots, f(a_n))\]. Note: Elementary property forces injectivty. 
+\end{defn}
+
+\begin{rem}
+IF $A = M$, this is precisely the definition of an elementary embedding. 
+\end{rem}
+
+\begin{rem}
+pems are injective
+\end{rem}
+
+\begin{lem}
+Let $\Phi$ be an n-type in $\cM$ over $A$ and let $f: A \to N$ be a pem from $\cM \to \cN$, then 
+\[ \Phi(x)^f = \{ \phi(x,f(a)) : \phi(x,a) \in \phi(x,a) \in \Phi, a\in A\}\]
+is an $n$-type in $\cN$ over $f(A)$. (proof left as an exercise). 
+\end{lem}
+
+% Tuesday, January 22
+\begin{defn}
+Let $\kappa$ be an infinite cardinal. We say an L-structure, $\cM$ is {\bf $\kappa$-homogeneous} is $f:A\to \cM$ is a p.e.m from $\cM$ to itself with $|A|<\kappa$ and any $b \in M$, there exists a partial elementary map on $A \cup \{b\}$ extending $f$ . 
+\end{defn}
+
+\begin{lem}\label{lem33}
+Let $f: A \to \cN$ be a p.e.m, $f$ extends to a p.e.m $f'$ with $f'(b) = b'$ (where $b \in M\setminus A$ and $b' \in N\setminus f(A)$) $\Leftrightarrow$ $b'$ realizes $t_{p_\cM}(b/A)^f $ in $\cN$. 
+\end{lem}
+
+\begin{proof}
+Let $f: A \cup \{b\} \to N$ such that $f'|_A = f$ and $f'(b') = b'$. $f'$ is a p.e.m $\Leftrightarrow $ 
+\[ \tag{*} \cM \models \phi(a_1,\dots, a_n,b) \Leftrightarrow \cN \models \phi(f(a_1), dots, f(a_l),b') \]
+for all L-formulas $\phi$, all $a_1,\dots, a_l \in A$. This is just by the definition of p.e.m. We get
+\[ (*) \Leftrightarrow \phi(a_1,\dots, a_l, y) \in t_{p_\cM}(b/A) \Leftrightarrow \phi(f(a_1), \dots, f(a_l), y) \in t_{p_\cN}(b' /f'(A)) \Leftrightarrow t_k(b'/f(A)) = t_p (b/A)^f  \] 
+$\Leftrightarrow b'$ realizes $t_p(b/A)^f$. 
+\end{proof}
+
+
+\begin{prop}$\kappa$-saturation implies $\kappa$-homogeneity. 
+\end{prop}
+
+\begin{proof}
+Let $f:A \to M$ be a p.e.m, $|A|< \kappa$ and $b \in M$. Consider $t_p(b/A)^f$, a 1-type in $\cM$ over $f(A)$. Since $|f(A)| = A < \kappa$. By $\kappa$-saturation, there is a $b' \models t_p (b/A)^f$ (this means $b'$ realizes a collection of formulas) in $M$.  Now we can set $f'$ to be $f$ on $A$ and $f'(b) = b'$ and then apply Lemma \ref{lem33}
+\end{proof}
+
+
+\begin{prop} \label{prop39}
+As a corollary, we get the following collection of results
+\begin{enumerate}
+\item Suppose $\cM$ is a $\kappa$-saturated. If $\cN, \cM$ and $|N| \leq  \kappa$, then $\cN \preceq \cM$ (or rather, there is an elementary embedding of $\cN \in \cM$. 
+\end{enumerate}
+ 
+\end{prop}
+
+\begin{proof}
+\begin{enumerate}
+\item We build an elementary embedding $f:N \to M$. Enumerate $N = \{n_\alpha: \alpha < \kappa\}$. For each $\alpha < \kappa$, let 
+\[ A_\alpha:= \{n_\beta: \beta < \alpha \}\]
+So 
+\[ N = \bigcup_{\alpha < \kappa} A_\alpha \] 
+Note that $|A_\alpha|<\kappa$. Recursively define 
+\[ f_\alpha: A_\alpha \to M \]
+a chain if p.e.ms and set $f = \bigcup f_\alpha: N \to M$. Clearly, $f$ will be a p.e.m, i.e. an elementary embedding 
+\[ \emptyset= f_0: \emptyset \to M \]
+is a p.e.m from $\cN$ to $\cM$. The $\emptyset$-function is a p.e.m $\Leftrightarrow \cN = \cN$, note that this is condition is not vacuous!.
+
+If $\alpha$ is a limit ordinal, define $f_\alpha:= \bigcup_{\beta < \alpha} f_\beta$. Otherwise, suppose $\alpha$ is a successor. Given $f_\alpha: A_\alpha \to M$ p.e.m, and $A_{\alpha + 1} = A_\alpha \cup \{n_\alpha\}$.  Consider $t_{p_\cN}(n_\alpha / A_\alpha)^{f_\alpha}$ is a 1-type in $\cM$ over $f_\alpha(A_\alpha)$ ,
+\[ |f_\alpha(A_\alpha)| = |A_\alpha| < \kappa \]
+$k$-saturated on $\cM$ implies there is a realization $b \in \cM$. Extend $f_\alpha$ to $f_{\alpha+1}$ by taking $n_\alpha \to b$. 
+\end{enumerate}
+
+\end{proof}
+
+\begin{rem}
+Say toy are studying some complete theory $T$. We want to consider \emph{All} model of $T$. In any given situation, it will suffice to consider models of $T$ of size less than some cardinal $\kappa$. Let $\cM$ be a $\kappa$-saturated model of $T$, then all the smaller models are elementary substructures of $\cM$. So need only study $\cM$. 
+\end{rem}
+
+\begin{rem}
+We would like more than $\kappa$-homogeneity. Namely, given a p.e.m $f$, we want to extend it "all the way up", want to extend $f$ to an automorphism of $\cM$! This does not follow from homogeneity because of the size of the structure $\cM$ might be bigger than $\kappa$, so we can't build the recursion like we did before. 
+\end{rem}
+
+\begin{defn}
+$\cM$ is {\bf strongly $\kappa$-homogeneous} if every p.e.m, $f:A \to M$ with $A \subseteq M$, $|A| <\kappa$, extends to an automorphism of $\cM$. 
+\end{defn}
+
+\begin{rem}
+If $|M|=\kappa$ then $\kappa$-homogeneity implies strong $\kappa$-homogeneity using a recursive construction as in the proof of Prop \ref{prop39}.  There is something to do do make the extension an automorphism rather than simply an elementary embedding $\cM \to \cM$. Have to adjust the proof of  Prop \ref{prop39}(1) by back and forth. In part, $\cM$ saturated then $\cM$ is strongly $|M|$-homogeneous. Without GCH this remark is not so useful. 
+\end{rem}
+
+\begin{thm}
+$\cM$, $\kappa \geq |M|$. $\cM$ has a $\kappa$-saturated and strongly $\kappa$-homogeneous elementary extension (it will be of size $2^\kappa$). 
+\end{thm}
+
+\begin{proof}
+Actually build a $\kappa^+$-saturated strongly $\kappa^+$-homogeneous elementary extension. Recursively define an elementary chain: $(M_\alpha: \alpha < \kappa^+)$ of elementary extensions of $\cM$. 
+\begin{align*}
+\cM_0 &:= \cM \\
+\mbox{$\alpha$ limit, } \cM_\alpha &:= \bigcup_{\beta < \alpha} \cM_\beta
+\end{align*}
+If $\alpha$ a successor ordinal, let $\cM_{\alpha+1}$ be an elementary extension of $\cM_\alpha$. That is $|M_\alpha|^+$-saturated using a past proposition. Let $\cN = \bigcup_{\alpha < \kappa^+} \cM_\alpha$, $\cM \preceq \cN$ ($|N| = 2^k$). Check that $\cN$ is $\kappa^+$-saturated. \\
+
+Next, we show that $\cN$ is strong $\kappa^+$-homogeneous. Let $f:A \to N, |A| \leq \kappa$ a p.e.m. 
+\begin{align*}
+A \subseteq \bigcup_{\alpha < \kappa^+} M_\alpha & \Rightarrow A, f(A) \subseteq M_\alpha \mbox{ (Since $\kappa^+$ is regular)}\\ 
+f(A) \subseteq \bigcup_{\alpha < \kappa^+} M_\alpha
+\end{align*}
+$\cM_{\alpha+1}$ is $|M_\alpha|^+$ saturated, hence $|M_\alpha|^+$ - homogeneous so can interate to extend $f$ to an elementary embedding $f_\alpha: \cM_\alpha \to \cM_{\alpha+1}$. 
+\begin{align*}
+A \subseteq M_\alpha \preceq M_{\alpha +1} \preceq M_{\alpha +2} \\
+f(A) \subseteq \cM_{\alpha} \preceq \cM_{\alpha +1} \preceq M_{\alpha+2}
+\end{align*}
+Where $f$ takes $A\to f(A)$ . Insert Diagram above. 
+
+Work in $\cM_{\alpha+2}$ and consider the p.e.m. 
+\[ f_\alpha^{-1}(M_\alpha) \to \cM_\alpha \]
+where $f_\alpha(M_\alpha) \subseteq \cM_{\alpha+1} \subseteq \cM_{\alpha+2}$, to induce the map $g_{\alpha+1}: \cM_{\alpha + 1} \to \cM_{\alpha + 2}$. Finally, we get 
+\[ f' = \bigcup_\alpha f_\alpha: \bigcup_{\alpha < \kappa^+} M_\alpha: N \to N\]
+an elementary embedding. It is an automorphism with inverse $\bigcup_{\alpha < \kappa^+} g_\alpha$. 
+
+
+\end{proof}
+
+
+\begin{thm}
+Suppose $\cM$ is $\kappa$-saturated and strongly $\kappa$-homogeneous. Then 
+\begin{enumerate}
+\item If $\cN \equiv \cM$ and $|N| \leq \kappa$, then $\cN \preceq \cM$. 
+\item If $b,b' \in M^n$ and $A \subseteq M, |A| < \kappa$. Then $t_p(b/A) = t_p(b'/A) \Leftrightarrow$ there exists an automorphism of $\cM$, $\sigma$ such that $\sigma|_A = id$ and $\sigma(b) = b'$.  Where $Aut_A(\cM$) is the group of automorphisms of $\cM$ that fix $A$ pointwise) . 
+\item Suppose $X \subseteq M6n$ is a definable set. Suppose $A \subseteq M, |A| < \kappa$. The following are equivalent
+\begin{enumerate}
+\item For every $\sigma \in Aut_A(\cM)$, $\sigma(X) = X$ (where $\sigma((a_1,\dots, a_n)) = (\sigma(a_1), \dots, \sigma(a_n))$ so $\sigma$ acts on all $M^n$). 
+\item $X$ is $A$-definable. 
+\end{enumerate}
+
+\end{enumerate}
+\end{thm}
+% Thursday, Jan 24
+\begin{proof}
+(2) $\Leftarrow$ Let $\phi(x)$ be an $L_A$ formula. We write $\phi(x) = \psi(x,a)$ where it is an $L$-formula, a tuple from $A$. 
+\begin{align*}
+\phi(x) \in t_p(B/A) & \Leftrightarrow \cM \models \phi(b) \\
+& \Leftrightarrow \cM \models \psi(b,a) \\
+& \Leftrightarrow \cM \models \psi(f(b), f(a))\\
+& \Leftrightarrow \cM \models \psi(b',a)\\
+&\Leftrightarrow \cM \models \phi(b') \\
+&\Leftrightarrow \phi(x) \in t_p(b'/A) 
+\end{align*}
+
+$\Rightarrow t_p(b/A) = t_p(b'/A) $, by question 4(a) on the assignment we have that $A: A \cup[ \{b_1,\dots, b_m\} \to M$ by $a\to a$ and $b_i \to b_i'$ is a p.e.m.  $|A \cup \{b_1,\dots, b_m\}| < \kappa$. By strong $\kappa$-homogeneity, $g$ extends to an automorphism $f \in Aut_A(\cM)$ with $f(b) = b'$. \\
+
+(3) $\Rightarrow$ Suppose $X$ is a defined by $\phi(x,a)$ where $\phi$ is an $L$-formula, $a$ is a tuple from $A$. 
+\begin{align*}
+c \in X &\Leftrightarrow \cM \models \phi(c,a) \\
+& \Leftrightarrow \cM \models \phi(f(c), f(a))\\
+& \Leftrightarrow \cM\models \phi(f(c),a)\\
+& \Leftrightarrow f(x) \in X 
+\end{align*}
+ 
+ $\Leftarrow$ The converse direction is a bit harder. Suppose $X$ is defined by $\phi(x,b)$, where $\phi$ is an $L$-formula and $b \in M^m$. Let $x,y$ be distinct tuples. Consider $\Phi(x,y)$ saying "$x$ and $y$ have the same type over $A$ but $x \in X$ and $y \notin Y$".  
+\[ \Phi(x) := \{ \psi(x) \leftrightarrow \psi(y) : \mbox{ all } L_A-\mbox{ formulas } \psi\} \cup \{\phi(x,b), \neg \phi(y,b)\}  \]
+
+\begin{claim}[1]
+$\Phi(x)$ is {\bf not} a $2n$-type
+\end{claim}
+
+\begin{proof}
+As $\Phi(x,y)$ is over $<\kappa-$many parameters, if it were a type, then there would also be a realization $d,d' \in M^n$. Then, 
+\[ t_p(d/A) = t_p(d'/A) \]
+By part (2) of this theorem. there exists $f \in Aut_A(\cM), f(d) = d'$. However, $d \in X$ but $f(d) = d' \in X$ which is a contradiction because our automorphism of $X$ has taken $d$ outside of $X$. So $\Phi(x)$ is never realized. 
+\end{proof}
+
+Claim (1) implies that $\Phi(x,y)$ is {\bf not} finitely realized. There exists $\psi_1,\dots, \psi_l$ $L_A$-formulas 
+\[ \cM \models \forall x,y\left( \left(\bigwedge_{i=1}^l \psi_i(x) \leftrightarrow \psi_i(y) \right) \rightarrow (\phi(x,b) \leftrightarrow \phi(y,b)) \right)\]
+i.e. in $\cM$ if $x,y$ agree on $\psi_1,\dots, \psi_k$, then they agree on $\phi(x,b)$. Consider all possible truth values on $\psi_1,\dots, \psi_l$ for each $\tau::\{1,\dots, l\} \to \{0,1\}$. Let 
+\[ \tag{*}\theta_\tau(a) := \bigwedge_{i \mbox{ s.t } \tau(i) = 1} \psi_i(x) \wedge \bigwedge_{j \mbox{ s.t. } \tau(j) = 0} \neg \psi_j(x) \]
+The $\theta_\tau^\cM$ form a finite disjoint definable partition of $M^n$. $(*)$ says each $\theta_t^\cM \subseteq X$ or $\theta_t^\cM \subseteq M^n \setminus X$. So if you think of each of the $\theta_\tau$ as boxes which union together to make $M^n$, either a box is completely contained in $X$ or is completely disjoint of $X$. Therefore, $X$ is a finite union of the $\theta_\tau^\cM$. i.e. $X$ is defined by 
+\[ \bigvee_{i=1}^r \theta_{\tau-i}(x) \]
+and so $X$ is $A$-definable. 
+
+\end{proof}
+
+\begin{defn}
+$\cM$ an $L$-structure. $A \subseteq M$ and $b \in M$, then $b$ is {\bf definable over A} if $\{b\}$ is an $A$-definable set. i.e. There is an $L_A$ formula with $b$ as its unique realization. These elements are denoted by $b \in dcl(A)$ (call the {\bf definable closure})
+\end{defn}
+
+\begin{defn}
+We say $b$ is {\bf Algebraic over A} if $b$ is contained in a finite set that is $A$-definable. i.e. There ie an $L_A$ formula that has only finitely many realizations. We denote this by $b \in acl(A)$. 
+\end{defn}
+
+\begin{rem}
+We can extend this top tuples $b = (b_1,\dots, b_n) \in M^n$ by saying that $b$ is \emph{(definable/algebraic)} over $A$ to mean each $b_i$ is  definable/algebraic. Alternatively, $b \in M^n$ is definable over $A$ if $\{b\}$ is $A$-definable and similarly define for the algebraic elements. 
+\end{rem}
+
+\begin{prop}
+\label{prop42} $\cM$ is $\kappa$-saturated and strongly $\kappa$-homogeneous.  $A \subseteq M, |A| < \kappa, b \in M$. The following are equivalent
+\begin{enumerate}
+\item $b \in dcl(A)$
+\item Only $b$ realizes $t_p(b/A)$
+\item $f(b) = b$ for all $f \in Aut_A(\cM)$ 
+\end{enumerate}
+
+Second part of this theorem for $acl$. 
+\begin{enumerate}
+\item $b \in acl(A)$
+\item $t_p(b/A)$ has only finite many realizations
+\item $\{f(b): f \in Aut_A(\cM)\}$ is finite. 
+\end{enumerate}
+
+
+\end{prop}
+
+\begin{proof}
+$1\to 2$. Let $\phi(x)$ be an $L_A$ formula such that $\phi(x)^\cM = \{b\}$, then $\phi(x) \in t_p(b/A) \Rightarrow$ any realization $c$ of $t_a(b/A)$ realizes $\phi(x)$ and so $c = b$. \\
+
+$2 \to 3$. Certainly $f(b) \models t_p(b/A)$ since $f \in Aut_A(\cM) \Rightarrow f(b) = b$.\\
+
+$3 \to 1$. $\{b\}$ is definable, say $x =b$. (3) says it is preserved by any $f \in Aut_A(\cM)\Rightarrow $ $\{b\}$ is $A$-definable and so $b \in dcl(a)$.    
+\end{proof}
+
+\begin{proof}
+$1\to 2$, let $\phi(x)$ be an $L_A$ formulas such that $\phi^\cM$ is finite and contains $b$. Then 
+\[ \Rightarrow \phi \in t_p(b/A) \Rightarrow t_p(b/A)^\cM \subseteq \phi^\cM \]
+Therefore $t_p(b/A)^\cM$ is finite. 
+
+$2\to 3$. $f \in Aut_A(\cM)\Rightarrow t_p(f(b)/A) = t_p(b/A)$. This means that 
+\[ \{f(b): f \in Aut_A(\cN)\} \subseteq t_p(b/A)^\cM \]
+and hence is finite.\\
+
+$3 \to 1$. Let $X = \{f(b): f \in Aut_A(\cM)\} \subseteq M$. Since $X$ is finite, $X$ is definable. If $f \in Aut_A(\cM)$, $F(X) = X$ and so $X$ is $A$-definable. Thus, $X$ is finite and $b \in X$ implies that $b \in acl(A)$.  
+\end{proof}
+
+\begin{exercise}
+$\cM \preceq \cN$, $A \subseteq M, b \in M$. $b \in dcl_\cM(A) \Leftrightarrow b \in dcl(A)$. Also show, $b \in acl_\cM(A) \Leftrightarrow b \in acl_\cN(A)$. 
+\end{exercise}
+
+\newpage
+
+\section{$\omega$-stability}
+
+\subsection{Morley Rank}
+
+\begin{defn}
+Let $\cM$ be an $L$-structure, $\phi(x)$ an $L_M$ formula, $x$ a tuple. We define recursively $RM_\cM (\phi) \geq \alpha$  $\alpha$ an ordinal, as follows
+\begin{itemize}
+\item $RM_\cM(\phi) \geq 0 \Leftrightarrow$ has a realization in $\cM$. 
+\item $\alpha$ a limit ordinal, then $RM_\cM(\phi) \geq \alpha \Leftrightarrow RM_\cM(\phi) \geq \beta$ for all $\beta < \alpha$. 
+\item $RM_\cM(\phi) \geq \alpha + 1 \iff $ there exists $\cN \succeq \cM$ and $L_N$-formulae $\{\psi_i(x): i<\omega\}$ 
+\begin{enumerate}
+\item $RM_\cN(\psi_i) \geq \alpha$
+\item $\cN \models \forall x(\psi_i(x) \to \phi(x))$ for all $i < \omega$ i.e. $\psi_i^\cN \subseteq \phi^\cN$. 
+\item $\cN \models \neg \exists x(\psi_i(x) \wedge \psi_j(x))$ all $i\neq j$ i.e. $\psi_i^\cN \wedge \psi_j^\cN = \phi$. 
+\end{enumerate}
+\end{itemize}
+If $RM_\cM(\phi) \geq \alpha$ for all ordinals $\alpha$, then we say that $RM_\cM(\phi) = \infty$ or is undefined. On the other hand if $RM_\cM(\phi) \geq \alpha$ but $ RM_\cM(\phi)\ngeq \alpha + 1$ then we say that $RM_\cM(\phi) = \alpha$. If $RM_\cM(\phi) \ngeq \alpha$ for any $\alpha \iff RM_\cM \ngeq 0 \iff$ $\phi$ has no realizations in $\cM$. Then we say $RM_\cM(\phi) = -1$. 
+
+\end{defn}
+
+\begin{exercise}
+$RM_\cM(\phi) = 0 \iff \phi^\cM$ is finite non-empty. 
+\end{exercise}
+
+%Tuesday, Jan 29 2012
+\begin{rem}
+\begin{enumerate}
+\item $RM$ is automorphism invariant: $\phi(x,b)$ is an $L_M$-formula, where $\phi(x,y)$ is an $L$-formula, $b \in M^n$. Then, $RM_\cM(\phi(x,b)) = RM_\cM(\phi(x,f(b))$ for any $f \in \Aut(\cM)$.  Note, $\phi(x,f(b))^\cM = f(x), x = \phi(x,b)^\cM$. 
+\item If $\cM \preceq \cN$ then $RM_\cM(\phi) = RM_\cN(\phi)$, where $\phi$ is an $L_M$-formula. 
+\end{enumerate}
+\end{rem}
+
+\begin{proof}
+(2) The non-trivial part is the inductive step, $RM_\cM(\phi) \geq \alpha + 1 \Rightarrow RM_\cM(\phi) \geq \alpha + 1$. Suppose there exists another elementary exntesion $\cN' \succeq \cM$ but now we can amalgamate the extensions, i.e. we can find a structure $\cR$ such that $\cN \preceq \cR$ and $\cN' \preceq \cR$, $\cR$ exists because $\cN_M'\equiv \cN_M$. Suppose we have $L_{N'}$ formulas $\{\theta_i(x): i < \omega\}$ of $RM_{\cN'}\geq \alpha$ By the inductive hypothesis, $RM_\cR(\theta_i) \geq \alpha$ for each $i < \omega$. 
+\begin{align*}
+\phi &\models \forall x(\theta_i(x) \to \phi(x))\\
+\phi &\models \neg \exists (\theta_i (x) \wedge \theta_j(x))
+\end{align*}
+\end{proof}
+
+\begin{prop} \label{prop3}
+$\phi(x,y)$ is a $L$-formula, $x,y$ are tuples with $b,b' \in M^n$. If $\tp(b) = \tp(b')$, then $\RM(\phi(x,b)) = \RM(\phi(x,b'))$.  
+\end{prop}
+
+\begin{proof}
+It suffices to show by induction on $\alpha$, show $\RM(\phi(x,b)) \geq \alpha \Rightarrow \RM(\phi(x,b')) \geq \alpha$. \\
+
+\noindent {\bf $ \alpha = 0:$ } $\RM(\phi(x,b)) \geq 0 \Rightarrow \cM \models \exists x \phi(x,b) \Rightarrow \exists x(\phi(x,y)) \in \tp(b) = \tp(b') \Rightarrow \cM \models \exists x \phi(x,b') \Rightarrow \RM(\phi(x,b')) \geq 0$.  \\
+
+\noindent {\bf $\alpha$ is a limit ordinal: } This case is easy by the inductive hypothesis. \\
+
+\noindent {$\alpha$ is an ordinal: } $\RM(\phi(x,b) \geq \alpha + 1 \Rightarrow$ there exists $\cN \succeq \cM$, an $L_N$-formulate $\{\theta_i(x,d_i): i < \omega \}$.  
+\begin{align*}
+\cN &\models \forall x (\theta_i(x,d_i) \to \phi(x,b)) \iff \\
+\cN &\models \neg \exists x (\theta_i(x,d_i)\wedge \theta_j(x,d_j) \iff\\
+\RM)\theta_i &\geq \alpha 
+\end{align*}
+Replacing $\cN$ by a further elementary extension if necessary. We may assume that $\cN$ is $\omega$-saturated and $\omega$-strongly homogeneous. $\tp_{\cM}(b) = \tp_{\cM}(b')$ and $\tp_\cM(b) = \tp_\cN(b)$, $\tp_\cM(b') = \tp_\cN(b')$. This implies $\exists f \in \Aut(\cN)$ such that $f(b) = b'$ 
+\begin{align*}
+\cN & \models \forall x (\theta_i(x,f(d_i)) \to \phi(x,b')) \iff\\
+\cN & \models \forall x (\theta_i(x,f(d_i)) \wedge \theta_j(x,f(d_j)))
+\end{align*}
+By the inductive hypothesis, and $\tp(d_i) = \tp(f(d_i))$, we get $\RM(\phi(x,f(d_i)) \geq \alpha$. Therefore, $\{\theta_i(x,f(d_j))\}$ witness $\RM(\phi(x,b')) \geq \alpha$. 
+
+\end{proof}
+
+\begin{cor}
+$f \in \Aut(\cM)$, $\RM(\phi(x,b)) = \RM(\phi(x,f(b))$, $\phi(x,y)$ is any $L$-formula, $b$ a tuple from $M$. i.e. the Morley Rank is automorphism invariant. This is an immediate consequence of Proposition 3 as $\tp(b) = \tp(f(b))$. 
+\end{cor}
+
+\begin{cor}
+$\cM$ is $\omega$-saturated, $\phi(x)$ is an $L_M$ formula. $\RM(\phi)\geq \alpha + 1 \iff$ there exists $\{\phi_i(x) : i < \omega \}$ $L_M$-formulas such that 
+\begin{itemize}
+\item $\RM(\theta_i) \geq \alpha$ 
+\item $\cM \models \forall x(\theta_i(x) \to \phi(x)$
+\item $\cM \models \neg \exists x(\theta_i(x) \wedge \theta_j(x))$ for $i\neq j$ 
+\end{itemize}
+In other words, for a definable set $X \subseteq M^n$, $\RM(x) \geq \alpha + 1$ means that in $\cM$, $X$ contains infinitely many disjoint definable subsets of $\RM \geq \alpha$.  
+
+\end{cor}
+
+\begin{proof}
+$\Leftarrow $ is clear. \\
+
+\noindent $\Rightarrow \RM(\phi) \geq \alpha + 1$ so there exists $\cN \succeq \cM$ such that  this is witnessed by $\{\theta_i(x,d_i): i < \omega\}$ where $\theta_i(x,y)$ are $L$-formulas , $\theta_i$ tuples from $N$. We want to find this in $\cM$ itself. Let $A \subseteq M$ be a finite set, $\phi(x)$ is an $L_A$-formula. By $\omega$-saturation, we can find $\cM$ a realization of $\tp(d_0,d_1,\dots/A)$. i.e. There exists $(d_i: i<\omega)$ form $M$ such that for each $l < \omega$, 
+\[ \tp_\cN(d_o,\dots, d_l/A) = \tp_\cN(d_0',\dots, d_l'/A) \] 
+We construct the $d_i'$ recursively by 
+\begin{itemize}
+\item $d_0'$ is any realization of $\tp(d_0/A)$ in $\cM$ 
+\item  Having found $d_0',\dots, d_l'$ with 
+\[ \tp(d_0',\dots, d_l'/A) = \tp(d_0,\dots, d_l/A) \]
+So $f:A \cup \{d_0,\dots, d_l\} \to N$ with $f|_A = id$ and $f(d_i) = d_i'$. $f$ is a p.e.m. and so $\tp(d_{e+1}/Ad_0,\dots, d_l)^f = p$ is a type in $\cN$ over $Ad_0',\dots, d_l'$. By $\omega$-saturation, there is a realization $d_{e+1}'$ of $p$ in $\cM$. By the homework 4(b), $\tp(d_0',\dots, d_{l+1}'/A) = \tp(d_0,\dots, d_{l+1}/A)$. Now since $\tp(d_i/A) = \tp(d_i'/A)$, 
+\[ \tag{1} \cN \models \forall x(\theta_i(x,d_i) \to \phi(x)) \Rightarrow \cN \models \forall x(\theta_i(x,d_i') \to \phi(x)) \] 
+and since $\tp(d_id_j/A) = \tp(d_i'd_j'/A)$, then 
+\[ \tag{2} \cN \models \exists x(\theta_i(x,d_i) \wedge \theta_j(x,d_j)) \Rightarrow \cN \models \neg \exists x(\theta_i(x,d_i') \wedge \theta_j(x,d_j)) \]
+\end{itemize}
+Now, since $\tp(d_i/A) = \tp(d_i'/A)$ and by proposition \ref{prop3}, we have 
+\[ \tag{3} \RM_\cN(\theta_i(x,d_i)) \geq \alpha  \Rightarrow \RM_\cN(\theta_i(x,d_i')) \geq \alpha \] 
+Now since $\cM \preceq \cN$, formulas (1), (2) and (3) hold for $\cM$ (on the right hand side of the implication) and this is precisely what we want.  
+\end{proof}
+
+\begin{lem}
+Let $X,Y \subseteq M^n$ be definable sets. 
+\begin{enumerate}
+\item $X \subseteq Y \Rightarrow \RM(x) \leq \RM(Y)$. 
+\item $\RM(X \cup Y) = \max\{\RM(X), \RM(Y) \}$ 
+\item $\RM(X) = 0 \Leftrightarrow X$ is nonempty finite. 
+\end{enumerate}
+
+\end{lem}
+
+\begin{proof}
+By passing to an elementary extension if necessary, we may assume $\cM$ is $\omega$-saturated. For (a) show that $\RM(X) \geq \alpha \Rightarrow \RM(X) \geq \alpha$ (check). \\
+
+\noindent For (b), show that for all $\alpha$ have $\RM(X\cup Y) \geq \alpha \iff \RM(X) \geq \alpha$ or $\RM(Y) \geq \alpha$. The $\Leftarrow$ implication follows by (a). For $\Rightarrow$ proceed by induction on $\alpha$. \\
+
+\noindent $\alpha = 0$ case is clear. \\
+
+\noindent $\alpha$ a limit: $\RM(X\cup Y) \geq Y \Rightarrow \RM(X \cup Y) \geq \beta$ all $\beta < \alpha$. By the inductive hypothesis, for each $\beta < \alpha$, $\RM(X) \geq \beta$ or $\RM(Y) \geq \beta$. If $RM(X) < \a	lpha$ then for all $\RM(X) < \beta < \alpha \Rightarrow \RM(Y) \geq \beta \Rightarrow \RM(Y) \geq \alpha$.\\
+
+\noindent $\RM(X\cup Y) \geq \alpha + 1$: there are infinitely many disjoint $\{Z_i: i < \omega \}$ definable subsets of $X\cup Y$ with $RM(Z_i) \geq \alpha$. For each $i$, $Z_i = (Z_i\cap X) \cup (Z_i \cap Y)$ and by the inductive hypothesis, either $\RM(Z_i \cap X) \geq \alpha$ or $\RM(Z_i \cap Y) \geq \alpha$. Do either, for infinitely many $i$, $\RM(Z_i \cap X) \geq \alpha)$ which implies $RM(X) \geq \alpha + 1$ or we get infinitely $i$ such that $\RM(Z_i \cap Y) \geq \alpha$ which implies $\RM(Y) \geq \alpha + 1$.  \\
+
+\noindent For part (c), $\RM(X) \geq 1 \iff X$ has infinite many disjoint definable non empty subsets by $\omega$-saturation $\iff$ $X$ is infinite. 
+\end{proof}
+
+
+% thursday, jan 31
+
+\subsection{Morley Degree}
+$RM(X) = \alpha$ implies that $X$ does not contain infinitely many disjoint defiable subsets of rank $\alpha$ in any elementary extension. 
+
+
+\begin{lem}\label{lem6}
+$\cM$ is an $L$-structure, $X\subseteq M^n$ a definable subset, $RM(X) = \alpha$. Then, there is a $0 < d < \omega$ such that if $Y_1,\dots,Y_l \subseteq X$ disjoint, definable, $RM(Y_i) = \alpha$, then $l \leq d$. 
+\end{lem}
+
+\begin{proof}
+We build  a binary tree $S \subseteq 2^{<\omega}$ (set of sequences of 0s and 1s) together with a definable subset $X_\sigma \subseteq X$ for each $\sigma \in S$ recursively, $\emptyset \in S, X_\emptyset = X$. If $\sigma \in S$ we have two cases: 
+\begin{enumerate}
+\item There exists $Y \subseteq X_\sigma$ definable such that $RM(Y) = RM(X_\sigma\setminus Y) = \alpha$: In this case set $\sigma^0,\sigma^1 \in S$ and $X_{\sigma^0}:= Y, X_{\sigma^1} = X \setminus Y$. 
+\item No such $Y$, then $\sigma$ is a terminal node in $S$. 
+\end{enumerate}
+If $S$ is an infinite tree than $S$ has an infinite branch, say $f: \omega \to 2$, $f|_n \in S$ for all $n< \omega$. Let 
+\[Z_n := X_{f|_n} \setminus X_{f|_{n+1}}\] 
+We have $RM(Z_n) = \alpha$ and $\{Z_n: n<\omega\}$ are disjoint by construction, $\Rightarrow RM(X) \geq \alpha + 1$ which is a contradiction! Hence, $S$ is finite. \\
+
+Let $Z_1,\dots, Z_d$ be the terminal nodes of $S$. Then,
+\begin{enumerate}
+\item $X = Z_1 \cup \dots \cup Z_d$
+\item $\{Z_1,\dots, Z_d\}$ are pairwise disjoint
+\item $RM(Z_i) = \alpha$ 
+\item For each $i$, there is no definable $Y \subseteq Z_i$ with $RM(Y_i) = RM(Z_i \setminus Y) = \alpha$ 
+\end{enumerate}
+We show that this $d$ works (as the $d$ in the statement of the question). Suppose $Y_1,\dots, Y_l$ are disjoint definable subsets of $X$ or $RM(\alpha)$. By $(iv)$, for each $1,\dots, d$, there is at most one $j=1,\dots, l$ such that $RM(Z_i \cap Y_j) = \alpha$ implies if $RM(Z_i \cap Y_{j'}) = \alpha$ ($j'\neq i$) and $Y_{j'} \subseteq Z_i \setminus Y_j \implies RM(Z_i \cap Y_j) = RM(Z_i \setminus Y_j) = \alpha$. If $l > d$ there must exist some $j=1,\dots, l$ such that 
+\[ RM(Z_i \cap Y_j) < \alpha \mbox{ for each } i=1,\dots, d \]
+By (1), $Y_j = Z_1\cap Y_j \cup \dots \cup Z_d \cap Y_j \implies RM(Y_j) < \alpha$ a contradiction. Hence, $l \leq d$.  
+
+\end{proof}
+
+\begin{prop}\label{prop7}
+Let $\cM$ be an $L$-structure and $\phi(x)$ be an $L_M$-formula, $RM(\phi) = \alpha$. There exists a bound $\phi$ such that for any $\cN \succeq \cM$ and $Y_1,\dots, Y_l$ definable subset of $\phi^\cN$. 
+\end{prop}
+
+\begin{proof}
+Let $\cM'\succeq \cM$ be  $\omega$-saturated.Let $d$ be as given by Lemma \ref{lem6} applied to $\cM'$ and $X = \phi^{\cM'}$ and we show this $d$ works.  Suppose we have another extension $\cN \succeq \cM$, we can amalgamate these elementary extensions, i.e. we can find $\cR \succeq \cM,\cN$. Suppose $Y_1,\dots, Y_l = \psi_l(x,d_l)^\cN$,disjoint definable subsets of $\phi^\cN$, $d_1,\dots,d_l$ tuples form $N$. $\implies$ 
+\begin{enumerate}
+\item $RM(\psi_i(x,d_i)) = \alpha$
+\item $\cR \models \neg \exists x(\psi_i(x,d_i) \wedge \psi_j(x,d_j)), i\neq j$ 
+\item $\cR \models \forall x(\psi_i(x,d_i) \to \phi(x))$. 
+\end{enumerate}
+Let $A\subseteq M$ finite such that $\phi$ is an $L_A$-formula. Let $d_1',\dots, d_l'$ from $M'$ realize $\tp_\cR(d_1\dots d_l/A)$. 
+\begin{enumerate}
+\item $\tp(d_i) = \tp(d_i') \implies RM(\psi(x,d_i)) = RM(\psi(x,d_i'))$ By Proposition \ref{prop3}
+\item $\tp(d_id_j) = \tp(d_i'd_j') \implies \cM' \models \neg \exists x(\psi_i(x,d_i')\wedge \psi_j(x,d_j'))$
+\item $\tp(d_i/A) = \tp(d_i'/A) \implies \forall x(\psi(x,d_i') \to \phi(x))$. 
+\end{enumerate}
+(1),(2),(3) say that in $\cM'$, $\psi_i(x,d_i')^{\cM'}$ form a sequence of disjoint (2) , definable subsets of $\phi^{\cM'}$ (3) of rank $\alpha$ (1) $\implies l \leq d $ (Lemma \ref{lem6}) 
+\end{proof}
+
+\begin{defn} [Morley Degree of $\phi$]
+$\cM$ an $L$-structure, $\phi(x)$ an $L_M$-formula, if $RM(\phi) = \alpha$ ordinal, then the least d given by Proposition \ref{prop7}, the Morely Degree of $\phi$ is denoted by $dM_\cM(\phi)< \omega$. 
+\end{defn}
+
+
+\begin{rem}
+Given $\cM$ and $\cM'$  $\omega$ saturated; if $d$ is least for which lemma 6 holds for $\cM',\phi$ then $d = dM_\cM(\phi)$.  
+\end{rem}
+
+\begin{proof}
+$dM_\cM(\phi) \leq d$ since by the proof of Proposition \ref{prop7}. On the other hand , by minimal choice of $d$ for $\cM'$, there exist $d$-many disjoint definable subsets of $\phi^{\cM'}$ of rank $\alpha$ $\implies d \leq dM_\cM(\phi)$ by Proposition \ref{prop7}
+\end{proof}
+
+\begin{cor}
+\begin{enumerate}
+\item $\cM \preceq \cN \implies dM_\cM(\phi) = dM_\cN(\phi)$. 
+\item If $\cM$ is $\omega$-saturated, then $dM(\phi)$ is the maximal number of disjoint definable subsets of rank $= \alpha$. 
+\item If $\cM$ is $\omega$-saturated, $dM(\phi)$ is the greatest $d$ such that $\phi^\cM$ can be written as a disjoint union of $d$-many definable subsets of $RM = alpha$. 
+\item $dM(\phi(x,a)) = dM(\phi(x,b))$ if $\tp(a) = \tp(b)$ (assuming that $RM(\phi(x,a))$ is ordinal valued). 
+\end{enumerate}
+\end{cor}
+
+\begin{proof}
+\begin{enumerate}
+\item Let $\cN'\succeq \cN$ be $\omega$-saturated. The above remark tells us how to compute $dM_\cM(\phi), dM_\cN(\phi) implies$ give the same values. Hence, we often write $dM(\phi)$ instead of $dM_\cM(\phi)$. 
+\item In the remark, let $\cM' = \cM$. 
+\item Suppose $d = dM(\phi)$ and $\phi^\cM =X$ has $Y_1,\dots, Y_d$ as disjoint definable subsets of $RM(\alpha)$. Let 
+\[ Y_d' = Y_d \cup (X \setminus \bigcup_{i=1}^d Y_i \]
+\end{enumerate}
+$\implies RM(Y_d') = \alpha$ and $X = Y_1 \cup Y_2 \cup \dots \cup Y_d'$. 
+\item Let $\cM'\succeq \cM$ be $\omega$-saturated and strongly $\omega$-homogeneous. So $f \in \Aut(\cM') , f(a) = b$. Now the characterization of $dM$ given by $9(b)$ s visibly automorphism invariant so $dM_{\cM'}(\phi(x,b)) = dM_{\cN'}(\phi(x,a)) \implies  dM_\cM(\phi(x,b)) = dM_{\cN}(\phi(x,a))$ (by (1) of this theorem.) 
+\end{proof}
+
+\begin{defn}[Morley Rank for Types]
+$\cM$ is an $L$-structure, $p \in S_n(A)$ , $RM(p) = \inf\{RM(\phi): \phi \in p\}$, ordinal or $\infty$. If $RM(p)= \alpha$ is an ordinal, then we define 
+\[ dM(p) := \inf\{dM(\phi): \phi \in p \mbox{ with } RM(\phi) = \alpha\} \]
+(A positive integer)
+\end{defn}
+
+\begin{rem}
+\begin{enumerate}
+\item $RM,dM$ of complete types is preserved under elementary extensions. 
+\item $(RM,dM)(p) = \inf \{(RM,dM) (\phi): \phi \in p \}$ given the lexicographic ordering. 
+\end{enumerate}
+
+\end{rem}
+
+
+%% Missing Notes 
+
+% Tuesday, February 5th
+
+%% Missing Notes
+
+\begin{rem}
+If $\phi(x)$ is an $L_A$ formula, there is a complete type $p(x) \in S_n(A)$
+with $RM(p) = RM(\phi)$. Such a $p$ is characterized by the property $RM(p) \geq RM(q)$ all $q \in S_n(A)$., $\phi \in Q$. It is the highest RM-type in $S_n(A)$ containing $\phi$.  We say that $p$ is a {\bf generic type of $\phi$ over $A$}. If $\cM$ is $|A|^+$-saturated, then note that 
+\[ \phi \in q \in S_n(A) \iff q(x) = \tp(q/A) \]
+So 14(a) says: If $X \subseteq M^n$ is an $A$-definable then there exists $a \in X$ such that $RM(a/A) = RM(X)$. We call such a {\bf generic points in }X over $A$. 
+\end{rem}
+
+
+\begin{prop}
+Let $\cM$ be $\omega$-saturated, $\phi$ an $L_A$ formula of bounded (ordinal valued) RM. Then, $dM(\phi) = |\{ p \in S_n(M): \phi \in p, RM(p) = RM(\phi)\}|$. I.e. the morley degree of $\phi$ is the number of distinct generic types of $\phi$ over $M$. 
+\end{prop}
+
+\begin{proof}
+$X = \varphi^\cM$, $RM = \alpha, DM(X) = d$.  First show $"\leq"$: Write $X = Y_1\cup \dots \cup Y_d$. Each of the $Y_u$ is definable of $RM = \alpha$. Note that $Y_i$ need not be $A$-definable, just $M$-definable.  Apply 14(a) to each $"x \in Y_i$ to get $p_i(x) \in S_n(M)$ with $"x \in Y_i" \in p_i(x)$, $RM(p_i) = \alpha$. Note, $\phi(x) \in p_i$ all $i$, $p_i(x) \neq p_j(x), i\neq j$. This concludes this case. \\
+
+Next we show $\geq$: Toward a contradiction suppose $p_1,\dots, p_{d+1}$ are distinct in $S_n(M)$, each of $RM = \alpha$, each containing $\phi$. Let $\psi_i \in p_i(x)$ be such that $(RM, dM) (\psi_i) = (RM(p_i), dM(p_i))$. Note, $\psi_i \cap \phi$ is another witness. We may assume $\psi_i^\cM \subseteq \phi^\cM = X$, if $\psi_i = \psi_j \Rightarrow p_i = p_j$ so if $i\neq j, \psi_i \notin P_j \Rightarrow \neg \psi_i \in P_j \Rightarrow \theta_j := \psi_j \bigwedge_{i\neq j} \neg \psi_i \in p_j$. By min, $RM(\theta_j) = \alpha$, let $Y_j:= \theta_j^\cM \subseteq \psi_j^\cM \subseteq X$, disjoint, $RM = \alpha$ and so $dM(X) = d$ which is a contradiction.  
+\end{proof}
+
+\begin{defn}
+A theory $T$ is {\bf Totally Transcedental} (t.t) if in every model of $T$, every formula has vounded Morley Rank. $T$ is of finite morley rank if in every model, every formula has finite Morley rank. 
+\end{defn}
+
+\begin{rem}
+$T$ is a complete theory, can replace "every model" by "some model". 
+\end{rem}
+
+\begin{thm}
+Let $L$ be a countable language, then the following are equivalent
+\begin{enumerate}
+\item $T$ is t.t.
+\item For any $\cM \models T$, any countable $A \subseteq M$, then $|S_n(A)| \leq \aleph_0$ for all $n$. Such theories are called $\omega$-stable. An example is ACF. 
+\item For any infinite $\kappa$, cardinal, any $\cM \models T$, any $A \subseteq M$ of $|A| \leq \kappa$, then $|S_n(A)| \leq \kappa$. These are called $\kappa$-stable theories. 
+\end{enumerate}
+
+\end{thm}
+
+\begin{proof}
+$2\to 1$: Assume $T$ is not t.t.. Let $\cM \models T$, $\phi(x)$ an $L_M$ formula with $RM(\phi) = \infty$ we may assume $\cM$ is $\omega$-saturated. Note that there exists an ordinal $\alpha$ such that for any $L_M$-formula $\psi$, 
+\[ RM(\psi) \geq \gamma \iff RM(\psi)  = \infty \]
+Let $\gamma = \sup\{RM(\psi): \psi \mbox{ an } L_M \mbox{ formula with bounded MR}\} + 1$. (sup over a set of ordinals. This means that $\phi$ can be split into 2 disjoint pieces also of unbounded RM.  $RM(\psi) = \infty \Rightarrow RM(\phi) \geq \alpha+1$. This implies that there exists $\psi$ such that $RM(\phi \wedge \psi) \geq \gamma$ , $RM(\phi \wedge \neg \psi) \geq \gamma$ this implies $RM(\phi \wedge \psi) = \infty$ and $RM(\phi \wedge \neg \psi) = \infty$. \\
+
+We build a tree, $\sigma \in \sigma \in 2^{< \omega}$ with $\phi_{\sigma^1} = \phi_\gamma \wedge \psi'$ and $\phi_{\sigma^0} = \phi_\gamma \wedge \neg \psi'$ such that each of the pieces have infinite morley rank. This is countable infinte tree, let $A$ be a countable set of parameters such that all $\phi_\sigma$ are all $L_A$ formulas. LEt $f: \omega\ to 2$ be an infinite branch in this tree. \\
+
+\begin{claim}
+$\Phi_f:= \{\phi_{f|_m: M<\omega}\}$ is finitely realizable
+\end{claim}
+ 
+ \begin{proof}
+ "descending" so need only check that each $\phi_{f|m}$ is satisfiable. But $RM(\phi_{f|_m}) = \infty \geq 0$.  Thus, $T$ is not $\omega$-stable. 
+ \end{proof}
+ 
+Let $p_f \in S_n(A)$ containing $\Phi_f$, then $f\neq g \iff p_f \neq p_g$ but there are uncountably many branches, therefore $|S_n(A)| \geq 2^{\aleph_0}$.  \\
+
+
+$(1\to 3)$. $T$ is t.t., $\kappa$ is an infinite cardinal, and $\cM \models T$ and $A \leq M$ and $|A| \leq \kappa$. For each $p \in S_n(A)$ ,let $\phi_p$ witness $(RM,dM)(p)$. Lemma 13 says that $p\to \phi_p$ defines an injective formula from $S_n(A) \to L_A$ formulas. This implies, 
+\begin{align*}
+|S_n(A)| &\leq |\mbox{ set of }L_A \mbox{ formulas} | \\
+&\leq \kappa
+\end{align*}
+since $|L_A| \leq \kappa$ because $L$ is countable and $|A| \leq \kappa$. Therefore, $T$ is $\kappa$-stable. \\
+
+$3\to 2$. clear. 
+ 
+ 
+\end{proof}
+
+
+\begin{eg}
+ACF is t.t. since we proved it was $\omega$-stable. ACF is t.t.The following is useful in checking that a theory is t.t.
+\end{eg}
+
+\begin{prop}
+$T$ in a countable language is $\omega$-stable implies for all $\cM \models T$, $A\subseteq M$ definable $|S_1(A)| \leq \aleph_0$. 
+\end{prop}
+
+\begin{proof}
+Forward direction is clear/done. 
+
+$\Leftarrow$ Show $Sn(A)$ is countable for all $n\geq 1$ by induction on $n$ . $n=1$ is done by assumption. \\
+
+$n>1$. Suppose for contradiction that we have $\cM \models T, A\leq M$ countable with $|S_n(A)|$ uncountable. Let $\{p_\alpha: \alpha < \aleph_1\}$ be distinct types in $S_n(A)$. For each $\alpha$, let $a_\alpha = (a_{\alpha,1}, \dots, a_{\alpha,n}) \models p_\alpha$ (we may assume $\cM$ is $|A|^+$ saturated and strongly homogeneous). Let $a_\alpha':=(a_{\alpha,1}, \dots, a_{\alpha,n-1})$ 
+\[ \{ \tp(a_\alpha'/A): \alpha < \aleph_1 \} \subseteq S_{n-1}(A) \]
+by the inductive hypothesis this set is uncountable and so there exist uncountable many of them must be equal. Reindexing we may assume $\tp(a_\alpha'/A) = \tp(a_\beta'/A)$ for all $\alpha,\beta < \aleph_1$. For each $\alpha < \aleph_1$, let $f_\alpha \in \Aut_A(\cM)$ such that $f_\alpha(a_\alpha') = a_0'$. Consider 
+\[ \{\tp(f_\alpha(a_{\alpha,n)/A_{a_0'}}: \alpha < \aleph_1\} \subseteq S_1(A_{a_0'}) \]
+By the $S_1$ case, we have that this set is countable. This implies $\exists \alpha \neq \beta < \aleph_1$ such that 
+\[ \tp(f_\alpha(a_{\alpha,n}/Aa_0')  = \tp(f_\beta(a_{\beta,n}/Aa_0') \]
+Let $g \in \Aut_{A_{a_0'}}(\cM)$, $g(f_\alpha(a_\alpha,n)) = f_\beta(a_\beta, n)$.  $h \in \Aut_A(\cM)$ , $h(a_\alpha) = a_\beta)$ therefore, $\tp(a_\alpha/A) = \tp(a_\beta/A)$ but $p_\alpha \neq p_\beta$ which is a contradiction. 
+\end{proof}
+
+
+% Tuesday, February 12
+
+\begin{lem}
+Let $M,A \subseteq M$, $a \in M^n$, $b \in M$, then $b \in \acl(A_a) \implies \RM(ab/A) = \RM(a/A)$. 
+\end{lem}
+
+\begin{proof}
+Idea: $\phi(x,y)$ is an $L_A$ formula such that $\cM \models \phi(a,b)$ where $x$ is a tuple and $\phi(a,y)^\cM$ is finite, say of cardinality $l < \omega$. 
+\[\psi(x,y) = \phi(x,y) \wedge \exists y_1,\dots,y_l \left( \bigwedge_{i=1}^l \phi(x,y_i) \wedge \forall y( \phi(x,y) \to \bigvee_{i=1}^l y_i)\right) \] 
+(*) If $a' \in M^n, |\psi(a',y)^\cM| \leq l$ and $\cM \models \psi(a,b)$ so $\psi(x,y)$ witnesses $b \in \acl(A_a)$ and satisfies (*). We do this often without explanation. \\
+
+The $"\geq"$ case is easy and left as an exercise. In particular, if $\RM(a/A) = \infty$ then $\RM(ab/A) = \RM(a/A)$. We may assume that $RM(a/A) < \infty$. We prove by induction on $\RM(a/A)$ that $\RM(ab/A) \leq \RM(a/A)$. \\
+
+\underline{$\RM(a/A) = 0 $:} Since $b \in \acl(Aa)$, let $\phi(x,y)$ such that $\cM \models \phi(a,b)$, $\phi(a',y)^\cM$ is finite for all $\RM(a/A) = 0 \implies$ there is an $L_A$ formula $\psi(x)$ such that $\cM \models \psi(x), \psi(x)^\cM$ is finite. Consider $\phi(x,y) \wedge \psi(x)$, this defines a finite set in $M^{n+1}$ containing $(a,b) \implies ab \in \acl(A) \implies \RM(ab/A) = 0$. \\
+
+\underline{$\RM(a/A) > 0$:}
+
+\begin{claim}[1]
+There exists $\phi(x,y) \in \tp(ab/A)$ such that 
+\begin{enumerate}
+\item $(\RM,\dM)(\phi) = (\RM, \dM)(ab/A)$. 
+\item $\RM(\exists y \phi(x,y)) = \RM(a/A)$ 
+\item For every $\cN \succeq \cM$a and any $a' \in N^n$ $\phi(a',y)^\cN$ is finite. 
+\end{enumerate}
+
+\end{claim}
+The above claim is left as an exercise. We want $\RM(\phi) \leq \RM(a/A) =: \alpha > 0$ it is reasonable to expect that $\RM(x) = \RM(\pi x)$, where $\pi$ is the projection map. Suppose for contradiction $\RM(\phi) \geq \alpha +1$. 
+
+\begin{claim}[2]
+There exists an infinite subset $P \subseteq S_{n+1}(M)$ such that $\phi(x,y) \in p(x,y)$ for all $p \in P$ and $\RM(p) \geq \alpha$. 
+\end{claim}
+
+Claim 2 is also left as an exercise. For each $p \in P$, let $\hat{p}(x)$ be the restriction of $p$ to $x$, i.e. 
+\[ \hat{p}(x) := \{\theta(x): \theta(x) \in p(x,y)\} \in S_n(M) \] 
+Let $R:= \{\hat{p}: p \in P\} \subseteq S_n(M)$. 
+
+\begin{claim}[3]
+$R$ is infinite. 
+\end{claim}
+
+\begin{proof}[Proof of Claim 3]
+$\hat{p}\cup \{\phi(x,y)\}$, by claim (1).3, let $\cN \succeq \cM$ be $|M|^+$ saturated. If $a' \models \hat{p}$  and  $b_1,\dots, b_l \in N$ with $\hat{p}(x) \cup \{\phi(x,y)\} \subseteq \tp(a'b_i/M) \implies b_1,\dots,b_l \in \phi(a',y)^\cM \implies l \leq |\phi(a',y)^\cN|$. Therefore, $\hat{p}(x) \cup \{\phi(x,y)\}$ has only less than $l$-many completions to $S_{n+1}(M)$. 
+\end{proof}
+
+Let $(a',b') \models p(x,y) \in P\subseteq S_{n+1}(M) \in \cN \succeq \cM$, where $|M|^+$- saturated.  $\RM(a'/A) \leq \alpha$ By Claim (1).2 $(\exists y \phi(x,y) \in \tp(a'/A)$ and $b' \in \acl(Aa')$ by claim (1).3.\\
+
+Suppose $\RM(a'/M) < \alpha$, then 
+\[ \alpha \leq \RM(a'b'/M) \leq \RM(a'/M) \leq \alpha \] 
+Which implies $\RM(a'/M) = \alpha$. Therefore, $\RM(a'/M) = \alpha$. Therefore, we have shown that $\RM(r) = \alpha$ for all $r \in R$. We have $\exists y \phi(x,y)$ is of $\RM(\alpha)$ and has infinitely many completions of $\RM(\alpha)$. $\phi(x,y) \in p$ all $p \in P$. $\exists y \phi(x,y) \in R$ all $r \in R \subset S_n(M)$ which is a contradiction and so $\RM(\phi) \leq \alpha$. Thus, $\RM(ab/A) \leq \alpha$ and so $\RM(ab/A) \leq \alpha = \RM(\epsilon/A)$. 
+\end{proof}
+
+\subsection{Strongly Minimal Theories}
+By exercise 5 on homework 2, we have that $T$ is strongly minimal implies $T$ is Totally Transcedental. Recall that if $T$ is a complete theory, $T$ is strongly minimal if and only if in every model $\cM \models T$, every definable subset of $M$ is finite or cofinite. This is equivalent if in any model $(RM,cM)(x=x) = (1,1)$. 
+
+\begin{defn}[Strongly Minimal Structures]
+ $\cM$ is an $L$-structure, we say that $\cM$ is strongly minimal if $\Th(\cM)$ is equivalent in $\cM$ $(RM,dM)(x=x) = (1,1)$. 
+\end{defn}
+
+\begin{defn}[Matroid]
+A matroid is a set $X$ together with a function $\mbox{cl}:\cP(X) \to \cP(X)$, a "closure operator" satisfying 
+\begin{enumerate}
+\item $A \subseteq \mbox{cl}(A)$ and $\cl(\cl(A)) = \cl(A)$ 
+\item $A\subseteq B \implies \cl(A) \subseteq \cl(B)$ 
+\item If $a \in \cl(B)$ then there is $B_d \subseteq B$ finite such that $a \in \cl(B_d)$. 
+\item (Steinitz Exchange) If $a \in \cl(A \cup \{b\}) \setminus \cl(A) \implies b \in \cl(A \cup \{a\})$ (If $b \in \cl(A) \implies \cl(A \cup \{b\}) \subseteq \mbox{dcl}(A) = \cl(A) \implies a \in \cl(A)$)
+\end{enumerate}
+\end{defn}
+
+\begin{eg}
+\begin{enumerate}
+\item Let $X$ be an $F$-Vector Space and $\cl(A) = \mbox{span}_F(A)$. 
+\item $X = F$ an algebraically closed field, $\cl(A) = \bF(A)^{alg}$, the algebraic closure of the field generated by $A$. 
+\item In any $L$-structure $\cM$, $\acl: \cP(M) \to \cP(M)$ satisfies (1)-(3). 
+\end{enumerate}
+
+\end{eg}
+
+\begin{defn}[Geometric Theories]
+$T$ is {\bf Geometric} if $(M,\acl)$ is a matroid for all $\cM \models T$. 
+\end{defn}
+
+\begin{defn}
+$(X,\cl)$ is a matroid. $A \subseteq X$.  $B \subseteq X$ is {\bf cl-independent} over $A$ if for all $b \in B$, $b \notin \cl(B \setminus \{b\} \cup A)$. 
+\end{defn}
+
+\begin{defn} [Cl-Basis]
+$Y \subseteq X$,  a cl-basis for $Y$ over $A$ is a maximally cl-independent over $A$ of $Y$. 
+\end{defn}
+
+\begin{rem}
+Given a matroid $(X,\cl)$ $A \subseteq X$, $Y \subseteq X$, If $Z \subseteq Y$  then the following are equivalent 
+\begin{enumerate}
+\item $Z$ is a cl-basis for $Y$ over $A$ 
+\item $Z$ is cl-independent over $A$ and $\cl(Z \cup A) \supseteq Y$. 
+\item $Z$ is minimal with the property that $\cl(Z \cup A) = Y$ for every $Y \subseteq X$.  
+\end{enumerate}
+has a cl-basis over $A$. If $Z,Z'$ are Cl-bases, over $A$, then $|Z| = |Z'|$. So we can define for any $A\subseteq X, Y \subseteq X$ the dimension $dim-cl(Y/A) = $ the cardinality of any cl-basis for $Y$ over $A$.  
+\end{rem}
+
+%% Lecture Thursday, February 14
+\begin{prop}
+If $\cM $ is strongly minimal, then $(M,\acl)$ is a matroid
+\end{prop}
+
+\begin{proof}
+(1) - (3) of the matroid axioms hold of acl in any structure. We check the Steinitz exchange. $a \in \acl(A), A\subseteq M$, $a,b \in M$. We want $b \in \acl(A_a)$. Let $\phi(x,y)$ be an $L_A$ formula such that $\cM \models \phi(a,b)$ and $|\phi(x,b)^\cM| \leq l < \omega$ might hope that $\phi(a,y)$ witnesses $b \in \acl(A_a)$ but $\phi(a,y)$ may \emph{not} have finitely many realizations. However, \emph{we can choose} $\phi(x,y)$ such that $|\phi(x,b')^\cM| \leq l$ for any $b' \in M$. Discussed last time. 
+
+\begin{claim}
+$\phi(a,y)^\cM$ is finite
+\end{claim}
+
+\begin{proof}
+If not, its complement is finite, say of cardinality $k$. Consider 
+\[ \psi(x) := \exists y_1,\dots,y_k \forall \left(\neg \phi(x,y) \to \bigvee_{i=1}^k (y= y_i) \right) \]
+So if $\cM \models \psi(a')$ then $\abs{ M \setminus \phi(a',y)} \leq k$. $\psi(x)$ is an $L_A$-formula, $\cM \models \psi(a) \implies \psi(x)^\cM$ is infinite as $a \notin \acl(A)$. Let $a_1,\dots, a_{l+1}$ be distinct elements in $\psi(x)^\cM \implies \abs{M \setminus \phi(a_i,y)^\cM} \leq k \implies \phi(a,y)^\cM,\dots,\phi(a_{l+1},y)^\cM$ all cofinite $\implies \bigcap_{i=1}^{l+1} \phi(a_i,y)^\cM neq \emptyset$. Let $b'$ be in this intersection. This implies for each $i=1,\dots, l+1$, $\cM \models \phi(a,b')$ which contradicts $|\phi(x,b')^\cM| \leq l$. 
+\end{proof}
+ Hence, $\phi(a,y)$ witnesses $b \in \acl(A_a)$.  
+\end{proof}
+
+
+\begin{rem}
+If $\cM$ is strongly minimal, so $(M,\acl)$ is a matroid and $\cM$ is totally transcedental. We get two dimension theories. How do they compare? $A \subseteq M$, $a \in M^n$ where $a$ is a tuple. 
+\[ \mbox{acl - dim}(a/A) := \mbox{ac - dim}(\{a_1,\dots, a_n\}/A) = \mbox{ cardinality of a maximal acl-independent/ A subset of }\{a_1,\dots,a_n\} \]
+
+\[\RM(a/A) := \RM(\tp(a/A)) = \inf \{\RM(X) : X \mbox{ is A-definable } a\in X\} \]
+\end{rem}
+
+
+\begin{thm}
+$\mbox{acl-dim}(a/A) = \RM(a/A)$ 
+\end{thm}
+
+\begin{lem}
+$\cM$ is strongly minimal, $a,b \in M^n$. Suppose $\acldim(a/A) = \acldim(b/A) = n$. (i.e. $\{a_1,\dots,a_n\}$ is acl-independent over $A$, and same with $b$ ). Then, $\tp(a/A) = \tp(b/A)$. 
+\end{lem}
+
+\begin{proof}
+By induction on $n$. 
+
+\underline{$n=1$:} $\acldim(a/A) = 1 \iff a \notin \acl(A)$. Let $\phi(x)$ be an $L_A$-formula, $\phi(x)^\cM $ is finite $\implies \cM \setminus \phi(x)^\cM$ is finite and $L_A$-definable $\implies \cM \models \phi(a) \implies \phi \in \tp(a/A)$. $\phi \in \tp(a/A) \iff \phi(x)^\cM$ is infinite $\iff \phi \in \tp(b/A)$. \\
+
+\underline{$n>1:$} Let $a,b$ be $n$-tuples, we may assume $\cM$ is $|A|^+$-saturated and strongly homogeneous. $a,b$ are acl-independent over $A$. By the inductive hypothesis, $\tp(a_1,\dots,a_{n-1}/A) = \tp(b_1,\dots,b_{n-1}/A)$. Let $f \in \Aut_A(\cM)$, $f(a_1,\dots, a_{n-1}) = (b_1,\dots,b_{b-1})$, $a \notin \acl(Aa,\dots, a_{n-1})$, apply $f$
+\begin{align*}
+f(a_n) \notin \acl(Ab_1,\dots, b_{n-1})\\
+b_n \notin \acl(Ab_1,\dots, b_{n+1}
+\end{align*}
+By the $n=1$ case, this implies $\tp(f(a_n)/Ab_1,\dots,b_{n-1}) = \tp(b_n/Ab_1,\dots, b_{n-1})$. Let $g \in \Aut_{Ab_1,\dots, b_{n-1}}(\cM), g(f(a_n)) = b_n$. So, 
+\begin{align*}
+g \circ f (a) &= g(b_1,\dots,b_{n-1},f(a_n))\\
+&= (b_1,\dots, b_{n-1},gf(a_n) \\
+&= b
+\end{align*}
+$g \circ f \in \Aut(\cM) \to \tp(a/A) = \tp(b/A)$. 
+\end{proof}
+
+
+\begin{prop}
+$\cM$ is strongly minimal, $A\subseteq M, a\in M^n$. 
+\[ \acldim(a/A) = n \iff \RM(a/A) = n \] 
+
+\end{prop}
+
+\begin{proof}
+Induction on $n = 1$. 
+
+\underline{n=1:} $a \in M$, $\acldim(a/A) = 1 \iff a \notin \acl(A) \iff $ every $A$-definable set containing $a$ is infinite if and only if "   " has $\RM \geq 1 \iff \RM(a/A) \geq 1 \iff \RM(a/A) = 1$ since $\RM(x=x) = 1$. \\
+
+\underline{$n>1$} $a \in M^n$. 
+
+\begin{claim}[1]
+ $\RM(a/A) \geq n \to \acldim(a/A) = n$
+\end{claim}
+
+\begin{proof}
+After a permutation, let $\{a_1,\dots,a_l\}$ be an acl-basis for $\{a_1,\dots,a_n\}$ over $A$. Assume $l<n$ and seek a contradiction. So $a_j \in \acl(A_a,a_l)$ for all $j \geq l$. 
+\[ n \leq \RM(a/A) = \RM(a_1,\dots a_l/A) = l < n \]
+which is a contradiction. So $l=n$. So $\acldim(a/A) = n$ , this ends 
+\end{proof}
+ 
+ 
+\begin{claim}[3]
+$\acldim(a/A) = n \implies \RM(a/A) \geq n$
+\end{claim}
+
+\begin{proof}
+We may assume $\cM$ is $|A|^+$-saturated. LEt $\phi(x) \in \tp(a/A)$. We want $\RM(\Phi) \geq n$. Let $b_1,b_2,\dots,$ be distinct elements not in $\acl(A)$. let $\psi_i(x) := \psi(x) \wedge x_i = b_i)$. These are the fibres, clearly disjoint. 
+
+
+Subclaim: $\RM(\psi_i) \geq n-1$. 
+\begin{proof}
+Fix $i$, choose $c_2,\dots, c_n$ as follows: $c_2 \in \acl(Ab_i), c_3 \in \acl(Ab_i, c_2),\dots, c_n \notin \acl(Ab_ic_2,\dots, c_{n-1})$. \\
+
+Ex: $\{b_{ij}c_2,\dots,c_{n-1}\}$ is acl-independent over A. 
+
+Ex: In a matroid if $\{e_1,\dots, e_n\}$ is such that $e_i \notin \cl(e_1,\dots,e_{i-1},A)$ all $i$ then $\{e_1,\dots,e_n\}$ is cl-independent over $A$ by the Steiniza exhange. 
+\begin{align*}
+\implies \tp(b_ic_2\dots c_n/A) = \tp(a/A) \\
+\implies \cM \models (b_{ij}c_2\dots c_n) \\
+\implies \cM \models \psi_i(b_ic_2\dots c_n) \\
+\implies \psi_i \in \tp(b_i c_2 \dots c_n /Ab_i) 
+\end{align*}
+and so 
+\[ \RM(b_i c_2 \dots c_n /Ab_i) = \RM(c_2\dots c_n /Ab_i) \geq n-1 \] 
+Since $\{c_2,\dots, c_n\}$ is acl-independent over $Ab_i$ + induction hypothesis \\
+
+Ex: In a matroid if $\{e_1,\dots, e_n\}$ is cl-independent over A, then $\{e_l,\dots, e_n\}$ is cl-independent over $A \cup \{e_1,\dots, e_{l-1}\}$. Therefore, $\RM(\phi) \geq n$, $\phi$ was arbitrary in $\tp(a/A) implies \RM(a/A) \geq n-1$. 
+\end{proof} 
+\end{proof}
+We have $\acldim(a/A) = n \iff \RM(a/A) \geq n$ for $a \in M^n$. 
+
+
+\begin{claim}[3]
+$\RM(M^n)\leq n$ 
+\end{claim}
+
+\begin{proof}
+
+If not let $X,Y$ be disjoint definable subsets of $M^n$ such that $\RM(X) \geq n$ and $\RM(Y) \geq n$. Let $\beta$ be a (finite) set over which $X,Y$ are defined. Let $p,q \in S_n(B)$ with $"x\in X"\in p$ with $\RM(p) = \RM(X) \geq n$ and $"x \in Y" \in q$m $\RM(q) = \RM(Y) \geq n$. By (14a) let $c\neq p$, $d\neq q$. 
+
+\begin{align*}
+\RM(c/B) \geq n \implies \acldim(c/B) = n \\
+\RM(d/B) \geq n \implies \acldim (d/B) = n
+\end{align*}
+by 29, $\tp(c/B) = \tp(d/B)$ which is a contradiction and so $X\cap Y = \emptyset$. 
+
+\end{proof}
+
+Now, $\RM(a/A) = n \implies \acldim(a/A) = n$ by claim 1. Conversely, $\acldim(a/A) = n \implies \RM(a/A) \geq n \implies \RM(a/A) = n$( by claim 2 and claim 3) since $a \in M^n$. 
+\end{proof}
+
+
+% Tuesday, February 26
+
+\begin{thm}
+If $\cM$ is strongly minimal, then $\acldim(a/a) = \RM(a/A)$
+\end{thm}
+
+\begin{proof}
+Let $l = \acldim(a/A)$ and let $\{a_{i_1},\dots,a_{i_l}\}$ be an acl-basis for $\{a_1,\dots,a_n\}$ over $A$. So for all $1\leq i \leq n$, $q_i \in \acl(Aa_1,\dots,a_{i_l}\}$. By Lemma 1.6, 
+\begin{align*}
+\RM(a/A) &= \RM(a_{i_1},\dots a_{i_k} /A) \\
+&= l &\text{By Prop 30}
+\end{align*}
+as $\{a_{i_1},\dots,a_{i_l}\}$ is acl-independent over $A$. 
+
+\end{proof}
+
+
+\begin{rem}
+Hence, every strongly minimal theory of finite Morley Rank. In fact (for a sufficiently saturated model), if $X \subseteq M^n$ is an $A$-definable set 
+\[ \RM(X) = \max\{\acldim(a/A): a \in X\} \]
+This allows us to compute easily what the Morley Rank is in many examples.  
+\end{rem}
+
+\begin{eg}
+\begin{enumerate}
+\item $T = $theory of infinite sets. $\RM(a/A) = \acldim(a/A) = |\{a_1,\dots,a_n\}\setminus A|$. 
+\item $T = $ theory of infinite vector spaces over $F$. Then, $\RM(a/A) = \acldim(a/A) = \dim_F(span(Aa)) = \dim_F(span(A))$. 
+\item $T = $ ACF then $\RM(a/a) = \acldim(a/A) = tr.deg(\bF(Aa)^{alg}/\bF(A))$. 
+\end{enumerate}
+
+\end{eg}
+
+\newpage
+
+\section{Non-Forking Totally Transcedental Theories}
+In strongly minimal theories, acl gave rise to a notion of "independence". Is there such a notion in t.t. theories? In a matroid , dimension comes from independence. In a totally transcedental theory, we will develop an independence notion from the Morley Rank. 
+
+In the strongly minimal case: $D \subseteq M, A \subseteq M$. $D$ is acl-independent over $A$ if and only if for all $d \in D$, $d \notin \acl(A \cup D \setminus \{d\}) \iff$ " " " $d \notin \acl(A)$ and 
+\[\tag{*} \acldim(d/A) = \acldim(d/A\cup D\setminus\{d\})\] 
+Since $\acldim = \RM$ in strongly minimal, we can use (*) to motivate a notion of independence in T.T theories by replacing acl-dim by $\RM$. We fix a complete T.T. theory $T$ and a sufficiently saturated model $\cU \models T$.  That is, $\cU$ is $\kappa$-saturated and strongly $\kappa$-homogeneous for $\kappa$ so big that every parameter set we ever consider is of cardinality less than $\kappa$. We think of $\cU$ as a universe, we work inside $\cU$. 
+
+\begin{defn}[Independence]
+Suppose $a$ is an $n$-tuple, $A \subseteq B$ sets of parameters. We say $a$ is independent of $B$ over $A$ if 
+\[ \RM(a/A) = \RM(a/B) \]
+This is denoted by $a \downarrow_A B$. 
+\end{defn}
+
+\begin{defn}[Non-Forking Extension]
+In terms of types, given $p \in S_n(A), q\in S_n(B), B \supseteq A$, $p\subseteq q$, we say $q$ is a {\bf Non-Forking Extension} of $p$ if $\RM(q) = \RM(p)$. Note $a \downarrow_A B \iff \tp(a/A)$ if a non-forking extension of $\tp(a/A)$.
+\end{defn}
+
+
+\begin{rem}
+ We think of a non-forking extension as a "free" extension. $q$ does not say too much more than $p$ - not enough more to drop $\RM$. 
+\end{rem}
+
+
+\begin{defn} [Forking]
+If $q \supseteq p$ is not a non-forking extension and say that it is a forking extension of $p \iff \RM(q) < \RM(p)$. 
+\end{defn}
+
+\begin{rem}
+If $A\nsubseteq B$ then by $a \downarrow_A B$ we mean $a \downarrow_A A \cup B$. 
+\end{rem}
+
+\begin{lem}
+Some properties of independence 
+\begin{itemize}
+\item \underline{Automorphism Invariance}: $a\downarrow_A B \iff \sigma(a) \downarrow_{\sigma(A)} \sigma(B)$ for any $\sigma \in \Aut(\cU)$. 
+\item \underline{Transitivity} $a$ a non-forking extension of $p$ and $p$ a non-forking extension of $r$ then $q$ a nf extension of $r$. 
+\item \underline{Monotonicity}  $q$ a nf extension of $r$, $r \leq p \leq q$ then $p$ an nf extension of $r$ and $q$ is an nf of $p$.
+\item \underline{Together} $A \subseteq B \subseteq C$ and $a \downarrow_A C \iff a \downarrow_A B$ and $a\downarrow_B C$ 
+\item \underline{Finite Character} $a \not \downarrow_A B \iff $ there is a finite subset $B_0 \subseteq B$ such that $a \not \downarrow_A B_0$.
+\item \underline{Superstability} a $n$-tuple, parameters $B$, there is a finite $A \subseteq B$ such that $a \downarrow_A B$.  
+\end{itemize}
+
+\end{lem}
+
+\begin{proof} [Proof of Finite Character]
+$\Leftarrow$ is done. 
+
+$\Rightarrow$: $\RM(a/B \cup A) < \RM(a/A)$. Let $\phi(x) \in \tp(a/B \cup A)$, $\RM(\phi) = \RM(a/A\cup B)$, $\phi$ models only finitely many parameters. So there exists $B_0\subseteq B$ finite such that $\phi(x)$ is an $L_{A\cup B}$-formula $\phi(x) \in \tp(a/A\cup B)$. 
+\[ \RM(a/A\cup B_0) \leq \RM(\phi) = \RM(a/A\cup B) < \RM(a/A) \]
+Therefore $a \not \downarrow_A B_0$. 
+\end{proof}
+
+\begin{proof}[Proof of Superstability]
+$\tp(a/B)$, let $\phi \in \tp(a/B)$ such that $\RM(\phi) = \RM(a/B)$, let $\subseteq B$ be a finite set such that $\phi$ is an $L_A$ formula $\implies \phi \in \tp(a/A) \implies \RM(a/A) \leq \RM(\phi) = \RM(a/B) \implies a \downarrow_A B$ but $\RM(a/A) \geq \RM(a/B)$ as $B \supseteq A$. 
+\end{proof}
+
+\begin{prop}
+$a \downarrow_A \acl(A)$. 
+\end{prop}
+\begin{proof}
+Let $\alpha = \RM(a/\acl(A)) = \RM(\phi(x,b))$ where $\phi(x,b) \in \tp(a/\acl(A))$. So $b$ is a tuple from $\acl(A)$. By saturation, the orbit of $a$ under $\Aut_A(\cU)$ is finite, say $\{b_1,\dots,b_r\}$. Consider, 
+\[ \bigvee_{i=1}^r \phi(x,b_i) \]
+it defines a set $X \subseteq M^n$. $X$ is preserved by all $A$-automorphisms $\implies X$ is $A$-definable (by 7.39(c)).  Also $a \in X$. 
+\begin{align*}
+\RM(a/A) &\leq \RM(X) \\
+&= \max_{1\leq i \leq r} \{\RM(\phi(x,b_i))\} \\
+&= \RM(\phi(x,b)) & \text{By Auto-Invariance}\\
+&= \alpha \\
+&= \RM(a/\acl(A))
+\end{align*}
+Therefore, $a \downarrow_A \acl(A)$. 
+
+\end{proof}
+
+
+\begin{lem}[Existence of Nonforking Extensions]
+$p \in S_n(A), A\subseteq B$, there exists a nonforking extension of $p$ to $B$. That is, there exists $q \geq p, q \in S_n(B)$, $q$ nonforking extension of $p$. In fact there are at most $\dM(p)$ many such. Moreover, if $B$ is the universe of an $\omega$-saturated model of $T$ then there are precisely $\dM(p)$-many.  
+\end{lem}
+
+
+%Thursday, Feb 28 missing
+
+
+
+%Tuesday, March 5
+
+\begin{lem}(T Arb.)
+$\cM$ is a model and $\delta(x,y)$ is a stable $L_M$-formula, $a \in U^n_U$, $x = (x_1,\dots,x_n)$, $y=(y_1,\dots,y_l)$, $\{b \in M^l: \models \delta(a,b) \} \subseteq M^l$ is definable in $\cM$. In fact, this set is defined by a formula of the form 
+\[ \bigvee_{i=1}^k \bigwedge_{j=1}^r \delta(a_i,y) \]
+where $a_{i_j} \in M^n$. 
+\end{lem}
+
+\begin{proof}
+Technical, low level. 
+\end{proof}
+
+\begin{lem}(T totally transcedental)
+All types over models are definable. 
+\end{lem}
+
+\begin{proof}
+$M \preceq \cN$ a small model. $p(x) \in S_n(M)$ and let $\delta(X,y)$ be an $L$-formula. We need to show that 
+\[ \tag{*} M^l \supseteq \{b \in M^l: \delta(x,b) \in p(x) \} \]
+is definable in $\cM$. We have $(*) = \{b \in M^l : \models \delta(a,b)\}$, $a\models p(x)$ and $\delta(x,y)$ stable by proposition 10 $\implies$ by lemma 11 (my lemma 4.9) that this set is definable.  
+\end{proof}
+
+
+\begin{prop}
+$\theta(x)$ is an $L_A$-formula,  $\phi(x)$ an $L$-formula, $x,y$ tuples, then 
+\begin{enumerate}
+\item $\{b \in U^l: \RM(\theta(x) \wedge \phi(x,b)) = \RM(\theta)\}$ is definable. 
+\item $\{b \in U^l: (\RM,\dM)(\theta(x) \wedge  \phi(x,b)) = (\RM,\dM)(\theta)\}$ is $A$-definable. 
+\end{enumerate}
+
+\end{prop}
+
+\begin{proof}
+(a) $\alpha = \RM(\theta)$ and $d = \dM(\theta)$. Let $\phi \leftrightarrow \bigvee_{i=1}^d \theta_i$ where $(\RM(,dM)(\theta_i) = (\alpha,1)$. Also let $\theta_i^\cM \cap \theta_j^\cM = \phi$ where $i\neq j$. \\
+
+Note that $\RM(\phi(x) \wedge \phi(x,b)) = \alpha \iff $ for some $i$, we have $\RM(\theta_i(x) \wedge \phi(x,b)) = \theta(x)\wedge\phi(x,b) \leftrightarrow \bigvee_{i=1}^d \theta_i \wedge \phi(x,b)$. \\
+
+We may assume that $\dM(\phi) = 1$ and we may assume that $A$ is finite and let $M \supseteq A$ be a (small) $\aleph_0$-saturated model. Let $p(x) \in S_n(M)$ be such that $\phi(x) \in p(x)$, we have $\RM(p) = \alpha$ by (8.14a). Note $\dM(p) = 1$ also, so $\phi$ witnesses $(\RM,\dM)(p) = (\alpha,1)$. By 8.13 we have for all $a \in M^l$, 
+\[ \phi(x,a) \in p(x) \iff \RM(\theta(x) \wedge \theta(x,a)) = \alpha \]
+(**)So for all $a \in M^l$ we have $\RM(\theta(x) \wedge \phi(x,a)) = \alpha \iff \models d_p \phi(a)$ (a $\phi$-defin of $p$ using theorem 14, $d_p \phi(y)$ is an $L_M$-formula). \\
+
+Let $A \subseteq B \subseteq M$ be finite such that $d_p\phi(y)$ is an $L_B$ formula. Let $b \in U^l$. 
+\begin{align*}
+\models d_p \phi(x) &\iff d_p \phi(y) \in \tp(b/B) \in S_l(B) \\
+& \iff d+p \phi(y) \in \tp(a/B) \\
+&\iff \models d_p \phi(a)
+\end{align*}
+ Let $a \in M^l, a\models t_p(b/M)\implies \tp(b/M) = \tp(a/B)$. Let $\sigma \in \Aut_B, \sigma(a) = b$. So by (**) we have
+ \begin{align*}
+ &\iff \RM(\theta(x) \wedge \phi(x,a)) = \alpha \\
+ & \iff \RM(\theta(x) \wedge \phi(x,b)) = \alpha  &\text{Aut Invariance}
+ \end{align*}
+So $X = \{b \in U^l:\RM(\theta \wedge \phi(x,b)) = \alpha\}$ is derived by $d_p \phi(y)$ but $X$ is $\Aut_A$-invariant implies $X$ is $A$-definable. This ends part a. \\
+
+(b) $\dM(\theta) = d$ and $\theta \leftrightarrow \bigvee_{i=1}^d \theta_i (x)$ disjoint definable decomposition of $\theta^U$ with $(\RM,\dM) = (\alpha,1)$ subsets. 
+\[ \theta(x) \wedge \phi(x,b) \leftrightarrow \bigvee_{i=1}^d \theta_i(x) \wedge \phi(x,b) \]
+If $\RM(\theta(x) \wedge \phi(x,b)) = \alpha$. Thus, $\dM(\theta(x) \wedge \phi(x,b)) = | \{ i| \RM(\theta_i \wedge \phi(x,b)) = \alpha\}$. So 
+\[ (\RM,\dM)(\theta(x) \wedge \phi(x,b)) = (\alpha,d) \iff \RM(\theta_i(x) \wedge \phi(x,b)) = \alpha \]
+all $i =1,\dots,d$. By part (a), the set of $b \in M$ satisfying the right hand side is $A$-definable. 
+\end{proof}
+
+\begin{cor}
+All types over models are definable over a finite set. 
+\end{cor}
+
+\begin{proof}
+$p(x) \in S_n(M)$, given $\phi(x,y)$, we have an $L_M$-formula $d_p\phi(y)$. We want to prove there is a finite set $A$ independent of $\phi$ such that $d_p \phi(y)$ can be chosen to be an $L_A$-formula. Let $\theta(x) \in p(x)$ witness $(\RM,\dM)(p) = (\alpha,d)$, $\theta(x)$ is an $L_A$ formula for some finite $A \subseteq M$. \\
+
+given any $L$-formula $\phi(x,y)$, $b \in M^l$ 
+\[ \phi(x,y) \in p \iff \RM(\theta(x) \wedge \phi(x,b)) = \alpha \]
+Then,
+\begin{align*}
+Y:= \{b \in M^l : \phi(x,b) \in p(x) \}\\
+&= \{b \in M^l: \RM(\theta(x) \wedge \phi(x,b)) = \alpha \}
+\end{align*}
+$\{b \in U^l: \RM(\phi(x,n) \wedge \theta(x))=\alpha$ is $L_A$-definable by proposition 15 say the $L_A$ formula $\psi(y)$. 
+\begin{align*}
+X &= \psi(Y)^U \\
+\psi(y)^\cM = X \cap M^l \\
+&= Y
+\end{align*}
+So $\psi(y)$ is a $\theta$-defn of $p$ it is over $A$. That is, $p$ is $A$ definable. 
+
+\end{proof}
+
+\begin{cor}
+Every type over a model had $\dM = 1$ (Note that if $M$ is $\omega$-saturated this is by Lemma 7). 
+\end{cor}
+
+\begin{proof}
+$\theta \in p(x) \in S_n(M)$, $(\RM,\dM) (\theta) = (\alpha, d) = (\RM,\dM)(p)$. $\theta$ is an $L_M$-formula. Given $\phi(x,y)$ let $\psi(y)$ be an $L_M$ formula given by by 15a applied to $\theta$. Similarly, define $\psi_2(b)$ for 15(b). For $b \in M^l$ 
+\begin{align*}
+\models \psi_1(b) \iff \RM(\theta(x) \wedge \phi(x,b)) = \alpha \iff \phi(x,b) \in p(x) \\
+& \iff (\RM,\dM)(\phi(x) \wedge \theta(x,b)) = (\theta, d)\\
+&\iff \models \psi_2(b)
+\end{align*}
+Thus, $\psi_1(x)^\cM = \psi_2(x)^\cM$. $\cM \preceq \cU$, $\models \forall x(\psi_1(x) \leftrightarrow \psi_2(x))$. If $d>1$, then there exists a definable subset of $\theta(x)^\cU$ of rank $\alpha$ and with complement of rank $\alpha$ say $\phi(x,b)^\cU \leq \theta(x)^\cU$. \\
+\begin{align*}
+\RM(\theta(x) \wedge \phi(x,b)) = \alpha \implies \models \psi_1(b) \\
+\RM(\theta(x) \wedge \neg \phi(x,b)) = \alpha \implies\\
+d = \dM(\theta) > \dM(\theta(x) \wedge \phi(x,b)
+\end{align*}
+imples not models $\psi_2(b)$ and therefore $d=1$. 
+
+
+\end{proof}
+
+\begin{cor} [Stationarity over Models]
+$p \in S_n(<)$, $B \supseteq M$, $p$ has a unique non-forking extension to $B$. 
+
+\end{cor}
+
+
+\begin{proof}
+Lemma 7 + Cor.17
+\end{proof}
+
+\begin{defn}
+$p \in S_n(A) $ is stationary if for any $B \supseteq A$ there is a unique non-forking extension to $B$. We denote this non-forking extension by $p(x) \uparrow_B$. 
+\end{defn}
+
+%Thursday, March 7th
+
+\begin{thm}
+$p(x)\uparrow_B = \{\phi(x,b): \phi(x,y) \mbox{ L-formula b from B such that }\models d_p \phi(b)\}$. 
+\end{thm}
+
+\begin{proof}
+Let $q:= RHS$. Note $q$ is well defined even though $d_p \phi(u)$ is not. Suppose $\theta_1(y), \theta_2(y)$ are $\phi$-defns of $p \in S_n(M)$. For all $b \in M^l$ 
+\[ \models \theta_1(b) \iff \phi(x,b) \in p(c) \iff \models \theta_2(b) \] 
+$\implies \cM \models \forall y(\theta_1 (y) \leftrightarrow \theta_2(y))$, with $\cM \preceq \cU \implies \models \forall y(\theta_1(y) \leftrightarrow \theta_2(y))$. Therefore, $d_p\phi(y)$ is well-defined up to equivalence. This implies $q$ is well defined. \\
+
+\begin{claim}[1]
+$q(x)$ is a type
+\end{claim}
+
+\begin{proof}[proof of claim 1]
+If it not, then we get $\phi(x,b_1),\dots,\phi_m(x,b_m) \in q(x)$ such that 
+\[ \models \neg x\left( \bigwedge_{i=1}^m \phi_i(x,b_i) \wedge \bigwedge_{i=1}^m d_p\phi_i(b_i)\right) \]
+Let 
+\[ \psi(y_1,\dots,y_n) : = \neg \exists x \left( \bigwedge_{i=1}^m \phi_i(x,y_i) \wedge \bigwedge_{i=1}^m d_p ]phi_i(y_i) \right) \]
+is an $L_M$-formula realized by $(b_1,\dots,b_n)$ in $\cU \succeq \cM$.  This implies there are $b_1',\dots,b_n'$ from $M$ such that 
+\[ \models \neg \exists x \left( \bigwedge_{i=1}^m \phi_i(x,b_i') \wedge \bigwedge_{i=1}^m d_p \phi_i(b_i)\right) \] 
+So $\phi_i(x,b_i') \in p(x) \in S_n(M) \implies \bigwedge_{i=1}^m \phi_i(x,b_i') \in p(x)$ and $p(X)$ is a type so this is satisfiable (contradiction!). Therefore, $q(z)$ is finitely satisfiable and hence a type. 
+\end{proof}
+
+\begin{claim}[2]
+$\neg d_p\phi(y)^\cU = d_p(\neg \phi)^\cU (y)$
+\end{claim}
+
+\begin{proof}
+For all $b$ from $M$, 
+\begin{align*}
+\models d_p \phi(b) &\iff \phi(x,b) \notin p(x) \\
+& \iff \neg \phi(x,b) \in p(x) \\
+& \iff d_p (\neg \phi) b 
+\end{align*}
+Therefore, $(\neg d_o \phi)^\cM = d_o (\neg \phi)^\cM \implies (\neg d_p \phi)^\cU = d_p(\neg \phi)^\cU$ as $\cM \preceq \cU$. 
+\end{proof}
+
+\begin{claim}[3]
+$q(x) \in S_n(B)$ 
+\end{claim}
+
+\begin{proof}
+$\phi(x,y)$ an L-formula, $b$ from $B$ 
+\begin{align*}
+\phi(x,b) \notin q(x) & \implies \nvDash d_p \phi(b) \\
+& \implies \models d_p (\neg \phi) (b) & \text{ Claim 2} \\
+& \implies \neg \phi(x,b) \in q(x) 
+\end{align*}
+\end{proof}
+It remains to show that $q(x)$ is a non-forking extension of $p(X)$. Note $\phi(x,b) \in q(X) \iff \models d_p \phi(b)\iff \phi(x,b) \in p(x)$ where $b$ from $M$. Thus, $q(x)	\upharpoonright_M = p(x)$ and so $q$ extends $p$.\\
+
+We need $RM(q) = RM(p)$ so suppose $RM(q) < RM(p) = \alpha$. Let $\theta(x)$ witness $(\RM,\dM)(p)$. Let $\psi(x) \in q(x)$, $\RM(\psi) < \alpha$. We write $\psi(x) = \phi(x,b)$ where $\phi$ is an $L$-formula and $b$ is from $B$.
+\[ \RM(\theta(x) \wedge \phi(x,b)) < \alpha \]
+apply proposition 15(a) to get an $L_M$ formula $\eta(y)$ such that 
+\[ \eta(y)^\cU = \{b': \RM(\theta(x) \wedge \phi(x,b')) = \alpha\} \models \neg \eta(b) \wedge d_p \phi(b)  \]
+since $\cM \preceq \cU$ there is a $b'$ from $M$ such that 
+\[ \models \neg \eta(b') \wedge d_p \phi(b') \]
+But $\RM(p) = \alpha$ and $\theta(x) \wedge \phi(x,b') \in p(X)$ (Contradiction!) Therefore $q = p \upharpoonright_B$.    
+\end{proof}
+
+
+\begin{cor}
+$M \subseteq N$, $r(x) \in S_n(N)$. $r(x)$ does not fork over $M$ (i.e. $r(X)$ is a non-forking extension of $r(x)\upharpoonright_M$) if and only if $r(X)$ is $M$-definable.  Moreover in this casefor any $L$-formula $\phi(x,y)$ $r(X)$ and $r(x)\upharpoonright_M$ have the same $\phi$-definitions. 
+\end{cor} 
+
+\begin{proof}
+$\Rightarrow $ $r(x)$ is defined $M$. \\
+
+$\Leftarrow$ $r(X)$ is the non-forking extension of $r(x)\upharpoonright_M$ i.e. if $r(X)\upharpoonright_M =: p(x) \in S_n(M)$ and $r(x) = p(x) \upharpoonright_B$.\
+\
+
+Give $\phi(x,y)$ and $b$ from $N$, $\models d_p \phi(b) \iff \phi(x,b) \in r(x)$. Therefore, $d_p \phi(y)$ is a $\phi$-definition for $r(X)$. Since it is over $M$, we get $r(X)$ is $M$-definable, this also proves the "moreover clause". \\
+
+$\Leftarrow$  $r(x)$ is $M$-definable, so for every $\phi(X,y)$ there is an $L_M$ formula, $\theta(y)$ such that 
+\[ \models \theta(b) \iff \phi(x,b) \in r(x) \] 
+all $b$ from $N$. A fortiori: for all $b$ from $M$ $\models \theta(b) \iff \phi(x,b) \in r(X) \upharpoonright|_M = p(x) \in S_n(M)$. So $\theta(y) = d_p \phi(y)$. 
+\begin{align*}
+p(x) \upharpoonright|_N  &= \{\phi(x,b): \phi(x,y),b \text{ from } N, \models d_p \phi(b) \} \\
+&= \{\phi(x,b): \phi(x,y), \text{b from N}, \models \theta(b) \} \\
+&= r(x)
+\end{align*}
+Therefore, $r(x)$  is a non-forking extension $r(x) \upharpoonright_M$.  
+\end{proof} 
+
+\begin{lem}
+$p(x) \in S_n(M), q(y) \in S_l(M)$. $\phi(x,y)$ an $L$-formula. Let $\phi^*(y,x) = \phi(x,y)$ (same formula but different presentation of free variables) 
+\[ d_p \phi(y) \in q \iff d_q \phi^*(x) \in p \]
+\end{lem}
+
+\begin{proof}
+$M\subseteq N$ and $\aleph_0$-saturated. By theorem 20, we have $d_p \phi(y)$ is a $\phi$-definition of $p\upharpoonright_N$ and $d_q \phi^*(x)$ is a $\phi^*$-definition of $q\upharpoonright_N$. Also $d_p \phi(y) \in q \iff d_p \phi(y) \in q \upharpoonright N$ and $d_Q \phi^*(x) \in p \iff d_q \phi^*(x) \in p\upharpoonright_N$. So it suffices to prove the lemma for $p\upharpoonright_N, q\upharpoonright_N$. We may assume $M = N$, i.e. that $M$ is $\aleph_0$-saturated. Suppose $d_p \phi(y) \in q(y)$ and $d_Q \phi^*(x) \in p(x)$ and seek a contradiction. We will find $(a_i),(b_i)$ in $M$ witnessing instability of $\phi(x,y)$. Let $A \subseteq M$ finite such that $d_p \phi^*(x)$ are $L_A$ formulas. Let $a_1 \in M^n$ realise $p(x) \upharpoonright_A \in S_n(A)$.   $b_1 \in M^n$ realize $q(y) \upharpoonright_{Aa_1} \in S_l(Aa_1)$ so on so that $a_{r+1} \models p(x) \upharpoonright_{Ab1\dots b_r}$ and $b_r \models \upharpoonright_{Aa_i \dots a_r}$. 
+
+\begin{claim} 
+$\phi(a_i,b_j) \iff i<j$ 
+\end{claim}
+
+\begin{proof}
+$\Rightarrow$ Toward a contradiction suppose $\models \phi(a_i,b_j)$ for some $i\leq j$. $b_j \models q(a) \upharpoonright_{Aa_1\dots a_j}$ and so 
+\begin{align*}
+&\Rightarrow \phi(a_i,y) \in q(y)\upharpoonright_{Aa_1 \dots a_j)} \subseteq q(y) \\
+&\Rightarrow \phi^*(y,a_i) \in q(y) \\
+&\Rightarrow \models d_q \phi^*(a_i) \\
+&\Rightarrow d_q \phi^*(x) \in \tp(a_i/A) \subseteq p(x)
+\end{align*}
+(Contradiction!). \\
+
+$\Leftarrow$ Similarly if $\models \neg \phi(a_i,b_j)$ where $i>j$ implies $\neg \phi(x,b_j) \in \tp(a_i/Ab_1\dots b_{i-1}) = p(x) \upharpoonright_{Ab_1\dots b_{i-1}} \implies \nvDash d_p \phi(b_j) \implies d_p \phi \notin \tp(b_j /A) = q(y) \upharpoonright_A \subseteq q(y)$ (Contradiction!). Therefore, $\phi(x,y)$ is unstable. \\
+
+Hence, $d_p \phi \in q \iff d_q \phi^* \in p$.  
+\end{proof}
+\end{proof}
+
+
+%Tuesday March 12
+
+\begin{prop}[Symmetry]
+$a \da_A b \iff b \da_A a$ 
+\end{prop}
+
+Recall that if $a = (a_1,\dots, a_n)$, $b = (b_1,\dots,b_l)$ then $a \da_A b$ means that $a \da_A \{b_1,\dots,b_l\}$ means $\tp(a/Ab_1\dots b_l)$ does not fork over $A$ means $\RM(a/Ab_1\dots b_l\}) = \RM(a/A)$. 
+
+\begin{proof}
+First consider the case when $A = M$ is a model. $p(x) = \tp(a/M) \in S_n(M)$ and $q(y) = \tp(b/M) \in S_l(M)$. 
+\begin{align*}
+a \da_M b &\iff \tp(a/Mb) \mbox{ is a nonforking extension of }\tp(a/M) = p(x)  \\
+& \iff  a \models p(x) \uhl_{Mb} &\text{By Stationarity}\\
+& \iff \models \psi(a,c) \forall \mbox{ L-formulas $\psi(x,z)$ with $c$ from $Mb_1\dots b_l$ such that $\models d_p \psi(c)$ }
+\end{align*}
+Ranging over $L$-formula $\psi(x,z)$ and considering $\psi(x,c)$ for $c$ from $Mb$ is equivalent to ranging over $L_M$-formulas $\phi(x,y)$ and considering $\phi(x,b)$. By applying the result of chapter 9 o $L_M, \cU_\cM, \Th(\cU_\cM)$ in place of $L, \cU, T$. Exercise: $\Th(U_\cM)$ is still totally transcedental and $\cU_\cM$ is still sufficient. This yields the equivalence 
+\begin{align*}
+&\iff \models \phi(A,b) \mbox{for all $L_M$-formulas $\phi(x,y)$ where $\models d_p \phi(b)$} \\
+& \iff \models \phi(a,b) \mbox{for all $L_M$-formulas $\phi(x,y)$ such that $d_p \phi(y) \in \tp(b/M) = q(y)$} 
+\end{align*}
+Similarly, 
+\begin{align*}
+ b \da_M a &\iff \models b \models q(y) \uhl_{Ma} \\
+ & \iff \models \phi(a,b) \mbox{for all $L_M$-formulas $\phi(x,y)$ such that $\models d_q \phi(a)$} \\
+ & \iff \models \phi(a,b) " ... " \mbox{ such that $d_q \phi(x) \in \tp(a/M) = p(x)$} 
+\end{align*}
+Therefore, by Lemma 21, $a \da_M  b \iff b \da_M a$. \\
+
+Now consider the general case when $A$ is not necessarily a model. Choose a model $M\supseteq A$. We want $a \da_A b \implies b \da_A a$. Let $b' \models \tp(b/A)$ with $b' \da_A M$ by existence of non-forking extensions. Let $f \in \Aut_A(\cM)$ with $f(b) = b'$. Let $a' \models \tp(f(a)/Ab')$ with $a' \models \tp(f(a)/Ab')$ with $a' \da_{Ab'} Mb'$ (2) . Let $g \in \Aut_{Ab'}(\cU)$ with $g(f(a)) = a'$ and $g\circ f \in \Aut_A(\cU)$. 
+
+\begin{align*}
+a \da_A b &\implies g(f(a)) \da_A g(f(b)) \implies a' \da_A b'\\
+& \implies a' \da_A Ab' \mbox{plus (2)}\\
+& \implies a' \da_A Mb' \implies a' \da_M b' \implies b' \da_M a'
+\end{align*}
+By (1) and transitivity we get $\implies b' \da_A Ma' \implies b' \da_A a'$ and note $b' = g(b') = g(f(b))$ and $a' = g(f(a))$ and so $gf(b) \da_A gf(a)$. Thus, $(gf)^{-1} \in \Aut_A (\cU) \implies b \da_A a$.  
+\end{proof}
+
+\begin{rem}[Summary of Properties of $\da$ in totally transcedental theories]
+The results we proved in the non-forking section
+\begin{enumerate}
+\item \underline{Non-triviality}: $a,A \subseteq B$, $a \in \acl(B) \setminus \acl(A) \implies a \not \downarrow_A B$. 
+\item \underline{Finite Character}: $a \da_A B \iff a \da_A B$ for all $B_0 \subseteq B$ is finite. 
+\item \underline{Finite Character:} Given $a,B$ there exists $A \subseteq B$ finite such that $a \da_A B$. 
+\item \underline{Monotonicity / transitivity:} $A \subseteq B \subseteq C$ then $(a \da_B c $ and $a \da_A B )$ if and only if $a \da_A C$. 
+\item \underline{Symmetry:} $a \da_A b \iff b \da_A$. 
+\item \underline{Existence:} Given a $A\subseteq B$ there exists $a' \models \tp(a/A)$ with $a' \da_A B$. 
+\item \underline{Stationarity over Models:} $M$ model $B \supseteq M$ and $a \da_M B, b \da_M B$ and $\tp(a/M) = \tp(b/M)$. Then, $\tp(a/B) = \tp(b/B)$ \item \underline{Finite Multiplicity}: $a \da_A \acl(A)$ and $\tp(a/A)$ has only finitely many extensions to $\acl(A)$. (multiplicity of $\tp(a/A) \leq \dM(a/A)$).   
+
+ Proof: There are only finitely many nonforking extensions of $\tp(a/A)$ to $S_n(\acl(A))$ - done before $\leq \dM(a/A)$ - many. But all extensions to $\acl(A)$ does not fork over $A$ since $b \da_A \acl(A)$. 
+\end{enumerate}
+\end{rem}
+\newpage
+
+\section{Groups in Totally Transcedental Theories}
+
+\begin{defn} [Definable Group]
+$M$ an $L$-structure, a definable group is a definable set $G \subseteq M^n$ and  a definable function $\cdot: G\times G \to G$ such that $(G,\cdot)$ is a group. 
+\end{defn}
+
+\begin{rem}
+The main motivation for these groups are algebraic groups: an algebraic variety together with a regular morphism (polynomial maps) $V\times V \to V$ such that $(V,\cdot)$ is a group. 
+\end{rem}
+
+\begin{eg}
+\begin{enumerate}
+\item $(K^n, +)$ is an algebraic group
+\item $GL_n(K)$ with matrix multiplication is an algebraic group. Identity it with $K^{n^2}$  and is a zariski open set since determinant is a polynomial in the entries.  We can also view $GL_n(K)$ as pairs $(M, \frac{1}{\det M} \subseteq K^{n^2 + 1})$ by $\{(A,v): \det(A)v = 1\}$ and this is zariski closed in $K^{n^2 + 1}$.
+\item Elliptic Curves
+\item Abelian Varities 
+\end{enumerate}
+
+\end{eg}
+
+\begin{thm} [Weil-vdDris - Hrushovski] The definable groups in ACF are precisely the algebraic groups. 
+
+\end{thm}
+
+% Thursday, March 14
+
+\subsection*{A Brief Discussion on Totally Transcedental Theories}
+Groups arise naturally as Automorphism Groups, $\Aut(\cU)$ under composition. These are not definable in $\cU$. Even the subgroup of $\Aut(\cU)$ of definable automorphism is not in general a definable group in $\cU$. However, here is a context is which definable groups arise: Fix two definable sets $X \subseteq U^n$ and $Y \subseteq U^l$ defined over $A$. Define 
+\[ \Aut(X/Y) := \mbox{set of bijections} \]
+$F:x \to x$ such that $F = \sigma|_x$ for some $\sigma \in \Aut_A(\cU)$ with $\sigma|_Y = \mbox{id}$. Clearly, $\Aut(X/Y)$ is a group under composition. Suppose $X \subseteq Y^r$ $(\subseteq U^{rl}, n= rl)$ $\Aut(X/Y) = \{id\}$. Suppose there is an $A$-definable, injective map 
+\[ R: X\to Y^t \]
+implies $\Aut(X/Y) = \{\mbox{id}\}$. 
+
+\begin{proof}
+$F \in \Aut(X/Y), a\in X$. 
+\begin{align*}
+f(F(a)) &= f(\sigma(a)) = \sigma(f(A)) = f(a)  \implies \\
+F(a) &= a \implies &\mbox{injectivity}\\
+F &= \mbox{id}
+\end{align*}
+
+Now suppose there is a definable injective function 
+\[ f:X \to Y^r \]
+but not $A$-definable. 
+\end{proof}
+
+\begin{defn}[Y-internal]
+We say that $X$ is $Y$-internal if there exists $B \supseteq A$ and a $B$-definable injection $f:X\to Y^r$. Suppose this is the case. $F = \sigma|_X \in \Aut(X/Y)$ where $\Gamma(f)$ is def by $\phi(x,y,b)$ $b$ from $B$ then $\Gamma(f^\sigma)$ is definable. \\
+
+The point: $\phi(x,y,\sigma(b))$ is still the graph of some injective function $X\to Y^r$. In particular, we do not expect $\Aut(X/Y)$ to be trivial, it measures the different way of embedding $X$ into $Y^r$. 
+\end{defn}
+
+\begin{thm} (T t.t) 
+$X$ $Y$-internal. Then, $\Aut(X/Y)$ and its action on $X$ is definable in $\cU$. More precisely, there exists a definable group $(G,\cdot)$ in $\cU$ with an isomorphism $\alpha: G \to \Aut(X/Y)$ as abstract groups and a definable function $\mu:G\times X \to X$ such that $\mu(g,x) = \alpha(g) (x)$ for all $g \in G, x \in X$. 
+\end{thm}
+
+\begin{rem}
+The key tool is definability of types. $\Aut(X/Y)$ when $X$ is $Y$-internal  is called the Binding Group of Definable Galois Group $X$ over $Y$. 
+\end{rem}
+
+\begin{rem}
+Now let us fix a $\phi$-definable $(G,\cdot)$ ins a sufficiently saturated model $\cU$ of a totally transcedental theory (After naming parameters there is no restriction). 
+\end{rem}
+
+\begin{defn}
+By a definable set in $(G,\cdot)$ we mean a subset $X\subseteq G^r$ (some $r<\omega)$ which is definable in $\cU$. If $G \subseteq U^n$ then $X\subseteq U^{nr}$ (induced structure)
+\end{defn}
+
+\begin{prop}[DCC on definable subgroup of $G$]
+There does not exist an infinite properly descending chain of subgroups. $G \geq H_1 \geq H_2 \geq H_3$ with each $H_i$ definable. 
+\end{prop}
+
+\begin{proof}
+Follows from the Following:
+\begin{claim}
+If $H\leq G$ is a proper definable subgroup of $G$ then $(\RM,\dM)H < (\RM,\dM)G$. 
+\end{claim}
+
+\begin{proof}[Proof of Claim]
+For each $g \in G$, 
+\begin{align*}
+\lambda_g: &G\to G \\
+x &\to g\cdot x
+\end{align*}
+$\lambda_g$ is a bijection that is definable, implies $gH$ is definably isomorphic to $H$. (Exercise: $\RM$ is preserved by definable bijections). $\RM(H) = \RM(gH)$ any $g \in G$. This implies if $[G:H]$ is infinite, then 
+\[ \RM(G) > \RM(H) \] 
+as $\{gH: g \in G\}$ is infinitely many splitting of $G$ into disjoint definable sets of $\RM = \RM(H)$. \\
+
+If $[C:H]$ is finite then $G = \bigcup_{i=1}^l g_iH$ where $g_i \in G$. So $\RM(g_i H)  = \RM(H) = \RM(G)$ and $\dM(G) = \sum_{i=1}^l \dM(g_iH)$ which implies $\dM(G) < \dM(G)$. 
+\end{proof}
+
+\end{proof}
+
+
+\begin{cor}
+\begin{enumerate}
+\item Every injective definable group endomorphism $f:G\to G$ is surjective. 
+\item $\{H_i: i \in I\}$ set of definable subgroups of $G$ then $\bigcap_{i\in I} H_i$ is a definable subgroup. In fact, $\bigcap_{i\in I} = \bigcap_{j\in J} H_j$ for some $J \subseteq I$ finite.
+\item $A\subseteq G$ arbitrary, $C(A) = \{g \in G:ga=ag \forall a\in A\}$ is a definable group.  
+\end{enumerate}
+
+\end{cor}
+
+\begin{proof}
+$G \supseteq f(G) \supseteq f^2(G) \supseteq \dots$ and DCC implies $f^r(G) = f^{r+1}(G)$ apply $f^{-1}$ to both sides to get $G = f(G)$.  
+\end{proof}
+
+
+\begin{proof} [3]
+For an $a\in A$, $C(A)$ is a definable subgroup. 
+\[ C(A) = \bigcap_{a\in A} C(A) \]
+done by (2). 
+\end{proof}
+
+
+\begin{defn}
+We can now define a connected component, 
+\[ G^0 = \bigcap \{H:H \mbox{ Definable subgroup of $G$ of finite index}\}\] 
+By corollary 4(b), $G^0$ is a definable subgroup of $G$ and is of finite index in $G$. $G^0$ is the least definable subgroup of finite index. $G^0$ is called the connected component of $G$. We say $G$ is connected if $G = G^0$. 
+\end{defn}
+
+\begin{rem}
+$G$ is connected if and only if it has no proper definable subgroups of finite index. 
+\end{rem}
+
+
+\begin{prop}
+$G^0$ is $\emptyset$-definable and is a normal subgroup of $G$. 
+\end{prop}
+
+\begin{proof}
+Let $\sigma \in \Aut(\cU)$ and 
+\[ \cH = \{H: H \mbox{definable subgroup of finite index}\} \]
+Since $\sigma(G) = G$ and this impliex $H \in \cH \iff \sigma(H) \in \cH \implies$
+\[ \sigma \left( \bigcap \cH \right) = \bigcap \cH = G^0 \]
+So $G^0$ is $\Aut(\cU)$-invariant therefore $G^0$ is definable. \\
+
+For normality, fix $h \in G$ and consider 
+\begin{align*}
+[h] : G \to G \\
+x \to hxh^{-1} 
+\end{align*}
+This is a definable automorphism of $(G_j)$. So $[h]$ preserves definability and index of subgroups and in particular it preseres $h$, 
+\[ [h](H) \in \cH \iff H \in \cH \]
+and so $[h] \left( \bigcap \cH \right) = \bigcap \cH = G^0$ for all $h \in G$ and so $G^0$ is normal in $G$. 
+\end{proof}
+
+
+% Tuesday March 19
+
+\begin{rem} [Loose Ends about Internality]
+$X,Y$ are $A$-definable sets. $X$ is $Y$-internal: There is $f:X\to Y^r$ a definable embedding, definable over $B\supseteq A$. $F \in \Aut(X/Y)$ and $F = \sigma|_X$  where $\sigma \in \Aut_A(\cU)$. So we have $F = (f^\sigma)^{-1} \circ f$ So each element of $\Aut(X/Y)$ is a definable bijection. We stated the theorem that in fact $\Aut(X/Y)$ is a definable group in $\cU$ and its action on $X$ is definable. It is actually "interpretable". 
+\end{rem}
+
+\begin{defn}[Generics]
+By a generic in $G$ over $A$ we mean an element $a \in G$ such that $\RM(a/A) = \RM(G)$. By 8.14 this impplies these exists, there are less than $\dM(G)$-many generic types over $A$. We have equality if $A$ is an $\aleph_0$-saturated model. 
+
+\end{defn}
+
+
+\begin{rem}
+$a \in G$ is generic over $A$ then $a \da A$. This is because we must have $\RM(a/A) = \RM(G) \geq \RM(a)$ which means that $\RM(a/A) = \RM(a)$ and so $a \da A$. 
+\end{rem}
+
+\begin{lem}
+The following are equivalent
+\begin{enumerate}
+\item $a$ is generic in $G$ over $A$
+\item For all $g \in G$, $g \da_A a$, $ga$ is generic in $G$ over $A$. 
+\item For all $g \in G$ if $a \da_A g$ then $ga \da_A g$. 
+\end{enumerate}
+Similar statements are with right multiplication are also true. 
+\end{lem}
+
+\begin{proof}
+Suppose $\varphi(x)$ an $L_U$-formula, $\varphi^\cU \subseteq G$. Let $g \in G$. $g \cdot \varphi^\cU$ is defined by $\phi(g^{-1}x)$. Since $\lambda_g(x) = gx$ is a definable bijection and morely rank is preserved under definable bijections, 
+\[ \RM(\phi(g^{-1}x)) = \RM(\phi(x)) \] 
+Given $a \in G$, we have
+\begin{align*}
+\tp(g\cdot a/Ag) = \{\phi(g^{-1}x): \phi(x) \in \tp(a/Ag)\} 
+\end{align*}
+and so $\RM(ga/Ag) = \RM(a/Ag)$. Now using the translation invariance property we can prove the equivalences. \\
+
+$(1)\implies (2)$ Let $a\in G$ be generic with $a\da_A g$ so 
+\[ \RM(ga/Ag) = \RM(a/Ag) = \RM(a/A) = \RM(G) \]
+So $ga$ is generic in $G$ over $Ag$.  \\
+
+$(2)\implies (3)$ Given $g \in G$ and $g\da_A a$, $ga$ is generic over $Ag$ and so 
+\[ \implies ga \da Ag \implies ga \da_A g \mbox{ (Monotonicity)} \]
+
+$(3)\implies (1)$ Let $b \in G$ be generic over $Aa$. In particular, $b \da_A a$. Apply $(1)\implies (2)$ to $b$ with right multiplication to get $ba$ is generic in $G$ over $Aa$ hence over $A$. 
+\begin{align*}
+\RM(a/Ab) &= \RM(ba/Ab) \\
+&= \RM(ba/A) &\mbox{Since by (3) $ba\da_A b$}\\
+&= \RM(G)
+\end{align*}
+Therefore, $a$ is generic in $G$ over $Ab$ hence over $A$. 
+\end{proof}
+
+\begin{lem}
+$M$ a model, $p(x) \in S_m(M)$ generic in $G$ over $M$. $g \in G$. There exists a generic type $q(x) \in S_m(M)$ such that for any $a \models p(x)$ with $ \da_M g$ we have $ga \models q(x)$. We denote $q(x)$ by $g\cdot p$. 
+\end{lem}
+
+\begin{proof}
+We would like to take $q(x) = \tp(ga/M)$. It is generic in $G$ over $M$, we know by Lemma 11. We need to check $q(x)$ depends only on $g,p$ and not on $a$.  \\
+
+Suppose $a' \models p(x)$, $a' \da_M g$, $p(x)$ stationarity, $\tp(a/M) = \tp(a'/M) = p(x)$ and so 
+\begin{align}
+&\implies \tp(a'/Mg) = \tp(a/Mg) \\
+&\implies \tp(ga'/Mg) = \tp(ga/Mg) \\
+&\implies \tp(ga'/M) = \tp(ga/M) = q(x) 
+\end{align}
+Ex. This action of $G$ on $S$ is a group action. 
+\end{proof}
+
+
+
+\begin{prop}
+Let $M\subseteq \cU$ be a model. Let $S \subseteq S_m(M)$ - here $G \subseteq U^m$ be the set of generic types of $G$ over $M$. 
+\begin{enumerate}
+\item $G$ acts transitively on $S$. 
+\item For any $p,q \in S$, $\{g \in G: g\cdot p = q\}$ is $M$-definable. In particular, if $p=q$, we get an $M$-definable subgroup $\mbox{Stab}(p) \leq G$. 
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+(1) $p,q \in S$ and $a \models p$, $b \models q$. If we let $g = ba^{-1}$ then $ga = b$. But we want to move $a$ to $b$ using an independent group element first let $b'\models \tp(b/M) = q$, $b'\da_M a$.  Well, we have $b' \da_{Ma} a^{-1}$ since $a^{-1} \in \dcl(Ma) \subseteq \acl(Ma)$ and $b' \da_{Ma} \acl(Ma)$. By transitivity, $b' \da_M a,a^{-1}$. This implies $b' \da_M a^{-1}$ ($b'$ is generated over $M$ and so $b'a^{-1} \da_M a^{-1}$ (Lemma 11(3)). Hence,
+\begin{align*}
+&\implies b'a^{-1} \da_M a \\
+&\implies (b'a^{-1})a \models (b'a^{-1}) p \\
+&\implies b'a^{-1} \cdot p = \tp(b'/M) = \tp(b/M) = q(x) 
+\end{align*}
+
+
+\noindent (2) $p \in S$, let $\theta_p \in p$ witness  $(\RM,\dM)(p) = (\alpha,1)$. For any $q \in S$, let $\bq$ be a non-forking extension of $p$ (A global type). 
+\end{proof}
+
+\begin{claim}
+$p,q \in S$, $g\in G$, then $g\cdot p = q \iff \theta_p(g^{-1}\cdot \bq(x')$ 
+\end{claim}
+
+\noindent Once we have the claim, let $\theta_p(x,y) := (y \in G) \wedge (\theta_p(y^{-1} \cdot x))$. Well, 
+\begin{align*}
+\{g \in G: g \cdot p = q\} &= \{g \in G: \theta_p(g^{-1}\cdot x) \in \bq(x) \}\\
+&= \{g \in G: \theta_p(x,g) \in \bq(x)\} \\
+&= \mbox{the set defined by a $\theta_p$-defn of $\bq(x)$}
+\end{align*}
+Where the last equality by definability of working in a $|V|^+$-saturated elementary extension of $\cU$. 
+
+\begin{proof}[Proof of Claim]
+Suppose $\theta_p(g^{-1}\cdot x) \in \bq(x) \implies \theta_p(g^{-1} \cdot x) \in \bq(x) \uhr_{Mg} = \tp(b/Mg)$ a non-forking extension  of $q(x) \in S_m(M)$. $b \da_M g$, $b \models q(x)$ and $g^{-1}b \models \theta_p(x)$. $\tp(a/M) \in S$ and $\theta_p(x) \in \tp(a/M)$ and 
+\[ \RM(a/M) = \RM(G) = \RM(p) \]
+implies $a \models p(x), a \da_M g$ and so $ga = b \models q$ and therefore $gp = q$. \\
+
+Forward direction is left as an exercise. 
+
+\end{proof}
+
+% Thursday, March 21
+
+\begin{thm}
+$[G^0,G] = \dM(G)$, moreover the generic types of $G$ over a model are the generic types of the cosets of $G^0$. In particular, $G$ is connected if and only if $\dM(G) = 1$. 
+\end{thm}
+
+\begin{proof}
+Let $d = \dM(G), r = [G^0,G]$ and 
+\[ G = g_1G^0 \cup \dots \cup g_rG^0 \]
+then $(\RM,\dM((g,\dots,G^0) = (\RM,\dM) (G^0)$ which implies $\RM(G) = \RM(G^0)$ and 
+\[ d = \dM(G) = r\dM(G^0) \geq r \]
+For the converse, let $M$ be a model, let $S$ be the set of generic types in $G$ over $M$, this implies $|S|=d$ (exercise). $G$ acts on $S$ transitively. Let $p \in S$, $\mbox{Stab}(p) = \{g \in G: g\cdot p = p \}$ is a $M$-definable subgroup. 
+\begin{align*}
+G/\Stab(p) &\leftrightarrow G-\mbox{Orbit}(p) = S \\
+g\cdot \Stab(p) &\to g \cdot p
+\end{align*}
+Hence, $[\Stab(p):G] = |S| = d \implies G^0 \leq \Stab(p) G \implies d \leq r$. Therefore, $d = r$ ($\Stab(p)= G^0$). \\
+
+\noindent \underline{Moreover Clause}: We can find $g_1,\dots, g_r \in M \preceq \cU$ such that $G = g_1G^0 \cup \dots \cup g_r G^0$. Exercise: The generic type of $g_i\cdot G^0$ over $M$ is $g_i \cdot p$ is generic of $G^0$ over $M$. 
+
+\end{proof}
+
+\begin{thm}[Macintyre's Theorem]
+A totally transcedental field is algebraically closed. In fact, if $K$ is an infinite field definable in a totally transcedental theory, then $K$ is algebraically closed. 
+\end{thm}
+
+\begin{defn}[Definable Field]
+$K$ a Definable Field means $K \subseteq U^n$ is a definable set and we have definable functions $+,\times$, $K\times K \to K$ making $(K,+,\times)$ a field. 
+\end{defn}
+
+\begin{lem}
+$G$ is connected definable group (in a totally transcedental theory) $h:G \to G$ definable group endomorphism with finite kernel. Then $h$ is surjective. 
+\end{lem}
+
+ \begin{proof}
+ $a \in G$, $a \in h^{-1}(h(a))$ which is a coset of $\ker(h)$ which is finite. Let $A$ be parameters over which $G$ and $h$ are defined. This implies $a \in \acl(Ah(a))$ and by (8.16), $\RM((a,h(a))/A) = \RM(h(a)/A))$ and exercise: $\RM(a/A) \leq \RM((a,h(a)) /A)$. Therefore, 
+ \[ \RM(G) \leq \RM(h(G)) \leq \RM(G) \]
+ and therefore, $\RM(G) = \RM(h(G))$, hence, $[g(H): G]$ is finite and so since $G$ is connected, $h(G) = G$. 
+ \end{proof}
+
+\begin{proof}[Proof of Macintyre's Theorem]
+Let $K$ be an infinite definable field. 
+
+\begin{claim}[1]
+$(K,+)$ and $(K\setminus\{0\},\times)$ are both connected definable groups. 
+\end{claim}
+
+\begin{proof}[1]
+Let $a \in K\setminus\{0\}$, $m_a: x\to ax$ is a definable automorphism of the additive subgroup. $m_a$ takes definable subgroups of finite index to definable subgroups of finite index. Hence, $m_a((K,+)^o) = (K,+)^o$ and therefore, $(K,+)^o$ is an ideal in $(K,+,\times)$. In a field, the only ideals are trivial or the whole thing, but since our field is infinite, it cannot be trivial and hence $(K,+)^o = (K,+)$. This also implies $\dM(K) = 1$ by the theorem which we proved a bit earlier and so certainly removing one point will not affect the morely degree computation, so $\dM(K\setminus \{0\}) = 1$. Now by the same theorem, $(K\setminus\{0\},\times)$ is connected.  
+\end{proof}
+
+\begin{claim}[2]
+For all $a \in K$, any positive integer $n$, $a$ has an n-th root in $K$. In particular, if $ =p = \mbox{char}(K) \neq 0$, $K$ is perfect. 
+\end{claim}
+
+\begin{proof}
+Let $h:x\to x^n$ is a multiplicative group homomorphism, $\ker(h) = $n-th roots of unit, if finite, therefore $h$ is surjective by Lemma 6. 
+
+\end{proof}
+
+
+\begin{claim}[3]
+Suppose for all $m \leq n$ $k$ has all $m$-th roots of unity. Then, $K$ has no Galois-Extension of degree $n$. 
+\end{claim}
+
+\begin{proof}
+Assume false and assume $K,n$ are a minimal counterexample. Let $L$ be a Galois Extension of degree $n$. Let $q$ prime $q |n$. By the Galois Theory, we get $K - F -L$ where $F$ is of degree $\frac{n}{q} =r$. $F$ is an abstract field extension of $K$. Exercise: $F$ is definable, i.e. abstractly isomorphic to a definable field extension of $K$). $F$ also has all $m$-th roots of unity for $m\leq q$. By minimality of $(k,n)$ implies $F = K$ $n=q$. $L-K$ Galois extension degree $q$ a prime. The Galois Theory of cyclic extensions, plus the fact that $K$ has a primitive q-th root of unity gives \\
+
+\underline{Case 1}: $q \neq \mbox{char}(K)$. $L$ is $K(\alpha)$ where teh minimal polynomial of $\alpha/K$ is $X^q - a$, $a \in K$. This is contradiction that $Z^q - a$ has a root in $K$, claim 2. \\
+
+\underline{Case 2} $\mbox{char}(K) = q$, then $L = K(\alpha)$ where the minimal polynomial of $\alpha/K$, $X^q + X - a$ for $a \in L$. See notes for the rest of this case. It involves some Galois Theory that I wasn't quite sure how to copy down. \\
+
+\underline{Case 3} $K$ has all $m$-th roots of unity, all $m$. Suppose false, and let $n$ be the least counterexample to $m$. Let $\alpha$ be a primitive $n$-th root of unity. $K(\alpha) - K$ be a proper Galois Extension of degree less than or equal to $n-1$.  But by minimality of $n$, for all $m\leq n$, $K$ has all m-th roots of unity. By claim 3, $K$ has no Galois Extensions of degree $r$, contradiction. 
+\end{proof}
+
+
+By claim 3 and 4, $K$ has no finite Galois Extensions. On the other hand, $K$ is perfect, all finite extensions are finite Galois and the conclusion is $K$ has no finite extensions, which is just another way of characterizing an algebraic closed field. 
+\end{proof}
+
+%Tuesday, March 26
+
+\section*{Differentially Closed Fields}
+
+\begin{defn}
+Let $R$ be a commutative ring with identity.  A derivation on $R$ is a map $\delta: R\to R$ which satisfies the Leibniz Rule $\delta(xy) = x\delta(x)y + \delta(y)x$. 
+\end{defn}
+
+
+\begin{eg}
+\begin{itemize}
+\item Let $R$ be any ring and $\delta(a) = 0$
+\item $R = C^\infty(\bR)$ and $\delta f = f'$. 
+\item Let $U \subseteq \bC$ be open and connected, $R = \theta_U$ be the ring of analytic functions on $\cU$ and $\delta$ to be the usual derivative. We could also take $M_U$ the field of meromorphic function on $U$. 
+\item Take $R[X]$ and let $\delta$ be the formal derivative. 
+\end{itemize}
+
+\end{eg}
+
+\begin{lem}
+\begin{enumerate}
+\item $\delta 1= 0$
+\item For $a \in R$ $\delta(a^n) = na^{n-1} \delta a$ 
+\item If $b$ is a unit , then $\delta(\frac{a}{b}) = \frac{\delta ab - a\delta b}{b^2}$ 
+\item IF $R$ is an integral domain, then $\delta$ extends uniquely to a fraction field on $R$. 
+\item On $\emptyset$, $\delta$ is trivia;. 
+\end{enumerate}
+
+\end{lem}
+
+\begin{proof}
+pretty easy exercise. For (4), $\delta(n) = 0$ and for all $z \in \bZ$, $\delta(z) = 0$ then by quotient rule $\delta(\frac{a}{b}) = 0$. 
+\end{proof}
+
+\begin{defn}
+Let $I\subseteq R$ an ideal. We say $I$ is a differential ideal, for all $t \in I$ we have $\delta r \in I$. A fact we want to show is that $R/I$ has a natural diff-ring structure. 
+\end{defn}
+
+\begin{proof}
+Let $\delta(a+I) = \delta a + I$ and check this is well defined. 
+\end{proof}
+
+\begin{defn}
+We form the differential ring of diff-polynomials, $R\{x\} := R[x,\delta x , \delta^2 x, \dots, ]$ where $\delta^n x$ are algebraic indeterminants with the natural derivation. If $R$ is an integral domian, we form the differential field of differential-rational functions $R\ip{x} = ff(R\{x\})$. 
+\end{defn}
+
+\begin{defn}
+Let $f \in R\{x\} \setminus R$, then the order of $f$ , $ord(f)$ is the largest $n$ such that $\delta^n x$ appears in $f$. If $f \in  R$ and $f = -1$. 
+\end{defn}
+
+Suppose $n = ord(f)$ then 
+\[ f = \sum_{i=0}^d g_i (\delta^n x)^i \] 
+where $ord(g_i) < n$. If $g_d \neq 0$ then we say $deg(f) = d$. The rank of $f$ is  (ord f, deg f). We say $g$ has lower rank than $f$ if (ord g, deg g) less than (ord f,deg f) lexicographically. 
+
+
+\begin{defn}
+Let $f \in R\{x\}$, $f = \sum g_i(\delta^n x)^i$ then the separant of $f$ 
+\[ S_f = \frac{\partial f}{\partial (\delta^n)} = \sum g_i i(\delta^n x)^{i-1} \] 
+\end{defn}
+The initial of $f$ is just $I_f = g_d$, $d$ the degree and $H_f = I_f S_f$. Henceforth we work with differential fields of characteristic 0 $(K,\delta)$.  Let $[A]$ denote the differential ideal generated by $A$. 
+
+\begin{eg}
+If $f\in K \{x\}$ then $[f] = (f,\delta f, \delta^2f ,\dots)$. 
+\end{eg}
+
+\begin{thm} [Diff-Division Algorithm]
+Let $f,g \in K\{x\} \setminus K$ then there is $g_0$ of lower rank than $f$ such that, for some $l$ 
+\[ H_f^l g \equiv g_0 \pmod [f] \] 
+
+\end{thm}
+
+\begin{lem}
+Let $f \in K\{x\} \setminus K$, if $g \in [f]$, $f$ irreducible, then order(g) greater equal to order f and if $ord(g) = ord(F)$, then there is $l$ such that $H_f^l g \in (f)$. 
+\end{lem}
+
+\begin{proof}
+We claim for $r\geq 1$, $\delta^r f = S_f \delta^{n+r}x + f_r$ where $ord(f_k) < n+r$. In the case $r=1$, we have 
+\begin{align*}
+\delta f = \delta \left( \sum h_i (\delta^n x)^i \right) = \sum (\delta h_i) (\delta^n x) + \sum h_i i(\delta^n x) ^{i-1} \delta^{n+1} x 
+\end{align*}
+If $g \in [f]$, $g = \sum_{i=0}^k a_i \delta^i f$, assume $ord(g)\leq ord(f)$. Notice that if $K = 0, g = a_0 f$. \\
+
+Assume $K >0$, now replace $\delta^{n+k} x$ for $\frac{-f_k}{s_f}$ then $\delta^{n+k}f = s_f \delta^{n+k} x + f_k = 0$. Notice this replacement does not affect $g,f,\dots, \delta^{n+k-1} f$. Then, 
+\[ a_i = \frac{b_i}{s_f^{l_i}} \]
+$b_i \in K\{x\}$ implies $s_f^l(g) = \sum_{i=0}^{k-1} b_i \delta^i f$.  Then, since $K\{x\}$ is a ufd and $f$ is not a factor $s_f^l$ then $f$ is a factor of $g$ and implies order of $g$ equals order of $f$. Also $H_g^l \in (f)$. 
+\end{proof}
+
+We will show that for $f \in K\{x\}$ irreducible, $I(f) := \{g: H_f^l g \in [f] $ for some $l \}$ is a prime differential ideal and all prime differential ideals have this form. 
+
+\begin{lem}
+$f$ irreducible, $I(f)$ is a prime diff-ideal 
+\end{lem}
+\begin{proof}
+$g \in I(f), H_f^l (g) \in [f] \implies H_g^{l+1} \in [f]$ implies $\delta(H^{l+1} g) \in [f] \implies (l+1) H^lg\delta H + H^{l+1} \delta g \in [f] \implies H^{l+1} dg \in [f] \implies \delta g \in I(f)$. Let $u_0 u_1 \in I(f)$, by diff-div algorithm, we have $H_f^{l_i} u_i \equiv v_i \pmod [f]$ for $i = 0,1 \implies H_f^{l_1 + l_2} u_0 u_1 \equiv v_0 v_1 \pmod [f]$ where $V_i$ have lower rank than $f$. But multiply by $H_f^l v_0 v_1 \equiv 0 \pmod[f] \implies H_f^l v_0 v_1 \in [f] \implies H_fv_0v_1 = cf \implies f|v_i \implies v_i = 0$  implies $H_f^{l_i} u_i \equiv 0  \pmod[f] \implies H_f^{l_i} u_i \in [f] \implies u_i \in I(f)$. 
+\end{proof}
+
+\begin{lem}
+Every nonzero prime differential ideal $I$ of $K\{x\}$ is of the form $I(f)$ for some $f \in K\{x\}$ irreducible. Moreover, if $f'$ is irreducible and $I(f) = I(f')$, then $f = cf'$ with $c \in K$.  
+\end{lem}
+
+\begin{proof}
+Let $f \in I$, irreducible of minimal rank. We call such an $f$ the minimal polynomial of $I$. Let $g \in I(f), H_f^l g \in [f] \subseteq I$ . Since $H_f \notin I$ (since it has lower rank), we get $g \in I$. Let $g \in I$, by the diff-division algorithm, there exists $g$ of lower rank than $f$ such that 
+\[ H_f^g g \equiv g_0 \pmod{[f]}  \implies g_0 \in I \] 
+But this means $g_0 = 0$ and so $H_f^l g \in [f] \implies g \in I(f)$. 
+
+\end{proof}
+
+\begin{lem}
+$I$ is a prime diff-ideal, let $f$ be irreducible of minimal order, then $f$ is of minimal rank. 
+\end{lem}
+
+\begin{proof}
+
+Suppose $g \in I$ is irreducible of lower tank which implies $\ord(g) = \ord(f)$. 
+\[ I = I(g) \implies g \mid f \implies hg = f \]
+and since $deg(h) > 0$ this is a contradiction since $f$ is irreducible. 
+
+\end{proof}
+
+\begin{cor}
+\begin{enumerate}
+\item Let $I = I(f)$ prime diff-ideal and suppose $J$ is a prime differential ideal such that $f \in J$ and there is no diff poly in $J$ of lower order than $f$. Then, $I = J$. 
+\item If $I \nsubseteq J$ prime diff ideal then if $f$ is a minimal diff-polynomial of $J$ then and $\ord(f) < \ord(g)$ for all $g \in I$. (use this in assignment!)
+\end{enumerate}
+\end{cor}
+
+\begin{rem}
+Let $K$ be a differential field with extensions $F,L$. Let $b \in F$ and $\beta \in L$, then if $I(b/K) \subseteq I(\beta/K)$ $(I(a/K) = \{f \in K\{x\} : f(a) = 0 \}$, then $\varphi: K\{b\} \to K\{\beta\}$ by $f(b) \to f(\beta)$ is a well defined differential ring homomorphism. Moreover if $I(b/K) = I(\beta/K)$, then we get $K\ip{b} \to K \ip{\beta}$ by $f(b) \to f(\beta)$ is an isomorphism. 
+\end{rem}
+
+\subsection*{Model Theory of Differentially Closed Fields}
+Let $L_\delta = \{0,1,+,-,\times, \delta \}$. The theory $DF_0$ , diff-fields of characteristic 0 is just theory of fields of characteristic with axioms saying $\delta$ is a derivation. 
+
+\begin{defn}
+The theory, $DCF_0$ diff-closed field of characteristic zero is defined by 
+\begin{enumerate}
+\item $DF_0$ 
+\item For each pair $f,g$ of diff-polynomials such that $g \neq 0$ and $\ord(f) > \ord(g)$ then $\exists x, f(x) = 0 \wedge g(x) \neq 0 $ 
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+Given $T_0$, an $L$-theory, we say $T_0$ has a model-companion, there $T$, $L$-such that $T_1$ is a model complete 
+\begin{enumerate}
+\item $M \models T_0 \implies \exists \cN \models T$ such that $\cM \subseteq \cN$ 
+\item $\cN \models T_1 \implies \exists \cM \models T_0 $ such that $\cN \subseteq \cM$ 
+\end{enumerate}
+\end{defn}
+
+\begin{thm}
+$DCF_0$ is the model companion of $DF_0$ 
+\end{thm}
+
+\begin{lem}
+Every $(K,\delta) \models DF_0$ has an extension $(K,\delta) \subseteq (L,\delta) \models DCF_0$
+\end{lem}
+\begin{proof}
+Let $f,g \in K\{x\}$, $g \neq 0$ and $\ord(f) > \ord(g)$. Let $f_1$ be an irreducible factor $f$ with $\ord(f) = \ord(f_1)$.  Consider $I(f_1)$, $g \notin I(f_1)$. $F =f.f (K\{x\} /I(f_1))$ a diff-extension of $K$ where if $a:= x + I$ implies $f_1(a) = 0 \implies f(a) = 0$. $g \notin I(f_1) \implies g(a) \neq 0$. Iterate this process to build $L$. 
+
+\end{proof}
+
+
+\begin{thm}
+ $DCF_0$ has quantifier elimination. 
+\end{thm}
+
+\begin{rem}
+$DCF_0$ is model complete, $DCF_0$ is the model companion of $DF_0$ and $DCF_0$ is complete since $(\bQ,\delta =0)$ is a prime model. 
+\end{rem}
+
+\begin{proof}
+LEt $F, L \models DCF_0$, $(K,\delta) $ is a substructure of $F,L$. Let $\varphi(x,\bar{a})$ , $L_\delta$-quantifier free formula, $\bar{a} \in K$. Suppose $F \models \varphi(b,\bar{a})$ $b \in F$. We may assume $L$ is $|\kappa|^+$ saturated. \\
+
+\underline{Case 1}: $I(b/K) = \{0\}$ consider $\Gamma =\{ h(x) \neq 0 : h \in K\{x\} \setminus K\}$. This is a partial type, then there is $\beta \in L$ realizing $\Gamma \implies I(\beta/K) = \{0\}$. By the fact $K\ip{b} \implies K\ip{\beta}$ a diff-field isomorphism then $K\ip{\beta} \models\varphi(\beta, \bar{a})$. 
+
+\underline{Case 2}: $I(b/K) \neq \{0\}$ implies $I(b/K) = I(f)$. Consider $\Gamma = \{f(X) = 0\} \cup \{h(x) \neq 0: \ord(h) < \ord(f), h\neq 0 \}$. $\Gamma$ is a partial type, then we have $\beta \in L$ realizing $\Gamma$. Hence, $I(b/K) = I(\beta/K)$ by the previous corollary). 
+\end{proof}
+
+\begin{rem}
+The models of $DCF_0$ are precisely the existentially closed models of $DF_0$. 
+\end{rem}
+
+\begin{thm}
+There is a 1-1 correspondence between $S_1(K)$ and the prime ideals of $K\{x\}$ given by 
+\[ p \to I_p \{f(x) \in K\{x\} : (f(x) = 0) \in p \} \]
+
+\end{thm}
+
+\begin{proof}
+$p \neq q$ and $\varphi \in p \setminus q$, we may assume $\varphi$ is quantifier free. Then, 
+\[ \varphi = \bigvee_j \bigwedge_i f_{ij} = 0 \wedge g_j \neq 0 \]
+this implies $f(x) = 0 \in p$ but eirher $f_{ij} = 0 \notin q$or $g_j \neq 0 \notin q$ and hence $I_p \neq I_q$. \\
+
+Let $I$ be a prime ideal, $F$ the fraction field of $K\{x\}/I$ and $F \subseteq DCF_0$. Let $a := x + I$ then $p = \tp_A(a/K)$, and $I = I_p$. 
+\end{proof}
+
+\begin{cor}
+$DCF_0$ is $\omega$-stable
+\end{cor}
+
+\begin{proof}
+$K \models DF_0$,  we have to show $|S_1(K)| = |K|$, $S_1(K) | = |\mbox{prime diff ideals}| = |I(f): f \in K\{x\} \mbox{irred}| = |K \{x\}| = K$.  
+\end{proof}
+
+\subsection*{Morley Rank}
+\begin{lem}
+For each $f \in K\{x\}$. If $\varphi = (f =0)$ then $\RM(\varphi) \leq \ord(f)$. 
+\end{lem}
+
+Let $\cU$ be saturated $\cU \models DCF_0$
+\begin{thm}
+$\RM(\cU) = \omega$. 
+\end{thm}
+
+\begin{proof}
+$C_n = \{a \in \cU: \delta^n = 0\}$. As a remark, $C_1$ is the field of constants, since $\cU \models DCF_0 \implies \cC \models ACF$. $\RM C_n =n$. By induction on $n$, we have $C_0 = \{0\}$ so its morely rank is 0. For $n+1$ we have 
+\begin{align*}
+C_{n+1} &= \{a: \delta \delta^n a = 0\} = \bigcup_{b \in C_1} \{a: \delta^n a = b\} \\
+&\implies \RM(C_{n+1}) \geq n+1
+\end{align*}
+Since definable bijections preserve the morely rank. But $\RM(C_{n+1}) \leq n+1$ by the previous lemma at the beginning of this section. Now we get 
+\[ \RM(\cU) \geq \RM(C_n)  = n \]
+for all $n$ and so $\RM(\cU) \geq \omega$. On the other hand, if $X \subseteq \cU$, then $X \subseteq (f(x) = 0)$ or $X^c \subseteq (f(x) = 0) \implies $ either $\RM(X)$ or $\RM(X^c)$ is finite. Therefore, there cannot be infinitely many disjoint subsets of rank omega so it is omega.  
+\end{proof}
+
+\end{document}
