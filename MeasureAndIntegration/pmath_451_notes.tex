@@ -1,0 +1,2762 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage[left=1in,top=1in,right=1in,bottom=1in]{geometry}
+\usepackage{amssymb, amsmath, amsthm, amstext, bbm}
+\usepackage{enumitem}
+\usepackage{mathdots}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\usepackage{lastpage}
+%\usepackage[usenames,dvipsnames]{color}
+\allowdisplaybreaks[1]
+
+%______________________________________________________________
+\newcommand{\halmos}{\rule{1.75mm}{2.25mm}}
+\renewcommand{\qedsymbol}{\halmos}
+
+%_________________________________________________________________
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\st}{\; : \; }
+\newcommand{\fin}{\qquad \quad \hfill \framebox[1.75mm][l]{\,}}
+\newcommand{\cU}{\mathcal{U}}
+
+\newcommand{\cE}{\mathcal{E}}
+
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cJ} {\mathcal{J}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bZ}{\mathbb{Z}}
+
+\newcommand{\bQ}{\mathbb{Q}}
+
+\newcommand{\Meas}{\mathrm{Meas}}
+
+%Groups Related Commands 
+
+\newcommand{\Scross} {S_{3}\times S_{3}} %S3 cross S3
+\newcommand{\SNormgp} { \{1, b, b^{2}\}}
+
+%Analysis Commands
+\newcommand{\intpi}{\int_{-\pi}^\pi}
+\newcommand{\overtpi}{\frac{1}{2\pi}}
+\newcommand{\Trig}{\text{Trig}}
+\newcommand{\ospan} {\text{span}}
+\newcommand{\otrig} {\text{Trig}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\cP}{\mathcal{P}}
+
+\newcommand{\Bor}{\mathrm{Bor}}
+\newcommand{\sA}{\mathcal{A}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\qtwo}{\mathbb{Q}_{2}}
+\newcommand{\Pow}{\mathrm{P}}
+\newcommand{\osc}{\ensuremath{\mathrm{osc}}}
+\newcommand{\dotcup}{\ensuremath{\,\mathaccent\cdot\cup}}
+\newcommand{\multi}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+\newcommand{\PosSLP}{\mathsf{PosSLP}}
+\newcommand{\PERM}{\mathsf{PERM}}
+\newcommand{\BitSLP}{\mathsf{BitSLP}}
+\newcommand{\ACIT}{\mathsf{ACIT}}
+\newcommand{\EquSLP}{\mathsf{EquSLP}}
+\newcommand{\DegSLP}{\mathsf{DegSLP}}
+\newcommand{\sSAT}{\mathsf{\#SAT}}
+\newcommand{\poly}{\mathrm{poly}}
+\newcommand{\Po}{\mathrm{P}}
+\newcommand{\NP}{\mathrm{NP}}
+\newcommand{\FP}{\mathrm{FP}}
+\newcommand{\sP}{\mathrm{\#P}}
+\newcommand{\PP}{\mathrm{PP}}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\TCz}{\mathrm{TC}^0}
+\newcommand{\CITE}{}
+
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\mbrac}[1] {\left( #1 \right)}
+\providecommand{\mcbrac}[1] { \{ #1 \}}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\ip}[1]{\left\langle #1 \right\rangle}
+\newcommand{\bC} {\mathbb{C}}
+\newcommand{\mdist} {\text{dist}}
+\newcommand {\flln} {\lfloor \lambda n\rfloor}
+
+%______________________________________________________________________________________
+
+\renewenvironment{thebibliography}[1]
+	{\section*{#1}
+	   \begin{list}{}{\setlength{\leftmargin}{\bibindent}
+	                  \setlength{\itemindent}{-\leftmargin}
+	                  \setlength{\itemsep}{0pt}
+	                  \setlength{\parsep}{\smallskipamount}
+	                  \usecounter{enumiv}\renewcommand{\theenumiv}{}}
+                    \sloppy\clubpenalty=4000\widowpenalty=4000\frenchspacing}
+	{\end{list}}
+
+\newtheoremstyle{stdthm}{7mm}{}{\it}
+{}{}{\bf}{ }{\thmname{\sc #1}\thmnumber{ \bf #2.}\thmnote{ \sc[#3]}}
+
+\newtheoremstyle{stddef}{7mm}{}{\rm}
+{}{}{\bf}{ }{\thmname{\sc #1}\thmnumber{ \bf #2.}\thmnote{ \sc[#3]}}
+
+\newtheoremstyle{stdnonum}{7mm}{}{\rm}
+{}{}{\bf.}{ }{\thmname{\sc #1}\thmnote{ \sc(#3)}}
+
+\newtheoremstyle{stdqands}{7mm}{}{\rm}
+{}{}{\bf}{ }{\thmname{\bf #1}\thmnumber{ \bf #2.}\thmnote{\sc#3}}
+
+\newtheoremstyle{stdbold}{}{}{\rm}
+{}{}{\bf:}{ }{\thmname{\bf #1}\thmnote{ \bf(#3)}}
+
+% Important results that usually require proof
+\theoremstyle{stdthm}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{obsv}[thm]{Observation}
+
+% Definitions and rems that merely state facts
+\theoremstyle{stddef}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{rem}[thm]{rem} %\fin if without proof
+\newtheorem{eg}[thm]{eg} %\fin
+
+% No numbering on these containers
+\theoremstyle{stdnonum}
+\newtheorem{diver}{Diversion} %\fin if without proof
+\newtheorem{prob}{Problem}
+\newtheorem{claim}{Claim}
+\newtheorem{sol}{Solution}
+\newtheorem{ob}{Observation} %\fin if without proof
+\newtheorem{note}{Note} %\fin
+
+% Sample questions and solutions
+\theoremstyle{stdqands}
+\newtheorem{sampleq}{Sample Question}
+\newtheorem{samples}{Sample Solution} %\fin
+
+% Misc. useful containers
+\theoremstyle{stdbold}
+\newtheorem{quest}{Question}
+\newtheorem{conc}{Conclusion}
+\newtheorem{strat}{Strategy}
+\newtheorem{astrat}{Alternate Strategy}
+\newtheorem{as}{Alternate Solution} %\fin
+%_________________________________________________________________
+
+
+
+
+
+
+
+%_____________________________________________________________________________________
+
+
+\begin{document}
+%\title{Pmath 450 Notes}
+%\author{Eeshan Wagh}
+%\maketitle
+%\newpage
+%{\noindent \textbf{\huge{PMATH 352 (1121 - Winter 2012)} \\ \Large{Complex %Analysis}} \\[0.25cm] Professor: L. Marcoux \\ University of Waterloo \\[0.25cm] Author: {\tt{mlbaker}} <\url{lambertw.com}> \\ Revised: \today} \\
+\begin{titlepage}
+\begin{center}
+\textsc{\LARGE University of Waterloo}\\[1cm]
+\textsc{\Large Fall 2012}\\[0.5cm]
+\rule{\linewidth}{0.5mm} \\[0.4cm]
+{\Large \bf PMATH 451 - Measure \& Integration}\\[0.2cm]
+\rule{\linewidth}{0.5mm} \\[1cm]
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Eeshan \textsc{Wagh}
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Instructor:} \\
+Alexandru \textsc{Nica}
+\end{flushright}
+\end{minipage}
+\\[1cm]
+%\emph{These notes are presented without any guaranty of any kind. They might contain material not seen in the course and/or omit material seen in the course. These notes might also contain typos and errors.}\\[0.5cm]
+Last updated: \today \\
+\end{center}
+
+\tableofcontents
+
+\end{titlepage}
+
+\newpage
+
+\section{Some Introductory Ideas}
+
+\begin{rem} {Brief History of Ideas on Integration.}
+Given a space $X$, $f:X \rightarrow \bR$ function. For example, $X$ a compact subset of $\bR^n$ and $f$ a bounded function. Given $X,f$ want to find a number $\int_X f \in \bR$ which ``integrates together" the values of $f$ on $X$. This idea goes back to Cauchy (circa 1800) who looked at when $f$ is continuous on $[a,b]\subseteq \bR$ (more generally, $f$ continuous on $[a_1,b_1] \times [a_2,b_2] \times \dots \times [a_n,b_n]\subseteq \bR^n$).   \\
+
+Riemann (circa 1850) introduced the concept of integrable functions on $[a,b]$. The Riemann Integral : $\int_a^b f(x)ds \approx \sum_{i=1}^m f(\xi_i)(t_i - t_{i-1})$. Turns out that which this approach, one cannot get too far from when $f$ is continuous. \\
+
+Stieltjes (circa 1870) extended the integral to $\int_a^b f(x) dG(x) \approx \sum_{i=1}^m f(\xi_i)(G(t_i)- G(t_{i-1}))$ where $G(x)$ is some increasing function. This leads to a richer theory of integration. \\
+
+Lebesgue (circa 1900) introduced $\int_a^b f(x)d\mu (x)$ where $\mu$ is a finite positive measure on $[a,b]$. The idea is if we can measure sets, then we can integrate functions.  
+\end{rem}
+
+\begin{rem}{Review of Riemann Integral.}
+ Working in $\bR^n$, denote $\mathcal{P}_n = \{ P \subseteq \bR^n \st \exists a_1 < b_1, \dots, a_n < b_n \in \bR \text{ such that } P = (a_1,b_1]\times \dots \times (a_n,b_n]$. Fix $P \in \cP_n, f:P\rightarrow \bR$ bounded. To go for "$\int_P f$", we use divisions of $P$, $\Delta = \{P_1,\dots, P_r\}$ with $P_1,\dots, P_r \in \cP_n$ with $P_i \cap P_j = \emptyset$ for $i\neq j$ and $P_1 \cup \dots \cup P_r = P$. For such $\Delta$ define Darboux Sums
+ \begin{align*}
+ U(f,\Delta) &= \sum_{i=1}^r \sup_{P_i}(f) \cdot vol(P_i)\\
+ L(f,\Delta) &= \sum_{i=1}^r \inf_{P_i}(f)\cdot vol(P)
+ \end{align*}
+ Then have $L(f,\Delta') \leq U(f,\Delta'')$ (for every divisions $\Delta',\Delta''$ of $P$) hence
+ \begin{align*}
+ \int_P f:= \sup \{L(f,\Delta') \st \Delta' \text{ division of } P\} & \leq \inf \{ U(f,\Delta '') \st \Delta'' \text{ division of P} \}
+ \end{align*}
+\end{rem} 
+In the case that the lower sum and the upper sum are arbitrarily close we let the integral $\int_P f$ be equal to the common value. What key ingredients did we need for working with Darboux Sums? 
+\begin{itemize}
+\item Every $P\in \cP_n$ has $vol(P)$ and hence get a volume function $vol:\cP_n \rightarrow [o,\infty)$.
+\item The Volume function is additive. If $\Delta = \{P_1,\dots, P_r\}$ is a division of $P$, then $vol(P) = \sum_{i=1}^r vol(P_i)$. 
+\item  $\cP_n$ has good properties with respect to Boolean operations. $P,Q \in \cP_n \Rightarrow P \cap Q \in \cP_n$ and $P,Q \in \cP_n \Rightarrow P\backslash Q $ can be written as $P_1\cup \dots \cup P_r$ for some $P_1,\dots, P_r \in \cP_n$ pairwise disjoint. Let 
+\begin{align*}
+\sA &= \{A \subseteq \bR^n | \exists Q_1,\dots, Q_s \in \cP_n \text{ such that } Q_1 \cup \dots \cup Q_s = A \}
+\end{align*}
+Then every $A\in \sA$ can be written as $A = P_1 \cup \dots \cup P_r$ with $P_i \cap P_j = \emptyset$ for $i\neq j$ and for such $P_1,\dots, P_r$, it is meaningful to define \begin{align*}
+vol(A) &= \sum_{i=1}^r vol(P_i)
+\end{align*}
+Hence, the volume function extends to $\sA$, $vol:\sA \rightarrow [o,\infty)$
+  
+\end{itemize}
+
+\begin{defn}
+$X$ a non-empty subset, a collection $\sA$ of subsets of $X$ is said to be an algebra of sets when it satisfies
+\begin{enumerate}
+\item $X \in \sA$
+\item If $A \in \sA$, then $S\backslash A \in \sA$ 
+\item If $A,B \in A$, then $A\cup B \in A$
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+$X$ a non-empty subset, $\sA$ an algebra of subsets of $X$. By additive set function on $A$, we understand a function $\mu: \sA \rightarrow [0,\infty]$ such that $\mu(\emptyset) = 0$ and $\mu(A\cup B) = \mu(A) + \mu(B)$ whenever $A,B\in A$ are such that $A\cap B = \emptyset$. 
+\end{defn}
+
+\newpage
+
+\section{An Idea of Lebesgue} 
+
+\begin{eg}
+Let $X$ be a non-empty countable set, and suppose we are given a weight function $w:X\rightarrow [0,\infty)$, we can define 
+\[ \sA = \{ A|A\subseteq X \}.\]
+Now, we can define the additive set function $\mu:\sA \rightarrow [0,\infty]$ defined by 
+\[\mu(A) = \sum_{x\in A} w(x). \]
+In the case where $A$ is infinite, we can define 
+\[\sum_{x\in A} w(x) = \sup \left\{\sum_{x\in F}w(x)| F\subseteq A, F \text{ finite} \right\} \in [0,\infty]. \]
+We have that $\sA$ is an algebra of sets because if $A\cap B = \emptyset$, then $\mu(A\cup B) = \mu(A) + \mu(B)$. %wut? Did you mean that $\mu$ is an additive set function?
+In the special case when $w(x) = 1$ for every $x \in X$, $\mu$ is a counting measure (counts the number of elements).  
+
+We get another special case by fixing an element $x_0\in X$ and considering the weight $w(x) = 1$ if $x=x_0$ and $w(x) = 0$ otherwise. In this case, $\mu$ is called the Dirac measure concentrated at $x_0$. 
+\end{eg}
+
+\begin{eg}
+Let $\cJ$ be the following set of subsets of $\bR$
+\[ \cJ = \{\emptyset\} \cup \{ (a,b]|a<b \in \bR\} \cup \{(-\infty ,b]|b\in \bR\} \cup \{(a,\infty)|a \in \bR \} \cup \{ \bR\} \]
+Next, we define
+\[ \cE := \text{ the collection of finite unions of sets from } \cJ \]
+Show that $\cE$ is an algebra of sets. 
+\end{eg}
+
+\begin{rem}
+If $X$ is a set and $\sA$ is an algebra of subsets of $X$. There are a few properties which follow from the definition of an algebra. We have
+\begin{enumerate}
+\item $\emptyset \in \sA$
+\item $A,B \in \sA \Rightarrow A\cap B \in \sA$ (using axiom 2, axiom 3, and then using DeMorgan's law)
+\item $A,B \in \sA \Rightarrow A\backslash B \in \sA$ ($A\backslash B = A\cap(X \backslash B) \in A$)
+\item Can take finite unions and intersections (induction)
+\end{enumerate}
+\end{rem}
+
+\begin{rem}
+Properties of an additive set function
+\begin{enumerate}
+\item $\mu$ is finitely additive (that is $\mu(A_1\cup\dots\cup A_n) = \sum_{i=1}^n\mu(A_i)$ if $A_i\cap A_j = \emptyset$ for $i\neq j$). 
+\item $(A,B \in \sA, A\subseteq B) \Rightarrow \mu(A) \leq \mu(B)$ (since $\mu (B) = \mu(A) + \mu(B\backslash A) \geq \mu(A)$)
+\item The inclusion-exclusion formula :
+\[\mu(A \cup B) + \mu(A\cap B) = \mu(A) + \mu(B).\]
+Additivity implies 
+\begin{align*}
+\mu(A\cup B) &= \mu(A\backslash B) + \mu(A\cap B) + \mu(B\backslash A), \text{ and}\\
+\mu(A\cap B) &= \mu(A \cap B).
+\end{align*}
+Adding the above two equations together (which we can do even in the case of infinity), we get
+\[\mu(A \cup B) + \mu (A\cap B) = \big(\mu(A\backslash B) + \mu(A\cap B)\big) + \big(\mu(B\backslash A)+\mu(A\cap B)\big) = \mu(A) + \mu(B).\]
+\item Finite subadditivity. For every $A,B \in \sA$ (Even if $A\cap B \neq \emptyset$) we have
+\[\mu(A \cup B) \leq \mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B). \]
+\end{enumerate}
+\end{rem}
+
+\begin{lem}
+Let $X$ be a non-empty set, and let $(\sA_i)_{i\in I}$ be a family of algebras of subsets of $X$. Denote $\sA := \bigcap_{i\in I}\sA_i$. Then $\sA$ also is an algebra of subsets of $X$. 
+\end{lem}
+
+\begin{proof} Checking the 3 axioms
+\begin{enumerate}
+\item $X \in A_i, \forall i \in I$ by axiom 1 for $A_i$, so $X \in \sA$. 
+\item Fix $A\in \sA$. For every $i \in I$ we have $A \in \sA_i$, hence $X \backslash A \in \sA_i$, for all $i \in I$ (by axiom 2 for $\sA_i$), hence $X\backslash A \in A$.
+\item Same trick as above.
+\end{enumerate}
+\end{proof}
+
+\begin{prop}
+Let $\cU$ a collection of subsets of $X$. Then there exists a smallest algebra $\sA$ of subsets of $X$ with the property that $\cU \subseteq \sA$. 
+\end{prop}
+
+\begin{proof}
+Let $(\sA_i)_{i\in I}$ be the collection of all possible algebras of subsets of $X$ which satisfy $\sA_i \supseteq \cU$ (Note: such algebras do exist, e.g. $\exists i_0 \in I$ such that $A_{i_0} = 2^X = \{A|A\subseteq X\}$). Put 
+\[\sA:= \bigcap_{i\in I} \sA_i.\]
+This is an algebra of sets by lemma 9%lemma 1.10 in Nica's notes
+. We also have $A\supseteq \cU$ since $\sA_i\supseteq \cU$ for all $i\in I$. Finally, if $B$ is an algebra of subsets of $X$ such that $B\supseteq \cU$, then $\exists i_1 \in I$ such that $B = A_{i_1}$, hence 
+\[B = A_{i_1} \supseteq \bigcap_{i\in I}\sA_i = \sA \]
+\end{proof}
+
+\newpage
+
+\begin{defn}
+Let $X,Y$ be non-empty sets. Let $\sA, \cB$ be algebras of subsets of $X$ and $Y$ respectivly. A function $f:X\rightarrow Y$ is said to be {\bf $(\sA,\cB)$-measurable} to mean that $f^{-1}(B) \in \sA, \forall B\in \cB$. 
+\end{defn}
+
+\begin{prop}
+Let $X,Y$ and $\sA,\cB$ as above and let $\cU\subseteq \cB$ be such that the algebra generated by  $\cU$ is equal to $\cB$. Let $f:X \rightarrow Y$ be a function such that $f^{-1}(U)\in \sA, \forall U\in \cU$. Then $f$ is $(\sA,\cB)$-measurable.  
+\end{prop}
+
+\begin{proof}
+Consider the set of sets $\cS = \{S\subseteq Y| f^{-1}(S)\in \sA\}$
+We claim that $\cS$ is an algebra of subsets of $Y$. We check the various conditions
+\begin{enumerate}
+\item $Y\in \cS$ because $f^{-1}(Y) = X \in \sA$.
+\item Suppose $S\in \cS$. Then $f^{-1}(Y\backslash S) = X \backslash f^{-1}(S) \in \sA$ by Axiom 2 for $\sA$ since $f^{-1}(S) \in \sA$.
+\item Suppose $S_1,S_2 \in \cS$. Then $f^{-1}(S_1 \cup S_2) = f^{-1}(S_1) \cup f^{-1}(S_2) \in \sA$ by Axiom 3 for $\sA$.
+\end{enumerate}
+Next, we claim $\cS \subseteq \cB$. Our hypothesis that $f^{-1}(U)\in \sA, \forall U\in \cU$ says that $U\subseteq \cS$.  Since $\cS$ is an algebra of sets, $\cS \supseteq U $ implies that $\cS \supseteq \cB$ (since $\cB$ is the smallest algebra of sets containing $\cU$). 
+\end{proof}
+
+\begin{eg}
+On $\bR$, consider the algebra $\xi$ of half open intervals. Let $\cU = \{(a,\infty)|a \in \bR\}$. Then $\cU$ generates $\xi$.
+\end{eg}
+
+\begin{defn}
+Let $(X,d)$ be a metric space, and let $\sA$ be an algebra of subsets of $X$ such that $D \in \sA$ whenever $D \subseteq X$ is open. Then, every continuous function from $f:X\rightarrow \bR$ will be $(\sA, \xi)$ measurable. 
+\end{defn} %wut, how is this a definition?
+
+%Incomplete day: had to leave for nserc/ogs info sessions
+
+%Monday, Sept 17
+
+\newpage
+\begin{prop}
+Let $X$ be a non-empty set and let $\sA$ be an algebra of subsets of $X$. Let $\mu: \sA \rightarrow [0,\infty]$ be an additive set function with $\mu(X) < \infty$ (hence $\mu(A) < \infty$ for all $A \in \sA$). Let $f: X \rightarrow \bR$ be bounded and $(\sA, \xi)$-measurable, where $\xi$ is the algebra of half-open intervals in $\bR$. Then,
+\[ \bar{\int} fd\mu = \int_{-} f d\mu\]
+\end{prop}
+
+\begin{lem}
+Let $X$, $\sA$, $\mu$, and $f$ as in the above proposition.
+\begin{enumerate}
+\item  Let $f:X \rightarrow \bR$ be a bounded function. Let $\Delta = \{A_1,\dots, A_r\}$ and $\Gamma = \{B_1,\dots,B_s\}$ be measurable divisions of $X$ such that $\Gamma$ refines $\Delta$ (i.e. for every $1\leq i \leq r$ there exist some $1\leq j_n < \dots < d_m \leq s$ such that $A_i = B_{d_1} \cup \dots \cup B_{d_{m}}$). Then, $U(f,\Gamma) \leq U(f,\Delta)$ and $L(f,\Gamma) \geq L(f,\Delta)$. 
+\item For any measurable divisions $\Delta '$ and $\Delta ''$ of $X$, we have $L(f,\Delta') \leq U(f,\Delta'')$
+\item $\int_{-}fd\mu \leq \int^{-} fd\mu $
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+Details left as exercise (so much like calculus). %originaly "so much lick calculus" lol 
+\begin{enumerate}
+\item Direct calculation: For $A_i = B_{d_1} \cup \dots \cup B_{d_m}$ use 
+\begin{align*}
+\sup_{A_i}(f) &\geq \sup_{B_{j_k}}(f)\\
+\inf_{A_i}(f) &\leq \inf_{B_{j_k}}(f)
+\end{align*}
+and the additivity of $\mu$. 
+\item Use a common refinement ($\sA$ closed under finite intersections) $\Gamma$ of $\Delta'$ and $\Delta ''$, then 
+\[L(f,\Delta') \leq L(f,\Gamma) \leq U(f,\Gamma) \leq U(f,\Delta ''). \]
+\item We have
+\[\begin{array}{ccccc}
+\int_{-}fd\mu &:=& \sup\{L(f,\Delta)|\Delta \text{ a measurable division}\}& \\
+ &\leq& \inf\{ U(f,\Delta)|\Delta \text{ a measurable division}\} &=:& \int^{-}fd\mu.
+\end{array}
+\]
+\end{enumerate}
+\end{proof}
+
+\begin{claim}
+Let $X$, $\sA$, $\mu$, and $f$ as in the above proposition.
+Given $\epsilon >0 $, one can find a measurable division $\Delta$ of $X$ such that $U(f,\Delta) - L(f,\Delta) < \epsilon$. 
+\end{claim}
+
+\begin{proof}
+Fix $\epsilon >0 $. Since $f$ is bounded, can fix $\alpha < \beta \in \bR$ such that $\alpha < f(x)<\beta, \forall x \in X$. Pick $k \in \bN$ such that 
+\[k > \frac{\mu(X)(\beta - \alpha)}{\epsilon} \]
+and write $(\alpha,\beta] = J_1\cup J_2 \cup \dots \cup J_k$ where
+\[J_i = \bigg(\alpha + \frac{(i-1)(\beta - \alpha)}{k}, \alpha + \frac{i(\beta - \alpha)}{k}\bigg], \text{ for } 1 \leq i \leq k. \]\
+For every $1\leq i \leq k$, put $A_i = f^{-1}(J_i) = \{x \in X|f(x) \in J_i\}$. 
+
+Observe that $A_i \in \sA$ because $f$ is $(\sA,\xi)$-measurable. \\
+
+Observe that for $1\leq i\leq j \leq k$, we have $A_i \cap A_j = \{x \in X| f(x) \in J_i \text{ and } f(x) \in J_j\} = \emptyset$ and also $A_1\cup \dots \cup A_k = X$ (because for every $x\in X$, have $f(x) \in (\alpha,\beta])$. Hence, $\Delta = \{A_i|1\leq i\leq k, A_i \neq \emptyset \}$ is a measurable division of $X$. For this $\Delta$, have 
+\begin{align*}
+ U(f,\Delta) &= \sum_{1\leq i \leq k, A_i \neq \emptyset} \mu(A_i)\sup_{A_i}(f)\\
+ & \leq \sum_{1\leq i\leq k, A_i \neq \emptyset} \mu(A_i)\left(\alpha +  \frac{i(\beta - \alpha)}{k} \right)
+\end{align*}
+So we have 
+\begin{align*}
+U(f,\Delta) &\leq \sum_{i=1}^k \mu(A_i)\left( \alpha + \frac{i(\beta - \alpha)}{k} \right), &(*)\\
+\end{align*}
+and similarly we can get
+\begin{align*}
+L(f,\Delta) &\geq \sum_{i=1}^k \mu(A_i) \left( \alpha + \frac{(i-1)(\beta - \alpha)}{k} \right). &(**)
+\end{align*}
+Subtract ($**$) out of ($*$) to get
+\begin{eqnarray*}
+U(f,\Delta) - L(f,\Delta) &\leq& \sum_{i=1}^n \mu(A_i) \frac{\beta - \alpha}{k}\\
+&=& \frac{\beta - \alpha}{k} \sum_{i=1}^k \mu(A_i)\\
+&=& \frac{(\beta - \alpha)\mu(X)}{k}\\
+&<& \epsilon
+\end{eqnarray*}
+\end{proof}
+
+\begin{claim}
+$\int_{-}fd\mu = \int^{-}fd\mu$. 
+\end{claim}
+
+\begin{proof}
+For every $\epsilon >0$, pick $\Delta$ as in above claim and write 
+\[L(f,\Delta) \leq \int_{-} fd\mu \leq \int^{-}f d\mu \leq U(f,\Delta) \]
+Hence,
+\[0 \leq \int^{-}f d\mu - \int_{-}f d\mu \leq U(f,\Delta) - L(f,\Delta) < \epsilon \]
+Since $\epsilon >0$ was arbitrary, $\int^{-}fd\mu - \int_{-}fd\mu = 0$. 
+\end{proof}
+
+\begin{eg}
+Let $X = [0,1]$. Suppose we have an algebra $\sA$ of subsets of $X$ such that $D \in \sA$ for all $D \subseteq X$ open and that we have an additive set function $\mu:\sA \rightarrow [0,1]$ such that $\mu((a,b)) = b-a$ and $\mu(\{t\}) =0$. Then,
+\begin{enumerate}
+\item Every continuous function $f:X\rightarrow \bR$ is bounded and $(A,\xi)$-measurable. We can define $\int fd\mu$ for them. 
+\item A step function is still $(A,\xi)$ - measurable so we can still do $\int f d\mu$. 
+\item What about the function $g$ which is 0 on irrationals and 1 on rationals? 
+
+The answer depends on the choice of $\sA$. 
+
+We can see immediately that $g$ is $(\sA,\xi)$-measurable if and only if $[0,1]\cap \mathbb{Q} \in \sA$. For example, if $\sA$ is the algebra of subsets of $[0,1]$ which is generated by the open sets, then $[0,1]\cap \mathbb{Q} \notin \sA$. The second great idea of lebesgue; look at algebras $\sA$ which are closed under countable unions ($\sigma$-algebras)! If $\sA$ is a $\sigma$-algebra, then $\mathbb{Q}\cap[0,1]\in \sA$ because it is countable. 
+\end{enumerate}
+\end{eg}
+
+\newpage
+%Wednesday, Sept 19
+
+\section{$\sigma$-Algebras and Positive Measures}
+
+\begin{defn}
+Let $X$ be a non-empty set. A set $\sA$ of subsets of $X$ is said to be a $\sigma$-algebra when it satisfies
+\begin{enumerate}
+\item $X \in \sA$
+\item $A \in \sA \Rightarrow X\backslash A \in \sA$
+\item If $\{A_n\}_{n=1}^\infty \in \sA \Rightarrow \bigcup_{i=1}^\infty A_n \in \sA$
+\end{enumerate} 
+\end{defn}
+
+\begin{rem} $ $
+
+1. If $\sA$ is a $\sigma$-algebra, then in particular, $\sA$ is also an algebra of subset of $X$. Hence, all observations from Lecture 1 about algebras of sets hold for $\sigma$-algebras.\\
+
+2.  If $\sA$ is a $\sigma$-algebra of $X$, we can safely do countable intersections of sets in $\sA$ (Apply Demorgan's Law to the complement of the union).
+\end{rem}
+
+\begin{defn}
+Let $X$ be a non-empty set and let $\sA$ be a $\sigma$-algebra of subsets of $X$. A function $\mu:\sA \rightarrow [0,\infty]$ is said to be a {\bf positive measure} when 
+\begin{enumerate}
+\item $\mu(\emptyset) = 0.$
+\item If $\left(A_n\right)_{n=1}^\infty \in \sA$ with $A_i \cap A_j = \emptyset$ for $i\neq j$, then 
+\[\mu\left( \bigcup_{i=1}^\infty A_i \right) = \sum_{n=1}^\infty \mu(A_n) = \sup\left\{\sum_{n=1}^N \mu(A_n)| N \in \bN \right\} = \lim_{n\rightarrow \infty} \sum_{n=1}^N \mu(A_n). \]
+\end{enumerate}
+If $\mu(X)<\infty$ then we say that $\mu$ is a finite positive measure. If $\mu(X) = 1$ then say that $\mu$ is a probability measure. 
+\end{defn}
+
+\begin{rem}
+Let $X$, $\sA$, and $\mu$ be as in the above definition, then $\mu$ is an additive set function in the sense of Lecture 1. Thus, results proved about additive set functions also hold for positive measures. 
+\begin{itemize}
+\item $\mu$ is increasing ($A\subseteq B \Rightarrow \mu(A) \subseteq \mu(B)$)
+\item Inclusion-Exclusion
+\item Finite Sub-additivity:
+\[\mu\left( \bigcup_{i=1}^n A_i \right) \leq \sum_{i=1}^n \mu(A_i) \]
+$\forall n \in \bN, \forall A_1,\dots, A_n$. 
+\end{itemize}
+A natural question is ``shouldn't we have $\mu\left(\bigcup_{i=1}^\infty A_n \right) \leq \sum_{n=1}^\infty \mu(A_n)$?". We will prove this, but first need a fact called ``continuity of $\mu$ along chains". 
+\end{rem}
+
+\begin{defn}
+A {\bf Measurable Space} is a pair $(X,\sA)$ where $X$ is a non-empty set and $\sA$ is a $\sigma$-algebra of subsets of $X$. A {\bf Measure Space} is a triple $(X,\sA, \mu)$ where $(X,\sA)$ is a measurable space and $\mu$ is a positive measure. If $\mu(X) = 1$, $(X,\sA,\mu)$ is called a {\bf Probability Space}.
+\end{defn}
+
+\begin{rem}
+The idea of using $\sigma$-algebras comes from Lebesgue around the year 1900. Why was this a significant idea? Cantor's proof that $\bR$ is uncountable was in 1875. We will return the pros and cons for using $\sigma$-algebras and $\sigma$-additivity. 
+\end{rem}
+
+\begin{prop}[``Continuity" Along Chains]
+
+Let $(X,\sA,\mu)$ be a measure space. 
+\begin{enumerate}
+\item If $(B_n)_{n=1}^\infty$ are sets in $\sA$ such that $B_1 \subseteq B_2 \subseteq \cdots$, then $\mu\left( \bigcup_{n=1}^\infty B_n \right) = \lim_{n\to\infty} \mu(B_n)$
+\item If $(C_n)_{n=1}^\infty$ are in $\sA$ such that $C_1 \supseteq C_2\supseteq \cdots$ and if $\exists n_0 \in \bN$ such that $\mu(C_{n_0})<\infty$ then $\mu \left( \bigcap _{i=1}^\infty C_n \right) = \lim_{n\rightarrow \infty} \mu(C_n)$. 
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+
+1. Define $A_1 = B_1, A_2 = B_2 \backslash B_1,\cdots, A_ n = B_n \backslash B_{n-1}, \cdots$. Then, by construction, the $A_i$ are pairwise disjoint sets in $\sA$ with $\bigcup_{i=1}^n A_i = B_n$ and $\bigcup_{i=1}^\infty A_n = \bigcup_{n=1}^\infty B_n$ (immediate Boolean Algebra - Check!). So then
+\begin{align*}
+\mu\left( \bigcup_{n=1}^\infty B_n \right) &= \mu \left( \bigcup_{n=1}^\infty A_n \right)\\
+&= \sum_{n=1}^\infty \mu(A_n) & (\sigma \text{-add})\\
+&= \lim_{n\rightarrow \infty} \left( \sum_{n=1}^N \mu(A_n) \right) \\
+&= \lim_{n\rightarrow \infty}\mu \left(\bigcup_{n=1}^N A_n \right) = \lim_{n\rightarrow \infty} \mu(B_n).
+\end{align*}
+
+2. We want $\mu(\bigcap_{n=1}^\infty C_n) = \lim_{n\rightarrow \infty} \mu(C_n)$ for $C_1 \supseteq C_2 \supseteq \cdots $ where $\exists n_0 \in \bN$ with $\mu(C_{n_0})<\infty$. What if we allow $\mu(C_n) = \infty, \forall n \in \bN$, what goes wrong? \\
+
+Take $X = \bZ$ and let $\sA$ be the powerset of $X$. Let $\mu$ be the counting measure. Now take $C_n = \{m \in \bZ | m \leq n \}$.\\
+
+
+%Friday - Sept 21%
+
+Proof starts here - Without loss of generality, assume $\mu(C_1) < \infty$. Let $B_n := C_1 \backslash C_n$ for all $n \in \bN$. Then we have $\emptyset = B_1 \subseteq B_2 \subseteq \cdots$ and $\bigcup_{n=1}^\infty B_n = \bigcup_{n=1}^\infty (C_1 \backslash C_n) = C_1 \backslash \left( \bigcap_{n=1}^{\infty}C_n \right)$. Using part (1) of the proposition for $\left( B_n \right)_{n=1}^\infty$. Get 
+\begin{align*}
+\mu \left( \bigcup_{n=1}^\infty B_n \right) &= \lim_{n\rightarrow \infty} \mu(B_n) \Rightarrow\\
+\mu\left( C_1 \backslash \bigcap_{n=1}^\infty C_n \right) &= \lim_{n\rightarrow \infty} \mu \left( C_1 \backslash C_n \right)\Rightarrow\\
+\mu(C_1) - \mu\left(\bigcap_{n=1}^\infty C_n \right) &= \lim_{n\rightarrow \infty} \left( \mu(C_1) - \mu(C_n)\right).
+\end{align*}
+Here we use the fact that $\mu(C_1) < \infty$! We have that $\mu(C_1) = \mu(C_n) + \mu(C_1\backslash C_n)$ and we use the arithmetic of $[0,\infty)$ not in $[0,\infty]$. Thus,
+\begin{align*}
+\lim_{n\rightarrow \infty} \left( \mu(C_1) - \mu(C_n)\right) = \mu(C_1) - \lim_{n\rightarrow \infty} \mu(C_n) \Rightarrow \mu \left(\bigcap_{n=1}^\infty C_n \right)  = \lim_{n\rightarrow \infty} \mu(C_n).
+\end{align*} 
+\end{proof}
+
+\begin{cor}
+Let $(X,\sA,\mu)$ be a measure space. Then $\mu$ is  countably subadditive. That is, for any $(A_n)_{n=1}^\infty \in \sA$, we have
+\[\mu \left( \bigcup_{n=1}^\infty A_n \right) \leq \sum_{n=1}^\infty \mu(A_n) \]
+\end{cor}
+
+\begin{proof}
+Let $B_n = A_1 \cup \dots \cup A_n$ for all $n \in \bN$. Then $B_1 \subseteq B_2 \subseteq \cdots \subseteq B_n \subseteq \cdots$ in $\sA$ with $\bigcup_{n=1}^\infty B_n = \bigcup_{n=1}^\infty A_n$.  For every $n \in \bN$ we have 
+\begin{align*}
+\mu(B_n) &= \mu(A_1\cup \dots \cup A_n)\\
+&\leq \sum_{i=1}^n \mu(A_i) \\
+&\leq \sum_{i=1}^\infty \mu(A_i)
+\end{align*}
+because $\mu$ is in particular an additive set function as in lecture 1. Note that we have $\mu(B_n) \leq \sum_{i=1}^\infty \mu(A_i)$ for all $n\in \bN$. So we get 
+\[
+\mu\left(\bigcup_{n=1}^\infty A_n \right) = \mu \left( \bigcup_{n=1}^\infty B_n \right) = \lim_{n\rightarrow \infty} \mu(B_n) \leq \sum_{i=1}^\infty \mu(A_i).
+\]
+\end{proof}
+
+\newpage
+
+\section{The Borel $\sigma$-Algebra}
+
+\begin{lem}
+Let $X$ be a non-empty set and let $(A_i)_{i\in I}$ be a family of $\sigma$-algebras on $X$. Let $\sA = \bigcap_{i\in I}\sA_i = \{ A \subseteq X| A \in \sA_i, \forall i \in I\}$. Then $\sA$ is a $\sigma$-algebra. 
+\end{lem}
+
+\begin{proof}
+This is exactly as the proof from lecture 1 for algebras of sets. 
+\end{proof}
+
+\begin{prop}
+Let $X$ be a non-empty set and let $\cU$ be a collection of subsets of $X$. Then there exists a smallest $\sigma$-algebra, $\sA$, on $X$ such that $\sA \supseteq \cU$. This means that 
+\begin{enumerate}
+\item $\sA$ is a $\sigma$-algebra on $X$ and $\sA \supseteq \cU$
+\item Whenever $\cB$ is some $\sigma$-algebra of subsets of $X$ such that $B \supseteq \cU$, it follows that $\sA \subseteq \cB$. 
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+This is exactly as the proof of proposition 10 %proposition 1.11 in Nica's notes
+in lecture 1: Let $(\sA_i)_{i \in I}$ be the family of all $\sigma$-algebras which contain $\cU$. Take $\sA:=\bigcap_{i \in I} \sA_i$ and use lemma 26. %lemma 4.1 in Nica's notes
+\end{proof}
+
+\begin{defn}
+This smallest $\sigma$-algebra $\sA$ is called the {\bf $\sigma$-algebra generated by $\cU$}. 
+\end{defn}
+
+\begin{defn}
+Let $(X,d)$ be a metric space. Let $\mathcal{D} := \{D \subseteq X|D \text{ is open}\}$. The $\sigma$-algebra generated by $\mathcal{D}$ is called the {\bf Borel %Originaly "Boreal" lol
+$\sigma$-algebra }of $(X,d)$ (Usually denoted by $\cB_X$). The sets $B \in \cB_X$ are called Borel sets. 
+\end{defn}
+
+\begin{rem}
+We saw in lecture 2 that if $(X,d)$ a metric space, we would like to look at bounded functions $f:X\rightarrow \bR$ which are $(\sA,\xi)$-measurable, where $\sA$ is a $\sigma$-algebra which contains the open sets.  The Borel $\sigma$-algebra $\cB_X$ is the smallest possible such $\sA$.  \\
+
+\noindent Why not allow a bigger $\sA$? If $\sA$ is bigger, it becomes harder to construct the positive measure on $\sA$. Sometimes, it is not even possible to construct a good positive measure on large $\sigma$-algebras. 
+\end{rem}
+
+\begin{eg}
+Suppose $X = \bZ$. Let $\sA = \{A | A \subseteq \bZ\}$ and let $\mu$ be the counting measure. Then, $\mu$ is a translative invariant measure in the sense that $\mu(A+m) = \mu(A), \forall A\subseteq \bZ, m \in \bZ$, where $A+m := \{a+m|a\in A\}$. 
+\end{eg}
+
+\begin{eg}
+Let $X = \bR$, and take $L_{\bR} = \{A|A\subseteq \bR\}$. There exists no positive measure on $L_{\bR}$ such that $(A+t) = \mu(A)$ for all $A \in L_{\bR}$ and all $t\in \bR$ and such that $\mu([0,1])=1$. However, if we change $L_{\bR}$ to $\cB_{\bR}$, then it does work. 
+\end{eg}
+
+%Monday, Sept 24
+\begin{rem}
+From Yes $\neq$ No, it follows that $\cB_\bR \neq L_\bR$. I.e. it follows that there are subsets $\sA \subseteq \bR$ which are not Borel. Specifically, by using the axiom of choice, one can find $E\subseteq [0,1]$ such that 
+\begin{enumerate}
+\item for every $t\in \bR$, there exist $a\in E$ such that $t-a \in \bQ$.
+\item $a,b \in E$ and $a\neq b$, then $a-b \notin \bQ$.
+\end{enumerate}
+(Have an equivalence relation on $\bR$ where $x \sim y$ if $x-y \in \bQ$). 
+\end{rem}
+
+\begin{rem}
+The Borel $\sigma$-algebra $\cB_X$ is the framework for integration on $(X,d)$. We still have the issue of how to construct positive measures $\mu: \cB_X \rightarrow [0,\infty]$. The preferred method is one of Caratheodory. Find a nice algebra $\sA$ of subsets of $X$, such that $\sA$ generates $\cB_X$ as a $\sigma$-algebra. Define $\mu_0: \sA \rightarrow [0,\infty]$, then extend $\mu_0$ from $\sA$ to $\cB_X$. 
+\end{rem}
+
+\newpage
+
+\section{The Caratheodory Extension Theorem}
+
+\begin{defn}
+Let $X$ be a non-empty set and let $\sA$ be an algebra of subsets of $X$. Let $\mu_0$ be an additive set function on $\sA$. We say that $\mu_0$ is a {\bf pre-measure} when 
+\begin{itemize}
+\item If $\{A_n\}_{n=1}^\infty$ from $\sA$ are pairwise disjoint and if $\bigcup_{n=1}^\infty A_n \in A$, then \[\mu\left(\bigcup_{n=1}^\infty A_n\right) = \sum_{n=1}^\infty \mu_0(A_n).\]
+\end{itemize}
+\end{defn}
+
+\begin{rem}
+Clearly, the above condition (we will call it pre-$\sigma$-additivity) is necessary if there is to be a chance that $\mu_0$ extends to a positive measure on a $\sigma$-algebra $\cB \supseteq \sA$. We can rephrase the condition above as ``If $\{A_n\}_{n=1}^\infty \in \sA$ such that $A \subseteq \bigcup_{n=1}^\infty A_n$ for some $A\in\sA$, then $\mu_0(A) \leq \sum_{n=1}^\infty \mu_0(A_n)$".    
+\end{rem}
+
+\begin{thm}[Caratheodory]
+Let $X$ be a non-empty set, let $\sA$ be an algebra of subsets of $X$, and let $\mu_0$ be a pre-measure on $(X,\sA)$. Then one can extend $\mu_0$ to a positive measure $\mu$ on $(X,\cB)$ where $\cB$ is the $\sigma$-algebra generated by $\sA$. 
+\end{thm}
+
+\begin{proof}
+Use the trick of the outer measure. (A more detailed proof will follow)
+\end{proof}
+
+\begin{defn}
+Let $X$ be a non-empty set and let $\cL = \{A|A\subseteq X\}$. A set function $\mu^*: \cL \rightarrow [0,\infty]$ is said to be an an {\bf outer measure} when it satisfies 
+\begin{enumerate}
+\item $\mu^*(\emptyset) = 0$
+\item $E\subseteq F \subseteq X \Rightarrow\mu^*(E) \leq \mu^*(F)$
+\item $\mu^*(\bigcup_{n=1}^\infty E_n) \leq \sum_{n=1}^\infty \mu^*(E_n)$
+\end{enumerate}
+\end{defn}
+
+\begin{lem}[``Trick of outer measure"]
+Let $\mu^*$ be an outer measure. We say that $G\subseteq X$ is ``good for $\mu^*$" when it has the following property: Whenever $E\subseteq G$ and $F\subseteq X\backslash G$ it follows that $\mu^*(E \cup F) = \mu^*(E) + \mu^*(F)$. Let $\cG$ be subsets of $X$ which are ``good for $\mu^*$". Then $\cG$ is a $\sigma$-algebra on $X$ and $\mu^*|_\cG$ is a positive measure.  
+\end{lem}
+
+%Wednesday - Sept 26
+\begin{center}
+\emph{Wednesday, September  26}
+\end{center}
+
+\begin{proof}[Proof (of Caratheodory's Theorem).]
+Recall that, by assumption, $X$ is a non-empty set, $\sA$ is an algebra of subsets of $X$, and $\mu_0$ is a pre-measure on $(X,\sA)$. Let $L = \{E|E \subseteq X\}$ and define $\mu^*: L \to [0,\infty]$ to be such that for every $E \subseteq X$ we have 
+\[\mu^*(E) = \inf \left.\left\lbrace \sum_{n=1}^\infty \mu_0 (A_n) \right| (A_n)_{n=1}^\infty \text{ Sets from } \sA \text{ such that } \bigcup_{n=1}^\infty A_n \supseteq E\right\rbrace \] 
+We will prove 3 claims about $\mu^*$. 
+
+\begin{enumerate}
+\item $\mu^*$ is an outer measure
+\item $\mu^*(A) = \mu_0(A), \forall A \in \sA$
+\item Every $A \in \sA$ is ``good for $\mu^*$". 
+\end{enumerate}
+Assume the claims are proven. Let $\cG = \{G \subseteq X| G \text{ is good for } \mu^*\}$. Observe that $\sA \subseteq \cG$ (claim 3). $\cG$ is a $\sigma$-algebra (by lemma). This implies that $\cB \subseteq \cG$ since $\cB$ is the smallest $\sigma$-algebra containing $\sA$.  \\
+
+\noindent Denote $\mu = \mu^*|_\cB$, so $\mu:\cB \rightarrow [0,\infty]$ is defined by $\mu(B) = \mu^*(B)$, for all $B \in \cB$. Observe that $\mu$ extends $\mu_0$ (for $A \in \sA$ we have $\mu(A) = \mu^*(A) = \mu_0(A)$ by claim 2). \\
+
+\noindent Finally observe that $\mu^*|_\cG$ is a positive measure by lemma, this implies that $\mu^*|_\cB$ is a positive measure on $\cB$.  This ends the proof modulo the verifications of claims 1,2,3. \\
+\end{proof}
+
+\begin{claim}[1]
+$\mu^*$ is an outer measure.
+\end{claim}
+\begin{proof}
+The first 2 properties of an outer measure are left as an exercise. Let's check property 3. Fix $E_1,...\, , E_n , ...\, \subseteq X$ for which we will verify that $\mu^*\left(\bigcup_{n=1}^\infty E_n \right) \leq \sum_{n=1}^\infty \mu^*(E_n)$. If $\sum_{n=1}^\infty \mu^*(E_n) = \infty$, then it is clear. So assume $\sum_{n=1}^\infty \mu^*(E_n)<\infty$, it suffices to verify that 
+\[\mu^*\left(\bigcup_{n=1}^\infty E_n \right) \leq \epsilon + \sum_{n=1}^\infty \mu^*(E_n) \]
+For every $\epsilon >0$. So we fix an $\epsilon >0$ as well. Look at 
+\[
+\mu^*(E_1) = \inf \left.\left\lbrace \sum_{m=1}^\infty \mu_0(A_m)\right| A_1,...\, ,A_m,...\, \in \sA \wedge \bigcup_{m=1}^\infty A_m \supseteq E_1 \right \rbrace 
+\]
+By definition of infimum, we can pick $A_1^{(1)}, A_2^{(1)},...\,,A_m^{(1)}, ...\, \in \sA$ with $\bigcup_{m=1}^\infty A_m^{(1)} \supseteq E_1$ and such that 
+\[
+\sum_{m=1}^\infty \mu_0 (A_m^{(1)}) < \mu^*(E_1) + \frac{\epsilon}{2}.
+\]
+In general for every $n \in \bN$ pick $A_1^{(n)},A_2^{(n)},...\,,A_m^{(n)},...\, \in \sA$ such that $\bigcup_{m=1}^\infty A_m^{(n)} \supseteq E_n$ and such that 
+\[\sum_{m=1}^\infty \mu_0 (A_m^{(n)}) < \mu^*(E_n) + \frac{\epsilon}{2^n}. \]
+Note that $(A_m^{(n)})_{(m,n) \in \bN^2} \in \sA$ is a countable family, and that we also have
+\[\bigcup_{(m,n)\in\bN^2} A_m^{(n)} = \bigcup_{n=1}^\infty \left( \bigcup_{m=1}^\infty A_m^{(n)} \right) \supseteq \bigcup_{n=1}^\infty E_n.\]
+From the definition of $\mu^*$ as $\inf$, it follows that 
+\begin{eqnarray*}
+\mu^*\left( \bigcup_{n=1}^\infty E_n \right) &\leq& \sum_{(m,n)\in\bN^2}^\infty \mu_0(A_m^{(n)})\\ 
+&=& \sum_{n=1}^\infty \left( \sum_{m=1}^\infty \mu_0 (A_m^{(n)})\right)\\ 
+&\leq& \sum_{n=1}^\infty \left( \mu^*(E_n) + \frac{\epsilon}{2} \right)\\
+ &=& \left( \sum_{n=1}^\infty \mu^*(E_n)\right) + \epsilon 
+\end{eqnarray*}
+\end{proof}
+
+\begin{claim}[2]
+$\mu^*(A) = \mu_0(A)$, for all $A \in \sA$
+\end{claim}
+
+\begin{proof}
+Recall the remark about pre-$\sigma$-additivity which says if $A$ and $(A_n)_{n=1}^\infty$ are in $\sA$ and if $A \subseteq \bigcup_{n=1}^\infty A_n$, then $\mu_0(A) \leq \sum_{n=1}^\infty \mu_0(A_n)$. But then, for $A \in \sA$, we have 
+\begin{align*}
+\mu_0(A) &\leq \inf \left.\left \{ \sum_{n=1}^\infty \mu_0(A_n)\right| (A_n)_{n=1}^\infty \in \sA \wedge \bigcup_{n=1}^\infty A_n \supseteq A \right\}.
+\end{align*}
+``$\leq$" follows by definition of infimum. So we got $\mu^*(A) \geq \mu_0(A)$, for all $A \in \sA$.\\
+
+For the opposite inequality, look at the cover $A \subseteq \bar{A}_1 \cup \bar{A}_2\cup  \dots$ where $\bar{A}_1 = A$ ad $\bar{A}_n = \emptyset, \forall n\geq 2$. Thus, we have 
+\[\mu^*(A) \leq \sum_{n=1}^\infty \mu_0(\bar{A}_n) = \mu_0(A) + 0 + 0 + \dots  \]
+Which implies that $\mu^*(A) \leq \mu_0(A)$, for all $A \in \sA$. So $\mu^*(A) = \mu_0(A)$, for all $A \in \sA$.
+\end{proof}
+
+\begin{center}
+\emph{Friday, September 28}
+\end{center}
+
+Let $\cL = \{E|E\subseteq X\}$ and let $\mu^*: \cL \rightarrow [0,\infty]$, where for $E \subseteq X$, we put
+\[ \mu^*(E) = \inf \left.\left\{ \sum_{n=1}^\infty \mu_0 (A_n)\right| (A_n)_{n=1}^\infty \in \sA \text{ with } \bigcup_{n=1}^\infty A_n \supseteq E \right\}.\]
+We saw on Wednesday that $\mu^*$ is an outer measure which extends $\mu_0$. Now to prove the last of our 3 claims.
+
+\begin{claim}[3]
+Every $G \in \sA$ is ``good for $\mu^*$" (Which means that for any sets $E \subseteq G$ and $F \subseteq X\backslash G$ we have that $\mu^*(E \cup F) = \mu^*(F) + \mu^*(F)$). 
+\end{claim}
+\begin{proof}
+Pick a set $G \in \sA$ and pick $E,F \subseteq X$ where $E\subseteq G$ and $F \subseteq X\backslash G$. We must show that $\mu^* (E \cup F) = \mu^*(E) + \mu^*(F)$. The inequality $\leq$ is obvious. We need to prove ``$\geq$". If $\mu^*(E \cup F) = \infty$, then ``$\geq$" is trivial, hence will assume that $\mu^*(E \cup F) < \infty$. \\
+
+It suffices to prove that $\mu^*(E) + \mu^*(F) \leq \mu^*(E \cup F) + \epsilon, \forall \epsilon >0$. Fix $\epsilon >0$ for which we verify the above condition. By definition of $\mu^*$, we can find $(A_n)_{n=1}^\infty \in \sA$ such that $E \cup F \subseteq \bigcup_{n=1}^\infty A_n$ and such that 
+$\sum_{n=1}^\infty \mu_0(A_n) < \mu^*(E\cup F) + \epsilon$.
+Observe that 
+\[ E = (E\cup F) \cap G \subseteq \left( \bigcup_{n=1}^\infty A_n \right) \cap G = \bigcup_{n=1}^\infty \left( A_n \cap G \right) \]
+with $A_n \cap G \in \sA$, for all $n\geq 1$, because $A_n,G \in \sA$ and $\sA$ is an algebra of sets. The definition of $\mu^*$ implies that \[ \mu^*(E) \leq \sum_{n=1}^\infty \mu_0 (A_n \cap G)\]. Likewise, write $F = (E \cup F) \cap (X \backslash G)$ , to get 
+\[\mu^*(F) \leq \sum_{n=1}^\infty \mu_0 (A_n \cap (X \backslash G)) \]
+but then, adding the two inequalities together, we have 
+\begin{align*}
+\mu^*(E) + \mu^*(F) \leq \sum_{n=1}^\infty \Big( \mu_0 (A_n \cap G) + \mu_0 \big(A_n \cap (X \backslash G)\big) \Big) = \sum_{n=1}^\infty \mu_0(A_n) < \mu^*(E \cup F) + \epsilon
+\end{align*}
+as required. 
+\end{proof}
+
+Thus, we have proven the three required claims and so the proof of Caratheodory's theorem holds. 
+
+\newpage
+
+\section{An Application of Caratheodory / Lebesgue Stieljes Measures}
+
+Our goal is to try to describe all positive measures $\mu$ on $\cB_\bR$, the Borel $\sigma$-algebra of $\bR$, such that $\mu$ is finite on compact sets. These measures are also called  {\bf Lebesgue-Stieltjes} measures. 
+
+\begin{defn}
+Let $\mu: \cB_\bR \rightarrow [0,1]$ be a probability measure.  The probability distribution function of $\mu$ is $F: \bR \rightarrow \bR$ defined by $F(t) = \mu\big((-\infty,t]\big)$ where $F$ has the following properties:
+\begin{itemize}
+\item $F$ is increasing; $s\leq t \Rightarrow F(s) \leq F(t)$.
+\item $F$ is continuous from the right; if we have a decreasing sequence $t_n \rightarrow a$ from above, then $F(t_n) \rightarrow F(a)$ from above.
+\end{itemize}
+Why? Because of the continuity of $\mu$ along decreasing chains, we have
+\begin{align*}
+\lim_{n\rightarrow \infty} F(t_n) &= \lim_{n\rightarrow \infty} \mu\big((-\infty,t_n]\big) = \mu \left(\bigcap_{n=1}^\infty (-\infty, t_n]\right) = \mu\big((-\infty,a]\big) = F(a).
+\end{align*} 
+What about increasing convergent sequences $t_n \rightarrow b$. They have $\lim_{n\rightarrow \infty} F(t_n) \leq F(b)$ where the inequality may be strict. Why? Because 
+\[
+\lim_{n\rightarrow \infty}F(t_n) = \lim_{n\rightarrow \infty} \mu\big((-\infty, t_n]\big) = \mu\left(\bigcup_{n=1}^\infty (-\infty, t_n]\right) = \mu\big((-\infty,b)\big) = F(b) - \mu(\{b\}).
+\]
+So equality holds if and only if $b$ is not an atom for $\mu$ (where a singleton has positive measure). 
+\end{defn}
+
+\begin{defn}
+A function $F: \bR \rightarrow \bR$ is said to be a {\bf Cadlag Function} when it is increasing (in the above sense) and it is continuous from the right at every $a \in \bR$. Cadlag is an acronym for ``continue \`a droite, limite \`a gauche". If $\mu$ is a probability measure, then the distribution function is Cadlag. 
+\end{defn}
+\begin{rem}
+What if $\mu$ is the Lebesgue measure? Here $\mu\big((-\infty,t]\big) = \infty$ for all $t \in \bR$.
+\end{rem}
+
+\begin{lem}
+Let $\mu:\bR \rightarrow [0,\infty]$ be a positive measure with $\mu(K) < \infty$ for all compact $K \subseteq \bR$. There exists a function $G:\bR \rightarrow \bR$ that is uniquely determined such that $G(0) = 0$ and $\mu((a,b]) = G(b) - G(a), \forall a<b \in \bR$. This $G$ is a Cadlag function. If $\mu$ is a probability measure, then $G(t) = F(t) - F(0)$.  
+\end{lem}
+
+
+\emph{Monday, October 1}
+
+\begin{rem}
+In the special case when $\mu(\bR) = 1$, we have $G(t) = F(t) - F(0)$ where $F$ is the distribution function of $\mu$, $F(t) = \mu((-\infty, t])$. In the special case when $\mu$ is the Lebesgue measure on $\bR$, then $G(t) = t$. 
+\end{rem}
+
+
+\begin{proof}
+Define $G$ by putting
+\[ G = 
+\begin{cases}
+\mu((0,t]) &\text{If } t>0\\
+0 &\text{If } t=0\\
+-\mu((t,0]) &\text{If } t<0 
+\end{cases}
+\]
+Then $G$ has all the required properties (``cadlag" checked exactly as we did for distribution functions on Friday - Exercise). To prove uniqueness of $G$, suppose $\tilde{G}: \bR \rightarrow \bR$ is such that $\tilde{G}(b) - \tilde{G}(a) = \mu((a,b]),$ for all $a<b \in \bR$. Then, for $t>0$, we get 
+\[
+\tilde{G}(t) =\tilde{G}(t) - \tilde{G}(0) = \mu((0,t]) = G(t),
+\] 
+and for $t<0$, we get 
+\[
+\tilde{G}(t) = -(\tilde{G}(0) - \tilde{G}(t)) = -\mu((t,0]) = G(t).\]
+Hence, $\tilde{G} = G$. 
+\end{proof}
+
+\begin{defn}
+Let $\mu: \cB_\bR \rightarrow [0,\infty]$. If $\mu(K)<\infty$ for all compact subsets of $\bR$, we say that $\mu$ is a {\bf Lebesgue-Stieltjes Measure}.  If $\mu$ is a Lebesgue-Stieltjes measure, then the function $G$ given by the previous lemma for this $\mu$ will be denoted as $G_\mu$ and we call it the the {\bf Centered Stieltjes Function} of $\mu$. 
+\end{defn}
+
+\begin{prop}
+Suppose we have 2 Lebesgue-Stiletjes measure $\mu, \nu$ such that $G_\mu = G_\nu$, then $\mu = \nu$. 
+\end{prop}
+
+\begin{proof}
+\begin{claim}[1]
+$\mu((a,b]) = \nu((a,b])$ for all $a<b \in \bR$.
+\end{claim}
+
+\noindent By definition, $\mu((a,b]) = G_\mu(b) - G_\mu(a) = G_\nu(b) - G_\nu(a) = \nu((a,b])$. 
+
+\begin{claim}[2]
+$\mu(I) = \nu(I)$ for every open interval $I \subseteq \bR$. 
+\end{claim}
+\noindent If $I$ is bounded, $I = (a,b)$ with $a<b$ in $\bR$. Take $(t_n)_{n=1}^\infty \in (a,b)$ such that $t_n \rightarrow b$ from below. We get $(a,b) = \bigcup_{n=1}^\infty (a,t_n]$.  Then, we apply the continuity of $\mu$ along an increasing chain to get
+\[
+\mu((a,b)) = \lim_{n\rightarrow \infty} \mu((a,t_n])
+= \lim_{n\rightarrow \infty} \nu((a,t_n])
+= \nu((a,b)).
+\]
+What if $I$ was unbounded, say $I = (-\infty,b)$ for some $b \in \bR$? Proceed in the same way, with $I= \bigcup_{n=1}^\infty (s_n,t_n]$ with $t_n \rightarrow b$ from below and $s_n \rightarrow -\infty$.
+
+\begin{claim}[3]
+$\mu(D) = \nu(D)$, for all open $D \subseteq \bR$. 
+\end{claim} 
+We know from previous courses that an open set can be written as the disjoint union of open intervals: $D = \bigcup_{n=1}^\infty I_n$ ($I_n$ pairwise disjoint) and every $I_n$ is either an open interval or it is empty (the non-empty sets are connected components of $D_n$). Then, 
+\[
+\mu(D) = \sum_{n=1}^\infty \mu(I_n)
+= \sum_{n=1}^\infty \nu(I_n)
+= \nu(D).
+\]
+We applied $\sigma$-additivity, claim 2, and then $\sigma$ additivity again. We will now invoke the property of ``Closed Regularity" as in Problem 4(b) of Homework 2. 
+
+\begin{claim}[4]
+$\mu(B) = \nu(B)$ for every bounded set $B \in \cB_\bR$. 
+\end{claim}
+
+Pick $n \in \bN$ such that $B \subseteq (-n,n)$  and consider the metric space $(X,d)$ where we have $X = (-n,n)$ and $d$ is the usual distance on $\bR$. Have $\cB_X = \{B \in \cB_\bR|B \subseteq X\}$. Let $\tilde{\mu} = \mu |_{\cB_X}$ and $\tilde{\nu} = \nu|_{\cB_X}$. Then $\tilde{\mu},\tilde{\nu}$ are finite positive measures on $\cB_X$. We can write
+\begin{align*}
+\mu(B) &= \tilde{\mu}(B) \\
+&= \inf \{ \tilde{\mu}(D) | D\subseteq X \text{ open, such that } D\supseteq B\}\\
+&= \inf \{ \mu(D) | D\subseteq \bR \text{ open, such that } B \subseteq D \subseteq X \}\\
+&= \inf \{ \nu(D) | D \subseteq \bR \text{ open, such that } B \subseteq D \subseteq X \}\\
+&= \inf\{ \tilde{\nu}(D) | D \text{ open in } X, D \supseteq X\}\\
+&= \tilde{\nu}(B) = \nu(B).
+\end{align*}
+
+\begin{claim}[5]
+$\mu(B) = \nu(B)$, for all $B \in \cB_\bR$
+\end{claim}
+Write $B = \bigcup_{n=1}^\infty (B \cap(-n,n))$, an increase chain. We get
+\[
+\mu(B) = \lim_{n\rightarrow \infty} \mu (B \cap (-n,n))
+= \lim_{n\rightarrow \infty} \nu(B \cap (-n,n))
+= \nu(B).
+\]
+Above we used the continuity along increasing chains. 
+\end{proof}
+
+\begin{rem}
+We have a map from the Lebesgue Stieltjes measure into the cadlag functions, to every $\mu$ we associate $G_\mu$. The proposition we proved above, says that this map is injective. Is this map also surjective? We will show that the answer is yes! This means that given a cadlag $G:\bR \rightarrow \bR$ with $G(0) =0$ we are sure to have a $\mu$ such that $G = G_\mu$. This gives us a convenient way to construct measures on $\bR$. 
+\end{rem}
+\newpage
+
+\begin{center}
+\emph{Wednesday, October 3}
+\end{center}
+
+\begin{rem}
+Recall an example from lecture 1; 
+\[
+\cJ:=  \{\emptyset\} \cup \{ (a,b] | a<b \in \bR\} \cup \{(-\infty, b]| b\in \bR\} \cup \{(a,\infty)| a \in \bR\} \cup \{\bR\}.
+\]
+Let $\Sigma$ be the collection of finite unions of sets from $\cJ$.  Then $\Sigma$ is an algebra of subsets of $\bR$ called the algebra of half-open intervals. We can get this by using problem 1 from homework 1.  The conditions listed in that problem are satisfied by $\cJ$. This is a structure called a {\bf semialgebra} of sets. 
+\end{rem}
+
+\begin{defn}
+Given $G: \bR \rightarrow \bR$ is such that $s\leq t \Rightarrow G(s) \leq G(t)$. Define a set function $\mu_{00}: \cJ \rightarrow [0,\infty]$ by
+\begin{itemize}
+\item $\mu_{00}(\emptyset) = 0$
+\item $\mu_{00} ((a,b]) = G(b) - G(a)$
+\item $\mu_{00}((-\infty,b]) = G(b) - L_{-}$
+\item $\mu_{00}((a,\infty)) = L_{+} - G(a)$
+\item $\mu_{00}(\bR) = L_{+} - L_{-}$
+\end{itemize}
+Where $L_{+} = \lim_{t\rightarrow \infty} G(t) \in \bR \cup \{\infty\}$ and $L_{-}= \lim_{s\rightarrow -\infty} G(s) \in \bR \cup \{-\infty\}$. Note that $\mu_{00}$ can be naturally extended to an additive set function $\mu_0: \Sigma \rightarrow [0,\infty]$. Why? Every $E \neq \emptyset$ from $\Sigma$ can be written uniquely as $E = J_1 \cup \dots \cup J_k$ with  $J_1,\dots, J_k \in \cJ$, $J_i \neq \emptyset$ for $1\leq i \leq k$ and where $\text{cl}(J_i) \cap \text{cl}(J_j) = \emptyset$ for $i\neq j$.   \\
+
+\noindent We are now facing the problem of how to extend $\mu_0: \Sigma \rightarrow [0,\infty]$ to a positive measure $\mu: \cB_\bR \rightarrow [0,\infty]$. 
+\end{defn}
+
+\begin{lem}
+Let $\Sigma$ be as above. The $\sigma$-algebra generated by $\Sigma$ is $\cB_\bR$. 
+\end{lem}
+
+\begin{prop}
+Let $(X,d)$ be a metric space, let $\sA$ be an algebra of subsets of $X$, and let $\mu_0: \sA \rightarrow  [0,\infty]$ be an additive set function. Suppose that for every $A \in \sA$, we have {\bf Pre-regularity},
+\begin{align*}
+ \mu_0 (A) &= \inf\{ \mu_0(U) | U \in \sA \mathrm{\ and\ int}(U) \supseteq A\} \\
+ \mu_0(A) &= \sup\{ \mu_0(H) | H \in \sA \mathrm{\ where\ cl}(H) \subseteq A \mathrm{\ and\ cl}(H) \mathrm{\ is\ compact}\}
+ \end{align*}
+\end{prop}
+%wut, what is the proposition? is it first property implies the second, or is there a chunk missing?
+
+\begin{lem}
+Let $G: \bR \rightarrow \bR$ be a cadlag function. Let $\Sigma$ be the algebra of half-open intervals of $\bR$ and let $\mu_0: \Sigma \rightarrow [0,\infty]$ be as in the above definition. Then $\mu_0$ satisfies Pre-regularity, hence it is a pre-measure. 
+\end{lem}
+
+\begin{thm}
+Let $G:\bR \rightarrow \bR$ a cadlag function and with $G(0) = 0$. Then there exists a Lebesgue-Stieltjes measure $\mu$, uniquely determined such that $G_\mu = G$. 
+\end{thm}
+
+\begin{proof}
+Let $\mu_0:\Sigma \rightarrow [0,\infty]$ be defined by starting from $G$ as in the above remarks. Then, $\mu_0$ is a pre-measure, by the above lemma. Hence Caratheodory applies and extends $\mu_0$ to $\mu: \cB_\bR \rightarrow [0,\infty]$. It is immediate that $\mu$ is finite on compact sets (Lebesgue-Stieltjes) with $G_\mu = G$.  
+\end{proof}
+
+\begin{center}
+\emph{Friday, October 5}
+\end{center}
+
+\begin{prop}
+Let $(X,d)$ be a metric space. Let $\sA$ be an algebra of subsets of $X$ and let $\mu_0$ be an additive set function and suppose that $\mu_0$ satisfies the following ``pre regularity" conditions: For every $A \in \sA$ we have that 
+\[
+\mu_0(A) = \inf\{\mu_0(U)|U \in \sA \text{ and } \mathrm{int}(U)\supseteq A\}.
+\]
+Then $\mu_0$ is a pre-measure.
+
+\end{prop}
+
+\begin{proof}
+In order to prove that $\mu_0$ is a pre-measure, we verify the condition of pre-$\sigma$-additivity from problem 3 of homework 2. So let $A$ and $(A_n)_{n=1}^\infty$ be in $\sA$ such that $A \subseteq \bigcup_{n=1}^\infty A_n$. We want to show that 
+\[ \mu_0(A) \leq \sum_{n=1}^\infty \mu_0(A_n).\] 
+If $\sum_{n=1}^\infty \mu_0(A_n) = \infty $, then we are done. So we will assume that $\sum_{n=1}^\infty \mu_0(A_n) < \infty$. From pre-regularity, we know that 
+\[ \mu_0(A) = \sup\{\mu_0(H) | H\in \sA, \mathrm{cl}(H)\subseteq A,\mathrm{cl}(H) \text{ compact}\}.\]
+So the required equality will follow if we can prove that 
+\[ \mu_0(H) \leq \sum_{n=1}^\infty \mu_0(A_n)\]
+for every $H \in \sA$ such that $\mathrm{cl}(H)$ is a compact subset of $A$. Lets fix such an $H$. We have our usual trick; it suffices to prove 
+ \[ \mu_0(H) \leq \epsilon + \sum_{n=1}^\infty \mu_0(A_n), \forall \epsilon >0.\]
+So besides $H$, let us also fix an $\epsilon >0$. Apply pre-regularity to $A_n$, we can find $U_n \in \sA$ with $U_n\supseteq \mathrm{int}(U_n) \supseteq A_n$ and such that $\mu_0(U_n) < \mu_0 (A_n) + \frac{\epsilon}{2^n}$. Observe that 
+\[
+\mathrm{cl}(H) \subseteq A \subseteq \bigcup_{n=1}^\infty A_n \subseteq \bigcup_{n=1}^\infty \mathrm{int}(U_n).
+\]
+By definition of compactness we can find $N\in \bN$ such that $\mathrm{cl}(H) \subseteq \bigcup_{n=1}^N \mathrm{int}(U_n)$. So then $H \subseteq \bigcup_{n=1}^N U_n$ (because $H \subseteq \mathrm{cl}(H) \subseteq \bigcup_{n=1}^N \mathrm{int}(U_n) \leq \bigcup_{n=1}^N U_n$). Since $\mu_0$ is known to be finitely sub-additive, we get 
+\[
+\mu_0(H) \leq \sum_{n=1}^N \mu_0 (U_n)
+< \sum_{n=1}^N\left(\mu_0(A_n) + \frac{\epsilon}{2^n}\right) \leq \sum_{n=1}^\infty\left(\mu_0(A_n) + \frac{\epsilon}{2^n}\right)
+= \sum_{n=1}^\infty\mu_0(A_n) + \epsilon
+\]
+Therefore we get the desired inequality and so QED. 
+\end{proof}
+
+\begin{rem}
+Where is the Cadlag for $G$ used in order to verify Pre-Reg for $\mu_0$? Take special case $A = (a,b] \in \Sigma$ for $a<b \in \bR$. Lets check this, for this $A$ that $\mu_0(A) = \inf\{\mu_0 (U) | U \in \sA \text{ such that } \mbox{int}(U) \supseteq A \}$. Try $U_n = (a, b + \frac{1}{n}] \in \Sigma$. Have $\mbox{int}(U) = (a,b + \frac{1}{n}) \supseteq A$, $\mu_0(U)= G(b + \frac{1}{n}) - G(a)$. Do we have $\mu_0(U_n)\rightarrow \mu_0(A)$? $G(b + \frac{1}{n}) - G(a) \rightarrow G(b) - G(a)$. \\
+
+\noindent Yes, because, $G$ is continous  from the right.  For same $A = (a,b]$, let us check that $\mu_0(A) = \sup\{ \mu_0(H)| H \in \Sigma, \text{ such that } cl(H) \subseteq A \text{ and } cl(H) \text{ is compact }\}$. Try $H = (a_n,b] \in \Sigma$ where $a_n \rightarrow a$ from above. Then, $cl(H_n) = [a_n,b]$ compact, inside.  Have $\mu_0(H_n) \rightarrow \mu_0(A)$ from the left. Thus,  $G(b) - G(a_n) \rightarrow G(b) - G(b)$, i.e. $G(a_n) \rightarrow G(a)$  from the left and we are saved. 
+\end{rem}
+
+\begin{rem} Aside
+: In class midterm - 2nd november. 
+\end{rem}
+\newpage
+
+%Wednesday, October 10
+
+\section{The Space of Functions $\text{Bor}(X,\bR)$}
+
+\begin{defn}
+A function $X\rightarrow Y$ is said to be $(\sA,\cB)$-measurable when it has the property that $f^{-1}(B) \in \sA$ for all $B \in \cB$. We will now use this concept in the case when $\sA,\cB$ are $\sigma$-algebras (hence we will call $(X,\sA),(Y,\cB)$ measurable spaces). 
+\end{defn}
+
+\begin{defn}
+Let $(X,\sA)$ be a measurable space. A function $f: X\rightarrow \bR$ which is $(\sA,\cB_\bR) $- measurable will be called a {\bf Borel Function}.  We denote 
+\[
+\mathrm{Bor}(X,\bR) = \{f: X \rightarrow \bR \ |\ f  \mbox{ is a Borel function}\}.
+\]
+\end{defn}
+
+\begin{thm}
+Let $(X,\sA)$ be a measurable space. Then $\mathrm{Bor}(X,\bR)$ is a unital algebra of functions which is closed under pointwise convergence. 
+\end{thm}
+
+\begin{rem}
+``$\mathrm{Bor}(X,\bR)$ is an algebra of functions'' means that 
+\[
+f,g \in \mathrm{Bor}(X,\bR) \Longrightarrow \alpha f+\beta g \in \mathrm{Bor(X,\bR)}\text{ and } fg \in \mathrm{Bor}(X,\bR)
+\]
+for any scalars $\alpha,\beta \in \bR$. Unital means that $\mathbbm{1} \in \mathrm{Bor}(X,\bR)$. Moreover, if $f$ and $(f_n)_{n=1}^\infty$ are functions from $X \rightarrow \bR$ such that $f_n(x) \rightarrow f(x), \forall x \in X$ and if $f_n \in \mathrm{Bor}(X,\bR),\forall n \in \bN$, then it follows that $f \in \mathrm{Bor}(X,\bR)$. We need 2 tools to prove theorem 59. 
+\end{rem}
+
+\begin{prop} [Tool no.1]
+Consider the measurable spaces $(X,\cM),(Y,\cN),$ and $(Z,\cP)$. Let $f: X\rightarrow Y$ be $(\cM,\cN)$ measurable and let $g: Y \rightarrow Z$ be $(\cN,\cP)$-measurable. Consider the composed function $h = g\circ f:X \rightarrow Z$. Then $h$ is $(\cM,\cP)$-measurable. 
+\end{prop}
+
+\begin{proof}
+For every $C\subseteq Z$ have $h^{-1}(C) = (g \circ f)^{-1} (C) = f^{-1} (g^{-1}(C))$. So then $C \in \cP$ implies $g^{-1}(C) \in \cN$ (Since $g$ is $(\cN,\cP)$-measurable). Thus, $f^{-1}(g^{-1}(C)) \in \cM$ (since $f$ is $(\cM,\cN)$ measurable). Thus, $h^{-1}(C) \in \cM$. Hence, $h$ is $(\cM,\cP)$ measurable. 
+\end{proof}
+
+\begin{prop} [Tool no.2]
+Let $(X,\cM)$ and $(Y,\cN)$ be measurable spaces. Let $\cU \subseteq \cN$ be a collection of sets which generate $\cN$ as a $\sigma$-algebra. Let $f:X\rightarrow Y$ be such that $f^{-1}(U) \in \cM$, for all $U \in \cU$. Then, $f$ is $(\cM,\cN)$-measurable. 
+\end{prop}
+\begin{proof}
+This very similar to the proof in lecture 2 (proposition 12), only that now we use $\sigma$-algebras. 
+\end{proof} 
+
+\begin{cor}
+Let $(X,d)$ and $(Y,d')$ be metric spaces. Let $f:X \rightarrow Y$ be continuous. Then $f$ is $(\cB_X,\cB_Y)$-measurable. 
+\end{cor}
+
+\begin{proof}
+Let $\cD_Y = \{\cD \subseteq Y| D \text{ is open} \}$. Then, $\cD_Y$ generates $\cB_Y$ as a $\sigma$-algebra. By Tool \#2, it suffices to check that $f^{-1}(D) \in \cB_X$, for all $D \in \cD_Y$. Indeed, $D \in \cD_Y$ implies $f^{-1}(D) $ open in $X$ since $f$ is continuous, so $f^{-1}(D) \in \cB_X$. 
+\end{proof}
+
+\begin{prop}
+Let $(X,\cM)$ be a measurable space and let $f: X \rightarrow \bR^n$. We can write $f(x) = \big(f_1(x),\dots, f_n(x)\big) \in \bR^n$. This defines functions $f_1,\dots, f_n: X \rightarrow \bR$. We have that $f$ is $(\cM,\cB_\bR)$-measurable if and only if each of the $f_1,\dots, f_n$ is in $\mathrm{Bor}(X,\bR)$.
+\end{prop}
+
+\begin{proof}[Proof of ``$\Rightarrow$".] Fix $1\leq i \leq n$ for which we will verify that $f_i \in \mathrm{Bor}(X,\bR)$. Let $P_i:\bR^n \rightarrow \bR$ be the projection on component $i$: $P(t_1,\dots,t_n) = t_i$.  Note that $P_i$ is continuous, hence it is $(\cB_{\bR^n},\cB_\bR)$-measurable by corollary 63. Also note that $f$ is $(\cM,\cB_{\bR^n})$-measurable (hypothesis). This implies $f_i = P_i \circ f$ is $(\cM,\cB_\bR)$-measurable by Tool \#1. 
+\end{proof}
+
+\begin{rem} [Course Information] 
+Graduate Student T.A. Marking the Courses: Michael Ng. Office Hours: Mondays 2:30 - 3:30, office MC 5050. Email: ks2ng@uwaterloo.ca. 
+\end{rem}
+
+\begin{center}
+\emph{Friday, October 12}
+\end{center}
+\begin{proof}[Proof of ``$\Leftarrow$".]
+Let 
+\[
+\cU = \{ U \subseteq \bR^n\ |\ U \text{ is of the form } U = (a_1,b_1)\times \dots \times (a_n,b_n) \text{ for some } a_i < b_1 \in \bQ\}.
+\] Then, $\cU$ is a basis of open sets for $\bR^n$ (that is, for every $D \subseteq \bR^n$ open and $a \in D$, one can find $U \in \cU$ such that $a \in U \subseteq D$). Then, every non-empty open set $D \subseteq \bR^n$ can be written as an (automatically countable!) union of sets from $\cU$. This implies that $\cU$ generates $\cB_{\bR^n}$ as a $\sigma$-algebra (exercise, check!). In this implication, $``\Leftarrow"$, we know that $f_1,\dots, f_n \in \mathrm{Bor}(X,\bR)$ and want to prove that $f$ is $(\cM,\cB_{\bR^n})$-measurable.  We use Tool \#2 (Prop. 62) which implies that it suffices to verify that $f^{-1}(U) \in \cM$, for all $U \in \cU$. Indeed, for $U = (a_1,b_1) \times \dots \times (a_n, b_n) \in \cU$, we get 
+\begin{align*}
+f^{-1}(U) &= \{ x \in X| f(x) \in U\} \\
+&= \{x \in X| \big(f_1(x),\dots,f_n(x)\big) \in (a_1,b_1) \times \dots \times (a_n, b_n) \}\\
+&= \{ x \in X| f_i(x) \in (a_i, b_i), \text{for all }1 \leq i \leq n \}\\
+&= \bigcap_{i=1}^n f_i^{-1}\big((a_i,b_i)\big).
+\end{align*}
+Each of the sets in the intersection is in $\cM$ since $f_i$ is $(\cM,\cB_\bR)$-measurable. Hence, $f^{-1}(U)$ is a finite intersection of sets from $\cM$ which implies that $f^{-1}(U) \in \cM$. 
+\end{proof}
+
+\begin{prop}
+Let $(X,\cM)$ be a measurable space and let $f,g \in \mathrm{Bor}(X,\bR)$, then we have $f+g, f\cdot g \in \mathrm{Bor}(X,\bR)$.  
+\end{prop}
+
+\begin{proof}
+Define $h: X \rightarrow \bR^2$ by putting $h(x) := \big(f(x),g(x)\big)$. Then, $h$ is $(\cM,\cB_{\bR^2})$-measurable by Prop. 64. Define, $S,P: \bR^2 \rightarrow \bR$ with $S\big((a,b)\big) = a+b$ and $P\big((a,b)\big) = ab$. Note that $S$ and $P$ are continuous functions, hence they are $(\cB_{\bR^2}, \cB_\bR)$-measurable by corollary 63. Using Tool \#1 (Prop.61), we get that $S\circ h$ and $P\circ h$ are $(\cM,\cB_{\bR})$-measurable. Hence, $S\circ h, P\circ h \in \mathrm{Bor}(X,\bR)$ but $S\circ h = f + g$  and $P\circ h = f\cdot g$ so we are done. 
+\end{proof}
+
+\begin{rem}
+What about ``unary" operations with Borel functions? Given a measurable space $(X,\cM)$ and $f \in \mathrm{Bor}(X,\bR)$, one can form many new functions, such as $\alpha f$ for fixed $\alpha \in \bR$. How about $|f|$ or $\exp(f)$? We claim that all of these functions are still in $\mbox{Bor}(X,\bR)$ because of Tool \#1. Why? for example take $\exp(f)$, let $g(t) = \exp(t)$ which is continuous and so $(\cB_\bR, \bR)$-measurable, so composition maintains  measurability. 
+\end{rem}
+
+\begin{prop}
+Let $(X,\cM)$ be a measurable space. 
+\begin{enumerate}
+\item Let $f$ and $f_0,\dots,f_n,\dots $ be functions from $X \rightarrow \bR$, such that $f(x) = \sup \{ f_n(x)| n \in \bN\}$. If, for all $n \in \bN$, we have $f_n \in \mathrm{Bor}(X,\bR)$, then it follows that $f \in \mathrm{Bor}(X,\bR)$. 
+\item  Similar statement for infimum.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+We must verify that $f^{-1}(B) \in \cM$, for all $B \in \cB_\bR$. Tool \#2 tells us that it suffices to check that $f^{-1}(U) \in \cM$, for all $U \in \cU$ where $\cU = \{(-\infty,b]\ |\ b \in \bR\}$ (Problem 1 form Homework 3 tells us that $\cU$ generates $\cB_\bR$ as a $\sigma$-algebra).  For $U = (-\infty, b]$, we have $f^{-1}(U) = \{x \in X| f(x) \leq b\}$. 
+%Monday, October 15
+So it now suffices to verify that $\{x \in X|f(x) \leq b\} \in \cM$ for every $b \in \bR$. Let's fix $b \in \bR$. Observe that for every $x \in X$ we have 
+\[
+f(x) \leq b \Longleftrightarrow \sup_{n\geq 1} f_n(x) \leq b \Longleftrightarrow f_n(x) \leq b, \forall n \in \bN.
+\]
+Therefore, we find that 
+\begin{align*}
+ \{ x \in X|f(x) \leq b \} &= \bigcap_{n=1}^\infty \{x \in X|f_n(x) \leq b\}\\
+ &= \bigcap_{n=1}^\infty f^{-1}_n\big((-\infty, b]\big) \in \cM.
+\end{align*}
+So we have proven 1.
+To prove 2, simply define $g:= -f$ and $g_n := -f_n$ for all $n \in \bN$. Then, $g_n \in \mathrm{Bor}(X,\bR)$ for every $n \in \bN$. We also have that $g(x) = \sup_{n\geq 1} g_n(x)$ directly from the definition of infimum and supremum. Apply part 1 of the proposition toget that $g$ is a borel function. Hence, $f = -g$ is in $\mathrm{Bor}(X,\bR)$ as well. 
+\end{proof}
+
+\begin{prop}
+Let $(X,\cM)$ be a measurable space. 
+\begin{enumerate}
+\item If $f$ and $(f_n)_{n=1}^\infty$ from $X\to \bR$ are such that $f(x) = \limsup_{n\rightarrow \infty} f_n(x)$ and if we also have that $f_n \in \mathrm{Bor}(X,\bR)$, then $f\in\mathrm{Bor}(X,\bR)$. 
+\item If $g$ and $(g_n)_{n=1}^\infty$ from $X \to \bR$ are such that $g(x) = \liminf_{n\rightarrow \infty} g_n(x)$ and if we also have that $g_n \in \mathrm{Bor}(X,\bR)$, then $g \in \mathrm{Bor}(X,\bR)$. 
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Recall that for a sequence $(t_n)_{n=1}^\infty$ in $\bR$, we define 
+\[
+\limsup_{n\to \infty} t_n = \inf_{k\geq 1}\left(\sup_{n \geq k} t_n\right)
+\]
+and 
+\[
+\liminf_{n\rightarrow \infty}  t_n = \sup_{k\geq 1} \left(\inf_{n\geq k} t_n\right).
+\]
+For every $x \in X$ we have $f(x) = \inf_{k\geq 1}(\sup_{n\geq k} f_n(x))$. So then, for every $k \in \bN$, let us define 
+\[
+h_k(x) = \sup_{n\geq k} f_n(x).
+\]
+By proposition 68, since each $f_n$ is Borel for $n\geq k$, each $h_k$ is measurable. So $h_k \in \mathrm{Bor}(X,\bR)$. But, the definition of limit supremum tells us that $f(x) = \inf_{k\geq 1} h_k(x)$. Using proposition 68 again, this time using part 2, yields that $f(x)$ is Borel. For part 2, this reduces to above proof by taking negatives as in proposition 68 (left as exercise). 
+\end{proof}
+
+\begin{rem} [Discussion of Limit Superior]
+Note that $\sup_{n\geq 1} t_n \geq \sup_{n\geq 2} t_n \geq \dots \geq \sup_{n\geq k} t_n$ forms a decreasing sequence. Let $\sigma_k := \sup_{n\geq k} t_n$ and $\sigma := \lim_{k\rightarrow \infty} \sigma_k \in [-\infty, \infty]$. Note that the limit does exists since it is a non-increasing sequence. So it is $\lim_{n\rightarrow \infty} (\sup_{n\geq k} t_n)$. Another possibility is to look at all possible convergent subsequences of $\{t_n\}_{n=1}^\infty$ with limits $\lambda \in [-\infty, \infty]$. Among these possible limits $\lambda$, there exists a greatest and a smallest, $\lambda_+, \lambda_-$.   Then, $\lambda_+$ is the limit superior and $\lambda_-$ is limit inferior. As an exercise, show that the two definitions are equivalent. In particular, note that for a convergent sequence $(t_n)_{n=1}^\infty$ we have 
+\[
+\limsup_{n\rightarrow \infty} t_n = \liminf_{n\rightarrow \infty} t_n = \lim_{n\rightarrow \infty} t_n.
+\]
+\end{rem}
+
+\begin{cor}
+Let $(X,\cM)$ be a measurable space, if $\{f_n\}_{n=1}^\infty$ a sequence of functions in $\mathrm{Bor}(X,\bR)$ such that $f(x) = \lim_{n\rightarrow \infty} f_n(x)$, then $f \in \mathrm{Bor}(X,\bR)$.  
+\end{cor}
+
+\begin{proof}
+Write $f(x) = \lim_{n\rightarrow \infty} \sup f_n(x)$ and then use proposition 69.  
+\end{proof}
+
+\begin{rem} [Conclusions]
+The theorem 59 is now proven. We showed that if $f,g \in \mathrm{Bor}(X,\bR)$, then $f+g, fg \in \mathrm{Bor}(X,\bR)$ and $\alpha f  \in \mathrm{Bor}(X,\bR)$ for any $\alpha\in\bR$. Note that $1_f \in \mathrm{Bor}(X,\bR)$ is trivial. So $\mathrm{Bor}(X,\bR)$ is a unital algebra of functions which is closed under pointwise limits (by corollary 71). 
+\end{rem}
+
+\newpage
+%Wednesday, October 17
+
+\section{Integration of Non-Negative Borel Functions}
+
+\begin{rem}
+We have a measurable space $(X,\cM)$ and an algebra of functions $\mathrm{Bor}(X,\bR)$. Denote 
+\[
+\mathrm{Bor}^+(X,\bR) = \{ f \in \mathrm{Bor}(X,\bR)|f(X) \subseteq [0,\infty)\},
+\]
+\[
+\mathrm{Bor}_s(X,\bR) = \{f \in \mathrm{Bor}(X,\bR)| f(X) \subseteq \bR \text{ is finite }\},
+\]
+and 
+\[
+\mathrm{Bor}_s^+ (X,\bR) = \mathrm{Bor}^+ (X,\bR) \cap \mathrm{Bor}_s(X,\bR).
+\]
+Given a measure space, we want to associate to every $f \in \mathrm{Bor}^+(X,\bR)$ a value in $[0,\infty]$ called its integral against $\mu$.  
+\end{rem}
+
+\begin{lem}
+We have a natural ``functional" $L_s^+: \mathrm{Bor}_s^+ (X,\bR) \rightarrow [0,\infty]$ uniquely determined with additivity, positive homogeneity and $L_s^+(I_A) = \mu(A)$ for measurable $A$. 
+\end{lem}
+
+\begin{rem}
+Operations in $[0,\infty]$ are the natural ones with the convention that $0\cdot \infty = 0 $. For the proof of the previous statement, how do we explicitly  construct $L_s^+(u)$ for some $u \in \mathrm{Bor}_s^+(X,\bR)$. Observe that $u$ has the canonical writing $u = \alpha_1 I_{A_1} + \dots + \alpha_n I_{A_n}$ with $A_i \cap A_j = \emptyset$.  Namely, we enumerate, $u(X) \backslash \{0\} = \{\alpha_1, \dots, \alpha_n\}$ and put $A_i = u^{-1} \big(\{\alpha_i\}\big)$. Then, we define 
+\[
+L_s^+(u) := \sum_{i=1}^n \alpha_i \mu(A_i) \in [0, \infty].
+\]
+It is trivial to see that $L_s^+(I_A) = \mu(A)$. Left to check that $L_s^+$ is additive and positive homogeneous. Exercise!  
+\end{rem}
+
+\begin{rem}
+How do we define integrals for general functions $f \in \mathrm{Bor}(X,\bR)$? Lebesgue's answer: Take a supremum and that's it! 
+\end{rem}
+ 
+\begin{defn}
+Let $f \in \mathrm{Bor}^+(X,\bR)$, then 
+\[
+\int f \, d \mu := \sup \{ L_S^+ (u) \st u \in \mathrm{Bor}_s^+(X,\bR), u \leq f \}.
+\]
+\end{defn}
+ 
+\begin{thm} [Properties of the Integral] $ $
+\begin{enumerate}
+\item Monotonic
+\item Additive
+\item Positively Homogeneous
+\item Simple functions have the integral you expect
+\item Monotone Convergence Theorem 
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+Left as an exercise since it is so similar to PMATH 450.
+\end{proof}
+ 
+\begin{rem}
+Part 5 is usually proved before part 2. 
+\end{rem}
+ 
+
+%Friday, October 19
+
+ 
+\begin{rem}
+We will do a bit of a discussion around the proof of theorem 78, In particular $\#2$. Proof of $\int f+g \geq \int f + \int g$ is easy, but proof of ``$\leq$'' is not that easy! 
+\end{rem}
+ 
+\begin{claim}
+Fix $f,g \in \mathrm{Bor}^+(X,\bR)$. Then we have $\int f+g \, d \mu \geq \int f \, d\mu + \int g \, d\mu$. 
+\end{claim}
+
+\begin{proof}
+If $\int f + g = \infty$, then it is clear. So let's assume that  $\int f+g \, d\mu < \infty$. Then, we also have 
+\begin{align*}
+\int f \, d\mu &\leq \int f +g \, d\mu < \infty\\
+\int g\,  d\mu &\leq \int f +g \, d\mu < \infty
+\end{align*}
+(Because $f,g \leq f+g$ and by part 1 of the theorem seen on wednesday). It suffices to prove that 
+\begin{align*}
+\epsilon + \int f + g \, d\mu &\geq \int f \, d\mu + \int g \, d\mu,
+\end{align*}
+for all $\epsilon>0$. Let's fix some $\epsilon >0$. From the definition of $\int f \, d\mu$, we can find $u \in \mathrm{Bor}_s^+(X,\bR)$ with $u \leq f$ and such that $L_S^+(u) > \int f \, d\mu - \frac{\epsilon}{2}$. Likewise, there exists a $v \in \mathrm{Bor}_s^+(X,\bR)$ such that $v \leq g$ and $L_s^+(v) > \int g \, d\mu  - \frac{\epsilon}{2}$. Put $w:= u + v \in \mathrm{Bor}_s^+(X,\bR)$. Then $w \leq f + g$, so 
+\[
+\int f + g \, d\mu \geq L_s^+(w) 
+= L_s^+ (u+v)
+= L_s^+(u) + L_s^+(v)
+>  \int f \, d\mu  +  \int g \, d\mu  - \epsilon.
+\] 
+\end{proof}
+\noindent Claim 1 done. Can we do this with claim 2? Lets try and see what happens.
+
+\begin{claim}
+Fix $f,g \in \mathrm{Bor}^+(X,\bR)$. Then we have $\int f+g \, d \mu \leq \int f \, d\mu + \int g \, d\mu$. 
+\end{claim}
+\noindent Can we do this directly from the definition? We start with $w \in \mathrm{Bor}_s^+(X,\bR)$ such that $w \leq f +g$ and we need to prove that
+\[
+L_s^+ (w) \leq  \int f \, d\mu  + \int g \, d\mu.
+\]
+To get this, would have to decompose $w = u+v$ with $u,v \in \mathrm{Bor}_s^+(X,\bR)$ such that $u \leq f$ and  $v \leq g$. How? This is not easy! So how do people prove this claim? First prove Lebesgue Monotone Convergence Theorem without assuming additivity. Then prove that for every $f \in \mathrm{Bor}^+(X,\bR)$, one can make a sequence $(u_n)_{n=1}^\infty$ in $\mathrm{Bor}_s^+(X,\bR)$ such that $u_1 \leq ...\leq u_n \leq...$ and $\lim_{n \rightarrow \infty} u_n(x) = f(x)$, for all $x \in X$.  Let's write $u_n \rightarrow f$ to denote pointwise convergence of functions.\\
+Now go back to claim 2. Given $f,g \in \mathrm{Bor}^+(X,\bR)$, take sequences $u_n,v_n \in Bor_s^+(X,\bR)$ such that $u_n \rightarrow f, v_n \rightarrow g$ from below. Then, $u_n + v_n \rightarrow f + g$ and we get 
+\begin{align*}
+\int f+g \, d \mu &= \lim_{n\rightarrow \infty} \int (u_n + v_n) \, d\mu\\
+&= \lim_{n\rightarrow \infty} L_s^+ (u_n + v_n) \\
+&= \lim_{n\rightarrow \infty} L_s^+(u_n) + L_s^+(v_n)\\
+&\leq \int f \,  d\mu + \int g \, d\mu.
+\end{align*}
+
+\begin{rem}
+How does the current lecture 8 relate to lecture 2? There it was a more restrictive case where we forced $\mu(X) < \infty$ and $f \in \mathrm{Bor}(X,\bR)$ bounded.  There we had the hypothesis ``$f$ is $(\cM, \Sigma)$-measurable with $\cM$ a $\sigma$-algebra'', this is the same as saying $f \in \mathrm{Bor}(X,\bR)$. We proved that $\int^+ f \, d\mu = \int_{-} f\, d\mu$ (make divisions, follow $f$) where $\int^+f, \int_{-}f$ are Darboux sums. Suppose now that $f\geq 0$, hence $f \in \mathrm{Bor}^+(X,\bR)$ does the Darboux integral from above match the Lebesgue integral? Yes! The key-point is to relate upper and lower Darboux sums to simple functions. $\Delta = \{A_1,...,A_r\}\Rightarrow u = \sum_{i=1}^r B_i I_{A_i}$ $U(f,\Delta) = L_s^+(u)$. 
+\end{rem}
+
+\newpage
+
+\section{Integrable Functions}
+
+For the whole lecture, fix a measure space $(X,\cM,\mu)$. 
+
+\begin{defn}
+Let $\cL^1(\mu) := \{f \in \Bor(X,\bR) \st \int |f|d\mu < \infty \}$. The functions in $\cL^1(\mu)$ are said to be integrable with respect to $\mu$. 
+\end{defn}
+
+\begin{rem}
+$\cL^1(\mu)$ is closed under linear combinations. For any $f,g \in \cL^1(\mu)$ and any $\alpha, \beta \in \bR$ we have $\alpha f + \beta g \in \cL^1(\mu)$. Indeed, 
+\[\int \abs{\alpha f + \beta g} \, d\mu \leq \int \abs{\alpha} \abs{f} + \abs{\beta}\abs{g} \, d\mu = \abs{\alpha} \int \abs{f} \, d\mu + \abs{\beta} \int \abs{g} \, d\mu < \infty.
+\]
+But how do we define the integral on the space of $\cL^1(\mu)$?
+\end{rem}
+
+\begin{rem}
+For $f : X\rightarrow \bR$ define $f_-$ and  $f_+$ by $f_+ (x) = \max(f(x),0)$ and $f_{-} (x) = \max(-f(x),0)$. It is immediate that $f = f_+ - f_{-}$, moreover $f_+ + f_{-} = |f|$. This shows that alternatively we can write 
+\[
+f_+ = \frac{|f|+ f}{2} \mbox{ and }
+f_{-} = \frac{|f| - f}{2}.
+\]
+It is now clear that 
+\[
+f \in \Bor(X,\bR) \Longrightarrow f_+, f_{-} \in \Bor(X,\bR).
+\]
+Finally, observe that if $f \in \cL^1(\mu)$, then 
+\[
+f_+ \leq |f| \Longrightarrow \int f_+ d\mu \leq \int |f| d\mu < \infty\]
+and
+\[
+f_{-} \leq |f| \Longrightarrow \int f_{-} d\mu \leq \int |f| d\mu < \infty.
+\]
+In short, we also get $f_+, f_{-} \in \Bor^+(X,\bR) \cap \cL^1(\mu)$.
+\end{rem}
+
+\begin{defn}
+For $f \in \cL^1(\mu)$ we define 
+\[
+\int f \, d\mu := \int f_{+} \, d\mu - \int f_{-}\, d\mu \in \bR
+\]
+Note that the left integral is the new integral we have just defined and the right hand integral is the one from lecture 8 defined on positive measurable functions. Note that if $f \in \cL^1(\mu) \bigcap \Bor^+(X,\bR)$, then the values ``$\int f d\mu$'' defined in Lecture 8 and in Lecture 9 coincide. Indeed, in this case we get $\int f_+ = f$ and $f_{-} = 0$. Hence, $\int f \, d\mu = \int f \, d\mu - 0$. 
+\end{defn}
+
+\begin{thm} [Properties of the integral on $\cL^1(\mu)$] $ $
+\begin{enumerate}
+\item Additive: $\int f + g \, d\mu = \int f \, d\mu + \int g \, d\mu$.
+\item Homogenous: $\int \alpha f \, d\mu = \alpha \int f \, d\mu$.
+\item Increasing:  If $f,g \in \cL^1(\mu)$ and $f\leq g$, then $\int f \, d\mu \leq \int g \, d\mu$.
+\item $\abs{\int f \, d\mu} \leq \int |f| \, d\mu$ for all $f \in \cL^1(\mu)$. 
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+(1.) Let $h := f + g$ and consider the positive/negative parts$f_{\pm},g_{\pm}, h_{\pm} \in \Bor^+(X,\bR) \bigcap \cL^1(\mu)$. We have, 
+\[
+h_+ - h_{-} = (f_+ + g_+) - (f_{-} + g_{-})
+\]
+so
+\[
+h_+ + f_{-} + g_{-} = h_{-} + f_{+} + g_{+}
+\]
+so
+\[
+\int h_+ \, d\mu + \int f_{-} \, d\mu + \int g_{-} \, d\mu = \int h_{-} \, d\mu + \int f_{+} \, d\mu  + \int g_{+} \, d\mu.
+\]
+Note that all involved quantities are finite! Rearrange the terms to get 
+\begin{align*}
+\int h \, d\mu &= \int h_+ \, d\mu - \int h_{-}\, d\mu\\
+&= \int f_+ \, d\mu - \int f_{-} \, d\mu + \int g_+ \, d\mu - \int g_{-}\, d\mu\\
+&= \int f\, d\mu + \int g\, d\mu.
+\end{align*}
+(2.) Immediate directly form the definition of the integral on $\cL^1(\mu)$. Verifications depend on the sign of $\alpha$. E.g. for $\alpha < 0$, we get $(\alpha f)_{+} = |\alpha| f_{-}$ and $(\alpha f)_{-} = |\alpha| f_{+}$. Hence, 
+\[
+\int \alpha f \, d\mu = \int \abs{\alpha}f_- \, d\mu - \int \abs{\alpha} f_+ \, d\mu = -|\alpha| \int f \, d\mu = \alpha \int f \, d\mu.
+\]
+(3.) Let $f,g \in \cL^1(\mu)$ with  $f\leq g$. Then we have $g -f \in \Bor^+(X,\bR)\bigcap \cL^1(\mu)$. So we also have that$\int g - f \, d \mu \in [0,\infty)$. But $\int g - f \, d\mu = \int g \, d\mu - \int f \, d\mu$, and hence we get $\int g \, d\mu - \int \, f d\mu \geq 0$. \\
+
+\noindent (4.) Let $f\in \cL^1(\mu)$. We have  $\pm|f|\in \cL^1(\mu)$ with $-|f| \leq f \leq |f|$. Apply 3 of this theorem to get 
+\[
+-\int |f| \, d\mu = \int - |f| \, d\mu \leq \int f \, d\mu \leq \int |f| \, d\mu.
+\]
+So we have that
+\[
+-\left( \int |f| d\mu \right) \leq \int f d\mu \leq \int |f| d\mu \]
+which gives $\abs{\int f d\mu } \leq \int |f| d\mu$. 
+\end{proof}
+
+\newpage
+
+\section{Fatou's Lemma and Lebesgue Dominated Convergence Theorem}
+
+\begin{eg}
+Let $X = [0,1]$, let $\cM = \cB_X$ and let $\mu$ be the Lebesgue measure on $[0,1]$. For every $n\in \bN$ let 
+\[ f_n(x) = 
+\begin{cases}
+(2n)^2x+1 & x \leq \frac{1}{2n}\\
+-(2n)^2x+4n+1 & \frac{1}{2n} \leq x \leq \frac{1}{n}\\
+1 & \frac{1}{n} \leq x
+\end{cases}
+\]
+Note that $f_n(x) \rightarrow 1$ but $\int f_n(x)\, dx = 2$. We get different integrals.  Could we construct an example such that the limit is less than 1? Fatou says no, we cannot do that. 
+\end{eg}
+
+\begin{center}
+\emph{Wednesday, October 24}
+\end{center}
+
+\begin{rem}
+Fatou's lemma for $f_n$ in $\Bor^+(X,\bR)$ says that we always have 
+\[
+\lim_{n\rightarrow \infty }\left( \int f_n \, d\mu\right) \geq \int \lim_{n\rightarrow \infty} f_n \, d\mu.
+\]
+
+\noindent Question: Could we adjust the example to make the $f_n$ uniformly bounded? Dominated convergence theorem says no. If $c$ dominates all the $f_n$ and since $\int c \, d\mu = c < \infty$, then by LDCT it must follow that 
+\[
+\lim_{n\rightarrow \infty} \int f_n \, d\mu = \int \lim_{n\rightarrow \infty} f_n \, d\mu
+\]
+Note: The dominating constant function $c$ is specific to case when $\mu(X) <\infty$ but LDCT applies in the case when $\mu(X) = \infty$, but there we use integrable dominating functions instead. 
+\end{rem}
+
+\begin{rem}
+There is an analogy between LMCT and ``continuity along chains'' from lecture 3. Recall general principle sets are functions with values in $\{0,1\}$. 
+\end{rem}
+
+\begin{lem}
+Let $u\in\Bor^+(X,\bR)$ and let $(u_n)_{n=1}^\infty$ be a sequence of functions from $\Bor^+(X,\bR)$ with $u_n\to u$ such that 
+\[
+u_1 \geq u_2 \geq \dots \geq u_n \geq \cdots
+\]
+and such that $\int u_1 \, d\mu < \infty$, then $\int u \, d\mu = \lim_{n\rightarrow \infty} \int u_n \, d\mu$.
+\end{lem}
+
+\begin{proof}
+Proof left as an exercise. The idea for the proof: Denote $V_n := u_1 - u_n \in \Bor^+(X,\bR)$. Then we have $0 = v_1 \leq v_2 \leq \cdots $. Apply LMCT to $\{v_n\}$ (proof is truly analaogous to what we did in Lecture 3). 
+\end{proof}
+\newpage
+\begin{prop}[Fatou's Lemma] $ $
+\begin{enumerate}
+\item Suppose we have $f$ and $(f_n)_{n=1}^\infty$ in $\Bor^+(X,\bR)$ such that $f(x) = \liminf_{n\rightarrow \infty} f_n(x)$, for all $x \in X$.
+Then,
+\[ \int \liminf f_n \, d\mu \leq \liminf_{n\rightarrow \infty} \int f_n\, d\mu.
+\]
+
+\item Suppose we have $g$ and $(g_n)_{n=1}^\infty$ in $\Bor^+(X,\bR)$ such that $g(x) =\limsup_{n\rightarrow \infty} g_n(x)$ for all $x \in X$. Suppose also that there exists a dominating function $h \in \Bor^+(X,\bR) \cap \cL^1 (\mu)$ such that $g_n \leq h$ for all $n \in \bN$, then 
+\[
+\int \limsup g_n \, d\mu \geq \limsup_{n\rightarrow \infty} \int g_n \, d\mu.
+\]
+\end{enumerate}
+\end{prop}
+
+\begin{rem}
+Fatou's Lemma, both 1 and 2, is proved by the ``Trick of Fatou''; take the inf/sup for the tail of your sequence. 
+\end{rem}
+
+%\begin{rem} [Midterm]
+%Midterm exam is next Friday, November 2, 1:30 - 2:20 in Biology %2, Room 350. 
+%3 questions:
+%State L(1-7)
+%Prove 
+%Solve Hw(1-2)
+%\end{rem}
+
+\begin{proof}
+We will do part 2. Denote $\int g_n \, d\mu := \gamma_n$. We want to prove that $\int g d\mu \geq \limsup_{n\rightarrow \infty} \gamma_n$. For every $n \in \bN$ define $u_n:X \rightarrow \bR$ by 
+\[
+u_n(x) = \sup(g_n(x), g_{n+1}(x),...\, , g_m(x),...) \in X.
+\]
+Note that $0 \leq u_n(x) \leq h(x)$ for all $n \in \bN$ and $x\in X$. We have $u_n \in \Bor^+(X,\bR)$ by some proposition in lecture 7. We also have 
+\[
+u_1 \geq u_2 \geq \dots \geq u_n \geq \cdots
+\]
+and
+\[
+\lim_{n\rightarrow \infty} u_n(x) := \limsup_{n\rightarrow \infty} g_n(x) = g(x)
+\]
+for all $x \in X$. Note that $\int u_1 \, d\mu \leq \int h \, d\mu < \infty$. Hence, we can apply lemma 90 to $(u_n)_{n=1}^\infty$. We now get 
+\[
+\lim_{n\rightarrow \infty} \int u_n \, d\mu = \int g \, d\mu.
+\]
+Now fix $n \in \bN$, observe that $\forall m \geq n$ we have
+\[
+\int u_n \, d\mu \geq \int g_m \, d\mu = \gamma_m
+\]
+so $\int u_n \, d\mu \geq \sup(\gamma_n,\gamma_{n+1}, ...\, , ...)$.
+Last point, unfix $n$ and make $n\rightarrow \infty$ in the above point. So 
+\begin{align*}
+\int g \, d\mu &= \lim_{n\rightarrow \infty} \int u_n \, d\mu \\
+&\geq \lim_{n\rightarrow \infty} (\sup (\gamma_n, \gamma_{n+1}m,\dots,))\\
+&= \limsup_{n\rightarrow \infty} \gamma_n
+\end{align*}
+\end{proof}
+
+\begin{thm}[Lebesgue Dominated Convergence Theorem]
+Let $\left(X,\mathcal{M},\mu\right)$ be a measure space. Let $f$
+and $\left(f_{n}\right)_{n=1}^{\infty}$ be functions from $\mbox{Bor}\left(X,\mathbb{R}\right)$
+such that $\lim_{n\to\infty}f_{n}\left(x\right)=f\left(x\right)$,
+$\forall x\in X$. Suppose moreover that there exists a function $h\in\mbox{Bor}^{+}\left(X,\mathbb{R}\right)\cap\mathcal{L}^{1}\left(\mu\right)$
+which dominates all the $f_{n}$, in the sense that ve have $\left|f_{n}\right|\leq h$,
+$\forall n\in\mathbb{N}$. Then $f$ and $f_{1},f_{2},\ldots,f_{n},\ldots$
+are all in $\mathcal{L}^{1}\left(\mu\right)$, and
+\begin{align*}
+\lim_{n\to\infty}\int f_{n}d\mu=\int fd\mu \tag{1}
+\end{align*}In fact, even stronger that (1), we have
+\begin{align*}
+\lim_{n\to\infty}\int\left|f_{n}-f\right|d\mu=0 \tag{2}
+\end{align*}
+\end{thm}
+
+\begin{proof}
+Do first (2). For every $g_n = |f_n - f| \in \Bor^+(X,\bR)$ . Then, $g_n(x) = |f_n(x) - f(x)| \rightarrow 0$ for all $x \in X$. Will apply corollary 10.5 to the $g_n$s. Is this a dominating function for the $g_n$s? \\
+
+We know that $|f_n(x)| \leq h(x)$. Note that for every $x \in X$, we also have that 
+\[ |f(x)| = \lim_{n\rightarrow \infty} |f_n(x)| \leq h(x) \] 
+Hence, $g_n(x) = |f_n(x) - f(x)| \leq |f_n(x)| + |f(x)|\leq 2h(x) $. So the previous lemma applies, and gives $\int g_n \rightarrow 0$ hence $\int |f_n - f| \rightarrow 0$. We have 
+\[ |\int f_n - \int f| = |\int f - f | \leq \int |f_n - f| = \int g_n \rightarrow 0 \]
+\end{proof}
+
+%\begin{rem}[Midterm!]
+%Midterm next Friday during class in Biology 2, room 350. 
+%3 questions. 
+%\begin{enumerate}
+%\item State. State definitions, theorems, etc (2-3 pages of statements)
+%\item Proof question from class.[From Lecture 1-7] 
+%\item Solve: Similar to one on the homework assignment (1,2). 
+%\end{enumerate}
+%\end{rem}
+\newpage
+
+%Monday, October 29
+
+\section{Densities and Signed Measures}
+
+\begin{rem}
+For this lecture, let $(X,\cM,\mu)$ be a measure space, $f \in \Bor^+(X,\bR)$, and $A \in \cM$. By $\int_A f d\mu$ we mean $\int f \cdot I_A \, d\mu $, in the sense of lecture 8, where $I_A \in \Bor^+(X,\bR)$ is the indicator function of $A$. 
+\end{rem}
+
+\begin{prop}
+For every $A \in \cM$, let us put 
+\[ \nu(A) := \int_A f \, d\mu \]
+Then, $\nu: \cM \rightarrow [0,\infty]$ is a positive measure. 
+\end{prop}
+
+\begin{proof}
+Firstly, $\nu(\emptyset) = \int f \cdot I_\emptyset \, d\mu = \int 0 \, d\mu = 0$. So the first condition is satisfied. Next, let $(A_n)_{n=1}^\infty$ be in $\cM$ such that each $A_i$ is pairwise disjoint with the other elements in the collection. Consider the union $U:= \bigcup_{n=1}^\infty A_n$. We want to check that $\nu(U) = \sum_{n=1}^\infty \nu(A_n)$. Indeed we have
+\begin{eqnarray*}
+\sum_{n=1}^\infty \nu(A_n) &=& \lim_{N\rightarrow \infty} \mbrac{\sum_{n=1}^N \nu(A_n)}\\
+&=& \lim_{N\rightarrow \infty} \mbrac{\sum_{n=1}^N \int f \cdot I_{A_n} \, d\mu } \\
+&=& \lim_{N\rightarrow \infty} \mbrac{\int f(I_{A_1} + \dots + I_{A_n})\, d\mu }\\
+&=& \lim_{N \rightarrow \infty} \mbrac{ \int f \cdot I_{A_1 \cup \dots \cup A_n} \, d\mu}.
+\end{eqnarray*}
+It is immediate that we have $f\cdot I_{A_1 \cup \dots \cup A_n}$ converges from below to $f \cdot I_U$. So therefore, by LMCT, we have  
+\[ \lim_{N\rightarrow \infty} \int f \cdot I_{A_1\cup \dots \cup A_n} \, d\mu = \int f \cdot I_U \, d\mu = \nu(U).\] 
+So altogether, we get $\sum_{n=1}^\infty \nu(A_n) = \nu(U)$ as we wanted. 
+\end{proof}
+
+\begin{lem}
+Let $f \in \Bor^+(X,\bR)$, and let $\nu: \cM \rightarrow [0,\infty]$ be as in the above proposition. Then, for every $g \in \Bor^+(X,\bR)$, we have 
+\[\int g \, d\nu = \int gf \, d\mu. \tag{$\diamond$} \]
+\end{lem}
+
+\begin{proof}
+Let $G = \{ g \in \Bor^+(X,\bR) \st (\diamond) \mbox{ holds for } g \}$. We want to prove that $G = \Bor^+(X,\bR)$.
+
+\begin{claim}[1]
+$I_A \in G$ for all $A \in \cM$.
+\end{claim}  
+
+\begin{proof} [Verification of Claim 1]
+For $g = I_A$, we get 
+\[ \int g \, d\nu = \int I_A \, d\nu = \nu(A) = \int f \cdot I_A \, d\mu = \int gf \, d\mu. \]
+\end{proof}
+
+\begin{claim}[2]
+If $g_1,g_2 \in G$ and $\alpha_1,\alpha_2 \in [0,\infty)$, then $g:= \alpha_1 g_1 + \alpha_2 g_2 $ is in $G$ as well. 
+\end{claim}
+
+\begin{proof} [Verification of Claim 2]
+We know that $\int g_1 \,d \nu = \int g_1 f \, d\mu$ and $\int g_2 \, d\nu = \int g_2 f \,d\mu$, so if we do the linear combination of these two equalities with coefficients $\alpha_1,\alpha_2$ we get $\int g \, d \nu = \int gf \, d\mu$ due the linearity of the integral with respect to $\mu$ and to $\nu$. Hence, $g \in G$.
+\end{proof}
+
+\begin{claim}[3]
+Suppose $g$ and $(g_n)_{n=1}^\infty$ in $\Bor^+(X,\bR)$ are such that $g_n \rightarrow g$ from below. If $g_n \in G$ for each $n \in \bN$, then $g \in G$. 
+\end{claim}
+
+\begin{proof} [Verification of Claim 3]
+It is immediate that $g_n \cdot f \rightarrow gf$. We know that $\int g_n \, d\nu = \int g_n \, f d\mu$ since $g_n \in G$.  Use LMCT on both sides of the the equality to get $\int g\, d \nu = \int gf \, d\mu$ and hence $g \in G$. 
+\end{proof}
+
+\begin{claim}[4]
+$G \supseteq \Bor_s^+ (X,\bR)$.
+\end{claim}
+\begin{proof}[Verification of Claim 4]
+This follows from claims 1 and 2 and the fact that every $g \in \Bor_s^+(X,\bR)$ can be written as $\sum_{i=1}^n \alpha_i I_{A_i}$.  
+\end{proof}
+
+\begin{claim}[5]
+$G = \Bor^+(X,\bR)$. 
+\end{claim}
+\begin{proof}[Verification of Claim 5]
+This follows from claims 3 and 4 and the fact that for every $g$ in $\Bor^+(X,\bR)$, one can find a sequence $(g_n)_{n=1}^\infty$ in $\Bor_s^+(X,\bR)$ with $g_n \rightarrow g$ (This last fact is similar to problem 4 in homework 4). 
+\end{proof}
+\noindent Claim 5 ends the proof.
+\end{proof}
+
+\begin{rem}
+One uses the notation $d\nu = f \, d\mu$. This only really makes sense in the context of integrals. Look at the formula $(\diamond)$ and ``cancel'' the integral for convenience (or laziness). 
+\end{rem}
+
+\begin{rem}
+Suppose $f \in \cL^1(\mu)$. For every $A \in \cM$ have that $f \cdot I_A \in \cL^1(\mu)$ as well (Why? Beacause $f \cdot I_A \in \Bor(X,\bR)$ since $f$ and $I_A$ are Borel and we have $|f \cdot I_A| \leq |f|$. Hence $\int |f \cdot I_A| \, d\mu \leq  \int |f| \, d\mu < \infty$). So we can define 
+\[ \int_A f \,d\mu := \int f \cdot I_A \,d\mu \in \bR \]
+Hence, we can define $\nu: \cM \rightarrow \bR$ as $\nu(A) = \int_A f \,d\mu$, for all $A \in \cM$. \\
+
+\noindent If $f \geq 0$ (that is, $f \in \cL^1(\mu) \cap \Bor^+(X,\bR)$), then $\nu$ is a finite positive measure. What if $ f$ is not in $\Bor^+(X,\bR)$. Then, we get for $\nu$ what is called a finite signed measure. 
+\end{rem}
+
+\begin{defn}
+Let $(X,\cM)$ be a measurable space. A {\bf finite signed measure } is a set function $\nu: \cM \rightarrow \bR$ such that whenever $(A_n)_{n=1}^\infty$ are in $\cM$ , pairwise disjoint, it follows that 
+\[
+\sum_{n=1}^\infty \abs{\nu(A_n)} < \infty \tag{*}
+\]
+and
+\[
+\nu \mbrac{\bigcup_{n=1}^\infty A_n } = \sum_{n=1}^\infty \nu(A_n) \tag{**}
+\] 
+We denote 
+\[ \Meas^{\pm} (X,\cM) = \{ \nu: \cM \rightarrow \bR \st \nu \mbox{ is a finite signed measure}\} \] 
+and we also denote
+\begin{align*}
+\Meas^+(X,\cM)& = \{ \nu \in \Meas^{\pm}(X,\cM) \st \nu(A) \geq 0, \forall A \in \cM \}\\
+&= \{ \nu: \cM \rightarrow [0,\infty) \st \nu \mbox{ is a finite positive measure}\}.
+\end{align*}
+\end{defn}
+
+\begin{rem}
+In definition 99, we did not ask (as we usually do) that $\nu(\emptyset) =0$. This actually follows from (*). Take $A_n = \emptyset$, for all $n \in \bN$. Then (*) gives us $\sum_{n=1}^\infty \abs{\nu(\emptyset)} < \infty$, which implies $\nu(\emptyset) = 0$. \\
+
+\noindent Note that $\nu \in \Meas^{\pm}(X,\cM)$ implies that $\nu$ is finitelly additive since $\nu(\bigcup_{i=1}^m A_i) = \sum_{i=1}^m \nu(A_i)$ for pairwise disjoint sets (use (**)).\\
+
+\noindent {\bf Warning: }  A property that $\nu \in \Meas^{\pm}(X,\cM)$ generally does not have is monotonicity. It is generally not true that $A\subseteq B \Rightarrow \nu(A) \leq \nu(B)$ because $\nu(B) - \nu(A) = \nu(B\backslash A)$ could be less than 0. 
+\end{rem}
+
+\begin{rem}
+$\Meas^{\pm}(X,\mu)$ is a vector space over $\bR$ with natural operations for additions and scalar multiplication, $\nu:= \alpha_1\nu_1 + \alpha_2 \nu_2$ by $\nu(A) = \alpha_1\nu_1(A) + \alpha_2 \nu_2(A)$. It is immediate that $\nu$ is a vector space. One does a linear combination of absolutely convergent series. 
+\end{rem}
+
+\begin{prop}
+Suppose $(X,\cM,\mu)$ a measure space. Then, 
+\begin{enumerate}
+\item Let $f \in \cL^1(\mu)$ and define $\nu: \cM \rightarrow \bR$ by $\nu(A) = \int_A f \, d\mu = \int f \cdot I_A \, d\mu$, for all $A \in \cM$. Then $\nu \in \Meas^{\pm}(X,\cM)$. 
+
+\item The map $\Lambda: f \rightarrow \nu$ (as in 1) is a linear map from $\cL^1(\mu) \rightarrow \Meas^{\pm}(X,\cM)$. 
+\end{enumerate}
+\end{prop}
+
+\begin{proof} $ $
+\begin{enumerate}
+\item Write $f = f_{+} - f_{-}$, with $f_{\pm} = \frac{1}{2} (|f| \pm f) \in \Bor^+(X,\bR) \cap \cL^1 (\mu)$ as in lecture 9. Define $\nu_+, \nu_{-}: \cM \rightarrow \bR$ by $\nu_+(A) = \int_A f_{+} \, d\mu$ and  $\nu_{-}(A) = \int_A f_{-} \, d\mu$, for all $A \in \cM$. Then, $\nu_+, \nu_-$ are positive measures by proposition 95. In fact, $\nu_+,\nu_-$ are \emph{finite} positive measures since
+\[ \nu_{\pm} (X) = \int f_{\pm} \,d\mu \leq \int |f| \, d\mu < \infty  \]
+Hence, $\nu_+ - \nu_- \in \Meas^{\pm}(X,\cM)$ (because $\Meas^+ (X,\cM) \subseteq \Meas^{\pm} (X,\cM)$ and because $\Meas^{\pm}(X,\cM)$ is closed under linear combinations), but $\nu_+ - \nu_- = \nu$. Hence we have $\nu \in \Meas^{\pm}(X,\cM)$ as required. 
+
+\item Let $f_1,f_2 \in \cL^1(\mu)$ and let  $\alpha_1, \alpha_2 \in \bR$. Put $f = \alpha_1 f_1 + \alpha_2 f_2 \in \cL^1(\mu)$ and consider 
+\begin{align*}
+f_1 &\rightarrow \nu_1\\
+f_2 & \rightarrow \nu_2\\
+f & \rightarrow \nu.
+\end{align*}
+We want to check that $\nu = \alpha_1 \nu_1 + \alpha_2 \nu_2$. This is immediate; for every $A \in \cM$ we have 
+\begin{eqnarray*}
+\nu(A) &=& \int fI_A \, d\mu \\
+&=& \int (\alpha_1f_1 + \alpha_2 f_2) I_A \, d\mu \\
+&=& \alpha_1 \int f_1 I_{A} \, d\mu + \alpha_2 \int f_2 I_A \, d\mu \\
+&=& \alpha_1 \nu_1(A) + \alpha_2 \nu_2(A).
+\end{eqnarray*}
+\end{enumerate}
+\end{proof}
+
+\begin{rem}
+Some natural questions about the linear map $\Lambda: f \rightarrow \nu \in \Meas^{\pm}(X,\cM)$ from prop 11.9.2 where $f \in \cL^1(\mu)$. What is $\ker(\Lambda)$? Homework problem; Show that $\Lambda(f) = \Lambda(g) \Longleftrightarrow f = g \mbox{ a.e.}$ \\
+
+\noindent What is $\mathrm{Ran}(\Lambda)$? This is the Radon-Nikodyn Theorem: Assume $\mu$ is $\sigma$-finite. The we get that $\mathrm{Ran}(\Lambda) = \{\nu\in\Meas^{\pm}(X,\cM)\st \nu \mbox{ is absolutely continuous w.r.t } \mu \}$. Some natural questions about $\Meas^{\pm}(X,\cM)$.
+\begin{enumerate}
+\item Is it true that $\mathrm{Span}(\Meas^+(X,\cM)) = \Meas^{\pm}(X,\cM)$?
+\item Do we have a natural norm on $\Meas^{\pm}(X, \cM)$? 
+\end{enumerate}
+The answers to both these questions are yes and shown in the following lecture. 
+\end{rem}
+
+%\begin{rem}
+%Midterm - Friday 1:30 - 2:20. 
+%\end{rem}
+
+\newpage
+
+%Monday, November 5
+
+\section{Positive, Negative, and Total Variation for Finite Signed Measures}
+
+\begin{defn}
+Let $(X,\cM)$ be a measurable space and let $\nu \in \Meas^{\pm}(X,\cM)$. For every $A \in \cM$, we define
+\[ V^+(A) = \sup \{ \nu(B)|B  \in \cM, B \subseteq A\} \] 
+and
+\[ V^{-}(A) = \sup\{ -\nu(B)| B \in \cM, B\subseteq A\} = -\inf\{\nu(B)| B \in \cM, B \subseteq A\}.\]
+We call $V^+(A)$ and $V^-(A)$ the {\bf Positive and Negative Variations} of $\nu$ on $A$. The sum $\nu^+(A) + \nu^-(A)$ is called the total variation $\nu$ on $A$. 
+\end{defn}
+
+\begin{rem}
+When we replace $\nu$ by $-\nu$ (which still belongs to $\Meas^\pm (X,\cM))$, the roles of $V^+$ and $V^-$ are swapped.
+\end{rem}
+
+\begin{rem}
+If $(X,\cM)$ and  $\nu \in \Meas^\pm(X,\cM)$, then $A \rightarrow V^+(A) $ is a set function. Why is it that $V^+(A) = \sup \{ \nu(B)| B \in \cM, B \subseteq A\} \geq 0$? because the supremum includes $\emptyset$ and $V^+(\emptyset) = 0$. A priori, it looks possible that $V(A) = \infty$ (we will rule this out). 
+\end{rem}
+
+\begin{lem}
+Let $V^+(A)$ be the positive variation of $\nu$ (a signed measure), then $V^+$ is a positive measure. 
+\end{lem}
+
+\begin{proof}
+First we have that $V^+(\emptyset) = \sup \{ \nu(B) | B \in \cM, B \subseteq \emptyset\} = \nu(\emptyset) = 0$. Now fix $(A_n)_{n=1}^\infty$ in $\cM$ such that $A_n \cap A_m = \emptyset$ for $n \neq m$ and denote $A:= \bigcup_{n=1}^\infty A_n$. We want to prove that 
+\[ V^+(A) = \sum_{n=1}^\infty V^+(A_n).\]
+Let's first prove ``$\leq$''. From the definition of $V^+(A)$ as a supremum, it suffices to check that we have $\nu(B) \leq \sum_{n=1}^\infty \nu^+(A_n)$ for every $B \in \cM$ with $B \subseteq A$. Fix $B \in \cM$ with $B \subseteq A$. We have 
+\[
+B = B \cap A = B \cap \mbrac{\bigcup_{n=1}^\infty A_n }\\
+= \bigcup_{n=1}^\infty \mbrac{B \cap A_n}.
+\]
+Note that this is still a union over disjoint sets, therefore, 
+\[
+\nu(B) = \sum_{n=1}^\infty \nu(B \cap A_n) \leq \sum_{n=1}^\infty V^+(A_n).
+\]
+The first equality comes from absolute convergence and second inequality comes form the fact that $\nu(B \cap A_n) \leq V^+(A_n)$ because $B \cap A_n \in \cM$ and $B \cap A_n \subseteq A_n$.\\
+Now let's prove ``$\geq$''. That is, $V^+(A) \geq \sum_{n=1}^\infty V^+(A_n)$. It suffices to check that 
+\[
+V^+(A) \geq \sum_{n=1}^N V^+(A_n)
+\]
+for all $N \geq 1$.
+Once this is done, we only have to make $N \rightarrow \infty$. So fix an $N \in \bN$. By playing with supremums, it is easy to see that 
+\[
+\sum_{n=1}^N V^+(A_n) = \sup \{ \nu(B_1) + \dots + \nu(B_n)\st B_1,\dots, B_n \in \cM, B_i \subseteq A_i\}.
+\]
+So it suffices to check that $\nu(B_1) + \dots + \nu(B_n) \leq V^+(A)$ whenever $B_1, \dots, B_n \in \cM$ are such that $B_i \subseteq A_i$.  And indeed, for any such $B_1, \dots, B_N$, we have $B_i \cap B_j \subseteq A_i \cap A_j = \emptyset$ for $i \neq j$. Hence, 
+\[ \nu(B_1) + \dots + \nu(B_n) = \nu(B_1 \cup \dots \cup B_n) \leq V^+(A)\]
+The first equality by finite additivity and the second inequality because $B_1 \cup \dots \cup B_N \subseteq A$. 
+\end{proof}
+
+\begin{thm} % (**)
+Let $(X,\cM)$ be a measurable space and and let $\nu \in \Meas^\pm(X,\cM)$. Let $V^+,V^-: \cM \rightarrow [0,\infty]$ be the positive/negative variations of $\nu$. Recall that 
+\[\Meas^+ (X, \cM) = \{\mu \in \Meas^\pm(X,\cM)\st \mu(A) \geq 0, \forall A \in \cM\} = \{ \mu \mbox{ a finite signed measure} \}. \] Then, 
+\begin{enumerate}
+\item $V^+ \in \Meas^+(X,\cM)$
+\item $V^- \in \Meas^+(X,\cM)$
+\item $V^+ - V^- = \nu$ (This is called the Jordan Decomposition of $V$)
+\end{enumerate}
+\end{thm}
+
+\begin{defn}
+Let $\nu \in \Meas^\pm(X,\cM)$. The measure $V^+ + V^- \in \Meas^+(X,\cM)$ is called the {\bf Total Variation Measure} of $\nu$, denoted by $|\nu|$. The number $|\nu|(X) = V^+(X) + V^-(X)$ is called the {\bf Total Variation} of $V$ denoted by $\|\nu\|$. 
+\end{defn}
+
+%\begin{center}
+%\emph{Wednesday, November 7}
+%\end{center} 
+
+\begin{lem}
+Let $\nu \in \Meas^\pm(X,\cM)$ and let $V^+$ be the positive variation of $\nu$. Then, $V^+(X) < \infty$ and hence $V^+ \in \Meas^+(X,\cM)$.
+\end{lem}
+
+\begin{proof}
+\begin{claim}[1]
+Let $E \in \cM$ and suppose that $V^+(E) = \infty$.  Then, can write $E = A\cup B$ with $A \cap B = \emptyset$ sucht that $|\nu(A)|\geq 1$ and $|\nu(B)| \geq 1$. 
+\end{claim}
+
+\begin{proof}[Verification of Claim 1]
+By definition, we can find $B \in \cM$ such that $B \subseteq E$ with the property that $\nu(B) > 1 + |\nu(E)|$. Put $A = E\backslash B$, then $\nu(A) = \nu(E) - \nu(B)$. Hence, 
+\[ |\nu(A) | = |\nu(B) - \nu(E)| \geq |\nu(B)| - |\nu(E)| = \nu(B) - \nu(E) \geq 1 \]
+\end{proof}
+
+\begin{claim}[2]
+Let $E \in \cM$ and suppose $V^+(E) = \infty$. Then, $A,B$ from Claim 1 can be picked such that (in addition to the properties form Claim 1) we have $V^+(A) = \infty$. 
+\end{claim}
+
+\begin{proof} [Verification of Claim 2]
+$V^+$ is a positive measure and hence 
+\[
+V^+(A) + V^+(B) = V^+(A\cup B) = V^+(E) = \infty.\]
+Therefore, at least one of $V^+(A), V^+(B)$ is infinite. By swapping $A$ and $B$ if necessary, we may assume that $V^+(A) = \infty$. 
+\end{proof}
+
+\begin{claim}[3] $V^+(X) < \infty$.
+\end{claim}
+
+\begin{proof}[Verification of Claim 3]
+Assume by contradiction that $V^+(X) = \infty$. By Claim 2, we can find $A_1,B_1 \in \cM$ with $A \cup B = X$, $A_1 \cap B_1 = \emptyset$, $V^+(A_1) = \infty$, and $|\nu(B_1)| \geq 1$. Now apply claim 2 to $A$. This gives us a partition $A_1 = A_2 \cup B_2$ with $A_2,B_2 \in \cM$ such that $A_2 \cap B_2 = \emptyset$, $V^+(A_2) = \infty$, and $|\nu(B_2)|\geq 1$. Continue recursively, get sequences of sets $(A_n),(B_n)$ in $\cM$ where 
+\[
+A_1 \supseteq A_2 \supseteq \dots \supseteq A_n \dots 
+\] 
+and 
+\[
+B_1 = X\backslash A_1,\; B_2 = A_1 \backslash A_2,\; \dots,\; B_n = A_{n-1}\backslash A_n,\; \dots
+\]
+ and where $|\nu(B_n)|\geq 1$, for all $n \in \bN$. Note that our construction gives $B_n \cap B_m = \emptyset, \forall n\neq m$. The definition of a finite signed measure implies that 
+\[ \sum_{n=1}^\infty |\nu(B_n)| < \infty.\]
+So the assumption $V^+(X) = \infty$ leads to a contradiction. Hence, $V^+(X) < \infty$. 
+\end{proof}
+Claim 3 ends the proof.
+\end{proof}
+
+\begin{proof} [Proof of Theorem 108] $ $
+\begin{enumerate}
+\item Follows from Lemma 110
+\item Follows from 1, applied to the measure $-\nu \in \Meas^\pm (X, \cM)$
+\item Will prove the required equality $V^+(A) - V^-(A) = \nu(A)$ by double inequality. 
+\end{enumerate}
+
+\begin{claim}[``$\geq$"]
+If $\nu \in \Meas^\pm(X,\cM)$ and  $A \in \cM$, then $\nu(A)\geq V^+(A) - V^-(A)$. 
+\end{claim}
+
+\begin{proof}[Verification of ``$\geq$"]
+By the definition of $V^+(A)$, we can find a sequence $(B_n) \in \cM$ with $B_n \subseteq A$ for all $n \in \bN$ such that $\nu(B_n) \rightarrow V^+(A)$ (from below). For every $n \in \bN$ we put $C_n = A\backslash B_n$. We have, $\nu(C_n) = \nu(A) - \nu(B_n)$. Note that 
+\[
+C_n \in \cM, C_n \subseteq A \, \Longrightarrow\, \nu(C_n) \geq \inf \{ \nu(C)\st C \in \cM, C \subseteq A \} = - V^- (A).
+\]
+So we get $\nu(A) - \nu(B_n) = \nu(C_n)\geq - V^-(A)$, for all $n \in \bN$. Let $n \rightarrow \infty$ and we get 
+\[ \nu(A) - V^+(A) \geq -V^-(A). \] 
+Hence, $\nu(A) \geq V^+(A) - V^-(A)$ as claimed.
+\end{proof}  
+
+\begin{claim}[``$\leq$"]
+If $\nu \in \Meas^\pm (X,\cM)$ and $A \in \cM$, then we have $\nu(A) \leq V^+(A) - V^-(A)$.
+\end{claim}
+
+\begin{proof}[Verification of ``$\leq$"]
+Use claim ``$\geq$'' for the measure $-\nu$. Let us denote $-\nu=: \sigma$ and let $W^+,W^-$ denote the positive/negative variations for $\sigma$. By claim ``$\geq$'' for $\sigma$ we have
+\[\sigma(A)\geq W^+(A) - W^-(A).\]
+But we know that $W^+ = V^-$ and $W^- = V^+$ so we get 
+\[-\nu(A)\geq V^-(A) - V^+(A)\]
+which implies
+\[\nu(A) \leq V^+(A) - V^-(A).\]
+\end{proof}
+This ends the proof of the Jordan Decomposition Theorem. 
+\end{proof}
+
+\newpage 
+
+% Friday, November 9 
+
+\section{Hahn Decomposition for Finite Signed Measures}
+
+\begin{defn}
+Let $(X,\cM)$ be a measurable space.
+\begin{enumerate}
+\item Let $\mu\in \Meas^+(X,\cM)$ and let $A\in\cM$. We say that $\mu$ is concentrated on $A$ if and only if $\mu(X\setminus A) = 0$.
+\item Let $\mu_1,\mu_2\in \Meas^+(X,\cM)$. We say that $\mu_1,\mu_2$ are mutually singular (denoted as $\mu_1 \perp \mu_2$) when there exists $A_1,A_2\in\cM$ such that $A_1\cap A_2 = \emptyset$ and such that $\mu_1$ is concentrated on $A_1$ and $\mu_2$ is concentrated on $A_2$.
+\end{enumerate}
+\end{defn}
+
+\begin{thm}
+Let $(X,\cM)$ be a measurable space. Let $\nu\in\Meas^\pm(X,\cM)$. Let $V^+,V^-\in\Meas^+(X,\cM)$ be the positive and negative variations of $\nu$. Then $V^+ \perp V^-$.
+\end{thm}
+
+\begin{rem}
+Let $(X,\cM)$, $\nu$, $V^+$, and $V^-$ be as above. Then $V^+ \perp V^-$ implies that there exists $Y,Z\in\cM$ with $Y\cap Z = \emptyset$ such that $V^+$ is concentrated on $Y$ and that $V^-$ is concentrated on $Z$. Put $Y^+:=Y$ and $Y^-:=X\setminus Y\supseteq Z$. Then we have
+\[
+(\mbox{H-Dec.})\left\{
+\begin{array}{c}
+Y^+,Y^-\in\cM\\
+Y^+ \cup Y^- = X\\
+Y^+ \cap Y^- = \emptyset\\
+V^+ \mbox{ concentrated on } Y^+\\
+V^- \mbox{ concentrated on } Y^-
+\end{array}
+\right..
+\]
+A pair $(Y^+,Y^-)$ satisfying (H-Dec.) is called a Hahn decomposition of $\nu$. The previous theorem says that some Hahn decompositions do exist!
+\end{rem}
+
+\begin{rem} [Why is (H-Dec.) good?] Let $Y^+,Y^-$ be a Hahn decomposition of $\nu$. Then
+\[
+\left.
+\begin{array}{c}
+A\in\cM \\
+A\subseteq Y^+
+\end{array}
+\right\}
+\Longrightarrow
+\nu(A) = V^+(A),
+\]
+and
+\[
+\left.
+\begin{array}{c}
+A\in\cM \\
+A\subseteq Y^-
+\end{array}
+\right\}
+\Longrightarrow
+\nu(A) = -V^-(A).
+\]
+Why is this true? We have that
+\begin{eqnarray*}
+V^+\mbox{ concentrated on } Y^+ &\Longrightarrow& V^+(X\setminus Y^+) = 0\\
+&\Longrightarrow& V^+(Y^-) = 0\\
+&\Longrightarrow& V^+(A) = 0, \forall A\in\cM \mbox{ such that } A\subseteq Y^-.
+\end{eqnarray*}
+Likewise, we also have
+\begin{eqnarray*}
+V^-\mbox{ concentrated on } Y^- &\Longrightarrow& V^-(A) = 0, \forall A\in\cM \mbox{ such that } A\subseteq Y^+.
+\end{eqnarray*}
+Now we recall that $\nu = V^+-V^-$, so
+\[
+\left.
+\begin{array}{c}
+A\in\cM \\
+A\subseteq Y^+
+\end{array}
+\right\}
+\Longrightarrow
+\nu(A) = V^+(A)-V^-(A) = V^+(A),
+\]
+and
+\[
+\left.
+\begin{array}{c}
+A\in\cM \\
+A\subseteq Y^-
+\end{array}
+\right\}
+\Longrightarrow
+\nu(A) = V^+(A)-V^-(A) = -V^-(A).
+\]
+So for a general set $E\in \cM$ we have 
+\[
+\nu(E) = \nu(E\cap Y^+) + \nu (E\cap Y^-) = V^+(E\cap Y^+) - V^- (E\cap Y^-).
+\]
+\end{rem}
+
+\begin{rem} [An idea of the proof]
+We have that $(X,\cM)$ is a measurable space, we have $\nu\in\Meas^\pm(X,\cM)$, and we have the variations $V^+$ and $V^-$ for $\nu$. We need $Y,Z\in\cM$, such that $Y\cap Z = \emptyset$, that $V^+$ is concentrated on $Y$, and that $V^-$ is concentrated on $Z$. Suppose that we found such $Y,Z$. Then, since $V^+$ is concentrated on $Y$, we observe that
+\[
+\nu(Y) = V^+(Y) - V^-(Y) = V^+(Y) = V^+(Y) + V^+(X\setminus Y) = V^+(X)
+\]
+and since $V^-$ is concentrated on $Z$, we observe that
+\[
+\nu(Z) = V^+(Z) - V^-(Z) = -V^-(Z) = -V^-(Z) - V^-(X\setminus Z) = -V^-(X).
+\]
+Hence, the $Y,Z$ that we're looking for must have $\nu(Y) = V^+(X) = \sup\{\nu(A):A\in\cM\}$ and $\nu(Z) = -V^-(X) = \inf\{\nu(A):A\in\cM\}$.
+\end{rem}
+
+\begin{proof}[Proof of Theorem 113.]
+We have by assusmption that $(X,\cM)$ is a measurable space, that $\nu \in\Meas^\pm (X,\cM)$, and that $V^+,V^-$ are the variations of $\nu$. Since 
+\[
+V^+(X) = \sup\{\nu(A):A\in\cM\},
+\]
+for every $n\in\bN$ we can find $A_n\in\cM$ such that $\nu(A_n)>V^+(X)-\frac{1}{2^n}$.\\\\ (What happens if we try $Y=\bigcup_{n=1}^\infty A_n$? This is not good, can't conclude that $\nu(Y)\geq \nu(A_n)$.)\\\\ We will have 3 claims:
+\begin{enumerate}
+\item $V^+(X\setminus A_n) \leq \frac{1}{2^n}$, for all $n\geq 1$.
+\item $V^-(A_n) \leq \frac{1}{2^n}$, for all $n\geq 1$.
+\item Let $T = \bigcap_{k=1}^\infty\big(\bigcup_{n=k}^\infty A_n\big)$. Then $V^-(T) = 0$ and $V^+(X\setminus T) = 0$, hence $V^-$ is concentrated on $X\setminus T$ and $V^+$ is concentrated on $T$.
+\end{enumerate}
+This will finish the proof, since we can simply take $Y = X\setminus T$ and $Z=T$.\\
+(TO BE CONTINUED NEXT CLASS)
+\end{proof}
+\begin{center}
+\emph{Monday, November 12}
+\end{center}
+Now we verify the claims. Have $(\chi,\cM), \nu \in \Meas^\pm(X,\cM)$ and $V^+,V^- \in \Meas^+(X,\cM)$ are the positive/negative variation of $\nu$. For every $n \in \bN$, we pick $A_n \in \cM$ with $\nu(A_n)>V^+(X) - \frac{1}{2^n}$. Recall that $V^+(X) = \sup\{\nu(A)|A \in \cM\} < \infty$. 
+
+\begin{proof} [Proof of Claim 1.]
+Have $V^+(X\backslash A_n) = \sup \{\nu(B)| \cB \in \cM, B \subseteq X \backslash A_n \}$. We must show that $\nu(B) \leq \frac{1}{2^n}, \forall B \in \cM$ such that $B \subseteq X\backslash A_n$. Assume by contradiction that $\exists B \in \cM, B \subseteq X \backslash A_n$ such that $\nu(B) > \frac{1}{2^n}$.  Then, 
+\[\nu(B \cup A_n) = \nu(B) + \nu(A_n) > \frac{1}{2^n} + \left(V(X) - \frac{1}{2^n} \right) = V^+(X) \]
+which contradicts the definition of $V^+(X)$. 
+\end{proof}
+
+\begin{proof} [Proof of Claim 2.]
+From Jordan Decomposition we have $\nu(A_n) = V^+(A_n) - V^-(A_n) \Rightarrow$
+\begin{align*}
+  V^+(A_n) - V^-(A_n) &= \nu(A_n) > \nu^+(X) - \frac{1}{2^n} \geq  \nu^+(A_n) - \frac{1}{2^n} \Rightarrow \\
+  V^+(A_n) - V^-(A_n) & \geq V^+(A_n) - \frac{1}{2^n} - \frac{1}{2^n} \Rightarrow\\
+  V^-(A_n) &\leq \frac{1}{2^n}
+  \end{align*}
+
+\end{proof}
+
+\begin{proof} [Verification of Claim 3.]
+The fact that $V^-(T) = 0$ follows from the trick of the tail set (Homework 2, Problem 1) since $V^-(A_n) < \frac{1}{2^n}$ for all $n \in \bN$ (by claim 2) with $\sum_{n=1}^\infty \frac{1}{2^n} < \infty$. For $V^+(X\backslash T)$, let us write
+\begin{align*}
+X\backslash T &= X\backslash \bigcap_{k=1}^\infty \mbrac{\bigcup_{n=k}^\infty A_n}\\
+&= \bigcup_{k=1}^\infty \mbrac{X \backslash \mbrac{\bigcup_{n=k}^\infty A_n}}\\
+&= \bigcup_{k=1}^\infty \mbrac{\bigcap_{n=k}^\infty \mbrac{X \backslash A_n}}
+\end{align*}
+
+Call the inner term (the intersection) $B_k$. So have $X\backslash T = \bigcup_{k=1}^\infty B_k$ where $B_k = \bigcap_{n=k}^\infty (X\backslash A_n), \forall k \in \bN$. For every $k, n\in \bN$ such that $k \geq n$, we have
+\[B_k \subseteq X \backslash A_n \Rightarrow V^+(B_k) \leq V^+(X \backslash A_n)  \leq \frac{1}{2^n} \]
+Last inequality follows by claim 1. Fix $k \in \bN$, make $n\rightarrow \infty$, get $V^+(B_k) = 0$. Now unfix $k \in \bN$ and use subadditivity for $V^+$ to get 
+\[V^+(X\backslash T) \leq \sum_{k=1}^\infty V^+(B_k) = 0 \]
+hence $V^+(X\backslash T) = 0$. 
+\end{proof}
+
+\newpage
+\section{Absolute Continuity, Radon-Nikodyn, and Lebesgue Decomposition Theorem}
+
+\begin{defn}
+Let $(X,\cM)$ a measurable space, $\mu,\nu: \cM \rightarrow [0,\infty]$ a positive measures. Say that $\nu$ is {\bf absolutely continuous} with respect to $\mu$ and write $\nu \ll \mu$ to mean that $A \in \cM$ and $\mu(A) = 0$ implies $\nu(A) = 0$. 
+\end{defn}
+
+\begin{defn}
+$(X,\cM)$ a measurable space and say that a positive measure $\mu:\cM \rightarrow [0,\infty]$ is {\bf $\sigma$-finite} to mean there exists a sequence $(A_n)_{n=1}^\infty$ in $\cM$ such that $\bigcup_{n=1}^\infty A_n = X$ and such that $\nu(A_n) < \infty, \forall n \in \bN$. 
+\end{defn}
+
+
+\begin{thm}
+$(X,\cM)$ a measurable space and let $\mu,\nu: \cM \rightarrow [0,\infty]$ be positive measures on $\cM$ where $\nu$ is finite ($\nu(X) < \infty$) and $\mu$ is $\sigma$-finite. Then, the following are equivalent
+\begin{enumerate}
+\item $\nu \ll \mu$. 
+\item $\forall \epsilon >0, \exists \delta > 0$ such that $A\in \cM, \mu(A) < \delta \Rightarrow \nu(A) < \epsilon$. (Called the Absolute continuity $\epsilon -\delta$)
+\item $\exists h \in \Bor^+(X,\bR) \cap \cL^1(\mu)$ such that $d\nu = h d\mu$. That is, we have, $\forall A \in \cM$,  
+\[ \nu(A) = \int_A h d\mu = \int h I_A d\mu \]
+\end{enumerate}
+\end{thm}
+
+\begin{rem}
+\begin{enumerate}
+\item Some of the implications are immediate, and do not equire the hypothesis of finite/$\sigma$-finite for $\nu$ and $\mu$, $(2) \Rightarrow (1)$ and $(3) \Rightarrow (1)$. For $(2) \Rightarrow (1)$ proof for every $n \in \bN$, there exists $\delta_n >0$ such that $\mu(B) < \delta_n \Rightarrow  \nu(B) < \frac{1}{n}$. Make $B = A$ and let $n\rightarrow \infty$ and done. 
+\item For (3) implies (1) assume $\nu = h d\mu$. But then for $A \in \cM$ we must have $\mu(A) = 0 \Rightarrow h I_A = 0$ almost everywhere $\mu$ implies that $\int hI_A d\mu = \int 0 d\mu = 0$. 
+\item For the implication $(1) \Rightarrow (2)$ needs the hypothesis $\nu(X) < \infty$ (but does not require $\mu$ to be $\sigma$-finite). If we allow $\nu(X) = \infty$, it is easy to find examples when $(1)$ holds but (2) does not (Homework Problem). 
+\item $(1) \Rightarrow (3)$ is the Radon-Nikodyn Theorem. In this implication, we may allow both $\mu$ and $\nu$ to be $\sigma$-finite. The essence of the proof is the case when $\mu(X), \nu(X) < \infty$, after that one bootstraps to the $\sigma$-finite case. 
+\end{enumerate}
+\end{rem}
+
+
+
+\begin{prop}
+$(X,\cM)$ a measurable space. $\mu,\nu: \cM \rightarrow [0,\infty]$ positive measures, where $nu(X) < \infty$. If $\nu ll \mu$ , then Absolute Continuity w.r.t $\epsilon - \delta$ holds. ($(1) \Rightarrow (2))$ in the theorem) 
+\end{prop}
+
+\begin{proof}
+ Assume by contradiction that there exists $\epsilon > 0$ for which no $\delta > 0$ works in (Absolute Continuity $\epsilon - \delta$. For every $ k \in \bN$, let us record how $\delta = \frac{1}{2^k}$ fails to work. 
+ \end{proof}
+ \begin{prop}
+ Let $(X,\cM)$ be a measurable space and suppose $\mu,\nu: \cM \to [0,\infty)$ are finite positive measures such that $\nu \leq \mu$ (in the sense that $\nu(A) \leq \mu(A)$ for every $A \in \cM$). Then there exists $g\in \Bor(X,\bR)$ with $0\leq g(x) \leq 1, \forall x \in X$ and such that $d\nu = gd\mu$.
+\end{prop}
+
+
+
+
+\begin{prop}
+Let $(X,\cM)$ be a measurable space. Let $\mu,\nu:\cM\to [0,\infty]$ be positive measures, where $\nu(X)<\infty$. If $\nu<<\mu$, then absolute continuity $\epsilon$-$\delta$ holds. In other words, (1)$\Longrightarrow$ (2).
+\end{prop}
+
+\begin{proof}
+Assume by way of contradiction that there exists $\epsilon>0$ for which no $\delta$ works in absolute continuity $\epsilon$-$\delta$. For every $k\in\bN$, let us record how $\delta=\frac{1}{2^k}$ fails to work. Not true that 
+\[
+\left.
+\begin{array}{c}
+A\in\cM\\
+\mu(A)<\frac{1}{2^k}
+\end{array}
+\right) \Longrightarrow \nu(A)<\epsilon.
+\]
+hence there exists $A_k\in \cM$ such that $\mu(A_k)<\frac{1}{2^k}$ but $\nu(A_k)\geq\epsilon$. Look at the tail-swt
+\[
+T=\bigcap_{k=1}^\infty\left(\bigcup_{n=k}^\infty A_n \right)\in\cM
+\]
+Since $\sum_{k-1}^\infty \mu(A_k)\leq \sum_{k=1}^\infty\frac{1}{2^k}<\infty$, we know that $\mu(T)=0$ (from problem 1 in homework 2, Borel-Cantelli lemma).
+We now have
+\[
+T=\bigcap_{k=1}^\infty T_k
+\]
+with
+\[
+T_1\supseteq T_2 \supseteq \cdots \supseteq T_k \supseteq \cdots
+\]
+where $T_k = \bigcap_{n=k}^\infty A_n$. For every $k\in\bN$ we have 
+\[
+T_k\supseteq A_k \Longrightarrow \nu(T_k) \geq \nu(A_k) \geq \epsilon.
+\]
+Hence, we find
+\[
+\nu(T) = \lim_{k\to \infty} \nu(T_k)\geq \epsilon>0
+\]
+by continuity along decreasing chains (we use here that $\nu$ is finite).
+So we found $\mu(T)=0$ but $\nu(T)\neq 0$. This is a contradiction with $\nu << \mu$.
+\end{proof}
+
+\begin{rem}
+Bootstrapping in RN can in fact be started from the special case of the  "bounded Radon-Nikodyn Derivative"
+\end{rem}
+
+\begin{prop}
+Let $(X,\cM)$ be a measurable space. Let $\mu,\nu\in\Meas^+(X,\cM)$. Suppose that $\nu\leq \mu$, in the sense that $\nu(A)\leq \mu(A)$ for all $A\in\cM$. Then there exists a $g\in\Bor(X,\bR)$ with $0\leq g(x) \leq 1, \forall x\in X$, such that $d\nu = g\, d\mu$.
+\end{prop}
+
+\begin{rem}
+Note that $\nu\leq\mu$ implies $\nu<<\mu$. So the previous proposition has a stronger hypothesis, but also a stronger conclusion than (1)$\Longrightarrow$(3) of theorem 14.3.
+\end{rem}
+
+
+\begin{rem}
+How to find the idea of the proof from the proposition? Fix $t \in [0,1]$ and look at the sets
+\begin{align*}
+P &= \{ x \in X \st g(x) \geq t \}\\
+Q &= \{x \in X \st g(x) \leq t \}
+\end{align*}
+For every $A \in \cM$ with $A\subseteq P$, we have 
+\begin{align*}
+\nu(A) &= \int gI_A d\mu \geq \int t \cdot I_A d\mu =t \mu(A).
+\end{align*}
+Note that $gI_A \geq tI_A$ because $g(x) \geq t, \forall x \in A$. Likewise for $B \in \cM, B \subseteq Q$ we have, 
+\begin{align*}
+\nu(B) &= \int gI_B d\mu \\
+& \leq \int t I_B d \mu = t \mu(B)
+\end{align*}
+$gI_B \leq tI_B$ because $g(x) \leq t, \forall x \in B$. Write these facts in terms of the signed measure $\nu - t\\mu \in \Meas^\pm(X,\cM)$, we get
+\begin{align*}
+(A \in \cM, A \subseteq P) \Rightarrow (\nu 0 t\mu) A \geq 0\\
+(B \in \cM, B \subseteq Q) \Rightarrow (\nu - t\mu) (B) \leq 0
+\end{align*}
+It follows that $(P,X\backslash P)$ is a Hahn decomposition for $V - t\mu$
+\end{rem}
+
+\begin{proof}
+Given $\mu\,\nu\in\Meas^+(X,\cM)$ such that $\nu\leq \mu$. For every $t\in[0,1]$, consider a Hahn decomposition $(P_t,Q_t)$ for the signed measure $\nu-t\mu\in\Meas^\pm(X,\cM)$.
+\end{proof}
+
+\begin{center}
+\emph{Friday, November 16}
+\end{center}
+
+Today we prove ``Proposition 14.6'' (Radon-Nikodyn with bounded derivative).
+
+\begin{proof}[Proof started on Wednesday]
+Given $\mu,\nu\in\Meas^+(X,\cM)$ such that $\nu\leq \mu$. For every $t\in[0,1]$, consider the Hahn decomposition $(P_t,Q_t)$ for the signed measure $\nu-t\mu\in\Meas^\pm(X,\cM)$. For $t=0$, we have $\nu-t\mu =  \nu -0\mu = \nu\in\Meas^+(X,\cM)$ so we can pick $P_0=X$ and $Q_0 = \emptyset$. For $t=1$, we have $\nu-t\mu =  \nu - \mu = -(\mu-\nu)\in -\Meas^+(X,\cM)$ so we can pick $P_1=\emptyset$ and $Q_1 = X$. For general $t\in[0,1]$ we have 
+\[
+P_t,Q_t\in\cM \mbox{ and } P_t\cup Q_t = X \mbox{ and } P_t\cap Q_t = \emptyset
+\]
+we also have
+\[
+(\nu-t\mu)(A)\geq 0, \forall A\in \cM, A\subseteq P_t
+\]
+and
+\[
+(\nu-t\mu)(B)\leq 0, \forall B\in \cM, B\subseteq Q_t.
+\]
+We will focus on the sets $(Q_t)_{t\in[0,1]}$. (We would be happy if $Q_s\subseteq Q_t$ for $s\leq t$, but we're not that lucky...)
+
+\begin{claim}[1]
+For $0\leq s < t\leq 1$ we have $\mu(Q_s\setminus Q_t) = 0$.
+\end{claim}
+\begin{proof}[Verification of Claim 1]
+Denote $A:=Q_s\setminus Q_t = Q_s\cap (X\setminus Q_t) = Q_s\cap P_t$. Then we have
+\[
+A\subseteq Q_s \Longrightarrow (\nu-s\mu)(A)\leq 0 \Longrightarrow \nu(A)\leq s\mu(A)
+\]
+and
+\[
+A\subseteq P_t \Longrightarrow (\nu-t\mu)(A)\geq 0 \Longrightarrow \nu(A)\geq t\mu(A).
+\]
+Hence we have
+\[
+t\mu(A)\leq \nu(A) \leq s\mu(A)
+\]
+which implies
+\[
+(s-t)\mu(A)\geq 0
+\]
+So $\mu(A)$ must be 0 since $(s-t)<0$.
+\end{proof}
+
+
+\begin{claim}[2]
+Denote \[
+N:=\bigcup_{s,t\in[0,1]\cap\bQ}(Q_S\setminus Q_t)
+\]
+Then $N\in\cM$ with
+\[
+\mu(N)=\nu(N) = 0
+\]
+\end{claim}
+
+\begin{proof}[Verification of Claim 2]
+We have
+\[
+0\leq \nu(N) \leq \mu(N) \leq \sum_{s,t\in[0,1]\cap\bQ}(Q_S\setminus Q_t) = 0
+\]
+\end{proof}
+
+\begin{claim}[3]
+For every $t\in\bQ\cap[0,1]$, put
+\[
+\tilde{Q}_t = Q_t\cup N \mbox{ and } \tilde{P}_t = X\setminus \tilde{Q}_t = P_t\setminus N.
+\]
+Then $(\tilde{P}_t,\tilde{Q}_t)$ still is a Hahn decomposition for $\nu-t\mu$. Moreover we have that $s<t$ in $\bQ\cap [0,1]$  implies that $\tilde{Q}_s\subseteq \tilde{Q}_t$. We also have that $\tilde{Q}_1=X$ and $\tilde{Q}_0 = N$
+\end{claim}
+
+\begin{proof}[Verification of Claim 3]
+\end{proof}
+\noindent Fix $t \in [0,1] \cap \bQ$. 
+\[A \in \cM, A\subseteq \tilde{P}_t \Rightarrow A \in \cM , A\subseteq P_t \Rightarrow  (\nu - t\mu)(A) \geq 0 \]
+For $B \in \cM, B \subseteq \tilde{Q}_t$, we write $B = (B \cap Q_t) \cup (B \cap (N \backslash Q_t)) \Rightarrow  $
+\begin{align*}
+(\nu - t\mu) (B) &= (\nu - t\mu) (B \cap Q_t) + (\nu - t\mu) (B \cap (N \backslash Q_t))
+\end{align*}
+Let $B'$ be the right part of the sum. We have $B' \in, B' \subseteq N \Rightarrow (\nu - t\mu)(B') = 0$. The left part of the sum is less than or equal to 0 because $B \cap Q_t \subseteq Q_t$, use that $(P_t,Q_t)$ is a Hahn Decomposition.  Hence, $(\nu - t\mu) (B) \leq 0$. Moreover, for $s < t\in \bQ \cap [0,1]$ we have 
+\[\tilde{Q}_s = Q_s \cup N = (Q_s \cap Q_t) \cup (Q_s \backslash Q_t) \cup N = (Q_s \cap Q_t) \cup N \subseteq Q_t \cup N = \tilde{Q_t} \]
+Note that $(Q_s \backslash Q_t) \cup N$, this is $N$, by the definition of $N$. Finally, 
+\begin{align*}
+\tilde{Q_1} &= Q_1 \cup N = X \cup N = X \\
+\tilde{Q_0} &= Q \cup = \emptyset \cup N = N
+\end{align*}
+\end{proof}
+
+\begin{claim}[4]
+There exists $g\in\Bor(X,\bR)$ with $0\leq g(x)\leq 1$ such that for every $t\in\bQ\cap[0,1]$ we have
+\[
+\left\{
+\begin{array}{ccc}
+x\in\tilde{P}_t & \Longrightarrow & g(x)\geq t\\
+x\in\tilde{Q}_t & \Longrightarrow & g(x)\leq t
+\end{array}
+\right.
+\]
+\end{claim}
+
+\begin{rem}
+For Claim 4 we use Lemma 14.8 (which will be on homework 7).
+\[
+B_t \mbox{ from Lemma 14.8} \longleftrightarrow \tilde{Q}_t \mbox{ here}
+\]
+The proof of the lemma is elementary. Hint:
+\[
+g(x):= \inf\{t\in\bQ\cap[0,1] \st x\in B_t\}
+\]
+\end{rem}
+
+\begin{claim}[5]
+THe function $g$ found in Claim 4 satisfies 
+\[ \tag{$*$}  \nu(A) = \int_A g d\mu, \forall A \in \cM \]
+So indeed, is such that $d\nu = gd\mu$
+\end{claim}
+
+
+\begin{proof}[Verification of Claim 5]
+Fix $A \in \cM$ for which we prove $(*)$. In fact we will prove 
+\[\tag{$**$} \left| \nu(A) - \int_A g d\mu \right| < \frac{\mu(x)}{n},\forall n \in \bN \]
+(Of course, $(**)\Longrightarrow (*)$ when $n\to \infty$). So let us also fix $n\in \bN$, for which we verify $(**)$. The Trick will be to find a partition $A = A_0 \cup A_1 \cup \dots \cup A_n$ such that 
+\[ \sum_{i=1}^n \frac{i-1}{n} \mu(A_i) \leq \nu(A) , \int_A g d \mu \leq \sum_{i=1}^n \frac{i}{n} \mu(A_i) \]
+\end{proof}
+
+
+
+\begin{center}
+\emph{Monday, November 19}
+\end{center}
+
+
+\begin{center}
+\emph{Monday, November 19}
+\end{center}
+
+\begin{proof}[Continuing proof of Claim 5]
+Look a the sets 
+\[N = \tilde{Q}_0 \subseteq \tilde{Q}_{\frac{1}{n}} \subseteq \dots \subseteq \tilde{Q}_{\frac{n-1}{n}} \subseteq \tilde{Q}_1 = X \]
+We get a partition of $X$, namely, $X = \tilde{Q}_0 \cup (\tilde{Q}_{\frac{1}{n}} \setminus \tilde{Q}_0) \cup \dots \cup (\tilde{Q}_1 \setminus \tilde{Q}_{\frac{n-1}{n}})$.  This gives us a partition of $A = A_0 \cup A_1 \cup \dots \cup A_n$ where $A_0 = A \cap \tilde{Q}_0 = A \cap N$ and where for $1\leq i \leq n$ we put
+\begin{align*}
+A_i &= A \cap \left(\tilde{Q}_{\frac{i}{n}} \setminus \tilde{Q}_{\frac{n-1}{n}}\right)\\
+&= A \cap \tilde{Q}_{\frac{i}{n}} \cap \tilde{P}_{\frac{i-1}{n}}
+\end{align*}
+Then, 
+\[\nu(A) = \sum_{i=0}^n \nu(A_i) = \sum_{i=1}^n \nu(A_i). \]
+$\nu(A_0) = 0 $ because $A_0 \subseteq N$ by claim 2. For $1\leq i \leq n$ we observe that 
+\begin{align*}
+A_i \subseteq \tilde{Q}_{\frac{i}{n}} & \Longrightarrow (\nu - \frac{i}{n}\mu)(A_i) \leq 0\\
+&\Longrightarrow \nu(A_i) \subseteq \frac{i}{n} \mu(A_i)\\
+A_i \subseteq \tilde{P}_{\frac{i-1}{n}} &\Longrightarrow (\nu - \frac{i-1}{n}\mu)(A_i) \geq 0 \\
+&\Longrightarrow \nu(A_i) \geq \frac{i-1}{n} \mu(A_i)
+\end{align*}
+So we get 
+\[ \frac{i-1}{\mu}(A_i) \leq \nu(A_i) \leq \frac{i}{n} \mu(A_i), 1\leq i \leq n \]
+Summing over $i$ yields 
+\[ \tag{$\diamond$} \sum_{i=1}^n \frac{i-1}{n}\mu(A_i) \leq \nu(A) \leq \sum_{i=1}^n \frac{i}{n} \mu(A_i) \]
+Now look at $\int_A g \, d\mu$. Partition again, $A = A_0 \cup A_1 \cup \dots \cup A_n$ we get 
+\[ \int_A g\, d\mu = \sum_{i=0}^n \int_{A_i} g\, d\mu = \sum_{i=1}^n \int_{A_i} g\, d\mu\]
+For the last equality on the right, $\int_{A_0} g d\mu = 0$ since $A_0 \subseteq N$, hence $\mu(A_0) = 0$.  For $1 \leq i \leq n$ (since $A_i = A \cap \tilde{Q}_{\frac{i}{n}} \cap \tilde{P}_{\frac{i-1}{n}})$ we have  
+\begin{align*}
+A_i \subseteq \tilde{Q}_{\frac{i}{n}} &\Rightarrow g(x) \leq \frac{i}{n} \mbox{for all x in }A_i\\
+A_i \subseteq \tilde{P}_{\frac{i-1}{n}} &\Rightarrow g(x) \geq \frac{i-1}{n} \mbox{ for all }x \in A_i
+\end{align*}
+So we get that 
+\[\frac{i-1}{n} \mu(A_i) \leq \int_{A_i} g \leq \frac{i}{n} \mu(A_i), 1\leq i \leq n \]
+Sum over $i$ to get 
+\[ \tag{$\diamond \diamond $} \sum_{i=1}^n \frac{i-1}{n} \mu(A_i) \leq \int_A g d\mu \leq \sum_{i=1}^n \frac{i}{n}\mu(A_i)\]
+Putting $(\diamond)$ and $(\diamond \diamond)$ together gives us
+\[
+\sum_{i=1}^n \frac{i-1}{n} \mu(A_i) \leq \begin{array}{c}
+\nu(A)\\
+\int_A g \, d\mu
+\end{array} \leq \sum_{i=1}^n \frac{i}{n} \mu(A_i)
+\]
+It follows that 
+\begin{eqnarray*}
+\abs{\nu(A) - \int_A g\, d\mu} &\leq& \left(\sum_{i=1}^n \frac{i}{n} \mu (A_i)\right) - \left(\sum_{i=1}^n \frac{i-1}{n} \mu (A_i)\right)\\
+&=& \sum_{i=1}^n \frac{1}{n}\mu(A_i) = \frac{1}{n}\sum_{i=1}^n \mu(A_i) \leq \frac{1}{n}\mu(X).
+\end{eqnarray*}
+This finishes the proof, but I didn't get the last thing he wrote...
+\end{proof}
+
+\begin{rem}
+Given $(X,\cM)$ and $\mu,\nu \in \Meas^+(X,\cM)$ (no relation assumed between them!). Idea: We can consider $\sigma:= \mu + v \in \Meas^+(X,\cM)$ abd we gave $\mu \leq \sigma, \nu \leq \sigma$. Hence, by the Radon-Nikodym Theorem, can be applied to $\nu$ and$\sigma$. Easy fact about $\sigma$ we have 
+\[\tag{$\circ$} \int f d\sigma = \int f d\mu + \int f d\nu   \]
+for all $f \in \Bor^+(X,\bR)$. Why? If $f = I_A$ then $(\circ)$ becomes $\sigma(A) = \mu(A) + \nu(A)$. Then do linear combinations, use LMCT. 
+\end{rem}
+
+\begin{center}
+\emph{Wednesday, November 21}
+\end{center}
+
+\begin{prop}
+14.10 Let $(X,\cM)$ be a measurable space and let $\nu, \mu: \cM \to [0, \infty)$ be two finite positive measures. There exists a function $g \in \Bor(X,\bR)$ such that $0\leq g(x) \leq 1$ for all $x \in X$ and such that 
+\[ \int fg d\mu = \int f(1-g) d\nu, \forall f \in \Bor_b^+(X,\bR)\]
+\end{prop}
+\begin{proof}
+Let $\sigma \in \mu + \nu \in \Meas^+(X,\cM)$. Then, $\nu \leq \sigma$, hence proposition 14.6 (Radon Nikodym) gives us $g \in \Bor(X,\bR)$ with $0 \leq g(x) \leq 1$ and such that $d\nu = g d\sigma$. For every $f \in \Bor^+(X,\bR)$. We then get that 
+\[ \int f d \nu = \int fg d \sigma = \int fg d\mu + \int fg d\nu \]
+If we also assume that $f$ is bounded, then it follows that $\int fg d\nu < \infty$. Hence, we can do algebra to get 
+\begin{align*}
+\int f f\nu - \int fg d\nu &= \int fg d\nu \Rightarrow \\
+\int f(1-g) d\nu &= \int fg d\mu
+\end{align*}
+
+\end{proof}
+
+
+\begin{lem}
+$(X,\cM), \nu, \mu \in \Meas^+(X,\cM)$. Let $g \in \Bor(X,\bR)$ connecting function as in Proposition 14.10. Let $N = \{ x \in X| g(x) = 1\}$, $(N \in \cM)$. Then, 
+\begin{enumerate}
+\item $\mu(N) = 0$.
+\item $A \in \cM, \mu(A) = 0 \Rightarrow \nu(A \cap (X \backslash N)) = 0$. 
+\end{enumerate}
+\end{lem}
+\begin{proof}
+We know that $0 \leq g(x) \leq 1, \forall x \in X$ and
+\[ \tag{(3)} f(1-g) d\nu = \int fg d\mu \] for all $f \in \Bor_b^+(X,\bR)$.
+
+\begin{enumerate}
+\item Put $f = I_N$ in (3). Then, $f(1-g) = I_N(1-g) = 0$, $fg = I_N g = I_N$. $x \in X \backslash N \Rightarrow I_N(x) = 0$ and $x \in N \Rightarrow (1-g)(x) = 1-1 = 0$. (3) gives $\int 0 d\nu  = \int I_n d\mu \Rightarrow 0 = \mu(N)$. 
+\item In (3) we put $f = I_A$ to get 
+\begin{align*}
+\int I_A (1-g) d\nu &= \int I_A g d\mu = \int 0 d\mu = 0 \\
+I_A f = 0 \mbox{ a.e. } \mu
+\end{align*}
+(It is $0$ on $X \backslash A$ where $\mu(A) = 0$. So we get that 
+\begin{align*}
+\int I_A(1-g) d\nu &= 0\Rightarrow \\
+I)A(1-g) &= 0 \mbox{a.e. } \nu
+\end{align*}
+This implies that 
+\[\tag{$\diamond$} \mu \left( \{x \in X| I_A(x) (1-g(x)) \neq 0 \} \right) = 0 \]
+But $I_A(x) (1-g(x)) \neq 0$ if and only if $I_A(x) \neq 0$ and $g(x) \neq 1$ if and only if $x \in A \cap (X \backslash N)$. Then, $\diamond$ is $A \cap (X\backslash N)$ and so the result follows immediately. 
+\end{enumerate}
+
+\end{proof}
+
+\begin{thm} [Radon - Nikodym]
+$\nu, \mu \in \Meas^+(X,\cM)$ such that $\nu \l \mu$ (We have $A \in \cM, \mu(A) \Rightarrow \nu(A) = 0$). Then there exists $h \in \Bor^+(X,\bR) \cap \cL^1(\mu)$ such that $d\nu = h d\mu$. 
+\end{thm}
+
+\begin{proof}
+Let $g \in \Bor(X, \bR)$ be a connecting function between $\mu$ and $\nu$ (as in proposition 14.10). Let $N:= \{x \in X| g(x) = 1\}$ (as in Lemma 14.11). Then, $\mu(N)=0$ by above lemma part 1, hence $\nu(N) = 0$ as well (since $\nu \ll \mu$). Let $\tilde{g}: X \to \bR$ defined by 
+\[ \tilde{g}(x) = 
+\begin{cases}
+g(x) & \mbox{if } x\in X \backslash N\\
+0 & \mbox{ if} x \in N
+\end{cases} \]
+Then, $\tilde{g} \in \Bor(X,\bR)$ (patching), $ 0 \leq \tilde{g}(x) <1, \forall x \in X$. We claim that $\tilde{g}$ is still a connecting function between $\mu$ and $\nu$. That is, we have 
+\[ \tag{$\tilde{3}$} \int f(1-\tilde{g}) d\nu = \int f \tilde{g} d\mu, \forall f \in \Bor^+_b(X,\bR)\]
+Indeed, 
+\[\int f(1-\tilde{g}) d\nu = \int f(1-g) d\nu = \int fg d\mu = \int f\tilde{g} d\mu  \]
+ first equallity because $f(1-g) = f(1-\tilde{g})$ almost everywhere $\mu$. Second equality by use of (3) and third equality because $fg = f\tilde{g}$ a.e. $\mu$. Define 
+ \[ h \in \frac{\tilde{g}}{1-\tilde{g}} \in \Bor^+(X,\bR), x \in X) \]
+ Use  here that $ 0 \leq \tilde{g}(x) \leq 1, \forall x \in X$. Given $f\ in \Bor^+_b(X,\bR)$, use $(\tilde{3})$ for the function $u =\frac{f}{1 - \tilde{g}}$. We claim that $\tilde{g}$ still a connecting function between $\mu$ and $\nu$. That is we have  by $(\tilde{3}$
+ \[ \int u (1- \tilde{g}) d\nu = \int u \tilde{g} d\mu \Rightarrow \int \frac{f}{1-f} \tilde{g} d\nu = \int \frac{f}{1-\tilde{g}} \tilde{g} d\mu \]
+ Where last equality because $\int f d\nu = \int fh d\mu$. We have a little problem to fix. $(\tilde{3})$ can be used for bounded functions, and we donky know it $u \frac{f}{1-\tilde{g}}$ is bounded. Way to go: Instead of $u$, we use in $(\tilde{3})$ the function 
+ \[ u_n = f(1+ \tilde{g} + \dots + \tilde{g}^n) \]
+ then make $n \rightarrow \infty$ and use LMCT on both sides. 
+\end{proof}
+
+\begin{center}
+\emph{Friday, November 23}
+\end{center}
+
+\begin{rem}
+Some remarks about theorem 14.16. 
+\begin{enumerate}
+\item $h$ is uniquely determined a.e.-$\mu$. 
+\item $\sigma$-finite case, do $h_n = \frac{d \nu_n}{d \mu_n}$. 
+\end{enumerate}
+
+\end{rem}
+
+
+\begin{thm}[Lebesgue Decomposition Theorem]
+Let $(X,\cM)$ be a measurable space and let $\mu, \nu: \cM \rightarrow [0,\infty)$ be two finite positive measures (where no relation is assumed between $\mu$ and $\nu$). Then, one can write $\nu = \nu_1 + \nu_2$ where $\nu_1,\nu_2 \in \Meas^+(X,\cM)$ are such that $\nu \ll \mu$ and $\nu_2 \perp \mu$.  
+\end{thm}
+
+\begin{proof}
+Apply prop 14.14, find connecting function $g \in \Bor(X,\bR)$ between $\mu$ and $\nu$. So $0\leq g(x) \leq 1, \forall x \in X$ and (3) holds. Put $N = \{x \in X| g(x) = 1\}$. Then, lemma 14.15 says that $\mu(N) = 0$ and $A \in \cM, \mu(A) = 0 \Rightarrow \nu(A \cap (X \backslash N)) = 0$. Define $nu_1,\nu_2: \cM \to [0,\infty)$ by 
+\begin{align*}
+\nu_1(A) &= \nu(A \cap (X \backslash N))\\
+\nu_2(A) &= \nu(A \cap N)
+\end{align*}
+
+\begin{claim} [1]
+$\nu_1,\nu_2 \in \Meas^+(X,\cM)$ and $\nu_1 + \nu_2 = \nu$. 
+\end{claim}
+
+\begin{proof} [Verification of Claim 1]
+Immediate from formulas defining $\nu_1$ and $\nu_2$.
+\end{proof}
+
+\begin{claim}[2]
+$\nu_1 \ll \mu$.
+\end{claim}
+
+\begin{proof} [Verification of Claim 2]
+By Lemma 14.15.2, $A \in \cM, \mu(A) = 0 \Rightarrow \nu(A \cap(X \backslash N)) = 0$ implies that $\nu_1(A) = 0$. 
+\end{proof}
+
+\begin{claim}[3]
+$\nu_2 \perp \mu$
+\end{claim}
+
+\begin{proof}
+We have $\nu_2(X \backslash N) = \nu(X \backslash N) \cap N) = \nu(\emptyset) = 0$. Where first equality follows by definition of $\nu_2$. Hence, $\nu$ is concentrated on $N$. On the other hand, $\mu(N) = 0$ (by Lemma 14.15.1), hence $\mu$ is concentrated on $X \backslash N$. So then $\nu_2 \perp \mu$, as they are concentrated on $N$ and $X \backslash N$. 
+\end{proof}
+This concludes the proof. 
+ 
+\end{proof}
+
+\begin{rem}
+The following remarks conclude our discussion of lecture 14.
+\begin{enumerate}
+\item Uniqueness of the Lebesgue Decomposition
+\item We can extend to the case when $\mu$ is $\sigma$-finite. 
+\end{enumerate}
+\end{rem}
+
+\newpage
+
+\section{Product of Two ($\sigma)$-finite measures and the Fubini-Tonelli Theorem}
+\begin{defn}
+Let $(X,\cM)$ and $(Y,\cN)$ be measurable spaces. For $M \in \cM, N \in \cN$, can form 
+\[ M \times N := \{(x,y)| x \in M, y \in M\} \subseteq X \times Y  \]
+Let 
+\[\cP = \{ M \times N| M \in \cM, N \in \cN\} \]
+The $\sigma$-algebra of subsets of $X\times Y$ that is generated by $\cP$ is called the direct product of $\cM$ and $\cN$, denoted as $\cM \times \cN$. 
+\end{defn}
+
+\begin{note}
+$\cM \times \cN$ is usually strictly larger than $\cP$, but it still good to be able to write that $(X\times Y, \cM \times \cN)$. This is the definition of the {\bf Direct Product} of Measurable Space. 
+\end{note}
+
+\begin{rem}
+$(X,\cM),(Y,\cN)$ and $\cP = \{M \times N| M \in \cM, N \in \cN\}$ as above then, 
+\begin{enumerate}
+\item $\cP$ is a {\bf semialgebra} of subsets of $X$. It is a semialgebra in the sense that 
+\begin{enumerate}
+\item $\emptyset \in \cP$
+\item $U_1,\dots, U_k \in \cP \Rightarrow U_1 \cap \dots \cap U_k \in \cP$
+\item $U \in \cP \Rightarrow (X\times Y)\setminus U$ can be written as a union of sets in $\cP$. 
+\end{enumerate}
+\begin{proof}[Verifications]
+We verify the three required conditions, 
+
+
+\begin{enumerate}
+\item $\emptyset = \emptyset \times  \emptyset \in \cP$. 
+\item Write $U_i = M_i \times N_i, 1 \leq i \leq k$, where $M_i \in \cM, N_i \in \cN$, then 
+\[ U_1 \cap \dots \cap U_k = M \times N \]
+Where $M = \bigcap_{i=1}^k M_i \in \cM$ and $N = \bigcap_{i=1}^k N_i \in \cN$. 
+\item Write $U = M \times N$ with $M \in \cM, N \in \cN$. Then 
+\[ (X\times Y) \setminus U = (M \times (Y \setminus N)) \cup (N \times (X \setminus M)) \cup ((X \setminus M) \times (Y \setminus N)) \]
+\end{enumerate}
+
+\end{proof}
+
+\item $A = \{U \subseteq X \times Y| U \mbox{ can be written as a finite union of sets form }\cP\}$. Then $\sA$ is an algebra of subsets of $X \times Y$ and the $\sigma$-algebra generated by $A$ is equal to the $\sigma$-algebra generated by $\cP$ which is defined to be $\cM \times \cN$. 
+
+\end{enumerate}
+
+\end{rem}
+
+\begin{center}
+\emph{Monday, November 26}
+\end{center}
+
+\begin{thm}
+Let $(X,\cM,\mu)$ and $(Y \cN,\nu)$ be measure spaces where there measure $\mu,\nu$ are $\sigma$-finite. Consider the measurable space $(X\times Y, \cM \times \cN)$. There exists a positive measure $\pi: \cM \times \cN \to [0,\infty]$ uniquely determined such that 
+\[ \pi(M \times N) = \mu(M)\cdot \nu(N), \forall M \in \cM, N \in \cN \]
+\end{thm}
+
+\begin{proof} [ Proof of Theorem 15.3 by assuming proposition 15.4]
+Have $(X,\cM, \mu), (Ym\cN,\nu)$ with $\mu\nu$ are $\sigma$-finite. Pick increasing chains $(X_k)_{k=1}^\infty \in \cM$ and $(Y_k)_{k=1}^\infty \in \cN$ such that $\bigcup_{k=1}^\infty X_k = X$ and $\mu(X_k) < \infty$, while $\bigcup_{k=1}^\infty Y_k = Y$ and $\nu(Y_k) < \infty$ for each $k \in \bN$. For every $k \in \bN$ put 
+\begin{align*}
+\cM_k &= \{ M \in \cM | M \subseteq X_k\}, \left. \mu_k  = \mu \right|_{\cM_k}\\
+\cN_k &= \{ N \in \cN | N \subseteq Y_k \|, \left. \nu_k = \nu \right|_{\cN_n}
+\end{align*}
+Proposition 15.4 applies to $(X_k, \cM_k, \mu_k)$ and $(Y_k, \cN_k, \nu_k)$ and gives a finit e positive  $\pi_k: \cM_k \times \cN_k \to [0,\infty)$. We introduce some notation
+\begin{align*}
+\cP &= \{ M \times N| M \in \cM, N \in \cN \}\\
+\sA &= \mbox{Collection of finite unions of sets from } \cP\\
+\cU &= \cM \times \cN = \sigma-\mbox{algebra generated by either $P$ or $\sA$}
+\end{align*}
+Likewise for any $k \in \bN$ we have 
+\begin{align*}
+\cP_k &= \{M \times N | M \in \cM_k, N \in \cN_k\}\\
+&= \{M \times N| M \in \cM, M \subseteq C_k, N \in \cN, N \subseteq Y_k \}\\
+A_k &= \mbox{finite unions from $\cP_k$}\\
+\cU_k &= \cM_l \times \cN_k = \mbox{$\sigma$-algebra of $\cP_k$ or $A_k$} 
+\end{align*}
+
+
+\begin{claim}[1]
+$U \in \cU \Rightarrow U \cap (X_k \times Y_k) \in U_k, \forall k \in \bN$
+\end{claim}
+\begin{proof} [Verification of Claim 1]
+We have $\sA = $algebra of subsets of $X \times Y$ and $A_k = $ algebra of subsets of subsets of $X_k\times Y_k$. Observe that
+\[ A_k = \{A \in \sA| A \subseteq X_k \times Y_k \} \]
+Indeed both sides of this equality are equal to 
+\[ \{A | A = (M_1 \times N_1) \cup \dots \cup (M_r \times N_r) \mbox{where } M_1,\dots, M_r \in \cM, M_1\dots, M_r \subseteq X_u, \atop N_1,\dots, N_r \in \cN, N_1 \dots N_r \subseteq Y_k \} \] 
+Then the $\sigma$ algebra generated by $A$ is $\cU$. Put 
+\[ V_k = \{V \in \cU| U \subseteq X_k \times Y_k \} \]
+Problem 7 in homework 1 says that the $\sigma$-algebra generated by $A_k$ is $V_k$. On the other hand we know that the $\sigma$-algebra generated by $A_k$ is $U_k$ ($= \cM_k \times \cN_k)$. Hence, 
+\[ U_k = V_k \{ v \in U| V \subseteq X_k \times Y_k \} \]
+So then for every $U \in \cU$ we have $U \cap (X_k \times Y_k) \in V_k \Rightarrow U \cap (X_k \times Y_k) \in U_k$. 
+\end{proof}
+
+\begin{claim}[2]
+For every $k \in \bN$ we have $\cU_k \subseteq \cU_{k+1}$ and $\left. \pi_{k+1} \right|_{\cU_k} = \pi_k$
+\end{claim}
+
+\begin{proof} [Verification of Claim 2]
+It is immediate that $\{U \in \cU_{k+1}|U \subseteq X_k \times Y_k\}$ is a $\sigma$-algebra which contains $\cP_k = \{M \times N| M\subseteq X_k, N \subseteq Y_k\}$. Hence, it contains the $\sigma$-algebra generated by $\cP_k$ which is $U_k$. Hence, 
+\[ U_k \subseteq \{U \in U_{k+1}|U \subseteq X_k \times Y_k \} \subseteq U_{k+1} \]
+Then, observe that $\left. \tilde{\pi}_k = \pi_{k+1} \right|_{\cU_k}$. (1 line missing) From the uniqueness property of $\pi_k$ it follows that $\pi_k = \tilde{\pi}_k = \pi_{k+1}|_{\cU_k}$.
+\end{proof}
+
+\begin{claim}[3]
+For every $U \in \cU( = \cM \times \cN)$, it makes sense to define 
+\[\pi(U) = \lim_{n\rightarrow \infty} \pi_k (U \cap (X_k \cap Y_k)) \in [0,\infty] \]
+\end{claim}
+
+\begin{proof}[Verification of Claim 3]
+We have $U \cap (X_k \times Y_k) \in \cU_k$ (by claim 1). Hence, $\pi_k(U \cap (X_k \times Y_k)$ makes sense. Moreover, for every $k \in \bN$ we have 
+\begin{align*}
+\pi_k(U \cap X_k \times Y_k)) &= \pi_{k+1} (U \cap (X_k \times Y_k)) \tag{By Claim 2}\\
+& \leq \pi_{k+1}(U \cap (X_{k+1} \times Y_{k+1})
+\end{align*}
+Last inequality follows because $U \cap (X_k \times Y_k) \subseteq U \cap (X_{k+1} \times Y_{k+1})$. Hence, the limit as $k\rightarrow \infty$ must exist.
+
+\end{proof}
+
+\begin{claim}[4]
+The set function $\pi:\cU \rightarrow [0,\infty]$ is a s positive measure such that $\pi(M \times N) = \mu(M)\nu(N)$ for all $M \in \cM, N \in \cN$. (left as exercise)
+\end{claim}
+
+\begin{claim}[5]
+Let $\tilde{\pi}: \cU \to [0,\infty)$ be a positive measure such that $\tilde{\pi}(M \times N) = \mu(M) \cdot \nu(N)$, for all $M \in \cM, N \in \cN$. Then, $\tilde{\pi} = \pi$ with $\pi$ defined as in claim 3. 
+\end{claim}
+
+\begin{proof}[Verification of claim 5]
+For every $k\in \bN$ we have $\tilde{\pi}|_{\cU_k} = \pi_k$ due to uniqueness of $\pi_k$, so then for every $U \in \cU$ we write 
+\[ U = \bigcup_{k=1}^\infty (U \cap (X_k \times Y_k)) \]
+So then 
+\begin{align*}
+\tilde{\pi}(U) &= \lim_{n\rightarrow \infty} \tilde{\pi} (U \cap (X_k \times Y_k)) \tag{CAIC}\\
+&= \lim_{k\rightarrow \infty} \pi_k (U \cap (X_k \times Y_k))\\
+&= \pi(U)
+\end{align*}
+
+\end{proof}
+
+\end{proof}
+
+\begin{prop}
+Let $(X,\cM,\mu)$ and $(Y,\cN,\nu)$ be measure spaces, where the measures $\mu$ and $\nu$ are finite $\mu(X), \nu(Y) < \infty$. Consider the measurable space $(X \times Y, \cM \times \cN)$. There exists a finite positive measure $\pi:\cM \times \cN \to [0,\infty)$, uniquely determined such that 
+\[ \pi(M\times N) = \mu(M) \cdot \nu(N), \forall M \in \cM, N \in \cN \]
+ This was not proven in class. 
+\end{prop}
+
+\begin{rem}
+Let $(X,\cM, \mu)$ $(Y,\cN, \nu)$ be measure spaces where $\mu(X),\nu(Y) < \infty$.  Let 
+\[ \cP = \{ M \times N \mid M \in \cM , N \in \cN \} \]
+We denote 
+\begin{align*}
+\sA &= (\text{Algebra of subsets of $X \times Y$ which is generated by $\cP$})\\
+\cU &= \cM \times \cN = (\text{ $\sigma$-algebra of subsets of $X \times Y$ which is generated by $\cP$ (or by $\sA$)})
+\end{align*}
+We define $\pi_0: \cP \to [0,\infty)$  by 
+\[ \pi_0(M \times N) = \mu(M) \nu(N) \]
+We want to extend $\pi_0$ to an additive set function $\tilde{\pi}_0:\sA \to [0,\infty)$ then to a finite positive measure $\pi: \cU \to [0,\infty)$. The key point is we will see that $\pi_0$ behaves well under divisions of a set $P = M \times N$ in $\cP$. 
+\end{rem}
+
+\begin{rem}
+Comments on theorem on side A of handout from Nov 28.  Idea for proof of part 1. of theorem.  Given $A \in \sA$, we write $A = S_1 \cup \dots \cup S_r$ with $S_1,\dots, S_r \in \cS$ and $S_i \cap S_j = \emptyset$ for $i \neq j$. Then, define $\tilde{\mu}_0(A) = \sum_{i=1}^r \mu_0 (S_i)$ (this quantity depends only on $A$, not on how it is written as $\bigcup_{i=1}^r S_i$, use idea of common refinement). \\
+
+We now look at the idea of the proof for part 2. Get $\tilde{\mu}_0: \sA \to [0,\infty)$ as in part 1. The hypothesis that $\mu_0$ respects countable divisions in $\cS$ implies that $\tilde{\mu}_0$ is a pre-measure on $A$. Use the Caratheodory Extension Theorem to extend from $A$ to $U$. \\
+
+Uniqueness of Statements? In part 1, it is clear that if $\tilde{\mu}_0: \sA \to [0,\infty)$ is additive and extends $\mu_0$, then for any $A \in \sA$ written as $A = S_1 \cup \dots \cup S_r$ we have 
+\[ \tilde{\mu}_0 (A) = \sum_{i=1}^r \tilde{\mu}_0 (S_i) = \sum \mu_0 (S_i) \] 
+Second equality follows since $\tilde{\mu}_0$ extends $\mu_0$.  \\
+
+For uniqueness in part 2, we do a bit of a digression on why uniqueness in Caratheodory extension theorem. 
+\end{rem}
+
+\begin{rem}
+Comment on side B of today's handout. Let $X,\sA, \cU$ be as in proposition on side $B$ of handout. Suppose we have two finite positive measure $\mu, \nu: U \to [0,\infty)$ such that 
+\[ \tag{*} \mu(A) = \nu(A), \forall A \in \sA \]
+Look at 
+\[ \cC = \{c \in \cU \mid \mu(C) = \nu(C) \} \]
+This is a monotone class!  ($\mu(\emptyset) = \nu(\emptyset) = 0$ and $\mu(X) = \nu(X) < \infty$ by putting $A = X$ in (*)). (MC2), (MC3) follows from continuity along increasing/decreasing chains of $\mu$ and  of $\nu$. Hence, we have $\cC$ a monotone class, $\cC \supseteq \sA$ by (*) and $\cC \subseteq \cU$ by definition implies that $\cC = \cU$. Thus, this implies that $\mu(c) = \nu(c)$ for all $c \in \cU$.\\
+
+We return to the framework of $(C,\cM, \mu), (Y,\cN, \nu)$ a semialgebra
+\[ \cP = \{ M \times N \mid M \in \cM, N \in \cN\}\]
+and $\pi_0: \cP \to [0,\infty)$, $\pi_0(M \times N) = \mu(M) \nu(N)$. We want to extend $\pi_0$ to a finite positive measure $\pi: \cU \to [0,\infty)$ where $\cU = \cM \times \cN$. Due to side $A$ of the handout, we only need a lemma. 
+\end{rem}
+
+\begin{lem}
+$\pi_0: \cP \to [0,\infty)$ respects countable divisions. Let $P = M \times N$ in $\cP$. Suppose that $P = \bigcup_{i=1}^\infty P_i$ where $P_i = M_i \times N_i \in \cP, \forall i \in \bN$ with $P_i \cap P_j = \emptyset$ for $i \neq j$. Then, 
+\[ \pi_0 (P) = \sum_{i=1}^\infty \pi_0(P_i) \]
+\end{lem}
+
+\begin{proof}
+Write $P = M \times N$ and $P_i = M_i \times N_i, \forall i \in \bN$. 
+
+\begin{claim}[1]
+For every $x \in X$, we have $\sum_{i=1}^\infty  I_{M_i} (x) \nu(N_i) = I_M(x) \nu(N)$. 
+\end{claim}
+
+\begin{proof}[Verification of claim 1]
+Fix $x \in X$ ad write 
+\begin{align*}
+\sum_{i=1}^\infty I_{M_i}(x) \nu(N_i) &= \lim_{k\rightarrow \infty} \left( \sum_{i=1}^k I_{M_i}(x) \nu(N_i)\right)\\
+&= \lim_{n\rightarrow \infty} \left( \sum_{1 \leq i \leq k} \nu(N_i) \right) \\
+&= \lim_{k\rightarrow \infty}  \left( \nu \left( \bigcup_{1 \leq i \leq k} N_i \text{ such that } x \in M_i \right)\right)
+\end{align*}
+In the last step we use here if $i \neq j$ where $1 \leq i, j \leq k$ such that $x \in M_i$, $x \in M_j$, the $N_i \cap N_j = \emptyset$. We want to check this claim. Suppose there exists $y \in N_i \cap N_j$. Then, $(x,y) \in( M_i \times N_i) \cap M_j \times N_j) = P_i \cap P_j = \emptyset$. Hence, 
+%\[
+%\sum_{i=1}^n I_{M_i} (x) \nu(N_i) = \lim_{k\rightarrow \infty} \left( \nu \left( %\bigcup_{1 \leq i \leq k \text{ such that } x \in M_i} N_i \right)\right) = \nu %\mbrac{\bigcup_{i \in \bN} N_i \text{ such that } x \in M_i}  = 
+%\begin{cases}
+%\nu(N) & \text{If} x \in M\\
+%0 & \text{if } x \in X \setminus M
+%\end{cases}
+%\]
+\begin{align*}
+\sum_{i=1}^n I_{M_i} (x) \nu(N_i) &= \lim_{k\rightarrow \infty} \left( \nu \left( \bigcup_{1 \leq i \leq k \text{ such that } x \in M_i} N_i \right)\right)\\
+& = \nu \mbrac{\bigcup_{i \in \bN} N_i \text{ such that } x \in M_i}\\
+&= \begin{cases}
+\nu(N) & \text{If} x \in M\\
+0 & \text{if } x \in X \setminus M
+\end{cases}
+\end{align*}
+Second last union is equal to $N$ if $x \in M$ and $\emptyset$ if $x \in X \setminus M$. Indeed if $x \in X \setminus M$ then $x \notin M_i$, hence $\cup_{i, x \in X_i} N_i = \emptyset$. If $x \in M$, for every $y \in N$ we write $(x,y) \in M\times N = \bigcup_{i=1}^\infty M_i \times N_i$ hence there exists $i \in \bN$ such that $(x,y) \in M_i \times N_i$ implies there exists $i$ such that $x \in M_i, y \in M \Rightarrow y \in \bigcup_{i \in \bN, x \in M_i} N_i$. Hence, 
+\[ \sum_{i=1}^\infty I_{M_i}(x) \nu(N_i) = 
+\begin{cases}
+\nu(N) & x \in M\\
+0 & x \in X \setminus M
+\end{cases}
+= I_m(x) \nu(N)
+\]
+
+\end{proof}
+
+\begin{claim} [2]
+ We have $\sum_{i=1}^\infty \mu(M_i) \nu(N_i) = \mu(M) \nu(N)$
+\end{claim}
+
+\begin{proof}
+For every $k \in \bN$ define $g_k: X \rightarrow \bR$ 
+\[ g_k (x) = \sum_{i=1}^k I_{M_i}(x) \nu(N_i) \]
+Then $g_k \in \Bor^+(X,\bR)$ with $\int g_k d\mu = \sum_{i=1}^k \mu(M_i) \nu(N_i)$. Claim 1 says that $g_k \rightarrow g$ from below where $g: X \to \bR$. $g(x) =I_M(x) \nu(N), x \in X$. Apply LMCT to get $\int g_k d\mu \rightarrow \int g d\mu$. Hence, $\sum_{i=1}^k \mu(M_i) \nu(N_i) \rightarrow \mu(M) \nu(N)$. Done with claim 2. 
+\end{proof}
+\end{proof}
+
+\newpage
+\section{The Fubini - Tonelli Theorem}
+
+\begin{defn}
+$X,Y$ are non-empty sets, 
+\begin{enumerate}
+\item Let $E$ be a subset of $X$. For every $x \in X$ we denote 
+\[ E_{(x)} = \{y \in Y| (x,y) \in \} \]
+For every $y \in Y$ we write 
+\[ E^{(y)} = \{x \in X| (x,y) \in E \} \]
+\item Let $f: X \times Y \to \bR$ be a function. For every $x \in X$ we define $f_{(x)}: Y \to \bR$ by $f_{(x)} = f(x,y), \forall y \in Y$. For every $y \in Y$ we define $f^{(y)}: X \to \bR$ by $f^{(y)}(x) = f(x,y), \forall x \in X$. 
+\end{enumerate}
+\end{defn}
+
+\begin{prop}
+$(X,\cM), (Y,\cN)$ measurable spaces. Consider direct product $(X\times Y, \cM \times \cN$. 
+\begin{enumerate}
+\item If $E \in \cM \times \cN$, then $E_{(x)} \in \cN, \forall x \in X$, $E^{(y)} \in \cM, \forall y \in Y$. 
+\item If $f \in \Bor(X\times Y, \bR)$ then $f_{(x)} \in \Bor(Y,\bR), \forall x \in X$ and $f^{(y)} \in \Bor (X,\bR), \forall y \in Y$. 
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+\begin{enumerate}
+\item Will do proof for $E_{(x)}$. Fix $x_0 \in X$. We want $E_{(x_0)} \in \cN$. Define $\varphi: Y \to X\times Y$ by $\varphi(y) = (x_0,y)$ for al $y \in Y$. Observe that 
+\begin{align*}
+E_{(x_0)} &= \{y \in Y \mid (x_0,y) \in E\}\\
+&= \{ y \in Y \mid \varphi(y) \in E \}\\
+&= \varphi^{-1}(E)
+\end{align*}
+So if we prove that $\varphi$ is $(\cN, \cM \times \cN$ - measurable then we are done ($\varphi^{-1}$ set $\cM \times \cN$ must be in $\cN$). Remember that $\cM \times \cN$ is the $\sigma$-algebra generated by 
+\[ \cP = \{ M \times N| M \in \cM, N \in \cN \}\] So in order to prove measurability of $\varphi$ sufices to check that  $\varphi^{-1}(P) \in \cN$ for all $P \in \cP$ (by Tool no 2 form lecture 7). And indeed for $P = M \times N \in \cP$ we have 
+\begin{align*}
+\varphi^{-1}(P)& = \{y \in N \mid \varphi(y) \in P \}\\
+&= \{y \in N \mid (x_0, y) \in M \times N\}
+\end{align*}
+where the above equals $\emptyset$ if $x_0 \in X \setminus M$ and $N$ if $x_0 \in \cM$. So in any case, $\varphi^{-1}(P) \in \cN$
+
+\item We do verifications for $f_{(x)}$. Fix $x \in X$, we must show that 
+\[ f_{(x)}^{-1}(B) \in \cN, \forall B \in \cB_{\bR}\]. Have $f:X\times Y \to \bR$ with $f_{(x)}: Y \to \bR$ by $f_{(x)}(y) = f(x,y)$. Denote 
+\[ E := f^{-1} (B) \in \cM \times \cN \]
+Then, $f_{(x)}^{-1} (B) = E_{(x)} \in \cN$ by part 1. Check this equality.
+\end{enumerate}
+
+\end{proof}
+
+ We form a product $(X \times Y, \cM \times \cN, \mu \times \nu$ Pick a bounded non negative borel function $f$. For every $x \in X$ consider a partial function $f_{(x)}: Y \to \bR$ and $f_{(x)}(y) = f(x,y)$ for all $y \in Y$. $f_{(x)}$ is a Borel function by prop 16.2. In fact here $f_{(x)} \in \Bor_b^+(Y,\bR)$ for each $x \in X$. $f_{(x)}$ is bounded and non-negative because 
+ \[ f_{(x)}(Y) \subseteq f(X \times Y) \subseteq [0,c]\]
+ Where $c$ is someuppser bound for $f$. Put $F(x) = \int_Y f_{(x)}d\nu, \forall x \in X$. Have $0 \leq F(x) \leq c\cdot \nu(Y)$ for all $x \in X$. In this way we get a bounded non-negative function $F:X \to \bR$. 
+ 
+ \begin{prop} [Special Case of Tonelli]
+ In the above notations have that $f \in \Bor_b^+(X,\bR)$ with $\int_X F d\mu = \int f d(\mu \times \nu)$.
+ \end{prop}
+ 
+ \begin{proof} [Ideas of proof]
+ Degnote 
+ \[ \cG = \{ f \in \Bor_b^+(X \times Y, \bR) | \text{prop 16.4 holds true}\} \]
+ We want $\cG = \Bor_b^+(X\times Y,\bR)$. Our plan is 
+ \[ I_E \in \cG, \forall E \in \cM \times \cN \Rightarrow \Bor_s^+(X\times Y, \bR) \subseteq \cG \Rightarrow \Bor_b^+(X\times Y, \bR) \subseteq \cG \]
+ which will force equality. The first implication follows because $G$ is closed under linear combinations with coefficients in $[0,\infty)$. Do linear combinations of $I_E$. The second implication because approximation with simple functions use LMCT. Why do we have the first part of implication chain? \\
+ 
+ To prove that $I_E \in \cG$ for all $E \in \cM \times \cN$, we denote 
+ \[ \Sigma = \{ E \in \cM \times \cN|I_E \in \cG \}\]
+ We want $\Sigma = \cM \times \cN$. Find the properties of $\Sigma$. LEt 
+ \[ \tag{P1} P = M \times N, M\in \cM, N \in \cN \Rightarrow P \in \Sigma \]
+ Why?
+ \[f = I_p = f_{(x)} = 
+ \begin{cases}
+ I_N & \text{If } x \in M\\
+ 0 & else
+ \end{cases}
+ \]
+ This implies that $F(x) = 0$ if $\nu(N)$ if $x \in \cM$ and 0 otherwise. $F = \nu(N)\cdot I_m$. We get that $F$ is Borel on $X$ with 
+ \begin{align*}
+ \int F d\mu &= \nu(N) \mu(M)\\
+ &= (\mu \times \nu) (P)\\
+ &= \int f d(\mu \times \nu)
+ \end{align*}
+ Let 
+ \[ \tag{P2} E,F \in \Sigma, E \cap F = \emptyset \Rightarrow E \cup F \in \Sigma \]
+ \[ \tag{P3} \Sigma \text{ is a monotone class (Use LMCT, LDCT)} \]
+ Use P(1) + P(2) + P(3) and the trick of the monotone class to get $\Sigma = \cM \times \cN$. 
+ \end{proof}
+ \begin{rem}
+ Nice way to write the statement of Prop 16.4 with 
+ \[ \int_X F(x)d\mu(x) = \int_X \left( \int_Y f(x,y)d\nu(y) \right) d\mu(x) \]
+ \end{rem}
+ 
+ \begin{prop} [Tonelli's Theorem]
+ See handout. 
+ \end{prop}
+ 
+ \begin{proof}
+ In general frame need to deal with the set $A = \{x \in X| \int f_{(x)} d\nu = \infty \}$
+ \end{proof}
+ 
+ \begin{thm}[Fubini]
+ is for function in $\cL^1(\mu \times \nu)$ we apply tonelli's theorem for positive functions and subtract what tonelli gives for $f^+$ and $f^-$. 
+ \end{thm}
+ 
+ \begin{eg}
+ $(X,\cM, \mu)$ a probability space, $f$ a positive borel function. Define 
+ \[ u(t) = \mu(\{x \in X| f(x) \geq t \}) \]
+ We claim that $\int f d\mu = \int_0^\infty u(t)dt$.  Why? Pit $Y = [0,\infty)$, $B_+$ is the borel $\sigma$ algebra of $[0,\infty)$. Let $b_+$ be the positive lebesgue measure. Form the product $(X \times Y, \cM \times \cB_+,\mu \times b_+)$. Look at 
+ \[E = \{(x,t) \in X \times Y| f(x) \geq t \}\] Then $F \in \cM \times \cB_+$. Why> Let $g: X\times Y \to \bR$, $g(x,t) = f(x) - t$. Then, $g \in \Bor(X,\times Y, \bR)$ and $E = g^{-1}([0,\infty))$. Apply tonelli to $I_E \in \Bor^+(X\times Y, \bR)$. Do it in both ways! 
+ \begin{align*}
+ \int_X \int_0^\infty I_E(x,t) dt d\mu(x) \\
+ &= \int_X f(x) d\mu(x) \\
+ &= \int f d\mu
+ \end{align*}
+ The other order of iteration
+ \begin{align*}
+ \int_0^\infty \int_X I_E(x,t)d\mu(x)  dt &= \int_0^\infty = \int_0^\infty \mu(\{x \in X| f(x) \geq t \}) dt = \int_0^\infty u(t)dt 
+ \end{align*}
+ where $I_E$ is an indicator function 1 if $f(x) \geq t$ otherwise 0. 
+ \end{eg}
+\end{document}
+
